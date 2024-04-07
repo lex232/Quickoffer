@@ -5,7 +5,9 @@ import logo from './logo.svg';
 import './App.css';
 import user_api from './api/user_api';
 
-import MainPage from './pages/site/Main'
+// Страницы
+import MainPage from './pages/site/mainpage/Main'
+import ProfilePage from './pages/auth/ProfilePage';
 
 import { AuthContext, UserContext } from './contexts'
 
@@ -99,6 +101,11 @@ function App() {
                   onSignOut={onSignOut}
                   user={user}/>}>
             </Route>
+
+            <Route path="/login" element={<ProfilePage
+              loginstate={loggedIn} 
+              onSignIn={authorization} />
+            }/>
 
             </Routes> 
         </BrowserRouter>
