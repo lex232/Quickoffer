@@ -27,7 +27,7 @@ const Login = ({ loginstate, onSignIn }) => {
 
     console.log(loginstate,)
     if (loginstate === true) {
-        return navigate("/admin")
+        return navigate("/profile")
     }
     
     return (
@@ -36,18 +36,17 @@ const Login = ({ loginstate, onSignIn }) => {
             <h1 className="h3 mb-3 fw-normal">Войдите</h1>
 
             <div className="form-floating">
-            <input type="username" className="form-control my-3" id="floatingInput" placeholder="example@example.com" onChange={(e) => handleChangeLogin(e)}/>
-            <label for="floatingInput">Логин</label>
+                <input type="username" className="form-control my-3" id="floatingInput" placeholder="example@example.com" onChange={(e) => handleChangeLogin(e)}/>
+                <label for="floatingInput">Логин</label>
             </div>
             <div className="form-floating">
-            <input type="password" className="form-control my-3" id="floatingPassword" placeholder="Password" onChange={(e) => handleChangePass(e)}/>
-            <label for="floatingPassword">Пароль</label>
+                <input type="password" className="form-control my-3" id="floatingPassword" placeholder="Password" onChange={(e) => handleChangePass(e)}/>
+                <label for="floatingPassword">Пароль</label>
             </div>
-
             <div className="checkbox my-3">
-            <label>
-                <input type="checkbox" value="remember-me" /> Запомнить меня
-            </label>
+                <label>
+                    <input type="checkbox" value="remember-me" /> Запомнить меня
+                </label>
             </div>
             <button onClick={(e) => handleLoginCLiсk(e)} className="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
         </form>

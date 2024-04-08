@@ -1,0 +1,9 @@
+.mainbackground {
+  background: url('../../../static/image/background/back_1.jpg');
+  background-color: rgba(227, 227, 227, 0.1) !important;
+  height: 100% !important;
+  background-repeat: no-repeat;
+  background-position:center;
+  --bs-bg-opacity: 1;
+  margin-left: 0;
+}

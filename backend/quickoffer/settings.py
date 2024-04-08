@@ -17,17 +17,15 @@ env = environ.Env(
     POSTGRES_PASSWORD=(str, 'mysecretpassword'),
     DB_NAME=(str, 'quickoffer'),
     DB_HOST=(str, 'db'),
-    DB_PORT=(int, 5432)
+    DB_PORT=(int, 5432),
+    ALLOWED_HOSTS=(list, ['127.0.0.1', 'localhost']),
 )
 
 DEBUG = env('DEBUG_MODE')
 
 SECRET_KEY = env('SECRET_KEY')
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost'
-]
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 CUT_NAME = 20
 

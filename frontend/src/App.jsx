@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { AuthContext, UserContext } from './contexts'
 
 import logo from './logo.svg';
 import './App.css';
@@ -7,9 +8,10 @@ import user_api from './api/user_api';
 
 // Страницы
 import MainPage from './pages/site/mainpage/Main'
-import ProfilePage from './pages/auth/ProfilePage';
 
-import { AuthContext, UserContext } from './contexts'
+import LoginPage from './pages/auth/LoginPage';
+import ProfilePage from './pages/profile/ProfilePage';
+import ProfileDashboard from './pages/profile/main/ProfileMain';
 
 function RequireAuth({ children, loginstate=false }) {
   let location = useLocation();
@@ -102,10 +104,20 @@ function App() {
                   user={user}/>}>
             </Route>
 
-            <Route path="/login" element={<ProfilePage
+            <Route path="/login" element={<LoginPage
               loginstate={loggedIn} 
               onSignIn={authorization} />
             }/>
+
+            <Route path="/profile" element={
+              <RequireAuth loginstate={loggedIn}>
+                <ProfilePage
+                  loginstate={loggedIn}
+                  onSignOut={onSignOut}
+                  user={user}/>
+              </RequireAuth>}>
+              <Route path="" element={<ProfileDashboard/>}/>
+            </Route>
 
             </Routes> 
         </BrowserRouter>
