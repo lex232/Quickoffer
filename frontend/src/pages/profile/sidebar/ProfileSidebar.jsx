@@ -12,7 +12,7 @@ const ProfileSidebar = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const active_url = "nav-link active bg-dark text-white"
-  const non_active_url = "nav-link"
+  const non_active_url = "nav-link text-black"
 
   // Подсветка активной ссылки (Создаем класс)
   const check_url = new activeUrl(pathname, active_url, non_active_url)
@@ -50,6 +50,7 @@ const ProfileSidebar = () => {
                     </Link>
                 </li>
             </ul>
+
         <h6 className="sidebar-heading d-flex align-items-center px-3 mt-2 mb-1 fw-bold text-muted text-uppercase">
           <DocumentIco fill="gray"/><span className='px-2'>Товары</span>
         </h6>
@@ -73,14 +74,14 @@ const ProfileSidebar = () => {
         </h6>
             <ul className="nav flex-column mb-2">
                 <li className="nav-item">
-                    <Link to="statdownload" className={check_url.check_active("statdownload")} aria-current="page"> 
+                    <Link to="createclient" className={check_url.check_active("createclient")} aria-current="page"> 
                         <span className="align-text-bottom">Создать</span>
                     </Link>
                 </li>
             </ul>
             <ul className="nav flex-column mb-2">
                 <li className="nav-item">
-                    <Link to="envsettings" className={check_url.check_active("envsettings")} aria-current="page"> 
+                    <Link to="listclient" className={check_url.check_active("listclient")} aria-current="page"> 
                         <span className="align-text-bottom">Посмотреть</span>
                     </Link>
                 </li>

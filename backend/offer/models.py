@@ -36,18 +36,21 @@ class Client(models.Model):
         on_delete=models.CASCADE,
         related_name='client'
     )
-    ogrn = models.IntegerField(
+    ogrn = models.CharField(
         verbose_name='огрн',
+        max_length=200,
         null=True,
         blank=True
     )
-    inn = models.IntegerField(
+    inn = models.CharField(
         verbose_name='инн',
+        max_length=200,
         null=True,
         blank=True
     )
-    kpp = models.IntegerField(
+    kpp = models.CharField(
         verbose_name='кпп',
+        max_length=200,
         null=True,
         blank=True
     )
@@ -63,19 +66,27 @@ class Client(models.Model):
         null=True,
         blank=True
     )
-    bill_num = models.IntegerField(
+    bill_num = models.CharField(
         verbose_name='расчетный счет',
+        max_length=200,
         null=True,
         blank=True
     )
-    bill_corr_num = models.IntegerField(
+    bill_corr_num = models.CharField(
         verbose_name='корреспондентский счет',
+        max_length=200,
         null=True,
         blank=True
     )
     bank_name = models.CharField(
         verbose_name='имя банка',
         max_length=200,
+        null=True,
+        blank=True
+    )
+    image = models.ImageField(
+        verbose_name='изображение',
+        upload_to='media/client/image',
         null=True,
         blank=True
     )
@@ -136,12 +147,9 @@ class Item(models.Model):
     price_retail = models.FloatField(
         verbose_name='розничная цена',
     )
-    price_purchase = models.FloatField(
-        verbose_name='закупочная цена',
-    )
     image = models.ImageField(
         verbose_name='изображение товара',
-        upload_to='items/',
+        upload_to='media/item/image',
         null=True,
         blank=True
     )

@@ -6,11 +6,10 @@ from rest_framework.routers import DefaultRouter
 from api.v1.users.views import UserViewSet
 from api.v1.offer.views import (
     GroupOfferViewSet,
-    ClientOfferViewSet,
     OfferViewSet,
     ItemViewSet
 )
-
+from api.v1.clients.views import ClientOfferViewSet
 
 router_offer = DefaultRouter()
 
@@ -21,18 +20,18 @@ router_offer.register(
     basename='offers'
 )
 
-# Роутер клиентов КП
-router_offer.register(
-    'clients',
-    ClientOfferViewSet,
-    basename='clients'
-)
-
 # Роутер группы товаров
 router_offer.register(
     'groups',
     GroupOfferViewSet,
     basename='groups'
+)
+
+# Роутер клиентов
+router_offer.register(
+    'clients',
+    ClientOfferViewSet,
+    basename='clients'
 )
 
 # Роутер товаров

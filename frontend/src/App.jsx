@@ -13,6 +13,8 @@ import LoginPage from './pages/auth/LoginPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
+import ClientCreate from './pages/profile/clients/ClientsCreate';
+
 function RequireAuth({ children, loginstate=false }) {
   let location = useLocation();
   if (!loginstate) {
@@ -117,6 +119,7 @@ function App() {
                   user={user}/>
               </RequireAuth>}>
               <Route path="" element={<ProfileDashboard/>}/>
+              <Route path="createclient" element={<ClientCreate />}/>
             </Route>
 
             </Routes> 

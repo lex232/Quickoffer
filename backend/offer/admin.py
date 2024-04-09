@@ -18,8 +18,7 @@ class ItemAdmin(admin.ModelAdmin):
         'name',
         'description',
         'group',
-        'price_retail',
-        'price_purchase'
+        'price_retail'
     )
 
 
