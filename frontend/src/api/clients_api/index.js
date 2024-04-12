@@ -52,7 +52,6 @@ class ApiClients {
         },
         body: JSON.stringify({
           title,
-          title,
           ogrn,
           inn,
           kpp,

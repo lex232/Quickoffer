@@ -31,11 +31,12 @@ class ApiItems {
 
   createItem ({
     title,
-    help,
+    description,
+    group,
+    price_retail,
+    quantity_type,
+    item_type,
     image,
-    status_type,
-    pre_link,
-    link,
   }) {
     const token = localStorage.getItem('token')
     return fetch(
@@ -48,28 +49,30 @@ class ApiItems {
         },
         body: JSON.stringify({
           title,
-          help,
+          description,
+          group,
+          price_retail,
+          quantity_type,
+          item_type,
           image,
-          status_type,
-          pre_link,
-          link
         })
       }
     ).then(this.checkResponse)
   }
 
   updateItem ({
-    section_id,
+    item_id,
     title,
-    help,
+    description,
+    group,
+    price_retail,
+    quantity_type,
+    item_type,
     image,
-    status_type,
-    pre_link,
-    link,
   }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/items//${section_id}/`,
+      `/api/items/${item_id}/`,
       {
         method: 'PATCH',
         headers: {
@@ -77,13 +80,14 @@ class ApiItems {
           'authorization': `Token ${token}`
         },
         body: JSON.stringify({
-          id: section_id,
+          id: item_id,
           title,
-          help,
+          description,
+          group,
+          price_retail,
+          quantity_type,
+          item_type,
           image,
-          status_type,
-          pre_link,
-          link
         })
       }
     ).then(this.checkResponse)

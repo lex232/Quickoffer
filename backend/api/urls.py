@@ -5,11 +5,11 @@ from rest_framework.routers import DefaultRouter
 
 from api.v1.users.views import UserViewSet
 from api.v1.offer.views import (
-    GroupOfferViewSet,
     OfferViewSet,
     ItemViewSet
 )
 from api.v1.clients.views import ClientOfferViewSet
+from api.v1.groups.views import GroupOfferViewSet
 
 router_offer = DefaultRouter()
 

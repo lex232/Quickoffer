@@ -23,7 +23,7 @@ class ApiItemsGroup {
 
   getItemsGroup () {
     return fetch(
-      `/api/items-group/`,
+      `/api/groups/`,
       {
         method: 'GET',
       }

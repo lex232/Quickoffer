@@ -128,6 +128,13 @@ const ClientForm = ({
     const data = {
       title: titleArea,
       ogrn: ogrnArea,
+      inn: innArea,
+      kpp: kppArea,
+      address_reg: addressRegArea,
+      address_post: addressPostArea,
+      bill_num: billNumArea,
+      bill_corr_num: billCorrNumArea,
+      bank_name: bankNameArea,
       image: selectedImage,
     }
 
@@ -138,7 +145,7 @@ const ClientForm = ({
     } else {
       // Иначе PATCH
       data.news_id = id
-      clients_api.updateNews(data)
+      clients_api.updateClient(data)
       return navigate("/profile/")
     }
 }
@@ -178,7 +185,7 @@ const ClientForm = ({
                 <button className='position-absolute translate-middle top-0 start-0' onClick={(e) => deletePic(e)}><DeleteIco fill="red" width='32' height='32'/></button>
             </div>}
             <div className="form col">
-              <label for="floatingPassword">Изображение записи</label>
+              <label for="floatingPassword">Лого компании</label>
               <input type="file" ref={refImg} className="form-control my-3" id="floatingImage" placeholder="Изображение" onChange={(e) => handleChangeImage(e)}/>
             </div>
           </div>

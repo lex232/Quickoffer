@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import Item, Group, OfferForCustomer, OfferItems, Client
+from .models import (
+    Item,
+    ItemUser,
+    Group,
+    OfferForCustomer,
+    OfferItems,
+    Client
+)
 
 
 @admin.register(Client)
@@ -12,13 +19,27 @@ class ClientAdmin(admin.ModelAdmin):
         'address_reg'
     )
 
+
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
+        'title',
         'description',
         'group',
-        'price_retail'
+        'price_retail',
+        'private_type',
+    )
+
+
+@admin.register(ItemUser)
+class ItemUserAdmin(admin.ModelAdmin):
+    list_display = (
+        'author',
+        'title',
+        'description',
+        'group',
+        'price_retail',
+        'private_type',
     )
 
 

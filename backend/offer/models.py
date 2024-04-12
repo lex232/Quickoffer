@@ -123,9 +123,9 @@ class Group(models.Model):
 
 
 class Item(models.Model):
-    """Модель товара."""
+    """Модель товара/ услуги абстрактная."""
 
-    name = models.CharField(
+    title = models.CharField(
         verbose_name='название товара',
         max_length=250,
         unique=True
@@ -161,11 +161,16 @@ class Item(models.Model):
         default=CHOICE_TYPE[0][0]
     )
     item_type = models.CharField(
-        verbose_name='товар или услуга',
+        verbose_name='тип - товар или услуга',
         max_length=20,
-        null=True,
+        db_index=True,
         choices=ITEM_TYPE,
         default=ITEM_TYPE[0][0]
+    )
+    private_type = models.BooleanField(
+        verbose_name='Приватность товара/ услуги',
+        default=False,
+        db_index=True,
     )
 
     class Meta:
@@ -175,6 +180,21 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ItemUser(Item):
+
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='item',
+        db_index=True
+    )
+
+    class Meta:
+        verbose_name = 'товар пользовательский'
+        verbose_name_plural = 'товары пользовательские'
+        ordering = ['-pub_date', '-pub_time']
 
 
 class OfferForCustomer(models.Model):
@@ -197,10 +217,6 @@ class OfferForCustomer(models.Model):
         null=True,
     )
     created = models.DateTimeField(auto_now_add=True)
-    goods = models.ManyToManyField(
-        Item,
-        through='OfferItems'
-    )
     status_type = models.CharField(
         verbose_name='Статус КП',
         max_length=30,
