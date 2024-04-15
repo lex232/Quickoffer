@@ -16,6 +16,8 @@ import ProfileDashboard from './pages/profile/main/ProfileMain';
 import ClientCreate from './pages/profile/clients/ClientsCreate';
 import ItemsCreate from './pages/profile/items/ItemsCreate';
 
+import OfferCreate from './pages/profile/offer/OfferCreate';
+
 function RequireAuth({ children, loginstate=false }) {
   let location = useLocation();
   if (!loginstate) {
@@ -123,6 +125,8 @@ function App() {
               <Route path="clients/create" element={<ClientCreate />}/>
 
               <Route path="items/create" element={<ItemsCreate />}/>
+
+              <Route path="offer/create" element={<OfferCreate />}/>
             </Route>
 
             </Routes> 

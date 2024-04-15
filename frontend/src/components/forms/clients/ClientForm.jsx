@@ -7,6 +7,7 @@ import getBase64 from '../../../utils/getBase64';
 
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 
+
 const ClientForm = ({
     id,
     title,

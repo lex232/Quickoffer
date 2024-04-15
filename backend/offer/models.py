@@ -179,7 +179,7 @@ class Item(models.Model):
         ordering = ['-pub_date', '-pub_time']
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class ItemUser(Item):

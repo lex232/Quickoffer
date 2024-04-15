@@ -15,6 +15,9 @@ backups
 /backups/
 .backups
 
+media
+/media/
+media/
 
 /plates/
 /pkg/
@@ -43,6 +46,14 @@ node_modules
 
 # testing
 /coverage
+
+# demo
+/demo
+demo
+
+# parsing
+/parsing
+parsing
 
 # production
 /build

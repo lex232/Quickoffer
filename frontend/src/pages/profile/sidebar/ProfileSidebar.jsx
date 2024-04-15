@@ -38,14 +38,14 @@ const ProfileSidebar = () => {
         </h6>
             <ul className="nav flex-column mb-2">
                 <li className="nav-item">
-                    <Link to="createoffer" className={check_url.check_active("createoffer")} aria-current="page"> 
+                    <Link to="offer/create" className={check_url.check_active("offer/create")} aria-current="page"> 
                         <span className="align-text-bottom">Создать</span>
                     </Link>
                 </li>
             </ul>
             <ul className="nav flex-column mb-2">
                 <li className="nav-item">
-                    <Link to="listoffer" className={check_url.check_active("listoffer")} aria-current="page"> 
+                    <Link to="offer/list" className={check_url.check_active("offer/list")} aria-current="page"> 
                         <span className="align-text-bottom">Посмотреть</span>
                     </Link>
                 </li>

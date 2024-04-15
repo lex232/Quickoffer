@@ -1,0 +1,40 @@
+.itemsforoffer {
+    width: 100%;
+    max-width: 100%;
+    margin: 1vh auto 0;
+    background: whitesmoke;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    box-shadow: 4px 4px 50px rgba(#687bf7, 0);
+    transition: box-shadow 100ms linear;
+}
+
+.itemsforoffer:hover {
+    box-shadow: 4px 4px 50px rgba(#687bf7, 0.6);
+}
+
+.offer {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.offer > tr {
+    align-items: center;
+    cursor: move;
+    line-height: 2;
+    margin-bottom: 0.1em;
+    border-radius: 5px;
+}
+
+.offer > li::before {
+    color: #687bf7;
+    font-size: 0.5em;
+    text-transform: uppercase;
+    border: 2px dashed #687bf7;
+    border-radius: 3px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
