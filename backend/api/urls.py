@@ -4,11 +4,14 @@ from rest_framework.routers import DefaultRouter
 # from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 from api.v1.users.views import UserViewSet
+from api.v1.items.views import ItemViewSet, ItemFinderViewSet
 from api.v1.offer.views import (
-    OfferViewSet,
-    ItemViewSet
+    OfferViewSet
 )
-from api.v1.clients.views import ClientOfferViewSet
+from api.v1.clients.views import (
+    ClientOfferViewSet,
+    ClientFinderViewSet
+)
 from api.v1.groups.views import GroupOfferViewSet
 
 router_offer = DefaultRouter()
@@ -34,11 +37,25 @@ router_offer.register(
     basename='clients'
 )
 
+# Роутер клиентов для поиска
+router_offer.register(
+    'clientsfinder',
+    ClientFinderViewSet,
+    basename='clientsfinder'
+)
+
 # Роутер товаров
 router_offer.register(
     'items',
     ItemViewSet,
     basename='items'
+)
+
+# Роутер товаров для поиска
+router_offer.register(
+    'itemsfinder',
+    ItemFinderViewSet,
+    basename='itemsfinder'
 )
 
 # Роутер пользователей

@@ -15,9 +15,6 @@ backups
 /backups/
 .backups
 
-media
-/media/
-media/
 
 /plates/
 /pkg/
@@ -50,6 +47,11 @@ node_modules
 # demo
 /demo
 demo
+
+# media
+/media
+/media/
+media
 
 # parsing
 /parsing

@@ -18,27 +18,28 @@ const OfferForm = ({
   const [ name_area, setName ] = useState(name_offer)
   const [ slug_area, setSlug ] = useState(name_client)
 
-  const items = [
-    { number: "100", title: "Камера"},
-    { number: "200", title: "Блок питания"},
-    { number: "300", title: "Кабель"},
-    { number: "400", title: "Разъем"},
-    { number: "500", title: "Регистратор"},
-  ]
-
-  const initialDnDState = {
-    draggedFrom: null,
-    draggedTo: null,
-    isDragging: false,
-    originalOrder: [],
-    updatedOrder: []
-   }
 
   const DragToReorderList = () => {
     
-    const [list, setList] = React.useState(items);
-    const [dragAndDrop, setDragAndDrop] = React.useState(initialDnDState);
-    
+    const items = [
+      { title: "Камера", price: "8990", purchase_price: "5990", quantity: "4"},
+      { title: "Блок питания", price: "510", purchase_price: "370", quantity: "1"},
+      { title: "Кабель", price: "27", purchase_price: "22", quantity: "80"},
+      { title: "Разъем", price: "25", purchase_price: "15", quantity: "8"},
+      { title: "Регистратор", price: "4790", purchase_price: "3590", quantity: "1"},
+    ]
+
+    const initialDnDState = {
+      draggedFrom: null,
+      draggedTo: null,
+      isDragging: false,
+      originalOrder: [],
+      updatedOrder: []
+     }
+  
+
+    const [list, setList] = useState(items);
+    const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
     
     // onDragStart fires when an element
     // starts being dragged
@@ -117,34 +118,80 @@ const OfferForm = ({
      
     }
     
-    // Not needed, just for logging purposes:
-    useEffect( ()=>{
-     console.log("Dragged From: ", dragAndDrop && dragAndDrop.draggedFrom);
-     console.log("Dropping Into: ", dragAndDrop && dragAndDrop.draggedTo);
-    }, [dragAndDrop])
+    // // Not needed, just for logging purposes:
+    // useEffect( ()=>{
+    //  console.log("Dragged From: ", dragAndDrop && dragAndDrop.draggedFrom);
+    //  console.log("Dropping Into: ", dragAndDrop && dragAndDrop.draggedTo);
+    // }, [dragAndDrop])
 
-    const deleteItemOffer = async (e) => {
-      // Устанавливаем slug категории на событии onChange
+    const deleteItemOffer = (index, e) => {
+      // Удаляем элемент в список товаров/услуг
       e.preventDefault();
-      await items.pop()
-      console.log('delete', items)
 
-      await setList(items)
-      console.log(list)
+      let prepareToDeleteList = list;
+      delete prepareToDeleteList[index]
+      setList(prepareToDeleteList);
+
+      setDragAndDrop({
+       ...dragAndDrop,
+       updatedOrder: prepareToDeleteList,
+       draggedFrom: null,
+       draggedTo: null,
+       isDragging: false
+      });
+    }
+
+    const handlePlusItem = (e) => {
+      // Добавляем элемент в список товаров/услуг
+      e.preventDefault();
+
+      let prepareToDeleteList = list;
+      prepareToDeleteList.push({ title: "Новый товар", price: "100", purchase_price: "60", quantity: "1"})
+      setList(prepareToDeleteList);
+
+      setDragAndDrop({
+       ...dragAndDrop,
+       draggedFrom: null,
+       draggedTo: null,
+       isDragging: false
+      });
+    }
+
+    const handleChangeValue = (index, key, new_value, e) => {
+      // Меняем в словаре значение
+      e.preventDefault();
+
+      let prepareToChangeList = list;
+      prepareToChangeList[index][key] = e.target.value
+      setList(prepareToChangeList);
+
+      setDragAndDrop({
+       ...dragAndDrop,
+       draggedFrom: null,
+       draggedTo: null,
+       isDragging: false
+      });
     }
     
     useEffect( ()=>{
-     console.log("List updated!");
-    }, [list])
+     console.log("Drag updated!", dragAndDrop);
+    }, [list], [dragAndDrop])
     
        return(
+          <div>
+            <div>
+              <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24}/></button>
+              <span className='ps-2'>Добавить товар/ услугу</span>
+            </div>
            <section className='itemsforoffer'>
+
               <table className='table table-striped table-sm offer'>
                 <thead>
                   <tr>
                     <th scope="col-1">Позиция</th>
                     <th scope="col">Название</th>
                     <th scope="col">Цена</th>
+                    <th scope="col">Закупочная цена</th>
                     <th scope="col">Кол-во</th>
                     <th scope="col">Сумма</th>
                     <th scope="col"></th>
@@ -164,10 +211,11 @@ const OfferForm = ({
                   >
                   <td>{index+1}:</td>
                   <td>{item.title}:</td>
-                  <td>{item.number}</td>
-                  <td>{item.number}</td>
-                  <td>{item.number}</td>
-                  <td className="col-1"><button onClick={(e) => deleteItemOffer(e)}><DeleteIco fill="red"/></button></td>
+                  <td><input value={item.price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'price', item.price, e)} /></td>
+                  <td><input value={item.purchase_price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'purchase_price', item.purchase_price, e)} /></td>
+                  <td><input value={item.quantity} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'quantity', item.quantity, e)} /></td>
+                  <td>{item.price * item.quantity}</td>
+                  <td className="col-1"><button onClick={(e) => deleteItemOffer(index, e)}><DeleteIco fill="red"/></button></td>
                   <i class="fas fa-arrows-alt-v"></i>
                 </tr>
                 )
@@ -175,26 +223,22 @@ const OfferForm = ({
                 
               </table>
            </section>
+           </div>
            )
    };
   
 
   const handleChangeName = (e) => {
     // Устанавливаем имя категории на событии onChange
+    e.preventDefault();
     setName(e.target.value);
   }
 
   const handleChangeSlug = (e) => {
     // Устанавливаем slug категории на событии onChange
+    e.preventDefault();
     setSlug(e.target.value);
   }
-
-  const HandlePlusItem = (e) => {
-    // Устанавливаем slug категории на событии onChange
-    e.preventDefault();
-    console.log('added')
-  }
-
 
   function handlePostCLiсk(e) {
     // Обработать клик
@@ -219,18 +263,13 @@ const OfferForm = ({
   return (
       <form>
           <div className="form">
-            <input type="header" defaultValue={name_offer} className="form-control my-3" id="floatingInput" placeholder="Название КП" onChange={(e) => handleChangeName(e)} /> 
+            <input type="header" defaultValue={name_offer} className="form-control my-3" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
           </div>
           <div className="form">
-            <input type="header" defaultValue={name_client} className="form-control my-3" id="floatingInput" placeholder="Клиент. Начните вводить текст для поиска" onChange={(e) => handleChangeSlug(e)} />
-          </div>
-          <div>
-            <button onClick={(e) => HandlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24}/></button>
-            <span className='ps-2'>Добавить товар/ услугу</span>
+            <input type="header" defaultValue={name_client} className="form-control my-3" id="offerClient" placeholder="Клиент. Начните вводить текст для поиска" onChange={(e) => handleChangeSlug(e)} />
           </div>
           <DragToReorderList />
           <button onClick={(e) => handlePostCLiсk(e)} className="w-50 btn btn-medium btn-primary mt-3">Опубликовать</button>
-          
       </form>
   );
 };

@@ -2,12 +2,15 @@
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from api.permissions import IsAdminOrReadOnly
 from offer.models import Client
 from api.v1.clients.serializers import (
     ClientSerializer,
     ClientPostSerializer
 )
+from api.filters import FilterForClients
 
 User = get_user_model()
 
@@ -26,3 +29,14 @@ class ClientOfferViewSet(viewsets.ModelViewSet):
         if self.action == 'list' or self.action == 'retrieve':
             return ClientSerializer
         return ClientPostSerializer
+
+
+class ClientFinderViewSet(viewsets.ReadOnlyModelViewSet):
+    """Поиск по клиентам."""
+
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    pagination_class = None
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = FilterForClients

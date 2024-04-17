@@ -17,33 +17,9 @@ User = get_user_model()
 #######################################################
 
 
-class GroupSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели категорий разделов"""
-
-    class Meta:
-        model = Group
-        fields = '__all__'
-
-
-class ClientSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели клиентов"""
-
-    class Meta:
-        model = Client
-        fields = '__all__'
-
-
 class OfferSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП"""
 
     class Meta:
         model = OfferForCustomer
-        fields = '__all__'
-
-
-class ItemSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели товара"""
-
-    class Meta:
-        model = Item
         fields = '__all__'
