@@ -118,6 +118,20 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
+  // ingredients
+  findItem ({ item }) {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/itemsfinder/?item=${item}`,
+      {
+        method: 'GET',
+        headers: {
+          ...this._headers
+        }
+      }
+    ).then(this.checkResponse)
+  }
+
 }
 
 export default new ApiItems(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

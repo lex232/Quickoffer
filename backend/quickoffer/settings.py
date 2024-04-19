@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     # Плагины
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
+    # 'djoser',
     'django_filters',
     # Приложения
     'offer.apps.OfferConfig',

@@ -6,6 +6,7 @@ import items_api from '../../../api/items_api';
 
 import { ReactComponent as PlusIco } from '../../../static/image/icons/plus-square.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
+import ItemSearch from '../../item-search';
 import './styles.css'
 
 const OfferForm = ({
@@ -15,12 +16,17 @@ const OfferForm = ({
   status_type
 }) => {
   const navigate = useNavigate()
-  const [ name_area, setName ] = useState(name_offer)
-  const [ slug_area, setSlug ] = useState(name_client)
-
+  const [ nameArea, setName ] = useState(name_offer)
+  const [ clientArea, setClient ] = useState(name_client)
 
   const DragToReorderList = () => {
     
+    const [ itemArea, setItem ] = useState()
+    const [ itemValue, setItemValue ] = useState({
+      title: '',
+      id: null
+    })
+    const [ showItems, setShowItems ] = useState(false)
     const items = [
       { title: "Камера", price: "8990", purchase_price: "5990", quantity: "4"},
       { title: "Блок питания", price: "510", purchase_price: "370", quantity: "1"},
@@ -40,6 +46,18 @@ const OfferForm = ({
 
     const [list, setList] = useState(items);
     const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
+
+    useEffect(_ => {
+      if (itemValue.title === '') {
+        return setItem([])
+      }
+      console.log("item", itemValue.title, itemArea, "ITEM LEN", itemArea.length, "SHOW ITEM", showItems)
+      items_api
+        .findItem({ item: itemValue.title })
+        .then(inputitems => {
+          setItem(inputitems)
+        })
+    }, [itemValue.title])
     
     // onDragStart fires when an element
     // starts being dragged
@@ -157,7 +175,7 @@ const OfferForm = ({
       });
     }
 
-    const handleChangeValue = (index, key, new_value, e) => {
+    const handleChangeValue = (index, key, e) => {
       // Меняем в словаре значение
       e.preventDefault();
 
@@ -172,16 +190,45 @@ const OfferForm = ({
        isDragging: false
       });
     }
+
+    const handleChangeItem = (e) => {
+      // Устанавливаем имя категории на событии onChange
+      e.preventDefault();
+      setItem(e.target.value);
+    }
     
-    useEffect( ()=>{
-     console.log("Drag updated!", dragAndDrop);
-    }, [list], [dragAndDrop])
+    // useEffect( ()=>{
+    //  console.log("Drag updated!", dragAndDrop);
+    // }, [list], [dragAndDrop])
     
        return(
           <div>
             <div>
               <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24}/></button>
               <span className='ps-2'>Добавить товар/ услугу</span>
+              <input className="form-control my-3" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
+                onChange={e => {
+                  const value = e.target.value
+                  setItemValue({
+                    title: value
+                  })
+                }}
+              onFocus={_ => {
+                setShowItems(true)
+              }}
+              value={itemValue.name} /> 
+
+              {showItems && itemArea.length > 0 && <ItemSearch
+                items={itemArea}
+                onClick={({ id, title }) => {
+                  // handleIngredientAutofill({ id, name, measurement_unit })
+                  setItem([])
+                  setShowItems(false)
+              }}
+              />
+              
+              }
+
             </div>
            <section className='itemsforoffer'>
 
@@ -211,9 +258,9 @@ const OfferForm = ({
                   >
                   <td>{index+1}:</td>
                   <td>{item.title}:</td>
-                  <td><input value={item.price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'price', item.price, e)} /></td>
-                  <td><input value={item.purchase_price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'purchase_price', item.purchase_price, e)} /></td>
-                  <td><input value={item.quantity} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'quantity', item.quantity, e)} /></td>
+                  <td><input value={item.price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'price', e)} /></td>
+                  <td><input value={item.purchase_price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'purchase_price', e)} /></td>
+                  <td><input value={item.quantity} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'quantity', e)} /></td>
                   <td>{item.price * item.quantity}</td>
                   <td className="col-1"><button onClick={(e) => deleteItemOffer(index, e)}><DeleteIco fill="red"/></button></td>
                   <i class="fas fa-arrows-alt-v"></i>
@@ -234,10 +281,10 @@ const OfferForm = ({
     setName(e.target.value);
   }
 
-  const handleChangeSlug = (e) => {
+  const handleChangeClient = (e) => {
     // Устанавливаем slug категории на событии onChange
     e.preventDefault();
-    setSlug(e.target.value);
+    setClient(e.target.value);
   }
 
   function handlePostCLiсk(e) {
@@ -245,8 +292,8 @@ const OfferForm = ({
     e.preventDefault();
 
     const data = {
-      title: name_area,
-      slug: slug_area,
+      title: nameArea,
+      client: clientArea,
     }
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
@@ -266,7 +313,7 @@ const OfferForm = ({
             <input type="header" defaultValue={name_offer} className="form-control my-3" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
           </div>
           <div className="form">
-            <input type="header" defaultValue={name_client} className="form-control my-3" id="offerClient" placeholder="Клиент. Начните вводить текст для поиска" onChange={(e) => handleChangeSlug(e)} />
+            <input type="header" defaultValue={name_client} className="form-control my-3" id="offerClient" placeholder="Клиент. Начните вводить текст для поиска" onChange={(e) => handleChangeClient(e)} />
           </div>
           <DragToReorderList />
           <button onClick={(e) => handlePostCLiсk(e)} className="w-50 btn btn-medium btn-primary mt-3">Опубликовать</button>
