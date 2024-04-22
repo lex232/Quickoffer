@@ -122,6 +122,20 @@ class ApiClients {
     ).then(this.checkResponse)
   }
 
+    // Поиск по вхождению сначала
+    findClient ({ client }) {
+      const token = localStorage.getItem('token')
+      return fetch(
+        `/api/clientsfinder/?client=${client}`,
+        {
+          method: 'GET',
+          headers: {
+            ...this._headers
+          }
+        }
+      ).then(this.checkResponse)
+    }
+
 }
 
 export default new ApiClients(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

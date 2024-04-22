@@ -3,10 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
+import clients_api from '../../../api/clients_api';
+import offer_api from '../../../api/offer_api';
 
 import { ReactComponent as PlusIco } from '../../../static/image/icons/plus-square.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import ItemSearch from '../../item-search';
+import ClientsSearch from '../../clients-search';
 import './styles.css'
 
 const OfferForm = ({
@@ -23,15 +26,18 @@ const OfferForm = ({
   // Самая главная переменная - итоговый список КП
   let items = []
 
+  // Очищаем локальное хранилище (тестирование)
+  // localStorage.clear()
+  // Сохраняем корзину в локальное хранилище
   if (localStorage.getItem("items")) {
     items = JSON.parse(localStorage.getItem("items"));
-    console.log('local_storage yes')
   }
   
   // Итоговая стоимость КП
   const [ finallyPrice, setFinallyPrice ] = useState(0)
   
-  // itemList - полученный список из бэкенда (поиска API)
+  // Блок поиска для товаров
+  // itemList - полученный список товаров из бэкенда (поиска API)
   const [ itemList, setItemList ] = useState()
   // itemValue - в процессе поиска используем title,
   // По завершению поиска - заполняем все поля
@@ -45,6 +51,18 @@ const OfferForm = ({
   // Показывать ли div с результатами поиска?
   const [ showItems, setShowItems ] = useState(false)
 
+  // Блок поиска для клиентов
+  // clientsList - полученный список клиентов из бэкенда (поиска API)
+  const [ clientList, setClientList ] = useState()
+  // clientValue - в процессе поиска используем title,
+  // По завершению поиска - заполняем все поля
+  const [ clientValue, setClientValue ] = useState({
+    title: '',
+    id: null
+  })
+  // Показывать ли div с результатами поиска клиентов?
+  const [ showClients, setShowClients ] = useState(false)
+
   // состояние DragNDrop
   const initialDnDState = {
     draggedFrom: null,
@@ -54,21 +72,33 @@ const OfferForm = ({
     updatedOrder: []
     }
 
-  // sd
+  // Состояние листа DragNDrop
   const [list, setList] = useState(items);
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
+  // UseEffect для динамического поиска товаров
   useEffect(_ => {
     if (itemValue.title === '') {
       return setItemList([])
     }
-    console.log("item", itemList, "ITEM LEN", itemList.length, "SHOW ITEM", showItems, "ITEM_VALUE", itemValue)
     items_api
       .findItem({ item: itemValue.title })
       .then(inputitems => {
         setItemList(inputitems)
       })
   }, [itemValue.title])
+
+    // UseEffect для динамического поиска клиентов
+    useEffect(_ => {
+      if (clientValue.title === '') {
+        return setClientList([])
+      }
+      clients_api
+        .findClient({ client: clientValue.title })
+        .then(clientsitems => {
+          setClientList(clientsitems)
+        })
+    }, [clientValue.title])
     
   // onDragStart fires when an element
   // starts being dragged
@@ -188,6 +218,7 @@ const OfferForm = ({
     });
   }
 
+  // Подсчет итого
   const calculateFinalPrice = () => {
     let temp_final = 0
     list.map((item, index) => {
@@ -214,6 +245,7 @@ const OfferForm = ({
     calculateFinalPrice();
   }
 
+  // Заполнение параметров товара при добавлении
   const handleItemAutofill = ({ id, title, price_retail, image, description}) => {
     setItemValue({
       id,
@@ -224,16 +256,18 @@ const OfferForm = ({
     })
   }
 
+  // Заполнение параметров клиента при добавлении
+  const handleClientAutofill = ({ id, title}) => {
+    setClientValue({
+      id,
+      title
+    })
+  }
+
   const handleChangeName = (e) => {
     // Устанавливаем имя категории на событии onChange
     e.preventDefault();
     setName(e.target.value);
-  }
-
-  const handleChangeClient = (e) => {
-    // Устанавливаем slug категории на событии onChange
-    e.preventDefault();
-    setClient(e.target.value);
   }
 
   function handlePostCLiсk(e) {
@@ -242,17 +276,19 @@ const OfferForm = ({
 
     const data = {
       title: nameArea,
-      client: clientArea,
+      client: clientValue.id,
+      status_type: 'in_edit',
+      items_for_offer: list
     }
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
-      items_api.createCategoryFreeSW(data)
-      return navigate("/admin/freesw")
+      offer_api.createOffer(data)
+      return navigate("/profile/offer/list")
     } else {
       // Иначе PATCH
       data.cat_id = id
-      items_api.updateCategoryFreeSW(data)
-      return navigate("/admin/freesw")
+      offer_api.createOffer(data)
+      return navigate("/profile/offer/list")
     }
   }
 
@@ -262,17 +298,36 @@ const OfferForm = ({
             <input type="header" defaultValue={name_offer} className="form-control my-3" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
           </div>
           <div className="form">
-            <input type="header" defaultValue={name_client} className="form-control my-3" id="offerClient" placeholder="Клиент. Начните вводить текст для поиска" onChange={(e) => handleChangeClient(e)} />
+              <span className='ps-2'>Добавить клиента:</span>
+              <input className="form-control my-3" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
+                onChange={e => {
+                  const valueForClient = e.target.value
+                  setClientValue({
+                    title: valueForClient
+                  })
+                }}
+              onFocus={_ => {
+                setShowClients(true)
+              }}
+              value={clientValue.title} />
+
+              {showClients && clientList.length > 0 && <ClientsSearch
+                clients={clientList}
+                onClick={({ id, title }) => {
+                  handleClientAutofill({ id, title })
+                  setClientList([])
+                  setShowClients(false)
+              }} />
+              }
           </div>
           <div>
             <div>
-              
-              <span className='ps-2'>Добавить товар/ услугу</span>
+              <span className='ps-2'>Добавить товар/ услугу:</span>
               <input className="form-control my-3" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
                 onChange={e => {
-                  const value = e.target.value
+                  const valueForItem = e.target.value
                   setItemValue({
-                    title: value
+                    title: valueForItem
                   })
                 }}
               onFocus={_ => {

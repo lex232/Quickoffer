@@ -118,7 +118,7 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
-  // ingredients
+  // Поиск по вхождению сначала
   findItem ({ item }) {
     const token = localStorage.getItem('token')
     return fetch(
