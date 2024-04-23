@@ -216,6 +216,12 @@ class OfferForCustomer(models.Model):
         blank=True,
         null=True,
     )
+    items = models.ManyToManyField(
+        Item,
+        through='OfferItems',
+        related_name='items',
+        verbose_name='Товары / услуги'
+    )
     created = models.DateTimeField(auto_now_add=True)
     status_type = models.CharField(
         verbose_name='Статус КП',
@@ -261,12 +267,12 @@ class OfferItems(models.Model):
     offer = models.ForeignKey(
         OfferForCustomer,
         on_delete=models.CASCADE,
-        related_name='offers'
+        related_name='selected_offer'
     )
     item = models.ForeignKey(
-        'Item',
+        Item,
         on_delete=models.CASCADE,
-        related_name='item'
+        related_name='selected_item'
     )
     amount = models.PositiveSmallIntegerField(
         verbose_name='количество',

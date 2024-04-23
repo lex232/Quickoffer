@@ -8,7 +8,8 @@ from offer.models import (
 )
 from api.v1.offer.serializers import (
     OfferSerializer,
-    OfferPostSerializer
+    OfferPostSerializer,
+    OfferFullSerializer
 )
 
 User = get_user_model()
@@ -25,6 +26,8 @@ class OfferViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         """Определеям сериалайзер в зависимости от запроса"""
 
-        if self.action in ['list', 'retrieve']:
+        if self.action in 'list':
             return OfferSerializer
+        elif self.action in 'retrieve':
+            return  OfferFullSerializer
         return OfferPostSerializer

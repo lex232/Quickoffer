@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import offer_api from '../../../api/offer_api';
 import getDate from '../../../utils/getDate';
 
-import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
+import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 
 
@@ -46,14 +46,14 @@ const OfferDashboard = () => {
   };
 
 
-  const HandleEditNews = async (id, title, description, image, e) => {
-    e.preventDefault();
-    return navigate("edit", {state: {id: id, title: title, description: description, image: image}})
-  }
-
-  const CreateNews = (e) => {
+  const CreateOffer = (e) => {
     e.preventDefault();
     return navigate("create")
+  }
+
+  const HandleShowOffer = async (id, e) => {
+    e.preventDefault();
+    return navigate("show", {state: {id: id}})
   }
 
   return (
@@ -62,7 +62,7 @@ const OfferDashboard = () => {
         <h1 className="h2">Панель Управления</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <button onClick={(e) => CreateNews(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить КП</button>
+            <button onClick={(e) => CreateOffer(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить КП</button>
           </div>
         </div>
       </div>
@@ -78,6 +78,7 @@ const OfferDashboard = () => {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Заголовок</th>
+              <th scope="col">Открыть</th>
             </tr>
           </thead>
           <tbody>
@@ -86,6 +87,7 @@ const OfferDashboard = () => {
                 <tr key={results.id}>
                   <td>{results.id}</td>
                   <td>{results.name_offer}</td>
+                  <td><button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button></td>
                 </tr>
                 );
               })}

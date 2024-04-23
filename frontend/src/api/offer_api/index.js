@@ -56,6 +56,17 @@ getOfferPaginate ({
   ).then(this.checkResponse)
 }
 
+getCurrentOffer ({
+  id
+}) {
+  return fetch(
+    `/api/offers/${id}/`,
+    {
+      method: 'GET',
+    }
+  ).then(this.checkResponse)
+}
+
 }
 
 export default new ApiOffer(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

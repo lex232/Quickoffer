@@ -200,10 +200,11 @@ const OfferForm = ({
 
     let prepareToAddList = list;
     prepareToAddList.push({
+      id: itemValue.id,
       title: itemValue.title,
-      price: itemValue.price_retail,
-      purchase_price: itemValue.price_retail,
-      quantity: "1",
+      item_price_retail: itemValue.price_retail,
+      item_price_purchase: itemValue.price_retail,
+      amount: "1",
       description: itemValue.description ,
       image: itemValue.image
     })
@@ -378,10 +379,10 @@ const OfferForm = ({
                   >
                   <td>{index+1}:</td>
                   <td class="col-4">{item.title}</td>
-                  <td class="col-1"><input value={item.price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'price', e)} /></td>
-                  <td class="col-1"><input value={item.purchase_price} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'purchase_price', e)} /></td>
-                  <td><input value={item.quantity} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'quantity', e)} /></td>
-                  <td>{item.price * item.quantity}</td>
+                  <td class="col-1"><input value={item.item_price_retail} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} /></td>
+                  <td class="col-1"><input value={item.item_price_purchase} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} /></td>
+                  <td><input value={item.amount} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} /></td>
+                  <td>{item.item_price_retail * item.amount}</td>
                   <td><img src={item.image} height="100"></img></td>
                   <td className="col-1"><button onClick={(e) => deleteItemOffer(index, e)}><DeleteIco fill="red"/></button></td>
                   <i class="fas fa-arrows-alt-v"></i>

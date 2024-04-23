@@ -17,11 +17,60 @@ User = get_user_model()
 
 
 class OfferSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели КП"""
+    """Сериалайзер для модели КП - сокращенное"""
 
     class Meta:
         model = OfferForCustomer
         fields = '__all__'
+
+
+class OfferItemRelateSerializer(serializers.ModelSerializer):
+    """Раскрываем товары при запросе полного КП."""
+
+    item = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='title'
+    )
+
+    description = serializers.ReadOnlyField(source='item.description')
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = OfferItems
+        fields = (
+            'id',
+            'item',
+            'position',
+            'amount',
+            'item_price_retail',
+            'description',
+            'image',
+        )
+
+    def get_image(self, obj):
+        """Находим url картинки"""
+
+
+        print(obj)
+        return 'image'
+
+
+class OfferFullSerializer(serializers.ModelSerializer):
+    """Сериалайзер для модели КП - полное"""
+
+    name_client = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='title'
+    )
+
+    items_for_offer = OfferItemRelateSerializer(
+        many=True,
+        source='selected_offer'
+    )
+
+    class Meta:
+        model = OfferForCustomer
+        fields = ('name_offer', 'created', 'status_type', 'name_client', 'items_for_offer')
 
 
 class ItemOfferCreateSerializer(serializers.ModelSerializer):
@@ -44,7 +93,7 @@ class ItemOfferCreateSerializer(serializers.ModelSerializer):
 class OfferPostSerializer(serializers.ModelSerializer):
     """Сериалайзер для создания коммерческого предложения."""
 
-    items = ItemOfferCreateSerializer(many=True)
+    items_for_offer = ItemOfferCreateSerializer(many=True)
 
     class Meta:
         model = OfferForCustomer
@@ -58,11 +107,15 @@ class OfferPostSerializer(serializers.ModelSerializer):
 
         for item in items:
             current_item = Item.objects.get(pk=item['id'])
-            current_quantity = item['quantity']
+            current_quantity = item['amount']
+            current_price_retail = item['item_price_retail']
+            current_price_purchase = item['item_price_purchase']
             OfferItems.objects.create(
                 offer=offer,
                 item=current_item,
-                amount=current_quantity
+                amount=current_quantity,
+                item_price_retail=current_price_retail,
+                item_price_purchase=current_price_purchase
             )
 
     def validate(self, data):
@@ -78,7 +131,7 @@ class OfferPostSerializer(serializers.ModelSerializer):
                         'Ошибка': 'Такой товар или услуга уже были'
                     }
                 )
-            if int(item['quantity']) < 1:
+            if int(item['amount']) < 1:
                 raise serializers.ValidationError(
                     {
                         'Ошибка': 'Количество не может быть меньше 1'

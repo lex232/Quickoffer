@@ -51,7 +51,7 @@ class OfferForCustomerAdmin(admin.ModelAdmin):
         'name_client',
         'id',
         'created',
-        'status_type'
+        'status_type',
     )
 
 
