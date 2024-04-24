@@ -1,12 +1,17 @@
 """
 Модели приложения offer
 """
-
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core import validators
 
+from PIL import Image
+
 User = get_user_model()
+ORGANIZATION_TYPE = [
+    ('ip', 'ИП'),
+    ('ooo', 'ООО'),
+]
 CHOICE_TYPE = [
     ('pc', 'шт.'),
     ('meters', 'м.'),
@@ -297,3 +302,86 @@ class OfferItems(models.Model):
 
     def __str__(self):
         return str(self.offer)[:15] + ': ' + str(self.item)[:15]
+
+
+class Profile(models.Model):
+    """Модель расширения профиля пользователя"""
+
+    user = models.OneToOneField(
+        User,
+        related_name='profile',
+        on_delete=models.CASCADE
+    )
+    avatar = models.ImageField(
+        verbose_name='аватар',
+        default='def-avatar.PNG',
+        upload_to='media/profile-img/',
+        null=True,
+        blank=True
+    )
+    ogrn = models.CharField(
+        verbose_name='огрн',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    inn = models.CharField(
+        verbose_name='инн',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    kpp = models.CharField(
+        verbose_name='кпп',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    address_reg = models.CharField(
+        verbose_name='адрес юридической регистрации',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    address_post = models.CharField(
+        verbose_name='почтовый адрес',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    bill_num = models.CharField(
+        verbose_name='расчетный счет',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    bill_corr_num = models.CharField(
+        verbose_name='корреспондентский счет',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    bank_name = models.CharField(
+        verbose_name='имя банка',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+
+    def save(self, *args, **kwargs):
+        """Фото профиля пользователя"""
+
+        super().save()
+        img = Image.open(self.avatar.path)
+        if img.height > 400 or img.width > 400:
+            new_img = (400, 400)
+            img.thumbnail(new_img)
+            img.save(self.avatar.path)
+
+    class Meta:
+        verbose_name = 'пользователь'
+        verbose_name_plural = 'пользователи'
+        ordering = ['user']
+
+    def __str__(self):
+        return self.user.username

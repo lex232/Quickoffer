@@ -16,6 +16,9 @@ const OfferShow = () => {
   const [itemsOffer, setItemsOffer] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
 
+  const [totalPrice, setTotalPrice] = useState(0)
+  let total
+
   useEffect(() => {
     // Получить все новости при загрузке страницы
     getCurrentOffer(id);
@@ -27,8 +30,14 @@ const OfferShow = () => {
       id: id,
     })
     .then(res => {
+      total = 0
       setCurrentOffer(res);
       setItemsOffer(res.items_for_offer);
+      res.items_for_offer.map((item) => {
+        total += item.item_price_retail * item.amount
+      })
+      setTotalPrice(total)
+      console.log(total)
     })
     .catch((e) => console.log(e))
     .finally(()=> setIsLoadding(false))
@@ -37,6 +46,8 @@ const OfferShow = () => {
   const DownloadOffer = (e) => {
     e.preventDefault();
   }
+
+
 
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -62,7 +73,7 @@ const OfferShow = () => {
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-row align-items-center">
                             <div>
-                            <img src={results.image} width="189" height="255" alt="item_img"></img>
+                            <img src={results.image} height="100" alt="item_img"></img>
                             </div>
                             <div class="ms-3">
                                 <h5>{results.item}</h5>
@@ -74,7 +85,7 @@ const OfferShow = () => {
                                 <h5 class="fw-normal mb-0">{results.amount} х</h5>
                             </div>
                             <div>
-                                <h5 class="mb-0 ps-2">{results.item_price_retail} Руб.</h5>
+                                <h5 class="mb-0 ps-2 fs-5">{results.item_price_retail} Р.</h5>
                             </div>
                             <a href="#!"><i class="fas fa-trash-alt"></i></a>
                             </div>
@@ -87,7 +98,7 @@ const OfferShow = () => {
 
       <div class="d-flex justify-content-between mb-4">
                       <p class="mb-2">Итого(без НДС)</p>
-                      <p class="mb-2">$4818.00</p>
+                      <p class="mb-2 fs-4">{totalPrice} Р.</p>
                     </div>
     </main>
   );

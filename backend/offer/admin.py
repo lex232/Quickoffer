@@ -6,7 +6,8 @@ from .models import (
     Group,
     OfferForCustomer,
     OfferItems,
-    Client
+    Client,
+    Profile
 )
 
 
@@ -76,3 +77,9 @@ class GroupAdmin(admin.ModelAdmin):
         'slug',
         'description'
     )
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    """Интерфейс админ-зоны модели пользователя."""
+
+    list_display = ('pk', 'user', 'ogrn', 'inn')

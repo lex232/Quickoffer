@@ -33,7 +33,9 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
     )
 
     description = serializers.ReadOnlyField(source='item.description')
+    # image = serializers.ReadOnlyField(source='item.image')
     image = serializers.SerializerMethodField()
+    # total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = OfferItems
@@ -50,9 +52,8 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         """Находим url картинки"""
 
-
-        print(obj)
-        return 'image'
+        img_link = self.context['request'].build_absolute_uri('/media/' + str(obj.item.image))
+        return img_link
 
 
 class OfferFullSerializer(serializers.ModelSerializer):
