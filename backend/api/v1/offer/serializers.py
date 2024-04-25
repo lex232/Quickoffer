@@ -5,9 +5,11 @@ from django.contrib.auth import get_user_model
 from offer.models import (
     OfferForCustomer,
     OfferItems,
-    Item
+    Item,
+    Client
 )
 # from utils.base64 import Base64ImageField
+from api.v1.clients.serializers import ClientSerializer
 
 User = get_user_model()
 
@@ -33,9 +35,7 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
     )
 
     description = serializers.ReadOnlyField(source='item.description')
-    # image = serializers.ReadOnlyField(source='item.image')
     image = serializers.SerializerMethodField()
-    # total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = OfferItems
@@ -59,10 +59,12 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
 class OfferFullSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП - полное"""
 
-    name_client = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='title'
-    )
+    # name_client = serializers.SlugRelatedField(
+    #     read_only=True,
+    #     slug_field='title'
+    # )
+
+    name_client = ClientSerializer()
 
     items_for_offer = OfferItemRelateSerializer(
         many=True,

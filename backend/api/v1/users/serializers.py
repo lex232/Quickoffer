@@ -35,7 +35,15 @@ class ProfileGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('avatar', 'ogrn', 'inn')
+        fields = '__all__'
+
+
+class ProfilePostSerializer(serializers.ModelSerializer):
+    """Сериалайзер для модели Profile на запись"""
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
 
 
 class UserGetSerializerAll(serializers.ModelSerializer):

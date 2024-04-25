@@ -14,6 +14,7 @@ const OfferShow = () => {
 
   const [currentOffer, setCurrentOffer] = useState([]);
   const [itemsOffer, setItemsOffer] = useState([]);
+  const [clientInfo, setClientInfo] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
 
   const [totalPrice, setTotalPrice] = useState(0)
@@ -33,6 +34,7 @@ const OfferShow = () => {
       total = 0
       setCurrentOffer(res);
       setItemsOffer(res.items_for_offer);
+      setClientInfo(res.name_client);
       res.items_for_offer.map((item) => {
         total += item.item_price_retail * item.amount
       })
@@ -47,7 +49,17 @@ const OfferShow = () => {
     e.preventDefault();
   }
 
-
+  const ReplaceTypeCompany = (type) => {
+    if (type === 'ip') {
+      return 'ИП'
+    }
+    else if (type === 'ooo') {
+      return 'ООО'
+    }
+    else {
+      return ''
+    }
+  }
 
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -57,14 +69,27 @@ const OfferShow = () => {
           </div>}
       </div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Просмотр КП для компании {currentOffer.name_client}</h1>
+        <h1 className="h2">Просмотр КП для компании {clientInfo.title}</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
             <button onClick={(e) => DownloadOffer(e)} type="button" className="btn btn-sm btn-outline-secondary">Скачать PDF</button>
           </div>
         </div>
       </div>
-
+      <table>
+        <td className='text-start'>
+            <tr>Название коммерческого предложения:</tr>
+            <tr>КП для компании:</tr>
+            <tr>ИНН:</tr>
+            <tr>Адрес регистрации:</tr>
+          </td>
+          <td className='text-start ps-4 pb-4'>
+            <tr>{currentOffer.name_offer}</tr>
+            <tr>{ReplaceTypeCompany(clientInfo.company_type)} {clientInfo.title}</tr>
+            <tr>{clientInfo.inn}</tr>
+            <tr>{clientInfo.address_reg}</tr>
+          </td>
+      </table>
       <div className="table-responsive">
       {itemsOffer.map((results) => {
               return (
@@ -72,9 +97,9 @@ const OfferShow = () => {
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-row align-items-center">
-                            <div>
-                            <img src={results.image} height="100" alt="item_img"></img>
-                            </div>
+                              <div>
+                                <img src={results.image} height="80" alt="item_img"></img>
+                              </div>
                             <div class="ms-3">
                                 <h5>{results.item}</h5>
                                 <p class="small mb-0"></p>

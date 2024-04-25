@@ -114,7 +114,6 @@ const OfferDashboard = () => {
         breakLinkClassName={"page-link"}
         activeClassName={"active"}
       />
-
       </div>
     </main>
   );

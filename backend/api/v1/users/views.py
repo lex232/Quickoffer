@@ -10,9 +10,29 @@ from api.v1.users.serializers import (
     UserGetSerializer,
     UserPostSerializer,
     UserGetSerializerAll,
+    ProfilePostSerializer,
+    ProfileGetSerializer
 )
+from offer.models import Profile
+from api.permissions import IsAuthorAdminOrReadOnly
 
 User = get_user_model()
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    """Работа с расширенной моделью пользователя"""
+
+    queryset = Profile.objects.all()
+    permission_classes = (IsAuthorAdminOrReadOnly, )
+
+    def get_serializer_class(self):
+        """Определеям сериалайзер в зависимости от запроса"""
+
+        if self.action == 'list' or self.action == 'retrieve':
+            return ProfileGetSerializer
+        elif self.action == 'patch':
+            return ProfilePostSerializer
+        return ProfilePostSerializer
 
 
 class UserViewSet(mixins.CreateModelMixin,
@@ -73,4 +93,15 @@ class UserViewSet(mixins.CreateModelMixin,
         для аутентифицированных пользователей)"""
 
         serializer = UserGetSerializer(request.user)
+        return Response(serializer.data)
+
+    @action(detail=False,
+            methods=['get'],
+            pagination_class=None,
+            permission_classes=(IsAuthenticated,))
+    def meall(self, request):
+        """Получаем информацию о текущем пользователе(только
+        для аутентифицированных пользователей) в полном формате"""
+
+        serializer = UserGetSerializerAll(request.user)
         return Response(serializer.data)

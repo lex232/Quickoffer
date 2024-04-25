@@ -36,6 +36,13 @@ class Client(models.Model):
         verbose_name='название',
         max_length=200
     )
+    company_type = models.CharField(
+        verbose_name='тип компании',
+        max_length=20,
+        null=True,
+        choices=ORGANIZATION_TYPE,
+        default=ORGANIZATION_TYPE[0][0]
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -312,7 +319,26 @@ class Profile(models.Model):
         related_name='profile',
         on_delete=models.CASCADE
     )
-    avatar = models.ImageField(
+    company_name = models.CharField(
+        verbose_name='имя компании',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    company_name_for_docs = models.CharField(
+        verbose_name='имя компании для документов',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    company_type = models.CharField(
+        verbose_name='тип компании',
+        max_length=20,
+        null=True,
+        choices=ORGANIZATION_TYPE,
+        default=ORGANIZATION_TYPE[0][0]
+    )
+    image = models.ImageField(
         verbose_name='аватар',
         default='def-avatar.PNG',
         upload_to='media/profile-img/',
@@ -369,14 +395,14 @@ class Profile(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        """Фото профиля пользователя"""
+        """Фото профиля компании"""
 
         super().save()
-        img = Image.open(self.avatar.path)
+        img = Image.open(self.image.path)
         if img.height > 400 or img.width > 400:
             new_img = (400, 400)
             img.thumbnail(new_img)
-            img.save(self.avatar.path)
+            img.save(self.image.path)
 
     class Meta:
         verbose_name = 'пользователь'

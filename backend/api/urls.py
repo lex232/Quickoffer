@@ -3,7 +3,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 # from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-from api.v1.users.views import UserViewSet
+from api.v1.users.views import UserViewSet, ProfileViewSet
 from api.v1.items.views import ItemViewSet, ItemFinderViewSet
 from api.v1.offer.views import (
     OfferViewSet
@@ -65,6 +65,12 @@ router_offer.register(
     basename='users'
 )
 
+# Роутер расширенного профиля
+router_offer.register(
+    'profile',
+    ProfileViewSet,
+    basename='profile'
+)
 
 
 api_urlpatterns = [

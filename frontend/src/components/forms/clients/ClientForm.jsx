@@ -11,6 +11,7 @@ import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.
 const ClientForm = ({
     id,
     title,
+    company_type,
     ogrn,
     inn,
     kpp,
@@ -31,6 +32,7 @@ const ClientForm = ({
   const [ billNumArea, setBillNum ] = useState(bill_num)
   const [ billCorrNumArea, setBillCorrNum ] = useState(bill_corr_num)
   const [ bankNameArea, setBankName ] = useState(bank_name)
+  const [ companyTypeArea, setCompanyType ] = useState(company_type) 
 
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
@@ -107,6 +109,13 @@ const ClientForm = ({
     getBase64(tempFile, setSelectedImage)
   }
 
+  const handleChangeCompanyType = (e) => {
+    // Устанавливаем значение типа компании onChange
+    e.preventDefault();
+    console.log(companyTypeArea)
+    setCompanyType(e.target.value);
+  }
+
   const deletePic = (e) => {
     // Кнопка удалить картинку
     e.preventDefault();
@@ -128,6 +137,7 @@ const ClientForm = ({
 
     const data = {
       title: titleArea,
+      company_type: companyTypeArea,
       ogrn: ogrnArea,
       inn: innArea,
       kpp: kppArea,
@@ -156,6 +166,10 @@ const ClientForm = ({
           <div className="form">
             <input type="header" defaultValue={title} className="form-control my-3" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => handleChangeTitle(e)} /> 
           </div>
+          <select className='form-select my-3' aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
+            <option selected value='ip'>ИП</option>
+            <option value='ooo'>ООО</option>
+          </select>
           <div className="form">
             <input type="header" defaultValue={ogrn} className="form-control my-3" id="Ogrn" placeholder="ОГРН" onChange={(e) => handleChangeOgrn(e)} />
           </div>

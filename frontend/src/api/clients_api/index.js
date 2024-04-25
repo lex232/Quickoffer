@@ -31,6 +31,7 @@ class ApiClients {
 
   createClient ({
     title,
+    company_type,
     ogrn,
     inn,
     kpp,
@@ -52,6 +53,7 @@ class ApiClients {
         },
         body: JSON.stringify({
           title,
+          company_type,
           ogrn,
           inn,
           kpp,

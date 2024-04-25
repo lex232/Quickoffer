@@ -4,6 +4,7 @@ from rest_framework import permissions
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     """Проверка на Админ или чтение для всех"""
+
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS or (
             request.user.is_authenticated and (
@@ -14,6 +15,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 
 class IsAuthorAdminOrReadOnly(permissions.BasePermission):
     """Проверка на Автора, Админа или чтение для всех"""
+
     def has_object_permission(self, request, view, obj):
         return (request.method in permissions.SAFE_METHODS
                 or request.user.is_staff
@@ -22,16 +24,3 @@ class IsAuthorAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         return (request.method in permissions.SAFE_METHODS
                 or request.user.is_authenticated)
-
-
-class IsAdminOrOwnerOrReadOnly(permissions.BasePermission):
-    """test"""
-    def has_permission(self, request, view):
-        return True
-
-    def has_object_permission(self, request, view, obj):
-        return (
-            request.method in permissions.SAFE_METHODS
-            or obj.author == request.user
-            or request.user.is_staff
-        )

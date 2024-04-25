@@ -18,8 +18,9 @@ import ItemsCreate from './pages/profile/items/ItemsCreate';
 
 import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferDashboard from './pages/profile/offer/OfferDashboard';
-import OfferForm from './components/forms/offer/OfferForm';
 import OfferShow from './pages/profile/offer/OfferShow';
+
+import ProfileEdit from './pages/profile/profile/ProfileEdit';
 
 function RequireAuth({ children, loginstate=false }) {
   let location = useLocation();
@@ -132,6 +133,8 @@ function App() {
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>
               <Route path="offer/create" element={<OfferCreate />}/>
+
+              <Route path="my-organization/edit" element={<ProfileEdit />}/>
             </Route>
 
             </Routes> 

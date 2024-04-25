@@ -4,7 +4,7 @@ class UserApi {
       this._headers = headers
       this._contentType = contentType
     }
-  
+
     // Проверка ответа
     checkResponse (res) {
       return new Promise((resolve, reject) => {
@@ -51,6 +51,20 @@ class UserApi {
     const token = localStorage.getItem('token')
     return fetch(
       `/api/users/me/`,
+      {
+        method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        }
+      }
+    ).then(this.checkResponse)
+  }
+
+  getUserDataAll () {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/users/meall/`,
       {
         method: 'GET',
         headers: {
@@ -141,6 +155,49 @@ class UserApi {
       }
     ).then(this.checkResponse)
   }  
+
+  updateProfile ({ 
+    id,
+    company_name,
+    company_name_for_docs,
+    company_type,
+    image,
+    ogrn,
+    inn,
+    kpp,
+    address_reg,
+    address_post,
+    bill_num,
+    bill_corr_num,
+    bank_name,
+  }) {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/profile/`,
+      {
+        method: 'PATCH',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        },
+        body: JSON.stringify({
+          id,
+          company_name,
+          company_name_for_docs,
+          company_type,
+          image,
+          ogrn,
+          inn,
+          kpp,
+          address_reg,
+          address_post,
+          bill_num,
+          bill_corr_num,
+          bank_name,
+        })
+      }
+    ).then(this.checkResponse)
+  }
 
 }
 
