@@ -1,0 +1,33 @@
+.border-left-primary {
+    border-left:.25rem solid #324c9b!important;
+}
+
+.border-left-success {
+    border-left:.25rem solid #1cc88a!important
+}
+
+.shadow {
+    box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important
+}
+
+.text-primary {
+    color:#4e73df!important;
+    text-align:left;
+}
+a.text-primary:focus,
+a.text-primary:hover {
+    color:#224abe!important
+}
+
+.font-weight-bold {
+    font-weight:700!important
+}
+
+.text-xs {
+    font-size:.8rem;
+}
+
+.text-gray-800 {
+    color:#5a5c69!important;
+    text-align:left;
+}

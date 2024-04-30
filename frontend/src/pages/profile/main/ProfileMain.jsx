@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import MainProfileInfo from './MainProfileInfo';
+
 const ProfileDashboard = () => {
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -12,6 +14,7 @@ const ProfileDashboard = () => {
           </div>
         </div>
       </div>
+        <MainProfileInfo />
     </main>
   );
 };

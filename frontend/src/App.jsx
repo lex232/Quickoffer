@@ -14,6 +14,8 @@ import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
 import ClientCreate from './pages/profile/clients/ClientsCreate';
+import ClientDashboard from './pages/profile/clients/ClientDashboard';
+
 import ItemsCreate from './pages/profile/items/ItemsCreate';
 
 import OfferCreate from './pages/profile/offer/OfferCreate';
@@ -127,6 +129,7 @@ function App() {
               </RequireAuth>}>
               <Route path="" element={<ProfileDashboard/>}/>
               <Route path="clients/create" element={<ClientCreate />}/>
+              <Route path="clients/list" element={<ClientDashboard />}/>
 
               <Route path="items/create" element={<ItemsCreate />}/>
 

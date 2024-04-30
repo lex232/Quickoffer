@@ -48,7 +48,7 @@ const OfferDashboard = () => {
 
   const CreateOffer = (e) => {
     e.preventDefault();
-    return navigate("create")
+    return navigate("/profile/offer/create/")
   }
 
   const HandleShowOffer = async (id, e) => {

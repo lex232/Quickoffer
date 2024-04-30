@@ -173,7 +173,7 @@ class UserApi {
   }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/profile/`,
+      `/api/profile/${id}/`,
       {
         method: 'PATCH',
         headers: {
@@ -181,7 +181,6 @@ class UserApi {
           'authorization': `Token ${token}`
         },
         body: JSON.stringify({
-          id,
           company_name,
           company_name_for_docs,
           company_type,

@@ -22,7 +22,6 @@ const ProfileEdit = () => {
     .then(res => {
       setCurrentUserData(res);
       setCurrentProfileData(res.profile)
-      console.log(res.profile)
     })
     .catch((e) => console.log(e))
     .finally(()=> setIsLoadding(false))

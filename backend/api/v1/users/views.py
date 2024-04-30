@@ -23,6 +23,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """Работа с расширенной моделью пользователя"""
 
     queryset = Profile.objects.all()
+    serializer_class = ProfileGetSerializer
     permission_classes = (IsAuthorAdminOrReadOnly, )
 
     def get_serializer_class(self):
@@ -30,7 +31,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
         if self.action == 'list' or self.action == 'retrieve':
             return ProfileGetSerializer
-        elif self.action == 'patch':
+        elif self.action == 'partial_update':
             return ProfilePostSerializer
         return ProfilePostSerializer
 
@@ -103,5 +104,5 @@ class UserViewSet(mixins.CreateModelMixin,
         """Получаем информацию о текущем пользователе(только
         для аутентифицированных пользователей) в полном формате"""
 
-        serializer = UserGetSerializerAll(request.user)
+        serializer = UserGetSerializerAll(request.user, context={'request': request})
         return Response(serializer.data)

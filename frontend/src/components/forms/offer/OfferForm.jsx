@@ -27,7 +27,7 @@ const OfferForm = ({
   let items = []
 
   // Очищаем локальное хранилище (тестирование)
-  // localStorage.clear()
+  //localStorage.clear()
   // Сохраняем корзину в локальное хранилище
   if (localStorage.getItem("items")) {
     items = JSON.parse(localStorage.getItem("items"));

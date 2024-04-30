@@ -13,6 +13,7 @@ from api.v1.clients.views import (
     ClientFinderViewSet
 )
 from api.v1.groups.views import GroupOfferViewSet
+from api.v1.main_profile.views import ProfileMainView
 
 router_offer = DefaultRouter()
 
@@ -74,6 +75,8 @@ router_offer.register(
 
 
 api_urlpatterns = [
+    # Роутер инфорации главной админ страницы
+    path('api/profile-main', ProfileMainView.as_view(), name="profile-main"),
     path('api/', include(router_offer.urls)),
     path('api/auth/', include('djoser.urls.authtoken')),
     # API СХЕМА

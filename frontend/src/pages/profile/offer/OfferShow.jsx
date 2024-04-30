@@ -47,6 +47,13 @@ const OfferShow = () => {
 
   const DownloadOffer = (e) => {
     e.preventDefault();
+    offer_api.downloadOffer({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
   }
 
   const ReplaceTypeCompany = (type) => {

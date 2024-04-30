@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 from offer.models import Profile
+from utils.base64 import Base64ImageField
 
 User = get_user_model()
 
@@ -33,13 +34,24 @@ class UserGetSerializer(serializers.ModelSerializer):
 class ProfileGetSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели Profile на чтение"""
 
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Profile
         fields = '__all__'
 
+    def get_image(self, obj):
+        """Находим url картинки"""
+
+        img_link = self.context['request'].build_absolute_uri('/media/' + str(obj.image))
+        return img_link
+
+
 
 class ProfilePostSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели Profile на запись"""
+
+    image = Base64ImageField(required=False)
 
     class Meta:
         model = Profile
@@ -49,13 +61,8 @@ class ProfilePostSerializer(serializers.ModelSerializer):
 class UserGetSerializerAll(serializers.ModelSerializer):
     """Сериалайзер для модели User на чтение"""
 
-    profile = serializers.SerializerMethodField()
+    profile = ProfileGetSerializer()
 
     class Meta:
         model = User
         fields = ('email', 'id', 'username', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'is_active', 'last_login', 'date_joined', 'profile')
-
-    def get_profile(self, obj):
-        # data = obj.profile.subdivision
-        data = ProfileGetSerializer(obj.profile).data
-        return data

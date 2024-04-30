@@ -55,6 +55,12 @@ const ProfileForm = ({
     setPreview(selectedImage)
   }, [selectedImage])
 
+  useEffect(() => {
+    if (image) {
+      setPreview(image)
+      image = undefined
+    }    
+  }, [image])
 
   const handleChangeCompanyName = (e) => {
     // Устанавливаем имя записи на событии onChange
@@ -136,28 +142,26 @@ const ProfileForm = ({
   function handlePostCLiсk(e) {
     // Обработать клик публикации
     e.preventDefault();
-
     // null не подходит для api, защита от отправки null
     if (image === null) {
       image = undefined
     }
 
     const data = {
-      id: idProfile,
+      id,
       company_name: companyNameArea,
-      company_name_for_docs,
-      company_type,
-      image,
-      ogrn,
-      inn,
-      kpp,
-      address_reg,
-      address_post,
-      bill_num,
-      bill_corr_num,
-      bank_name,
+      company_name_for_docs: companyNameDocsArea,
+      company_type: companyTypeArea,
+      image: selectedImage,
+      ogrn: ogrnArea,
+      inn: innArea,
+      kpp: kppArea,
+      address_reg: addressRegArea,
+      address_post: addressPostArea,
+      bill_num: billNumArea,
+      bill_corr_num: billCorrNumArea,
+      bank_name: bankNameArea,
     }
-
 
     // Иначе PATCH
     user_api.updateProfile(data)

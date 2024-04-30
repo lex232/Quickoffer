@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactPaginate from "react-paginate";
 
-import clients_api from '../../../api';
+import clients_api from '../../../api/clients_api';
 import getDate from '../../../utils/getDate';
-import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -21,7 +20,7 @@ const ClientDashboard = () => {
 
   useEffect(() => {
     // Получить все новости при загрузке страницы
-    getNews(currentpage);
+    getClients(currentpage);
   }, [])
   ;
 
@@ -44,7 +43,7 @@ const ClientDashboard = () => {
   };
 
   const HandleDelClient = async (id) => {
-    await api.deleteClient({ news_id: id, })
+    await clients_api.deleteClient({ news_id: id, })
       .then(res => {
         console.log(res)
       })
@@ -56,21 +55,22 @@ const ClientDashboard = () => {
     return navigate("edit", {state: {id: id, title: title, description: description, image: image}})
   }
 
-  const CreateNews = (e) => {
+  const CreateClient = (e) => {
     e.preventDefault();
-    return navigate("create")
+    return navigate("/profile/clients/create")
   }
+
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 className="h2">Панель Управления</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <button onClick={(e) => CreateNews(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить новость</button>
+            <button onClick={(e) => CreateClient(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить клиента</button>
           </div>
         </div>
       </div>
-      <h3>Список новостей</h3>
+      <h3>Список клиентов</h3>
       <div className="table-responsive">
         <table className="table table-striped table-sm">
           <thead>
@@ -91,7 +91,6 @@ const ClientDashboard = () => {
                   <td>{getDate(results.pub_date)}</td>
                   <td><button onClick={(e) => HandleEditNews(results.id, results.title, results.description, results.image, e)}><PencilIco fill="orange"/></button></td>
                   <td>
-                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelNews} id={results.id}/>
                   </td>
                 </tr>
                 );

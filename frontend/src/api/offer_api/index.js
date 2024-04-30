@@ -16,6 +16,27 @@ class ApiOffer {
       })
     }
 
+    // Проверка ответа, если возвращается файл в content-disposition
+    checkFileDownloadResponse (res) {
+      return new Promise((resolve, reject) => {
+        if (res.status < 400) {
+          const filename = res.headers
+          .get('content-disposition')
+          .split('filename=')[1]
+          return res.blob().then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          })
+        }
+        reject()
+      })
+    }
+
 /////////////////////////////////
 // API запросы с КП
 /////////////////////////////////
@@ -65,6 +86,17 @@ getCurrentOffer ({
       method: 'GET',
     }
   ).then(this.checkResponse)
+}
+
+downloadOffer ({
+  id
+}) {
+  return fetch(
+    `/api/offers/${id}/download_pdf/`,
+    {
+      method: 'GET',
+    }
+  ).then(this.checkFileDownloadResponse)
 }
 
 }
