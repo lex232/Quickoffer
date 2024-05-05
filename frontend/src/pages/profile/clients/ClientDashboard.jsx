@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 
 import clients_api from '../../../api/clients_api';
 import getDate from '../../../utils/getDate';
+import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -43,7 +44,7 @@ const ClientDashboard = () => {
   };
 
   const HandleDelClient = async (id) => {
-    await clients_api.deleteClient({ news_id: id, })
+    await clients_api.deleteClient({ client_id: id, })
       .then(res => {
         console.log(res)
       })
@@ -76,8 +77,9 @@ const ClientDashboard = () => {
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Заголовок</th>
-              <th scope="col">Дата публикации</th>
+              <th scope="col">Имя</th>
+              <th scope="col">ИНН</th>
+              <th scope="col">ОГРН</th>
               <th scope="col">Редактировать</th>
               <th scope="col">Удалить</th>
             </tr>
@@ -88,9 +90,11 @@ const ClientDashboard = () => {
                 <tr key={results.id}>
                   <td>{results.id}</td>
                   <td>{results.title}</td>
-                  <td>{getDate(results.pub_date)}</td>
+                  <td>{results.inn}</td>
+                  <td>{results.ogrn}</td>
                   <td><button onClick={(e) => HandleEditNews(results.id, results.title, results.description, results.image, e)}><PencilIco fill="orange"/></button></td>
                   <td>
+                  <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/>
                   </td>
                 </tr>
                 );

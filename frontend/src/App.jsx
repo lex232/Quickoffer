@@ -8,7 +8,9 @@ import user_api from './api/user_api';
 
 // Страницы
 import MainPage from './pages/site/mainpage/Main'
+import CatalogPage from './pages/site/catalog/Catalog';
 
+// Страницы для авторизованного пользователя
 import LoginPage from './pages/auth/LoginPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
@@ -65,7 +67,6 @@ function App() {
     })
   }
 
-
   useEffect(_ => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -82,11 +83,6 @@ function App() {
     }
   }, []);
 
-  // Не грузим рендер, пока не получили значение авторизации
-  if (loggedIn === null) {
-    return <div className="">Loading!!</div>
-  }
-
   const onSignOut = () => {
     user_api.signout()
       .then(res => {
@@ -101,6 +97,11 @@ function App() {
       })
   }
 
+  // Не грузим рендер, пока не получили значение авторизации
+  if (loggedIn === null) {
+    return <div className="">Loading!!</div>
+  }
+
   return (
     <AuthContext.Provider value={loggedIn}>
       <UserContext.Provider value={user}>
@@ -110,6 +111,12 @@ function App() {
           <Routes>
             <Route path="/" element={
                 <MainPage 
+                  loginstate={loggedIn}
+                  onSignOut={onSignOut}
+                  user={user}/>}>
+            </Route>
+            <Route path='/catalog' element={
+                <CatalogPage
                   loginstate={loggedIn}
                   onSignOut={onSignOut}
                   user={user}/>}>

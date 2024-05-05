@@ -1,0 +1,16 @@
+.container {
+  background: #FFF;
+  border: 1px solid rgba(98, 98, 98, 0.2);
+  box-sizing: border-box;
+  max-height: 100px;
+  padding: 10px;
+  min-width: 220px;
+  text-align: left;
+}
+
+@media screen and (max-width: 820px) {
+  .container {
+    left: 0;
+    top: 70px;
+  }
+}

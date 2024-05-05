@@ -49,7 +49,7 @@ const ItemForm = ({
 
 
   const getGroups = () => {
-    // Получить список ПО
+    // Получить список категорий товаров
     group_api.getItemsGroup()
     .then(res => {
       setListGroups(res);
@@ -68,23 +68,23 @@ const ItemForm = ({
   }
 
   const handleChangeGroup = (e) => {
-    // Устанавливаем текст записи на событии onChange
+    // Устанавливаем номер категории на событии onChange
     e.preventDefault();
     setGroup(Number(e.target.value));
   }
 
   const handleChangePriceRetail = (e) => {
-    // Устанавливаем текст записи на событии onChange
+    // Устанавливаем цену розничную на событии onChange
     setPriceRetail(e.target.value);
   }
 
   const handleChangeQuantityType = (e) => {
-    // Устанавливаем текст записи на событии onChange
+    // Устанавливаем кол-во товара на событии onChange
     setQuantityType(e.target.value);
   }
 
   const handleChangeItemType = (e) => {
-    // Устанавливаем текст записи на событии onChange
+    // Устанавливаем тип товара на событии onChange
     setItemType(e.target.value);
   }
 

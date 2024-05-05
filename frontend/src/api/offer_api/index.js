@@ -66,6 +66,20 @@ createOffer ({
   ).then(this.checkResponse)
 }
 
+deleteOffer ({ offer_id }) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${offer_id}/`,
+    {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkResponse)
+}
+
 getOfferPaginate ({
   page
 }) {

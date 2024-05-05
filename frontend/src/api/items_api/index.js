@@ -118,6 +118,18 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
+  getItemsFilterCategoryPaginate ({
+    page,
+    group
+  }) {
+    return fetch(
+      `/api/items/?group=${group}&page=${page}`, 
+      {
+        method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
   // Поиск по вхождению сначала
   findItem ({ item }) {
     const token = localStorage.getItem('token')

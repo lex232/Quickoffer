@@ -61,9 +61,9 @@ const Header = ({ loginstate, onSignOut, user }) => {
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <img className="bi text-muted flex-shrink-0 ms-5" width="200" src={logo} alt=""/>
       </a>
-
       <ul className="nav nav-pills">
         <li className="nav-item"><a href="/" className={check_url_header.check_absolute_url("about")} aria-current="page">О проекте</a></li>
+        <li className="nav-item"><a href="/catalog" className={check_url_header.check_absolute_url("about")} aria-current="page">Каталог</a></li>
       </ul>
       <ul className="nav">
         <HeaderAuthOption />

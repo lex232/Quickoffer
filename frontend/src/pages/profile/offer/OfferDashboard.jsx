@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 
 import offer_api from '../../../api/offer_api';
 import getDate from '../../../utils/getDate';
+import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -22,11 +23,10 @@ const OfferDashboard = () => {
 
   useEffect(() => {
     // Получить все новости при загрузке страницы
-    getClients(currentpage);
-  }, [])
-  ;
+    getOffers(currentpage);
+  }, []);
 
-  const getClients = (page) => {
+  const getOffers = (page) => {
     offer_api.getOfferPaginate({
       page: page,
     })
@@ -42,7 +42,7 @@ const OfferDashboard = () => {
     // Обработать клик паджинатора
     setPage(data.selected + 1)
     currentpage = data.selected + 1;
-    getClients(currentpage);
+    getOffers(currentpage);
   };
 
 
@@ -54,6 +54,14 @@ const OfferDashboard = () => {
   const HandleShowOffer = async (id, e) => {
     e.preventDefault();
     return navigate("show", {state: {id: id}})
+  }
+
+  const HandleDelOffer = async (id) => {
+    await offer_api.deleteOffer({ offer_id: id, })
+      .then(res => {
+        console.log(res)
+      })
+    await getOffers(currentpage);
   }
 
   return (
@@ -79,6 +87,7 @@ const OfferDashboard = () => {
               <th scope="col">ID</th>
               <th scope="col">Заголовок</th>
               <th scope="col">Открыть</th>
+              <th scope="col">Удалить</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +97,9 @@ const OfferDashboard = () => {
                   <td>{results.id}</td>
                   <td>{results.name_offer}</td>
                   <td><button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button></td>
+                  <td>
+                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id}/>
+                  </td>
                 </tr>
                 );
               })}

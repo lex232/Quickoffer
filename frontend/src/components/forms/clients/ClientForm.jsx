@@ -112,7 +112,6 @@ const ClientForm = ({
   const handleChangeCompanyType = (e) => {
     // Устанавливаем значение типа компании onChange
     e.preventDefault();
-    console.log(companyTypeArea)
     setCompanyType(e.target.value);
   }
 

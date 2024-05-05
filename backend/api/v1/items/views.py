@@ -10,6 +10,7 @@ from api.v1.items.serializers import (
     ItemSerializer
 )
 from api.filters import FilterForItems
+from api.pagination import ItemsLimitPagination
 
 User = get_user_model()
 
@@ -20,7 +21,9 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = (IsAdminOrReadOnly,)
-    pagination_class = None
+    filter_backends = (DjangoFilterBackend,)
+    pagination_class = ItemsLimitPagination
+    filterset_fields = ['group']
 
 
 class ItemFinderViewSet(viewsets.ReadOnlyModelViewSet):

@@ -10,6 +10,7 @@ import { ReactComponent as PlusIco } from '../../../static/image/icons/plus-squa
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import ItemSearch from '../../item-search';
 import ClientsSearch from '../../clients-search';
+import SimpleDivMessage from '../../messages';
 import './styles.css'
 
 const OfferForm = ({
@@ -27,7 +28,7 @@ const OfferForm = ({
   let items = []
 
   // Очищаем локальное хранилище (тестирование)
-  //localStorage.clear()
+  // localStorage.removeItem("items")
   // Сохраняем корзину в локальное хранилище
   if (localStorage.getItem("items")) {
     items = JSON.parse(localStorage.getItem("items"));
@@ -50,6 +51,9 @@ const OfferForm = ({
   })
   // Показывать ли div с результатами поиска?
   const [ showItems, setShowItems ] = useState(false)
+
+  // Показывать ли div с ошибкой
+  const [ showError, setShowError ] = useState(false)
 
   // Блок поиска для клиентов
   // clientsList - полученный список клиентов из бэкенда (поиска API)
@@ -81,6 +85,7 @@ const OfferForm = ({
     if (itemValue.title === '') {
       return setItemList([])
     }
+    setShowError(false)
     items_api
       .findItem({ item: itemValue.title })
       .then(inputitems => {
@@ -99,9 +104,10 @@ const OfferForm = ({
           setClientList(clientsitems)
         })
     }, [clientValue.title])
-    
+
   // onDragStart fires when an element
   // starts being dragged
+
   const onDragStart = (event) => {
     const initialPosition = Number(event.currentTarget.dataset.position);
     
@@ -181,8 +187,11 @@ const OfferForm = ({
     e.preventDefault();
 
     let prepareToDeleteList = list;
-    delete prepareToDeleteList[index]
+    // delete prepareToDeleteList[index]
+    prepareToDeleteList.splice(index, 1)
+    console.log(prepareToDeleteList)
     setList(prepareToDeleteList);
+    console.log(list)
     localStorage.setItem("items", JSON.stringify(list));
 
     setDragAndDrop({
@@ -199,28 +208,32 @@ const OfferForm = ({
     e.preventDefault();
 
     let prepareToAddList = list;
-    prepareToAddList.push({
-      id: itemValue.id,
-      title: itemValue.title,
-      item_price_retail: itemValue.price_retail,
-      item_price_purchase: itemValue.price_retail,
-      amount: "1",
-      description: itemValue.description ,
-      image: itemValue.image
-    })
-    setList(prepareToAddList);
-    localStorage.setItem("items", JSON.stringify(list));
 
-    setDragAndDrop({
-      ...dragAndDrop,
-      draggedFrom: null,
-      draggedTo: null,
-      isDragging: false
-    });
+    if (CheckSameItem(itemValue.id)) {
+
+      prepareToAddList.push({
+        id: itemValue.id,
+        title: itemValue.title,
+        item_price_retail: itemValue.price_retail,
+        item_price_purchase: itemValue.price_retail,
+        amount: "1",
+        description: itemValue.description ,
+        image: itemValue.image
+      })
+      setList(prepareToAddList);
+      localStorage.setItem("items", JSON.stringify(list));
+
+      setDragAndDrop({
+        ...dragAndDrop,
+        draggedFrom: null,
+        draggedTo: null,
+        isDragging: false
+      });
+    }
   }
 
-  // Подсчет итого
   const calculateFinalPrice = () => {
+    // Подсчет итого
     let temp_final = 0
     list.map((item, index) => {
       temp_final += item.purchase_price
@@ -246,8 +259,8 @@ const OfferForm = ({
     calculateFinalPrice();
   }
 
-  // Заполнение параметров товара при добавлении
   const handleItemAutofill = ({ id, title, price_retail, image, description}) => {
+    // Заполнение параметров товара при добавлении
     setItemValue({
       id,
       title,
@@ -257,8 +270,8 @@ const OfferForm = ({
     })
   }
 
-  // Заполнение параметров клиента при добавлении
   const handleClientAutofill = ({ id, title}) => {
+    // Заполнение параметров клиента при добавлении
     setClientValue({
       id,
       title
@@ -271,8 +284,25 @@ const OfferForm = ({
     setName(e.target.value);
   }
 
+  const ClearOffer = () => {
+    // Очищаем локал сторедж
+    localStorage.removeItem("items")
+  }
+
+  const CheckSameItem = (id_add) => {
+    // Проверяем на одинаковый товар
+    var index
+    for (index = 0; index < list.length; ++index) {
+      if (id_add === list[index].id) {
+        setShowError(true)
+        return false
+      }
+    }
+    return true
+  }
+
   function handlePostCLiсk(e) {
-    // Обработать клик
+    // Обработать клик публикации
     e.preventDefault();
 
     const data = {
@@ -284,6 +314,8 @@ const OfferForm = ({
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
       offer_api.createOffer(data)
+      // Чистим корзину
+      ClearOffer()
       return navigate("/profile/offer/list")
     } else {
       // Иначе PATCH
@@ -294,7 +326,9 @@ const OfferForm = ({
   }
 
   return (
+    
       <form>
+
           <div className="form">
             <input type="header" defaultValue={name_offer} className="form-control my-3" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
           </div>
@@ -346,13 +380,17 @@ const OfferForm = ({
               }
 
               {itemValue.id && 
-                <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24}/></button>
+                <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24} /><span className='ps-2'>Добавить позицию</span></button>
               }
+
+              {showError && <div className='mt-2'><SimpleDivMessage
+                text='Такой элемент уже есть в списке'
+              /></div>}
 
             </div>
            <section className='itemsforoffer'>
 
-              <table className='table table-striped table-sm offer'>
+              <table className='table table-sm offer'>
                 <thead>
                   <tr>
                     <th class="col-1">Позиция</th>
@@ -401,8 +439,14 @@ const OfferForm = ({
               
            </section>
            </div>
-           
-          <button onClick={(e) => handlePostCLiсk(e)} className="w-50 btn btn-medium btn-primary mt-3">Опубликовать</button>
+           <div className="btn-toolbar d-flex align-items-end mb-2 mb-md-0">
+            <div className='justify-content-start col-6'>
+              <button onClick={(e) => handlePostCLiсk(e)} className="btn btn-medium btn-primary mt-3 float-start">Опубликовать</button>         
+            </div>
+            <div className='justify-content-end col-6'>
+              <button onClick={(e) => ClearOffer()} type="button" className="btn btn-medium btn-outline-secondary float-end">Очистить КП</button>
+            </div>
+          </div>
       </form>
   );
 };

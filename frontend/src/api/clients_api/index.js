@@ -99,10 +99,10 @@ class ApiClients {
     ).then(this.checkResponse)
   }
 
-  deleteClient ({ section_id }) {
+  deleteClient ({ client_id }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/clients/${section_id}/`,
+      `/api/clients/${client_id}/`,
       {
         method: 'DELETE',
         headers: {
