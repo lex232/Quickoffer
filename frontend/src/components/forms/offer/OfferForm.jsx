@@ -183,15 +183,12 @@ const OfferForm = ({
   }
 
   const deleteItemOffer = (index, e) => {
-    // Удаляем элемент в список товаров/услуг
+    // Удаляем элемент из списка товаров/услуг по индексу
     e.preventDefault();
 
     let prepareToDeleteList = list;
-    // delete prepareToDeleteList[index]
     prepareToDeleteList.splice(index, 1)
-    console.log(prepareToDeleteList)
     setList(prepareToDeleteList);
-    console.log(list)
     localStorage.setItem("items", JSON.stringify(list));
 
     setDragAndDrop({
@@ -248,7 +245,7 @@ const OfferForm = ({
     let prepareToChangeList = list;
     prepareToChangeList[index][key] = e.target.value
     setList(prepareToChangeList);
-    
+    localStorage.setItem("items", JSON.stringify(list));
     setDragAndDrop({
       ...dragAndDrop,
       draggedFrom: null,
@@ -368,7 +365,7 @@ const OfferForm = ({
               onFocus={_ => {
                 setShowItems(true)
               }}
-              value={itemValue.title} /> 
+              value={itemValue.title} />
 
               {showItems && itemList.length > 0 && <ItemSearch
                 items={itemList}
@@ -439,7 +436,7 @@ const OfferForm = ({
               
            </section>
            </div>
-           <div className="btn-toolbar d-flex align-items-end mb-2 mb-md-0">
+           <div className="btn-toolbar d-flex align-items-end mb-4">
             <div className='justify-content-start col-6'>
               <button onClick={(e) => handlePostCLiсk(e)} className="btn btn-medium btn-primary mt-3 float-start">Опубликовать</button>         
             </div>

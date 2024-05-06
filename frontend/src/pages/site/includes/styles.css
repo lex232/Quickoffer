@@ -1,0 +1,11 @@
+.circle-number {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #0d6efd;
+    border-radius: 50%;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: 700;
+    color: aliceblue;
+}

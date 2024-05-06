@@ -5,6 +5,7 @@ import Footer from '../includes/Footer.jsx';
 import ItemsArea from '../items-area/ItemsArea.jsx';
 
 import group_api from '../../../api/group_api';
+import './styles.css'
 
 
 const CatalogPage = ({ loginstate, onSignOut, user }) => {
@@ -30,11 +31,11 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         .finally(()=> setIsLoaddingCat(false))
       }
 
-      const handleChangeCategory = (e, id) => {
-        // Устанавливаем значение типа компании onChange
-        e.preventDefault();
-        setChoosenCategory(id);
-      }
+    const handleChangeCategory = (e, id) => {
+    // Устанавливаем значение типа компании onChange
+    e.preventDefault();
+    setChoosenCategory(id);
+    }
 
     return (
             <div>
@@ -51,11 +52,11 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                     <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
                         <div className="position-sticky pt-3 sidebar-sticky">
                             <h2>Категории</h2>
-                            <ul class="nav flex-column gap-2">
+                            <ul className="nav nav-pills flex-column gap-2">
                                 {listGroups.map((results) => {
                                     return (
                                         <button onClick={(e) => handleChangeCategory(e, results.id)}>
-                                            <li className="nav-item">{results.title}</li>
+                                            {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}
                                         </button>
                                         );
                                     })}
@@ -67,7 +68,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                 </div>
                 </div>
                 
-                <div classNameName="container-fluid">
+                <div className="container-fluid">
                     <Footer/>
                 </div>
                 

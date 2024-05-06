@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,7 @@ import activeUrl from '../../../utils/activeUrl';
 import { ReactComponent as AuthIco } from '../../../static/image/iconsheader/user-lock.svg'
 import { ReactComponent as UserIco } from '../../../static/image/iconsheader/user.svg'
 import { ReactComponent as ExitIco } from '../../../static/image/iconsheader/lock-closed.svg'
+import './styles.css'
 
 const Header = ({ loginstate, onSignOut, user }) => {
 
@@ -17,9 +18,19 @@ const Header = ({ loginstate, onSignOut, user }) => {
   const active_url = "nav-link active text-black"
   const non_active_url = "nav-link text-black"
 
+  let items = []
+
+  // Сохраняем корзину в локальное хранилище
+  if (localStorage.getItem("items")) {
+      items = JSON.parse(localStorage.getItem("items"));
+  }
+
  // Подсветка активной ссылки
  const check_url_header = new activeUrl(pathname, active_url, non_active_url)
 
+ useEffect(() => {
+
+}, [localStorage.getItem("items")])
   
   function handleLogoutCLiсk(e) {
     // Обработать клик выхода
@@ -36,9 +47,17 @@ const Header = ({ loginstate, onSignOut, user }) => {
   const AuthUser = () => {
     let username = user.username
     return (
-      <div>
-        <Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none"><UserIco fill="black"  transform='scale(1)' baseProfile='tiny' width={14} className='me-2'/>{username}</div></Link>
-        <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-2"><ExitIco fill="black"  transform='scale(1)' baseProfile='tiny' width={20} className='me-2'/>Выйти</button></li>
+      <div className='nav'>
+        <div className="nav-item">
+          <Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none"><UserIco fill="black"  transform='scale(1)' baseProfile='tiny' width={14} className='me-2'/>{username}</div></Link>
+          <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-2"><ExitIco fill="black"  transform='scale(1)' baseProfile='tiny' width={20} className='me-2'/>Выйти</button></li>
+        </div>
+        <div className="nav-item py-2 ps-2 position-relative">
+          {items.length > 0 && <div><Link to="/profile/offer/create" className='nav-item dark py-2 text-black'>Корзина КП</Link>
+            <div className='circle-number position-absolute top-0 start-100 translate-middle'>{items.length}</div>
+          </div>
+          }
+        </div>
       </div>
     )
   }

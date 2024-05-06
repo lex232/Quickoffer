@@ -69,7 +69,7 @@ const OfferShow = () => {
   }
 
   return (
-    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main className="col-md-9 ms-sm-auto col-lg-10 px-5">
       <div className="d-flex">
           {isLoadding && <div className="spinner-border text-primary" role="status">
             <span class="visually-hidden">Загрузка...</span>

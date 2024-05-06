@@ -1,0 +1,15 @@
+.card-image {
+    width: 110px;
+    height: 110px;
+    display: inline-block;
+    object-fit: cover;
+}
+
+.area-img {
+    text-align: center;
+}
+
+.description-item {
+    font-size: 0.7em;
+    text-align: left;
+}

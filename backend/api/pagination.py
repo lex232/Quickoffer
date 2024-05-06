@@ -7,4 +7,4 @@ class ItemsLimitPagination(PageNumberPagination):
     или 9 записей"""
 
     page_size_query_param = 'limit'
-    page_size = 9
+    page_size = 8

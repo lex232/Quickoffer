@@ -40,6 +40,8 @@ function App() {
   const [ loggedIn, setLoggedIn ] = useState(null)
   const [ user, setUser ] = useState({})
 
+  const [ cart, setCart ] = useState([])
+
   const authorization = (username, password) => {
     user_api.signin({
       username, password
