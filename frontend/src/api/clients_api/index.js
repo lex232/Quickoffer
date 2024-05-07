@@ -21,10 +21,15 @@ class ApiClients {
 /////////////////////////////////
   
   getClients () {
+    const token = localStorage.getItem('token')
     return fetch(
       `/api/clients/`,
       {
         method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        },
       }
     ).then(this.checkResponse)
   }
@@ -40,6 +45,7 @@ class ApiClients {
     bill_num,
     bill_corr_num,
     bank_name,
+    phone_company,
     image
   }) {
     const token = localStorage.getItem('token')
@@ -62,6 +68,7 @@ class ApiClients {
           bill_num,
           bill_corr_num,
           bank_name,
+          phone_company,
           image
         })
       }
@@ -69,17 +76,23 @@ class ApiClients {
   }
 
   updateClient ({
-    section_id,
+    id,
     title,
-    help,
-    image,
-    status_type,
-    pre_link,
-    link,
+    company_type,
+    ogrn,
+    inn,
+    kpp,
+    address_reg,
+    address_post,
+    bill_num,
+    bill_corr_num,
+    bank_name,
+    phone_company,
+    image
   }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/clients/${section_id}/`,
+      `/api/clients/${id}/`,
       {
         method: 'PATCH',
         headers: {
@@ -87,13 +100,19 @@ class ApiClients {
           'authorization': `Token ${token}`
         },
         body: JSON.stringify({
-          id: section_id,
+          id,
           title,
-          help,
-          image,
-          status_type,
-          pre_link,
-          link
+          company_type,
+          ogrn,
+          inn,
+          kpp,
+          address_reg,
+          address_post,
+          bill_num,
+          bill_corr_num,
+          bank_name,
+          phone_company,
+          image
         })
       }
     ).then(this.checkResponse)

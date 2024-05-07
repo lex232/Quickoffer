@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 
 from api.permissions import IsAdminOrReadOnly
 from offer.models import Client
@@ -18,10 +19,15 @@ User = get_user_model()
 class ClientOfferViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для категорий клиентов."""
 
-    queryset = Client.objects.all()
     serializer_class = ClientSerializer
-    permission_classes = (IsAdminOrReadOnly,)
-    # pagination_class = None
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Показываем только клиентов авторизованного пользователя"""
+
+        user = self.request.user
+        queryset = Client.objects.filter(author=user)
+        return queryset
 
     def get_serializer_class(self):
         """Определеям сериалайзер в зависимости от запроса"""

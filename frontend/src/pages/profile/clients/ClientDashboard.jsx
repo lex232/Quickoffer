@@ -51,9 +51,37 @@ const ClientDashboard = () => {
     await getClients(currentpage);
   }
 
-  const HandleEditNews = async (id, title, description, image, e) => {
-    e.preventDefault();
-    return navigate("edit", {state: {id: id, title: title, description: description, image: image}})
+  const HandleEditNews = async (
+    id,
+    title,
+    company_type,
+    ogrn,
+    inn,
+    kpp,
+    address_reg,
+    address_post,
+    bill_num,
+    bill_corr_num,
+    bank_name,
+    phone_company,
+    image,
+    e) => {
+      e.preventDefault();
+      return navigate("/profile/clients/edit", {state: {
+        id,
+        title,
+        company_type,
+        ogrn,
+        inn,
+        kpp,
+        address_reg,
+        address_post,
+        bill_num,
+        bill_corr_num,
+        bank_name,
+        phone_company,
+        image
+      }})
   }
 
   const CreateClient = (e) => {
@@ -92,7 +120,21 @@ const ClientDashboard = () => {
                   <td>{results.title}</td>
                   <td>{results.inn}</td>
                   <td>{results.ogrn}</td>
-                  <td><button onClick={(e) => HandleEditNews(results.id, results.title, results.description, results.image, e)}><PencilIco fill="orange"/></button></td>
+                  <td><button onClick={(e) => HandleEditNews(
+                    results.id,
+                    results.title,
+                    results.company_type,
+                    results.ogrn,
+                    results.inn,
+                    results.kpp,
+                    results.address_reg,
+                    results.address_post,
+                    results.bill_num,
+                    results.bill_corr_num,
+                    results.bank_name,
+                    results.phone_company,
+                    results.image,
+                    e)}><PencilIco fill="orange"/></button></td>
                   <td>
                   <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/>
                   </td>

@@ -22,10 +22,15 @@ class ApiMainProfile {
 /////////////////////////////////
 
   getMainProfileInfo () {
+    const token = localStorage.getItem('token')
     return fetch(
       `/api/profile-main`,
       {
         method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        },
       }
     ).then(this.checkResponse)
   }

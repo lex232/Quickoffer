@@ -83,10 +83,15 @@ deleteOffer ({ offer_id }) {
 getOfferPaginate ({
   page
 }) {
+  const token = localStorage.getItem('token')
   return fetch(
     `/api/offers/?page=${page}`,
     {
       method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
     }
   ).then(this.checkResponse)
 }
@@ -94,10 +99,15 @@ getOfferPaginate ({
 getCurrentOffer ({
   id
 }) {
+  const token = localStorage.getItem('token')
   return fetch(
     `/api/offers/${id}/`,
     {
       method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
     }
   ).then(this.checkResponse)
 }

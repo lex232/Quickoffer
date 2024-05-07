@@ -13,3 +13,9 @@
     font-size: 0.7em;
     text-align: left;
 }
+
+.small-item {
+    font-size: 0.7em;
+    text-align: start;
+    padding-left: 20px;
+}

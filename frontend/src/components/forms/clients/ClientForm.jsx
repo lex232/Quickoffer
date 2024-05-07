@@ -1,3 +1,4 @@
+// Форма обработки полей создание клиента
 import React, { useEffect, useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +21,7 @@ const ClientForm = ({
     bill_num,
     bill_corr_num,
     bank_name,
+    phone_company,
     image
 }) => {
   const navigate = useNavigate()
@@ -32,7 +34,8 @@ const ClientForm = ({
   const [ billNumArea, setBillNum ] = useState(bill_num)
   const [ billCorrNumArea, setBillCorrNum ] = useState(bill_corr_num)
   const [ bankNameArea, setBankName ] = useState(bank_name)
-  const [ companyTypeArea, setCompanyType ] = useState(company_type) 
+  const [ companyTypeArea, setCompanyType ] = useState(company_type)
+  const [ phoneCompanyArea, setPhoneCompany ] = useState(phone_company)
 
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
@@ -51,51 +54,6 @@ const ClientForm = ({
     }
     setPreview(selectedImage)
   }, [selectedImage])
-
-  const handleChangeTitle = (e) => {
-    // Устанавливаем имя записи на событии onChange
-    setTitle(e.target.value);
-  }
-
-  const handleChangeOgrn = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setOgrn(e.target.value);
-  }
-
-  const handleChangeInn = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setInn(e.target.value);
-  }
-
-  const handleChangeKpp = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setKpp(e.target.value);
-  }
-
-  const handleChangeAddressReg = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setAddressReg(e.target.value);
-  }
-
-  const handleChangeAddressPost = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setAddressPost(e.target.value);
-  }
-
-  const handleChangeBillNum = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setBillNum(e.target.value);
-  }
-
-  const handleChangeBillCorrNum = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setBillCorrNum(e.target.value);
-  }
-
-  const handleChangeBankName = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setBankName(e.target.value);
-  }
 
   const handleChangeImage = (e) => {
     // Устанавливаем картинку записи на событии onChange
@@ -128,7 +86,6 @@ const ClientForm = ({
   function handlePostCLiсk(e) {
     // Обработать клик публикации
     e.preventDefault();
-
     // null не подходит для api, защита от отправки null
     if (image === null) {
       image = undefined
@@ -145,53 +102,39 @@ const ClientForm = ({
       bill_num: billNumArea,
       bill_corr_num: billCorrNumArea,
       bank_name: bankNameArea,
+      phone_company: phoneCompanyArea,
       image: selectedImage,
     }
-
+    console.log(data)
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
       clients_api.createClient(data)
-      return navigate("/profile/")
+      return navigate("/profile/clients/list")
     } else {
       // Иначе PATCH
-      data.news_id = id
+      data.id = id
       clients_api.updateClient(data)
-      return navigate("/profile/")
+      return navigate("/profile/clients/list")
     }
 }
 
   return (
       <form>
-          <div className="form">
-            <input type="header" defaultValue={title} className="form-control my-3" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => handleChangeTitle(e)} /> 
-          </div>
-          <select className='form-select my-3' aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
+          <div className="form pt-1">
+            <input type="header" defaultValue={title} className="form-control my-2" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
+          <select className='form-select my-2' aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
             <option selected value='ip'>ИП</option>
             <option value='ooo'>ООО</option>
           </select>
-          <div className="form">
-            <input type="header" defaultValue={ogrn} className="form-control my-3" id="Ogrn" placeholder="ОГРН" onChange={(e) => handleChangeOgrn(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={inn} className="form-control my-3" id="Inn" placeholder="ИНН" onChange={(e) => handleChangeInn(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={kpp} className="form-control my-3" id="Kpp" placeholder="КПП" onChange={(e) => handleChangeKpp(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={address_reg} className="form-control my-3" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => handleChangeAddressReg(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={address_post} className="form-control my-3" id="Address" placeholder="Адрес местанахождения" onChange={(e) => handleChangeAddressPost(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={bill_num} className="form-control my-3" id="Bill" placeholder="Расчетный счет" onChange={(e) => handleChangeBillNum(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={bill_corr_num} className="form-control my-3" id="CorrBill" placeholder="Корреспондентский счет" onChange={(e) => handleChangeBillCorrNum(e)} />
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={bank_name} className="form-control my-3" id="BankName" placeholder="Наименование банка" onChange={(e) => handleChangeBankName(e)} />
+            <input type="text" defaultValue={ogrn} className="form-control my-2" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />
+            <input type="text" defaultValue={inn} className="form-control my-2" id="Inn" placeholder="ИНН" onChange={(e) => setInn(e.target.value)} />
+            <input type="text" defaultValue={kpp} className="form-control my-2" id="Kpp" placeholder="КПП" onChange={(e) => setKpp(e.target.value)} />
+            <input type="text" defaultValue={address_reg} className="form-control my-2" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => setAddressReg(e.target.value)} />
+            <input type="text" defaultValue={address_post} className="form-control my-2" id="Address" placeholder="Адрес местонахождения" onChange={(e) => setAddressPost(e.target.value)} />
+            <input type="text" defaultValue={bill_num} className="form-control my-2" id="Bill" placeholder="Расчетный счет" onChange={(e) => setBillNum(e.target.value)} />
+            <input type="text" defaultValue={bill_corr_num} className="form-control my-2" id="CorrBill" placeholder="Корреспондентский счет" onChange={(e) => setBillCorrNum(e.target.value)} />
+            <input type="text" defaultValue={bank_name} className="form-control my-2" id="BankName" placeholder="Наименование банка" onChange={(e) => setBankName(e.target.value)} />
+            <input type="text" defaultValue={phone_company} className="form-control my-2" id="PhoneCompany" placeholder="Телефон организации" onChange={(e) => setPhoneCompany(e.target.value)} />
           </div>
           <div className='d-flex'>
             {preview && <div className='d-flex position-relative'>
@@ -200,7 +143,7 @@ const ClientForm = ({
             </div>}
             <div className="form col">
               <label for="floatingPassword">Лого компании</label>
-              <input type="file" ref={refImg} className="form-control my-3" id="floatingImage" placeholder="Изображение" onChange={(e) => handleChangeImage(e)}/>
+              <input type="file" ref={refImg} className="form-control my-2" id="floatingImage" placeholder="Изображение" onChange={(e) => handleChangeImage(e)}/>
             </div>
           </div>
           <button onClick={(e) => handlePostCLiсk(e)} className="w-50 btn btn-medium btn-primary mt-3">Опубликовать</button>

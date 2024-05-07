@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     # Плагины
     'rest_framework',
     'rest_framework.authtoken',
+    'mptt',
+    'django_mptt_admin',
     # 'djoser',
     'django_filters',
     # Приложения
@@ -75,7 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'quickoffer.wsgi.application'
-
 
 DATABASES = {
     'default': {

@@ -4,14 +4,14 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from PIL import Image as ImagePIL
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
-from reportlab.platypus import Paragraph, Spacer, Table, Image
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Table, Image
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
@@ -38,10 +38,15 @@ User = get_user_model()
 class OfferViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для коммерческих предложений."""
 
-    queryset = OfferForCustomer.objects.all()
     serializer_class = OfferSerializer
-    permission_classes = (IsAdminOrReadOnly,)
-    # pagination_class = None
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Показываем только КП авторизованного пользователя"""
+
+        user = self.request.user
+        queryset = OfferForCustomer.objects.filter(author=user)
+        return queryset
 
     def get_serializer_class(self):
         """Определеям сериалайзер в зависимости от запроса"""

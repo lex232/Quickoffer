@@ -105,7 +105,7 @@ const OfferShow = () => {
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-row align-items-center">
                               <div>
-                                <img src={results.image} height="80" alt="item_img"></img>
+                                <img src={results.image} height={80} width={80} alt="item_img"></img>
                               </div>
                             <div class="ms-3">
                                 <h5>{results.item}</h5>

@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 from offer.models import Item, Group
 
-temp_dir = 'razemiperehodniki-page1'
+temp_dir = 'akkymylyator-page1'
 # Видеорегистраторы
 # Контроль доступа
 # Микрофоны
@@ -20,7 +20,9 @@ temp_dir = 'razemiperehodniki-page1'
 # Кабель
 # Блоки питания
 # Аккумуляторы
-CATS = "Разъёмы"
+# CATS = ["Камеры видеонаблюдения", "Камеры цифровые IP 2 Mpix"]
+# CATS = ["Камеры видеонаблюдения", "Камеры цифровые IP 4 Mpix"]
+CATS = ["Аккумуляторы"]
 
 
 DATA_FILES = {
@@ -55,12 +57,15 @@ class Command(BaseCommand):
                     dict_for_record = {}
                     for i in range(len(data)):
                         if FIELDS.get(model)[i] == 'group':
+                            temp_group = []
+                            for group in CATS:
                             # obj = Group.objects.get(pk=int(data[i]))
-                            obj = Group.objects.get(title=CATS)
-                            print('Полученная группа', obj)
+                                obj = Group.objects.get(title=group)
+                                temp_group.append(obj)
+                            print('Полученные группы ', temp_group)
                             dict_for_record.setdefault(
                                 FIELDS.get(model)[i],
-                                obj
+                                temp_group
                             )
                         if FIELDS.get(model)[i] == 'image':
                             image = f'media/item/image/{data[i]}'
@@ -73,7 +78,13 @@ class Command(BaseCommand):
                                 FIELDS.get(model)[i],
                                 data[i]
                             )
-                    model.objects.create(
-                        **dict_for_record
+                    temp_model = model.objects.create(
+                        title=dict_for_record.get('title'),
+                        price_retail=dict_for_record.get('price_retail'),
+                        description=dict_for_record.get('description'),
+                        quantity_type=dict_for_record.get('quantity_type'),
+                        item_type=dict_for_record.get('item_type'),
+                        image=dict_for_record.get('image')
                     )
+                    temp_model.group.set(dict_for_record.get('group'))
         self.stdout.write('Данные в БД успешно загружены')

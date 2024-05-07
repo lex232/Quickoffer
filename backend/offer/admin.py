@@ -1,4 +1,5 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 
 from .models import (
     Item,
@@ -7,7 +8,8 @@ from .models import (
     OfferForCustomer,
     OfferItems,
     Client,
-    Profile
+    Profile,
+    Brand
 )
 
 
@@ -21,12 +23,20 @@ class ClientAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(Brand)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'description'
+    )
+
+
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'description',
-        'group',
+        # 'group',
         'price_retail',
         'private_type',
     )
@@ -38,7 +48,7 @@ class ItemUserAdmin(admin.ModelAdmin):
         'author',
         'title',
         'description',
-        'group',
+        # 'group',
         'price_retail',
         'private_type',
     )
@@ -69,14 +79,21 @@ class OfferItemsAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'title',
-        'slug',
-        'description'
-    )
+# @admin.register(Group)
+# class GroupAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'id',
+#         'title',
+#         'slug',
+#         'description'
+#     )
+
+class GroupAdmin(MPTTModelAdmin):
+    prepopulated_fields = {
+        "slug": ("title",)
+    }
+
+admin.site.register(Group, GroupAdmin)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

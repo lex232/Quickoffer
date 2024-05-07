@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation, useParams, Link } from 'react-router-dom';
+// APP QuickOffer
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { AuthContext, UserContext } from './contexts'
 
@@ -16,6 +17,7 @@ import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
 import ClientCreate from './pages/profile/clients/ClientsCreate';
+import ClientsEdit from './pages/profile/clients/ClientsEdit';
 import ClientDashboard from './pages/profile/clients/ClientDashboard';
 
 import ItemsCreate from './pages/profile/items/ItemsCreate';
@@ -139,6 +141,7 @@ function App() {
               <Route path="" element={<ProfileDashboard/>}/>
               <Route path="clients/create" element={<ClientCreate />}/>
               <Route path="clients/list" element={<ClientDashboard />}/>
+              <Route path='clients/edit' element={<ClientsEdit />}/>
 
               <Route path="items/create" element={<ItemsCreate />}/>
 

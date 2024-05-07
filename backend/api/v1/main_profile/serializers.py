@@ -20,9 +20,11 @@ class ProfileMainSerializer(serializers.Serializer):
     def get_count_clients(self, obj):
         """Подсчитывает количество клиентов пользователя"""
 
-        return Client.objects.count()
+        current_user = self.context['current_user']
+        return Client.objects.filter(author=current_user).count()
 
     def get_count_offers(self, obj):
         """Подсчитывает количество КП пользователя"""
 
-        return OfferForCustomer.objects.count()
+        current_user = self.context['current_user']
+        return OfferForCustomer.objects.filter(author=current_user).count()

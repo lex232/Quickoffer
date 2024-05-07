@@ -4,8 +4,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core import validators
+from django.urls import reverse
 
 from PIL import Image
+from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
 
 User = get_user_model()
 ORGANIZATION_TYPE = [
@@ -102,6 +104,12 @@ class Client(models.Model):
         null=True,
         blank=True
     )
+    phone_company = models.CharField(
+        verbose_name='телефон организации',
+        max_length=20,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'клиент'
@@ -112,12 +120,22 @@ class Client(models.Model):
         return self.title
 
 
-class Group(models.Model):
-    """Модель группы."""
+class Group(MPTTModel):
+    """Модель категории."""
 
     title = models.CharField(
-        verbose_name='название',
-        max_length=200
+        verbose_name='название категории',
+        max_length=200,
+        unique=True
+    )
+    parent = TreeForeignKey(
+        'self',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name='children',
+        db_index=True,
+        verbose_name='родительская категория'
     )
     slug = models.SlugField(
         max_length=50,
@@ -125,10 +143,45 @@ class Group(models.Model):
         )
     description = models.TextField()
 
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
     class Meta:
-        verbose_name = 'группа'
-        verbose_name_plural = 'группы'
-        ordering = ['-slug']
+        unique_together = [['parent', 'slug']]
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def get_absolute_url(self):
+        return reverse('post-by-category', args=[str(self.slug)])
+
+    def __str__(self):
+        return self.title
+
+
+class Brand(models.Model):
+    """Модель бренда"""
+
+    title = models.CharField(
+        verbose_name='название бренда',
+        max_length=100,
+        unique=True
+    )
+    description = models.TextField(
+        verbose_name='описание',
+        null=True,
+        blank=True
+    )
+    image = models.ImageField(
+        verbose_name='лого бренда',
+        upload_to='media/item/image',
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = 'бренд'
+        verbose_name_plural = 'бренды'
+        ordering = ['-title',]
 
     def __str__(self):
         return self.title
@@ -139,20 +192,35 @@ class Item(models.Model):
 
     title = models.CharField(
         verbose_name='название товара',
-        max_length=250,
+        max_length=150,
         unique=True
+    )
+    brand = models.ForeignKey(
+        Brand,
+        verbose_name='брэнд товара',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
     description = models.TextField(
         verbose_name='описание',
         null=True,
         blank=True
     )
-    group = models.ForeignKey(
-        Group,
-        verbose_name='группа товара',
-        on_delete=models.SET_NULL,
+    # group = models.ForeignKey(
+    #     Group,
+    #     verbose_name='группа товара',
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True,
+    # )
+    group = TreeManyToManyField(
+        'Group',
+        # on_delete=models.SET_NULL,
         blank=True,
         null=True,
+        related_name='items',
+        verbose_name='Категория'
     )
     pub_date = models.DateField(auto_now_add=True)
     pub_time = models.TimeField(auto_now_add=True)
@@ -390,6 +458,12 @@ class Profile(models.Model):
     bank_name = models.CharField(
         verbose_name='имя банка',
         max_length=200,
+        null=True,
+        blank=True
+    )
+    phone = models.CharField(
+        verbose_name='телефон',
+        max_length=20,
         null=True,
         blank=True
     )

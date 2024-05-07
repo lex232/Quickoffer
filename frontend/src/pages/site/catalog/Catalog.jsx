@@ -13,6 +13,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [ listGroups, setListGroups ] = useState([])
     const [ isLoaddingCat, setIsLoaddingCat ] = useState(true)
     const [ choosenCategory, setChoosenCategory ] = useState(undefined)
+    const [ choosenTree, setChoosenTree ] = useState(undefined)
 
     useEffect(() => {
         // Получить все новости при загрузке страницы
@@ -31,11 +32,14 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         .finally(()=> setIsLoaddingCat(false))
       }
 
-    const handleChangeCategory = (e, id) => {
+    const handleChangeCategory = (e, id, tree_id) => {
     // Устанавливаем значение типа компании onChange
     e.preventDefault();
     setChoosenCategory(id);
+    setChoosenTree(tree_id);
     }
+
+
 
     return (
             <div>
@@ -55,8 +59,16 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             <ul className="nav nav-pills flex-column gap-2">
                                 {listGroups.map((results) => {
                                     return (
-                                        <button onClick={(e) => handleChangeCategory(e, results.id)}>
-                                            {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}
+                                            results.level === 0 
+                                            &&
+                                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id)}>
+                                                {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}
+                                            </button> 
+                                            ||
+                                            choosenTree === results.tree_id && results.level !== 0
+                                            &&
+                                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id)}>
+                                            {results.id === choosenCategory ? <li className="nav-link active small-item"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
                                         </button>
                                         );
                                     })}
