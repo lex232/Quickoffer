@@ -237,7 +237,6 @@ const OfferForm = ({
     // Подсчет итого
     let temp_final = 0
     list.map((item, index) => {
-      console.log(item)
       temp_final += (item.item_price_retail * item.amount)
     })
     setFinallyPrice(temp_final)
