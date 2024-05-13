@@ -23,12 +23,12 @@ class ClientAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Brand)
-class ClientAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'description'
-    )
+# @admin.register(Brand)
+# class ClientAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'title',
+#         'description'
+#     )
 
 
 @admin.register(Item)
@@ -39,6 +39,7 @@ class ItemAdmin(admin.ModelAdmin):
         'brand',
         'price_retail',
         'private_type',
+        'item_type',
     )
 
 
@@ -93,7 +94,9 @@ class GroupAdmin(MPTTModelAdmin):
         "slug": ("title",)
     }
 
+
 admin.site.register(Group, GroupAdmin)
+
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

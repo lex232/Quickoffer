@@ -142,6 +142,13 @@ class Group(MPTTModel):
         unique=True
         )
     description = models.TextField()
+    cat_type = models.CharField(
+        verbose_name='тип категории: товар или услуга',
+        max_length=20,
+        db_index=True,
+        choices=ITEM_TYPE,
+        default=ITEM_TYPE[0][0]
+    )
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -254,8 +261,8 @@ class Item(models.Model):
     )
 
     class Meta:
-        verbose_name = 'товар'
-        verbose_name_plural = 'товары'
+        verbose_name = 'товар или услуга'
+        verbose_name_plural = 'товары или услуги'
         ordering = ['-pub_date', '-pub_time']
 
     def __str__(self):

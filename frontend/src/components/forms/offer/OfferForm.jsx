@@ -93,17 +93,21 @@ const OfferForm = ({
       })
   }, [itemValue.title])
 
-    // UseEffect для динамического поиска клиентов
-    useEffect(_ => {
-      if (clientValue.title === '') {
-        return setClientList([])
-      }
-      clients_api
-        .findClient({ client: clientValue.title })
-        .then(clientsitems => {
-          setClientList(clientsitems)
-        })
-    }, [clientValue.title])
+  // UseEffect для динамического поиска клиентов
+  useEffect(_ => {
+    if (clientValue.title === '') {
+      return setClientList([])
+    }
+    clients_api
+      .findClient({ client: clientValue.title })
+      .then(clientsitems => {
+        setClientList(clientsitems)
+      })
+  }, [clientValue.title])
+
+  useEffect(_ => {
+    calculateFinalPrice()
+  }, [list])
 
   // onDragStart fires when an element
   // starts being dragged
@@ -233,7 +237,8 @@ const OfferForm = ({
     // Подсчет итого
     let temp_final = 0
     list.map((item, index) => {
-      temp_final += item.purchase_price
+      console.log(item)
+      temp_final += (item.item_price_retail * item.amount)
     })
     setFinallyPrice(temp_final)
   }
@@ -429,7 +434,7 @@ const OfferForm = ({
                 <td></td>
                 <td></td>
                 <td><b>Итого:</b></td>
-                <td><b></b></td>
+                <td><b>{finallyPrice}</b></td>
                 <td></td>
                 <td></td>
               </table>
