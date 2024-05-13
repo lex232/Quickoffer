@@ -14,6 +14,11 @@ User = get_user_model()
 class ItemSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели товара"""
 
+    brand = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='title'
+    )
+
     class Meta:
         model = Item
         fields = '__all__'

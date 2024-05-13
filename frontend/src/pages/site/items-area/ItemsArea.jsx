@@ -81,6 +81,12 @@ const ItemsArea = ({ category_id }) => {
         return 1
     }
 
+    const AddNewLine = (info) => {
+        let new_line = info.replaceAll('; ','\n')
+        console.log(new_line)
+        return new_line
+    }
+
     const CartPlusItem = ( results, e) => {
     // Добавляем элемент в список товаров/услуг
         e.preventDefault();
@@ -132,8 +138,9 @@ const ItemsArea = ({ category_id }) => {
                                     <div className="card-body p-2">
                                         <div className="text-start">
                                             <h6 className="fw-bolder">{results.title}</h6>
-                                            <div className='description-item py-2'>{results.description}</div>
-                                            {results.price_retail} руб.
+                                            <div className='item-brand'>Производитель: <b>{results.brand}</b></div>
+                                            <div className='description-item py-1'>{AddNewLine(results.description)}</div>
+                                            <div className='item-price'><b>{results.price_retail} руб.</b></div>
                                         </div>
                                     </div>
                                     <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">

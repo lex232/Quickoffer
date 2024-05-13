@@ -36,7 +36,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'description',
-        # 'group',
+        'brand',
         'price_retail',
         'private_type',
     )

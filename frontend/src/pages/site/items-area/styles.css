@@ -1,3 +1,16 @@
 .quantity-items {
     width: 30px;
 }
+
+.description-item {
+    white-space: pre-wrap;
+}
+
+.item-brand {
+    font-size: 0.8em;
+    text-align: left;
+}
+
+.item-price {
+    text-align: right;
+}

@@ -5,24 +5,47 @@ import os
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from offer.models import Item, Group
+from offer.models import Item, Group, Brand
 
-temp_dir = 'akkymylyator-page1'
+temp_dir = 'videoregistratori_ip_nvr-page2'
 # Видеорегистраторы
 # Контроль доступа
-# Микрофоны
 # Замки для домофонов
 # Домофоны
 # Накопители информации
 # Разъёмы
-# Камеры видеонаблюдения
 # Вызывные панели
 # Кабель
 # Блоки питания
 # Аккумуляторы
 # CATS = ["Камеры видеонаблюдения", "Камеры цифровые IP 2 Mpix"]
+# CATS = ["Камеры видеонаблюдения", "Камеры CVI 2 Mpix"]
 # CATS = ["Камеры видеонаблюдения", "Камеры цифровые IP 4 Mpix"]
-CATS = ["Аккумуляторы"]
+# CATS = ["Аккумуляторы"]
+# CATS = ["Микрофоны"]
+# CATS = ["Домофоны", "Мониторы аналоговые"]
+# CATS = ["Домофоны", "Мониторы IP цифровые"]
+# CATS = ["Блоки питания", "Адаптеры в пластиковом корпусе"]
+# CATS = ["Блоки питания", "Бесперебойное питание"]
+# CATS = ["Блоки питания", "Уличное исполнение БП"]
+# CATS = ["Замки для домофонов", "электромагнитные"]
+# CATS = ["Замки для домофонов", "Электромеханические"]
+# CATS = ["Кабель", "для аналоговой системы"]
+# CATS = ["Кабель", "Витая пара"]
+# CATS = ["Кабель", "Патч-корд"]
+# CATS = ["Кабель", "Шнуры"]
+# CATS = ["Накопители информации", "Карты памяти"]
+# CATS = ["Коммутаторы", "POE - коммутаторы"]
+# CATS = ["Приемо-передатчики", "Пассивные приемо-передатчики"]
+# CATS = ["Разъёмы", "Коннекторы для камер"]
+# CATS = ["Разъёмы", "Коннекторы сетевые RJ45"]
+# CATS = ["Монтажные материалы", "Шкафы"]
+# CATS = ["Вызывные панели", "Аналоговые hd панели"]
+# CATS = ["Вызывные панели", "Цифровые IP панели"]
+# CATS = ["Видеорегистраторы", "Регистраторы CVI формат 2Mpix"]
+CATS = ["Видеорегистраторы", "Регистраторы IP цифровые 2Mpix"]
+
+
 
 
 DATA_FILES = {
@@ -32,6 +55,7 @@ DATA_FILES = {
 FIELDS = {
     Item: [
         'title',
+        'brand',
         'price_retail',
         'description',
         'group',
@@ -56,6 +80,14 @@ class Command(BaseCommand):
                 for data in reader:
                     dict_for_record = {}
                     for i in range(len(data)):
+                        if FIELDS.get(model)[i] == 'brand':
+                            print("TEST", data[i])
+                            temp_brand = Brand.objects.get(title=data[i])
+                            print('Полученный бренд', temp_brand)
+                            dict_for_record.setdefault(
+                                FIELDS.get(model)[i],
+                                temp_brand
+                            )
                         if FIELDS.get(model)[i] == 'group':
                             temp_group = []
                             for group in CATS:
@@ -80,6 +112,7 @@ class Command(BaseCommand):
                             )
                     temp_model = model.objects.create(
                         title=dict_for_record.get('title'),
+                        brand=dict_for_record.get('brand'),
                         price_retail=dict_for_record.get('price_retail'),
                         description=dict_for_record.get('description'),
                         quantity_type=dict_for_record.get('quantity_type'),
