@@ -9,7 +9,7 @@ import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-
+import './styles.css'
 
 const OfferDashboard = () => {
   const navigate = useNavigate()
@@ -86,6 +86,8 @@ const OfferDashboard = () => {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Заголовок</th>
+              <th scope="col">Для клиента</th>
+              <th scope="col">Сумма</th>
               <th scope="col">Открыть</th>
               <th scope="col">Удалить</th>
             </tr>
@@ -96,6 +98,11 @@ const OfferDashboard = () => {
                 <tr key={results.id}>
                   <td>{results.id}</td>
                   <td>{results.name_offer}</td>
+                  <td>{results.name_client}</td>
+                  <td className='table_left'>Итого: {results.final_price} руб 
+                      <br></br>Оборудование: {results.final_price_goods} руб
+                      <br></br>Работы: {results.final_price_work} руб
+                  </td>
                   <td><button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button></td>
                   <td>
                     <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id}/>

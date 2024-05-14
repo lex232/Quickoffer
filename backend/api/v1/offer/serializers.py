@@ -21,6 +21,11 @@ User = get_user_model()
 class OfferSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП - сокращенное"""
 
+    name_client = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='title'
+    )
+
     class Meta:
         model = OfferForCustomer
         fields = '__all__'
@@ -52,9 +57,10 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         """Находим url картинки"""
 
-        img_link = self.context['request'].build_absolute_uri('/media/' + str(obj.item.image))
-        return img_link
-
+        if len(str(obj.item.image)) > 0:
+            img_link = self.context['request'].build_absolute_uri('/media/' + str(obj.item.image))
+            return img_link
+        return None
 
 class OfferFullSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП - полное"""
@@ -65,7 +71,6 @@ class OfferFullSerializer(serializers.ModelSerializer):
     # )
 
     name_client = ClientSerializer()
-
     items_for_offer = OfferItemRelateSerializer(
         many=True,
         source='selected_offer'
@@ -73,7 +78,14 @@ class OfferFullSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OfferForCustomer
-        fields = ('name_offer', 'created', 'status_type', 'name_client', 'items_for_offer')
+        fields = (
+            'name_offer',
+            'created',
+            'status_type',
+            'name_client',
+            'items_for_offer',
+            'final_price'
+        )
 
 
 class ItemOfferCreateSerializer(serializers.ModelSerializer):
@@ -101,17 +113,31 @@ class OfferPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = OfferForCustomer
         fields = (
-            'items_for_offer', 'name_offer', 'name_client', 'status_type'
+            'items_for_offer',
+            'name_offer',
+            'name_client',
+            'status_type',
         )
 
     def processing_items(self, offer, items):
         """Сохранение связанной модели Товар-КП
         для каждой позиции отдельно в цикле"""
 
+        total_price_goods = 0
+        total_price_work = 0
+
         for item in items:
             current_item = Item.objects.get(pk=item['id'])
             current_quantity = item['amount']
             current_price_retail = item['item_price_retail']
+
+            current_type = current_item.item_type
+            print(current_item, "CUR ITEM", current_type)
+            # Подсчитываем суммы итого, товары и услуги
+            if current_type == 'product':
+                total_price_goods += (int(current_quantity) * float(current_price_retail))
+            elif current_type == 'service':
+                total_price_work += (int(current_quantity) * float(current_price_retail))
             current_price_purchase = item['item_price_purchase']
             OfferItems.objects.create(
                 offer=offer,
@@ -120,6 +146,8 @@ class OfferPostSerializer(serializers.ModelSerializer):
                 item_price_retail=current_price_retail,
                 item_price_purchase=current_price_purchase
             )
+
+        return total_price_goods, total_price_work
 
     def validate(self, data):
         """Проверка на одинаковые товары
@@ -153,7 +181,11 @@ class OfferPostSerializer(serializers.ModelSerializer):
             **validated_data,
             author=author
         )
-        self.processing_items(offer, items_valid)
+        total_goods, total_work = self.processing_items(offer, items_valid)
+        offer.final_price_goods = total_goods
+        offer.final_price_work = total_work
+        offer.final_price = total_goods + total_work
+        offer.save()
         return offer
 
     def to_representation(self, instance):

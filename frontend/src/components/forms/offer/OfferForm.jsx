@@ -27,8 +27,6 @@ const OfferForm = ({
   // Самая главная переменная - итоговый список КП
   let items = []
 
-  // Очищаем локальное хранилище (тестирование)
-  // localStorage.removeItem("items")
   // Сохраняем корзину в локальное хранилище
   if (localStorage.getItem("items")) {
     items = JSON.parse(localStorage.getItem("items"));
@@ -202,6 +200,7 @@ const OfferForm = ({
       draggedTo: null,
       isDragging: false
     });
+    calculateFinalPrice()
   }
 
   const handlePlusItem = (e) => {
@@ -230,6 +229,7 @@ const OfferForm = ({
         draggedTo: null,
         isDragging: false
       });
+      calculateFinalPrice()
     }
   }
 
@@ -310,7 +310,7 @@ const OfferForm = ({
       title: nameArea,
       client: clientValue.id,
       status_type: 'in_edit',
-      items_for_offer: list
+      items_for_offer: list,
     }
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
@@ -433,7 +433,7 @@ const OfferForm = ({
                 <td></td>
                 <td></td>
                 <td><b>Итого:</b></td>
-                <td><b>{finallyPrice}</b></td>
+                <td><b>{finallyPrice} руб.</b></td>
                 <td></td>
                 <td></td>
               </table>

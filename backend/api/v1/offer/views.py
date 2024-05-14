@@ -89,7 +89,10 @@ class OfferViewSet(viewsets.ModelViewSet):
                 total_sum += temp_sum
 
                 url_img = item.item.image
-                image = Image(url_img, 0.8*inch, 0.8*inch)
+                if url_img:
+                    image = Image(url_img, 0.8*inch, 0.8*inch)
+                else:
+                    image = None
                 table_data[index + 1].append(image)
 
             response = HttpResponse(content_type='application/pdf')

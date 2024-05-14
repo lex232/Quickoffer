@@ -40,9 +40,16 @@ class ClientOfferViewSet(viewsets.ModelViewSet):
 class ClientFinderViewSet(viewsets.ReadOnlyModelViewSet):
     """Поиск по клиентам."""
 
-    queryset = Client.objects.all()
+    # queryset = Client.objects.all()
     serializer_class = ClientSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = None
     filter_backends = (DjangoFilterBackend, )
     filterset_class = FilterForClients
+
+    def get_queryset(self):
+        """Показываем только клиентов авторизованного пользователя"""
+
+        user = self.request.user
+        queryset = Client.objects.filter(author=user)
+        return queryset

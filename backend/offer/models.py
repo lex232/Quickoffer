@@ -1,12 +1,12 @@
 """
 Модели приложения offer
 """
+from PIL import Image
+
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.urls import reverse
-
-from PIL import Image
 from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
 
 User = get_user_model()
@@ -317,6 +317,18 @@ class OfferForCustomer(models.Model):
         choices=STATUS_TYPE,
         default='in_edit'
     )
+    final_price = models.FloatField(
+        verbose_name='Итого',
+        null=True
+    )
+    final_price_goods = models.FloatField(
+        verbose_name='Итого оборудование',
+        null=True
+    )
+    final_price_work = models.FloatField(
+        verbose_name='Итого работа',
+        null=True
+    )
 
     class Meta:
         verbose_name = 'коммерческое предложение'
@@ -344,12 +356,12 @@ class OfferItems(models.Model):
     item_price_retail = models.FloatField(
         verbose_name='розничная цена',
         null=True,
-        default=0
+        default=0,
     )
     item_price_purchase = models.FloatField(
         verbose_name='закупка',
         null=True,
-        default=0
+        default=0,
     )
     offer = models.ForeignKey(
         OfferForCustomer,
@@ -364,11 +376,11 @@ class OfferItems(models.Model):
     amount = models.PositiveSmallIntegerField(
         verbose_name='количество',
         default=1,
-        validators=(
+        validators=[
             validators.MinValueValidator(
                 1, message='Нельзя добавить меньше 1 штук позиции'
-            ),
-        )
+            )
+        ]
     )
 
     class Meta:
