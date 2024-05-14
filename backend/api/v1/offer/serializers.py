@@ -84,7 +84,9 @@ class OfferFullSerializer(serializers.ModelSerializer):
             'status_type',
             'name_client',
             'items_for_offer',
-            'final_price'
+            'final_price',
+            'final_price_goods',
+            'final_price_work',
         )
 
 

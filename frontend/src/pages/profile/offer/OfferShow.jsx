@@ -17,7 +17,6 @@ const OfferShow = () => {
   const [clientInfo, setClientInfo] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
 
-  const [totalPrice, setTotalPrice] = useState(0)
   let total
 
   useEffect(() => {
@@ -35,10 +34,6 @@ const OfferShow = () => {
       setCurrentOffer(res);
       setItemsOffer(res.items_for_offer);
       setClientInfo(res.name_client);
-      res.items_for_offer.map((item) => {
-        total += item.item_price_retail * item.amount
-      })
-      setTotalPrice(total)
       console.log(total)
     })
     .catch((e) => console.log(e))
@@ -128,10 +123,18 @@ const OfferShow = () => {
         })}
       </div>
 
-      <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex justify-content-between">
+                      <p class="mb-2">Итого стоимость оборудования:</p>
+                      <p class="mb-1">{currentOffer.final_price_goods} Р.</p>
+      </div>
+      <div class="d-flex justify-content-between mb-1">
+                      <p class="mb-2">Итого стоимость монтажных работ:</p>
+                      <p class="mb-1">{currentOffer.final_price_work} Р.</p>
+      </div>
+      <div class="d-flex justify-content-between">
                       <p class="mb-2">Итого(без НДС)</p>
-                      <p class="mb-2 fs-4">{totalPrice} Р.</p>
-                    </div>
+                      <p class="mb-1 fs-4">{currentOffer.final_price} Р.</p>
+      </div>
     </main>
   );
 };
