@@ -40,7 +40,7 @@ class ApiItems {
   }) {
     const token = localStorage.getItem('token')
     return fetch(
-      '/api/items/',
+      '/api/itemsuser/',
       {
         method: 'POST',
         headers: {
@@ -50,7 +50,7 @@ class ApiItems {
         body: JSON.stringify({
           title,
           description,
-          group,
+          group: [group],
           price_retail,
           quantity_type,
           item_type,
@@ -114,6 +114,20 @@ class ApiItems {
       `/api/items/?page=${page}`,
       {
         method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
+  getItemsUserPaginate ({ page }) {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/itemsuser/`,
+      {
+        method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        }
       }
     ).then(this.checkResponse)
   }

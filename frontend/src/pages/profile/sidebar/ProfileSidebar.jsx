@@ -52,12 +52,17 @@ const ProfileSidebar = () => {
             </ul>
 
         <h6 className="sidebar-heading d-flex align-items-center px-3 mt-2 mb-1 fw-bold text-muted text-uppercase">
-          <DocumentIco fill="gray"/><span className='px-2'>Мои товары</span>
+          <DocumentIco fill="gray"/><span className='px-2'>Мои товары/ услуги</span>
         </h6>
             <ul className="nav flex-column mb-2">
                 <li className="nav-item">
                     <Link to="items/create" className={check_url.check_active("items/create")} aria-current="page"> 
                         <span className="align-text-bottom">Создать</span>
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="items/list" className={check_url.check_active("items/list")} aria-current="page"> 
+                        <span className="align-text-bottom">Список</span>
                     </Link>
                 </li>
             </ul>

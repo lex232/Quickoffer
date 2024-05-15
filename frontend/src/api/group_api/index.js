@@ -23,9 +23,23 @@ class ApiItemsGroup {
 
   getItemsGroup () {
     return fetch(
-      `/api/groups/`,
+      `/api/groupsitems/`,
       {
         method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
+  getItemsGroupOnCreateUserItem () {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/groupsoncreate`,
+      {
+        method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        },
       }
     ).then(this.checkResponse)
   }

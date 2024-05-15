@@ -17,6 +17,7 @@ ORGANIZATION_TYPE = [
 CHOICE_TYPE = [
     ('pc', 'шт.'),
     ('meters', 'м.'),
+    ('kms', 'км.'),
 ]
 ITEM_TYPE = [
     ('product', 'товар'),
@@ -180,7 +181,7 @@ class Brand(models.Model):
     )
     image = models.ImageField(
         verbose_name='лого бренда',
-        upload_to='media/item/image',
+        upload_to='media/brand/image',
         null=True,
         blank=True
     )
@@ -214,16 +215,9 @@ class Item(models.Model):
         null=True,
         blank=True
     )
-    # group = models.ForeignKey(
-    #     Group,
-    #     verbose_name='группа товара',
-    #     on_delete=models.SET_NULL,
-    #     blank=True,
-    #     null=True,
-    # )
+
     group = TreeManyToManyField(
         'Group',
-        # on_delete=models.SET_NULL,
         blank=True,
         null=True,
         related_name='items',
@@ -261,8 +255,8 @@ class Item(models.Model):
     )
 
     class Meta:
-        verbose_name = 'товар или услуга'
-        verbose_name_plural = 'товары или услуги'
+        verbose_name = 'товар/ услуга'
+        verbose_name_plural = 'товары/ услуги'
         ordering = ['-pub_date', '-pub_time']
 
     def __str__(self):
@@ -279,8 +273,8 @@ class ItemUser(Item):
     )
 
     class Meta:
-        verbose_name = 'товар пользовательский'
-        verbose_name_plural = 'товары пользовательские'
+        verbose_name = 'товар/ услуга пользовательский'
+        verbose_name_plural = 'товары/ услуги пользовательские'
         ordering = ['-pub_date', '-pub_time']
 
 

@@ -51,6 +51,12 @@ const ClientDashboard = () => {
     await getClients(currentpage);
   }
 
+  const ReadCompanyType = (type) => {
+    if (type==='ip') { return 'ИП' }
+    else if (type==='ooo') { return 'ООО' }
+    else {return 'нет'}
+  }
+
   const HandleEditNews = async (
     id,
     title,
@@ -106,6 +112,7 @@ const ClientDashboard = () => {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Имя</th>
+              <th scope="col">Тип компании</th>
               <th scope="col">ИНН</th>
               <th scope="col">ОГРН</th>
               <th scope="col">Редактировать</th>
@@ -118,6 +125,7 @@ const ClientDashboard = () => {
                 <tr key={results.id}>
                   <td>{results.id}</td>
                   <td>{results.title}</td>
+                  <td>{ReadCompanyType(results.company_type)}</td>
                   <td>{results.inn}</td>
                   <td>{results.ogrn}</td>
                   <td><button onClick={(e) => HandleEditNews(

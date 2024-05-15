@@ -21,6 +21,7 @@ import ClientsEdit from './pages/profile/clients/ClientsEdit';
 import ClientDashboard from './pages/profile/clients/ClientDashboard';
 
 import ItemsCreate from './pages/profile/items/ItemsCreate';
+import ItemsDashboard from './pages/profile/items/ItemsDashboard';
 
 import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferDashboard from './pages/profile/offer/OfferDashboard';
@@ -144,6 +145,7 @@ function App() {
               <Route path='clients/edit' element={<ClientsEdit />}/>
 
               <Route path="items/create" element={<ItemsCreate />}/>
+              <Route path="items/list" element={<ItemsDashboard />}/>
 
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>

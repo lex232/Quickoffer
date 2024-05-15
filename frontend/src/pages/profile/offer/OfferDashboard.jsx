@@ -84,10 +84,10 @@ const OfferDashboard = () => {
         <table className="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Заголовок</th>
               <th scope="col">Для клиента</th>
-              <th scope="col">Сумма</th>
+              <th scope="col">Дата создания</th>
+              <th className='table_left' scope="col">Сумма</th>
               <th scope="col">Открыть</th>
               <th scope="col">Удалить</th>
             </tr>
@@ -96,9 +96,9 @@ const OfferDashboard = () => {
             {news.map((results) => {
               return (
                 <tr key={results.id}>
-                  <td>{results.id}</td>
                   <td>{results.name_offer}</td>
                   <td>{results.name_client}</td>
+                  <td>{getDate(results.created)}</td>
                   <td className='table_left'>Итого: {results.final_price} руб 
                       <br></br>Оборудование: {results.final_price_goods} руб
                       <br></br>Работы: {results.final_price_work} руб

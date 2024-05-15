@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactPaginate from "react-paginate";
 
-import clients_api from '../../../api';
+import clients_api from '../../../api/clients_api';
+import items_api from '../../../api/items_api';
 import getDate from '../../../utils/getDate';
 import DeletePopup from '../../../components/popup/DeletePopup';
 
@@ -11,7 +12,7 @@ import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 
 
-const ClientDashboard = () => {
+const ItemsDashboard = () => {
   const navigate = useNavigate()
 
   const [news, setNews] = useState([]);
@@ -21,12 +22,12 @@ const ClientDashboard = () => {
 
   useEffect(() => {
     // Получить все новости при загрузке страницы
-    getNews(currentpage);
+    getItems(currentpage);
   }, [])
   ;
 
-  const getClients = (page) => {
-    clients_api.getClients({
+  const getItems = (page) => {
+    items_api.getItemsUserPaginate({
       page: page,
     })
     .then(res => {
@@ -40,15 +41,15 @@ const ClientDashboard = () => {
     // Обработать клик паджинатора
     setPage(data.selected + 1)
     currentpage = data.selected + 1;
-    getClients(currentpage);
+    getItems(currentpage);
   };
 
   const HandleDelClient = async (id) => {
-    await api.deleteClient({ news_id: id, })
+    await clients_api.deleteClient({ news_id: id, })
       .then(res => {
         console.log(res)
       })
-    await getClients(currentpage);
+    await getItems(currentpage);
   }
 
   const HandleEditNews = async (id, title, description, image, e) => {
@@ -66,11 +67,11 @@ const ClientDashboard = () => {
         <h1 className="h2">Панель Управления</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
-            <button onClick={(e) => CreateNews(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить новость</button>
+            <button onClick={(e) => CreateNews(e)} type="button" className="btn btn-sm btn-outline-secondary">Добавить товар</button>
           </div>
         </div>
       </div>
-      <h3>Список новостей</h3>
+      <h3>Список своих товаров/ услуг</h3>
       <div className="table-responsive">
         <table className="table table-striped table-sm">
           <thead>
@@ -91,7 +92,7 @@ const ClientDashboard = () => {
                   <td>{getDate(results.pub_date)}</td>
                   <td><button onClick={(e) => HandleEditNews(results.id, results.title, results.description, results.image, e)}><PencilIco fill="orange"/></button></td>
                   <td>
-                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelNews} id={results.id}/>
+                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/>
                   </td>
                 </tr>
                 );
@@ -125,4 +126,4 @@ const ClientDashboard = () => {
   );
 };
 
-export default ClientDashboard;
+export default ItemsDashboard;

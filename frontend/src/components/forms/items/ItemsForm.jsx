@@ -50,42 +50,17 @@ const ItemForm = ({
 
   const getGroups = () => {
     // Получить список категорий товаров
-    group_api.getItemsGroup()
+    group_api.getItemsGroupOnCreateUserItem()
     .then(res => {
       setListGroups(res);
     })
     .catch((e) => console.log(e))
   }
 
-  const handleChangeTitle = (e) => {
-    // Устанавливаем имя записи на событии onChange
-    setTitle(e.target.value);
-  }
-
-  const handleChangeDescription = (e) => {
-    // Устанавливаем текст записи на событии onChange
-    setDescription(e.target.value);
-  }
-
   const handleChangeGroup = (e) => {
     // Устанавливаем номер категории на событии onChange
     e.preventDefault();
     setGroup(Number(e.target.value));
-  }
-
-  const handleChangePriceRetail = (e) => {
-    // Устанавливаем цену розничную на событии onChange
-    setPriceRetail(e.target.value);
-  }
-
-  const handleChangeQuantityType = (e) => {
-    // Устанавливаем кол-во товара на событии onChange
-    setQuantityType(e.target.value);
-  }
-
-  const handleChangeItemType = (e) => {
-    // Устанавливаем тип товара на событии onChange
-    setItemType(e.target.value);
   }
 
   const handleChangeImage = (e) => {
@@ -143,12 +118,8 @@ const ItemForm = ({
 
   return (
       <form>
-          <div className="form">
-            <input type="header" defaultValue={title} className="form-control my-3" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => handleChangeTitle(e)} /> 
-          </div>
-          <div className="form">
-            <input type="header" defaultValue={description} className="form-control my-3" id="Description" placeholder="Описание или характеристики" onChange={(e) => handleChangeDescription(e)} />
-          </div>
+          <input type="header" defaultValue={title} className="form-control my-3" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+          <input type="header" defaultValue={description} className="form-control my-3" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
           {listGroups && <div className="form">
              <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => handleChangeGroup(e)}>
               {listGroups.map((catList) => {
@@ -158,14 +129,13 @@ const ItemForm = ({
               })}
             </select>
           </div>}
-          <div className="form">
-            <input type="header" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => handleChangePriceRetail(e)} />
-          </div>
-          <select className='form-select my-3' aria-label="Количественный тип" id="QuantityType" onChange={(e) => handleChangeQuantityType(e)}>
+          <input type="header" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
+          <select className='form-select my-3' aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
             <option selected value='pc'>шт.</option>
             <option value='meters'>м.</option>
+            <option value='kms'>км.</option>
           </select>
-          <select className='form-select my-3' aria-label="Товар или услуга *" id="ItemType" onChange={(e) => handleChangeItemType(e)}>
+          <select className='form-select my-3' aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
             <option selected value='product'>Товар</option>
             <option value='service'>Услуга</option>
           </select>

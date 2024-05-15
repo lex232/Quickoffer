@@ -1,18 +1,41 @@
 """API DRF Items views"""
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 
 from django_filters.rest_framework import DjangoFilterBackend
 
 from api.permissions import IsAdminOrReadOnly
-from offer.models import Item
+from offer.models import Item, ItemUser
 from api.v1.items.serializers import (
-    ItemSerializer
+    ItemSerializer,
+    ItemPostSerializer
 )
 from api.filters import FilterForItems
 from api.pagination import ItemsLimitPagination
 
 User = get_user_model()
+
+
+class ItemUserViewSet(viewsets.ModelViewSet):
+    """Апи вьюсет для создания товаров и услуг пользователя"""
+
+    queryset = ItemUser.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        """Показываем только товары авторизованного пользователя"""
+
+        user = self.request.user
+        queryset = ItemUser.objects.filter(author=user)
+        return queryset
+
+    def get_serializer_class(self):
+        """Определеям сериалайзер в зависимости от запроса"""
+
+        if self.action == 'list' or self.action == 'retrieve':
+            return ItemSerializer
+        return ItemPostSerializer
 
 
 class ItemViewSet(viewsets.ModelViewSet):

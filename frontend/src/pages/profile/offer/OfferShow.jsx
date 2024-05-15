@@ -17,6 +17,7 @@ const OfferShow = () => {
   const [clientInfo, setClientInfo] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
 
+  const [totalPrice, setTotalPrice] = useState(0)
   let total
 
   useEffect(() => {
@@ -34,6 +35,10 @@ const OfferShow = () => {
       setCurrentOffer(res);
       setItemsOffer(res.items_for_offer);
       setClientInfo(res.name_client);
+      res.items_for_offer.map((item) => {
+        total += item.item_price_retail * item.amount
+      })
+      setTotalPrice(total)
       console.log(total)
     })
     .catch((e) => console.log(e))

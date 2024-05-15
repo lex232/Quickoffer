@@ -3,8 +3,15 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 # from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
-from api.v1.users.views import UserViewSet, ProfileViewSet
-from api.v1.items.views import ItemViewSet, ItemFinderViewSet
+from api.v1.users.views import (
+    UserViewSet,
+    ProfileViewSet
+)
+from api.v1.items.views import (
+    ItemViewSet,
+    ItemFinderViewSet,
+    ItemUserViewSet
+)
 from api.v1.offer.views import (
     OfferViewSet
 )
@@ -12,7 +19,11 @@ from api.v1.clients.views import (
     ClientOfferViewSet,
     ClientFinderViewSet
 )
-from api.v1.groups.views import GroupOfferViewSet
+from api.v1.groups.views import (
+    GroupItemsOfferViewSet,
+    GroupOnCreateViewSet
+)
+from api.v1.brands.views import BrandViewSet
 from api.v1.main_profile.views import ProfileMainView
 
 router_offer = DefaultRouter()
@@ -24,11 +35,25 @@ router_offer.register(
     basename='offers'
 )
 
-# Роутер группы товаров
+# Роутер списка брендов
 router_offer.register(
-    'groups',
-    GroupOfferViewSet,
-    basename='groups'
+    'brands',
+    BrandViewSet,
+    basename='brands'
+)
+
+# Роутер группы товаров без услуг
+router_offer.register(
+    'groupsitems',
+    GroupItemsOfferViewSet,
+    basename='groupsitems'
+)
+
+# Роутер группы товаров при создании товара
+router_offer.register(
+    'groupsoncreate',
+    GroupOnCreateViewSet,
+    basename='groupsoncreate'
 )
 
 # Роутер клиентов
@@ -50,6 +75,13 @@ router_offer.register(
     'items',
     ItemViewSet,
     basename='items'
+)
+
+# Роутер товаров пользовательский
+router_offer.register(
+    'itemsuser',
+    ItemUserViewSet,
+    basename='itemsuser'
 )
 
 # Роутер товаров для поиска
