@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
 import group_api from '../../../api/group_api';
+import brands_api from '../../../api/brands_api';
 import getBase64 from '../../../utils/getBase64';
 
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -13,6 +14,7 @@ const ItemForm = ({
   title,
   description,
   group,
+  brand,
   price_retail,
   quantity_type,
   item_type,
@@ -22,11 +24,13 @@ const ItemForm = ({
   const [ titleArea, setTitle ] = useState(title)
   const [ descriptionArea, setDescription ] = useState(description)
   const [ groupArea, setGroup ] = useState(group)
+  const [ brandArea, setBrand ] = useState(brand)
   const [ priceRetailArea, setPriceRetail ] = useState(price_retail)
   const [ quantityTypeArea, setQuantityType ] = useState(quantity_type)
   const [ itemTypeArea, setItemType ] = useState(item_type)
 
   const [ listGroups, setListGroups] = useState(null)
+  const [ listBrands, setListBrands] = useState(null)
 
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
@@ -53,6 +57,12 @@ const ItemForm = ({
     group_api.getItemsGroupOnCreateUserItem()
     .then(res => {
       setListGroups(res);
+    })
+    .catch((e) => console.log(e))
+    // Получить список брендов
+    brands_api.getBrandsShortInfo()
+    .then(res => {
+      setListBrands(res);
     })
     .catch((e) => console.log(e))
   }
@@ -98,6 +108,7 @@ const ItemForm = ({
       title: titleArea,
       description: descriptionArea,
       group: groupArea,
+      brand: brandArea,
       price_retail: priceRetailArea,
       quantity_type: quantityTypeArea,
       item_type: itemTypeArea,
@@ -107,21 +118,21 @@ const ItemForm = ({
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
       items_api.createItem(data)
-      return navigate("/profile/")
+      return navigate("/profile/items/list")
     } else {
       // Иначе PATCH
       data.item_id = id
       items_api.updateItem(data)
-      return navigate("/profile/")
+      return navigate("/profile/items/list")
     }
 }
 
   return (
       <form>
-          <input type="header" defaultValue={title} className="form-control my-3" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
-          <input type="header" defaultValue={description} className="form-control my-3" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
+          <input type="text" defaultValue={title} className="form-control my-3" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+          <input type="text" defaultValue={description} className="form-control my-3" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
           {listGroups && <div className="form">
-             <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => handleChangeGroup(e)}>
+             <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
               {listGroups.map((catList) => {
                 return (
                 <option value={catList.id}>{catList.title}</option>
@@ -129,7 +140,16 @@ const ItemForm = ({
               })}
             </select>
           </div>}
-          <input type="header" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
+          {listBrands && <div className="form">
+             <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
+              {listBrands.map((brandList) => {
+                return (
+                <option value={brandList.id}>{brandList.title}</option>
+              )
+              })}
+            </select>
+          </div>}
+          <input type="number" step="1" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
           <select className='form-select my-3' aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
             <option selected value='pc'>шт.</option>
             <option value='meters'>м.</option>

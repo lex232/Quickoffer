@@ -7,10 +7,6 @@ from utils.base64 import Base64ImageField
 
 User = get_user_model()
 
-#######################################################
-# API Для пользовательских клиентов
-#######################################################
-
 
 class ClientSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели клиентов"""
@@ -35,6 +31,7 @@ class ClientPostSerializer(serializers.ModelSerializer):
         model = Client
         fields = (
             'title',
+            'company_type',
             'ogrn',
             'inn',
             'kpp',

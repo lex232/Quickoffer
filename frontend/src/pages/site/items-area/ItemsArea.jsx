@@ -4,13 +4,12 @@ import ReactPaginate from "react-paginate";
 import items_api from '../../../api/items_api';
 import './styles.css'
 import { ReactComponent as TrashIco } from '../../../static/image/icons/trash.svg'
+import AddNewLine from '../../../utils/text-operations/addNewLine';
 
 const ItemsArea = ({ category_id }) => {
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
-
-    const [ isLoaddingCart, setIsLoaddingCart ] = useState(true);   
 
     const [page, setPage] = useState(0);
     const [pageCount, setpageCount] = useState(0);
@@ -31,13 +30,6 @@ const ItemsArea = ({ category_id }) => {
       }, [category_id])
       ;
 
-    // useEffect(() => {
-    //     // Получить все товары при загрузке страницы
-    //     getItems(currentpage, category_id);
-    //     currentpage = 1;
-    // }, [items])
-    // ;
-
     const getItems = (page, category_id) => {
         // Получить список категорий товаров
         items_api.getItemsFilterCategoryPaginate({
@@ -52,15 +44,20 @@ const ItemsArea = ({ category_id }) => {
         .finally(()=> setIsLoaddingItems(false))
       }
 
+
+    /**
+    * Обработать клик паджинатора
+    */
     const handlePageClick = (data) => {
-        // Обработать клик паджинатора
         setPage(data.selected + 1)
         currentpage = data.selected + 1;
         getItems(currentpage, category_id);
     };
 
-    const CheckCartItem = (id_item) => {
-        // Проверяем на одинаковый товар
+    /**
+    * Проверяем на одинаковый товар
+    */
+    const CheckCartItem = (id_item) => { 
         var index
         for (index = 0; index < items.length; ++index) {
           if (id_item === items[index].id) {
@@ -70,8 +67,10 @@ const ItemsArea = ({ category_id }) => {
         return false
       }
 
+    /**
+    * Проверяем количество товара, если товар в корзине
+    */
     const CheckCartQuantity = (cart, id_item) => {
-        // Проверяем количество товара, если товар в корзине
         var index
         for (index = 0; index < cart.length; ++index) {
           if (id_item === cart[index].id) {
@@ -79,12 +78,6 @@ const ItemsArea = ({ category_id }) => {
           }
         }
         return 1
-    }
-
-    const AddNewLine = (info) => {
-        let new_line = info.replaceAll('; ','\n')
-        console.log(new_line)
-        return new_line
     }
 
     const CartPlusItem = ( results, e) => {

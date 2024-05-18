@@ -24,7 +24,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     queryset = Profile.objects.all()
     serializer_class = ProfileGetSerializer
-    permission_classes = (IsAuthorAdminOrReadOnly, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         """Определеям сериалайзер в зависимости от запроса"""

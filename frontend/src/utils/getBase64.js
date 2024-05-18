@@ -1,5 +1,7 @@
+/**
+* Переводит картинку в base64.
+*/
 const getBase64 = (file, setFunc) => {
-    // Переводим картинку в BASE64
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {

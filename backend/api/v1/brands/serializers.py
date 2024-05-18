@@ -7,20 +7,22 @@ from utils.base64 import Base64ImageField
 
 User = get_user_model()
 
-#######################################################
-# API Для пользовательских клиентов
-#######################################################
-
 
 class BrandSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели клиентов"""
+    """Сериалайзер для модели брендов"""
 
     image = Base64ImageField(read_only=True)
-    author = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='username'
-    )
 
     class Meta:
         model = Brand
         fields = '__all__'
+
+
+class BrandNameIdSerializer(serializers.ModelSerializer):
+    """Сериалайзер для модели брендов
+    Отдает только ID и Тайтл"""
+
+    class Meta:
+        model = Brand
+        fields = ('id','title',)
+

@@ -6,10 +6,6 @@ from offer.models import Group
 
 User = get_user_model()
 
-#######################################################
-# API Для пользовательских клиентов
-#######################################################
-
 
 class GroupSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели группы."""

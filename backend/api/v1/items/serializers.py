@@ -7,10 +7,6 @@ from utils.base64 import Base64ImageField
 
 User = get_user_model()
 
-#######################################################
-# API Для пользовательских клиентов
-#######################################################
-
 
 class ItemSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели товара"""

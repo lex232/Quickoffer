@@ -13,13 +13,10 @@ from api.v1.clients.serializers import ClientSerializer
 
 User = get_user_model()
 
-#######################################################
-# API Для КП
-#######################################################
-
 
 class OfferSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели КП - сокращенное"""
+    """Сериалайзер для модели КП.
+    Отдает только модель КП, без включенных товаров"""
 
     name_client = serializers.SlugRelatedField(
         read_only=True,

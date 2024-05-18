@@ -28,6 +28,7 @@ const ProfileForm = ({
   const [ companyNameArea, setCompanyName ] = useState(company_name)
   const [ companyNameDocsArea, setCompanyNameDocs ] = useState(company_name_for_docs)
   const [ companyTypeArea, setCompanyType ] = useState(company_type)
+  console.log(companyTypeArea, "COMTYPE", company_type)
   const [ ogrnArea, setOgrn ] = useState(ogrn)
   const [ innArea, setInn ] = useState(inn)
   const [ kppArea, setKpp ] = useState(kpp)
@@ -36,12 +37,11 @@ const ProfileForm = ({
   const [ billNumArea, setBillNum ] = useState(bill_num)
   const [ billCorrNumArea, setBillCorrNum ] = useState(bill_corr_num)
   const [ bankNameArea, setBankName ] = useState(bank_name)
-
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
   // Ссылка на имя файла в форме
   const refImg = useRef();
-
+  
   useEffect(() => {
     // Если картинка не выбрана пользователем
     if (!selectedImage) {
@@ -61,6 +61,12 @@ const ProfileForm = ({
       image = undefined
     }    
   }, [image])
+
+  useEffect(() => {
+    if (company_type) {
+      setCompanyType(company_type)
+    }    
+  }, [company_type])
 
   const handleChangeCompanyName = (e) => {
     // Устанавливаем имя записи на событии onChange
@@ -163,7 +169,7 @@ const ProfileForm = ({
       bank_name: bankNameArea,
     }
 
-    // Иначе PATCH
+    // PATCH всегда, потому-что профиль создается при создании пользователя
     user_api.updateProfile(data)
     return navigate("/profile/")
     
@@ -185,9 +191,9 @@ return (
       </div>
       <div className="form d-flex">
         <div className='col-3'>Форма собственности:</div>
-        <div className='col-9'>
-          <select className='form-select my-1' aria-label="Форма собственности *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
-            <option selected value='ip'>ИП</option>
+         <div className='col-9'>
+          <select className='form-select my-1' value={companyTypeArea} aria-label="Форма собственности *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
+            <option value='ip'>ИП</option>
             <option value='ooo'>ООО</option>
           </select>
         </div>

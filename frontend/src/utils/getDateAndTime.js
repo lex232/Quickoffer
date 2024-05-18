@@ -1,3 +1,6 @@
+/**
+* Оставляет только дату и время при чтении DateTime из БД.
+*/
 const getDateAndTime = (datetime_in) => {
   if (datetime_in !== null)
   return (

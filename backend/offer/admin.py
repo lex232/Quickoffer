@@ -103,3 +103,10 @@ class ProfileAdmin(admin.ModelAdmin):
     """Интерфейс админ-зоны модели пользователя."""
 
     list_display = ('pk', 'user', 'ogrn', 'inn')
+
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    """Интерфейс админ-зоны модели пользователя."""
+
+    list_display = ('pk', 'title', 'description', 'image')

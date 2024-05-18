@@ -1,3 +1,6 @@
+/**
+* Получает текущий год для футера.
+*/
 const YearNow = () => {
   const today = new Date();
   const year_now = today.getFullYear();

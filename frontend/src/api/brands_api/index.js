@@ -30,6 +30,15 @@ class ApiBrands {
     ).then(this.checkResponse)
   }
 
+  getBrandsShortInfo () {
+    return fetch(
+      `/api/brands/onlynamesid/`,
+      {
+        method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
 }
 
 export default new ApiBrands(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

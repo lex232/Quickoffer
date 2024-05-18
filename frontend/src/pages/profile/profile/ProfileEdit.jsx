@@ -21,7 +21,7 @@ const ProfileEdit = () => {
     user_api.getUserDataAll()
     .then(res => {
       setCurrentUserData(res);
-      setCurrentProfileData(res.profile)
+      setCurrentProfileData(res.profile);
     })
     .catch((e) => console.log(e))
     .finally(()=> setIsLoadding(false))

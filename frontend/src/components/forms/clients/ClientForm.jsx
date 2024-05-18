@@ -36,7 +36,6 @@ const ClientForm = ({
   const [ bankNameArea, setBankName ] = useState(bank_name)
   const [ companyTypeArea, setCompanyType ] = useState(company_type)
   const [ phoneCompanyArea, setPhoneCompany ] = useState(phone_company)
-
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
   // Ссылка на имя файла в форме
@@ -105,7 +104,6 @@ const ClientForm = ({
       phone_company: phoneCompanyArea,
       image: selectedImage,
     }
-    console.log(data)
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
       clients_api.createClient(data)
@@ -122,8 +120,8 @@ const ClientForm = ({
       <form>
           <div className="form pt-1">
             <input type="header" defaultValue={title} className="form-control my-2" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
-          <select className='form-select my-2' aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
-            <option selected value='ip'>ИП</option>
+          <select className='form-select my-2' value={companyTypeArea} aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
+            <option value='ip'>ИП</option>
             <option value='ooo'>ООО</option>
           </select>
             <input type="text" defaultValue={ogrn} className="form-control my-2" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />

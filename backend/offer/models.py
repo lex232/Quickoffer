@@ -174,11 +174,13 @@ class Brand(models.Model):
         max_length=100,
         unique=True
     )
+
     description = models.TextField(
         verbose_name='описание',
         null=True,
         blank=True
     )
+
     image = models.ImageField(
         verbose_name='лого бренда',
         upload_to='media/brand/image',

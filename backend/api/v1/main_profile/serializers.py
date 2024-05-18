@@ -2,13 +2,13 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from offer.models import Client, OfferForCustomer
+from offer.models import (
+    Client,
+    OfferForCustomer,
+    ItemUser
+)
 
 User = get_user_model()
-
-#######################################################
-# API Для админ-панели разное
-#######################################################
 
 
 class ProfileMainSerializer(serializers.Serializer):
@@ -16,6 +16,7 @@ class ProfileMainSerializer(serializers.Serializer):
 
     count_clients = serializers.SerializerMethodField()
     count_offers = serializers.SerializerMethodField()
+    count_items = serializers.SerializerMethodField()
 
     def get_count_clients(self, obj):
         """Подсчитывает количество клиентов пользователя"""
@@ -28,3 +29,9 @@ class ProfileMainSerializer(serializers.Serializer):
 
         current_user = self.context['current_user']
         return OfferForCustomer.objects.filter(author=current_user).count()
+
+    def get_count_items(self, obj):
+        """Подсчитывает количество Товаров, созданных пользователем"""
+
+        current_user = self.context['current_user']
+        return ItemUser.objects.filter(author=current_user).count()
