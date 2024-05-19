@@ -57,7 +57,7 @@ const ClientDashboard = () => {
     else {return 'нет'}
   }
 
-  const HandleEditNews = async (
+  const HandleEditClient = async (
     id,
     title,
     company_type,
@@ -128,7 +128,7 @@ const ClientDashboard = () => {
                   <td>{ReadCompanyType(results.company_type)}</td>
                   <td>{results.inn}</td>
                   <td>{results.ogrn}</td>
-                  <td><button onClick={(e) => HandleEditNews(
+                  <td><button onClick={(e) => HandleEditClient(
                     results.id,
                     results.title,
                     results.company_type,

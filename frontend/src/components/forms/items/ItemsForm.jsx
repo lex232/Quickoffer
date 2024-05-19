@@ -144,18 +144,18 @@ const ItemForm = ({
              <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
               {listBrands.map((brandList) => {
                 return (
-                <option value={brandList.id}>{brandList.title}</option>
+                brandArea === brandList.title ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
               )
               })}
             </select>
           </div>}
           <input type="number" step="1" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
-          <select className='form-select my-3' aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
+          <select className='form-select my-3' value={quantityTypeArea} aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
             <option selected value='pc'>шт.</option>
             <option value='meters'>м.</option>
             <option value='kms'>км.</option>
           </select>
-          <select className='form-select my-3' aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
+          <select className='form-select my-3' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
             <option selected value='product'>Товар</option>
             <option value='service'>Услуга</option>
           </select>

@@ -16,15 +16,16 @@ import LoginPage from './pages/auth/LoginPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
+import ClientDashboard from './pages/profile/clients/ClientDashboard';
 import ClientCreate from './pages/profile/clients/ClientsCreate';
 import ClientsEdit from './pages/profile/clients/ClientsEdit';
-import ClientDashboard from './pages/profile/clients/ClientDashboard';
 
-import ItemsCreate from './pages/profile/items/ItemsCreate';
 import ItemsDashboard from './pages/profile/items/ItemsDashboard';
+import ItemsCreate from './pages/profile/items/ItemsCreate';
+import ItemsEdit from './pages/profile/items/ItemsEdit';
 
-import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferDashboard from './pages/profile/offer/OfferDashboard';
+import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferShow from './pages/profile/offer/OfferShow';
 
 import ProfileEdit from './pages/profile/profile/ProfileEdit';
@@ -144,9 +145,10 @@ function App() {
               <Route path="clients/list" element={<ClientDashboard />}/>
               <Route path='clients/edit' element={<ClientsEdit />}/>
 
-              <Route path="items/create" element={<ItemsCreate />}/>
               <Route path="items/list" element={<ItemsDashboard />}/>
-
+              <Route path="items/create" element={<ItemsCreate />}/>
+              <Route path='items/edit' element={<ItemsEdit />}/>
+              
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>
               <Route path="offer/create" element={<OfferCreate />}/>

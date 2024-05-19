@@ -5,7 +5,9 @@ class ApiBrands {
       this._contentType = contentType
     }
   
-    // Проверка ответа
+    /**
+    * Проверяет ответ запроса.
+    */
     checkResponse (res) {
       return new Promise((resolve, reject) => {
         if (res.status === 204) {
@@ -16,11 +18,9 @@ class ApiBrands {
       })
     }
 
-/////////////////////////////////
-// API запросы с разделами и
-// категориями разделов
-/////////////////////////////////
-
+  /**
+  * Получаем список брендов (все параметры).
+  */
   getBrands () {
     return fetch(
       `/api/brands/`,
@@ -30,6 +30,9 @@ class ApiBrands {
     ).then(this.checkResponse)
   }
 
+  /**
+  * Получаем список брендов в формате имени и ID.
+  */
   getBrandsShortInfo () {
     return fetch(
       `/api/brands/onlynamesid/`,

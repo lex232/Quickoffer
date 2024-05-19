@@ -52,15 +52,33 @@ const ItemsDashboard = () => {
     await getItems(currentpage);
   }
 
-  const HandleEditNews = async (id, title, description, image, e) => {
+  const HandleEditItem = async (
+    id,
+    title,
+    brand,
+    price_retail,
+    item_type,
+    quantity_type,
+    description,
+    image,
+    e) => {
     e.preventDefault();
-    return navigate("edit", {state: {id: id, title: title, description: description, image: image}})
+    return navigate("/profile/items/edit", {state: {
+      id: id,
+      title: title,
+      brand: brand,
+      price_retail: price_retail,
+      item_type: item_type,
+      quantity_type: quantity_type,
+      description: description,
+      image: image}})
   }
 
   const CreateItem = (e) => {
     e.preventDefault();
     return navigate("/profile/items/create")
   }
+
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -78,10 +96,12 @@ const ItemsDashboard = () => {
             <tr>
               <th scope="col">Заголовок</th>
               <th scope="col">Дата публикации</th>
+              <th scope="col">Бренд</th>
               <th scope="col">Цена</th>
               <th scope="col">Тип</th>
-              <th scope="col">Редактировать</th>
-              <th scope="col">Удалить</th>
+              <th scope="col">Группа</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -90,12 +110,21 @@ const ItemsDashboard = () => {
                 <tr key={results.id}>
                   <td>{results.title}</td>
                   <td>{getDate(results.pub_date)}</td>
+                  <td>{results.brand}</td>
                   <td>{results.price_retail} руб</td>
                   <td>{results.item_type}</td>
-                  <td><button onClick={(e) => HandleEditNews(results.id, results.title, results.description, results.image, e)}><PencilIco fill="orange"/></button></td>
-                  <td>
-                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id}/>
-                  </td>
+                  <td>{results.group}</td>
+                  <td><button onClick={(e) => HandleEditItem(
+                    results.id,
+                    results.title,
+                    results.brand,
+                    results.price_retail,
+                    results.item_type,
+                    results.quantity_type,
+                    results.description,
+                    results.image,
+                    e)}><PencilIco fill="orange"/></button></td>
+                  <td><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id}/></td>
                 </tr>
                 );
               })}
