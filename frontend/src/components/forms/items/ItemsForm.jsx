@@ -6,8 +6,8 @@ import items_api from '../../../api/items_api';
 import group_api from '../../../api/group_api';
 import brands_api from '../../../api/brands_api';
 import getBase64 from '../../../utils/getBase64';
-
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
+import './styles.css'
 
 const ItemForm = ({
   id,
@@ -71,6 +71,7 @@ const ItemForm = ({
     // Устанавливаем номер категории на событии onChange
     e.preventDefault();
     setGroup(Number(e.target.value));
+    console.log(e.target.value)
   }
 
   const handleChangeImage = (e) => {
@@ -129,19 +130,47 @@ const ItemForm = ({
 
   return (
       <form>
-          <input type="text" defaultValue={title} className="form-control my-3" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
-          <input type="text" defaultValue={description} className="form-control my-3" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
+        <div className="form d-flex">
+          <span className='col-3'>Название:</span>
+          <div className='col-9'>
+            <input type="text" defaultValue={title} className="form-control my-1" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+          </div>
+        </div>  
+        <div className="form d-flex">
+          <span className='col-3'>Тип:</span>
+          <div className='col-9'>
+            <select className='form-select my-1' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
+              <option value='product'>Товар</option>
+              <option value='service'>Услуга</option>
+            </select>
+          </div>
+        </div>
+        <div className="form d-flex">
+          <span className='col-3'>Описание:</span>
+          <div className='col-9'>
+            <textarea rows='4' defaultValue={description} className="form-control my-1" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
+          </div>
+        </div>
+        <div className="form d-flex">
+          <span className='col-3'>Группа:</span>
+          <div className='col-9'>
           {listGroups && <div className="form">
-             <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
+             <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
               {listGroups.map((catList) => {
+                console.log(groupArea, catList.id, brandArea)
                 return (
-                <option value={catList.id}>{catList.title}</option>
+                groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option> 
               )
               })}
             </select>
           </div>}
+          </div>
+        </div>
+        <div className="form d-flex">
+          <span className='col-3'>Бренд</span>
+          <div className='col-9'>
           {listBrands && <div className="form">
-             <select name='selectSF' className='form-select my-3' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
+             <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
               {listBrands.map((brandList) => {
                 return (
                 brandArea === brandList.title ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
@@ -149,17 +178,25 @@ const ItemForm = ({
               })}
             </select>
           </div>}
-          <input type="number" step="1" defaultValue={price_retail} className="form-control my-3" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
-          <select className='form-select my-3' value={quantityTypeArea} aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
+          </div>
+        </div>
+        <div className="form d-flex">
+          <span className='col-3'>Цена розничная</span>
+          <div className='col-9'>
+          <input type="number" step="1" defaultValue={price_retail} className="form-control my-1" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
+          </div>
+        </div>
+        <div className="form d-flex">
+          <span className='col-3'>Количестваенная характеристика</span>
+          <div className='col-9'>
+          <select className='form-select my-1' value={quantityTypeArea} aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
             <option selected value='pc'>шт.</option>
             <option value='meters'>м.</option>
             <option value='kms'>км.</option>
           </select>
-          <select className='form-select my-3' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
-            <option selected value='product'>Товар</option>
-            <option value='service'>Услуга</option>
-          </select>
-          <div className='d-flex'>
+          </div>
+        </div>
+          <div className='d-flex pt-3'>
             {preview && <div className='d-flex position-relative'>
                 <img className="col-1.5 mt-1 me-4" width="100" src={preview} alt=""/>
                 <button className='position-absolute translate-middle top-0 start-0' onClick={(e) => deletePic(e)}><DeleteIco fill="red" width='32' height='32'/></button>

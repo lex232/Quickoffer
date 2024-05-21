@@ -85,7 +85,7 @@ class ApiItems {
           id: item_id,
           title,
           description,
-          group,
+          group: [group],
           price_retail,
           quantity_type,
           item_type,
@@ -95,10 +95,10 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
-  deleteItem ({ section_id }) {
+  deleteItem ({ item_id }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/items/${section_id}/`,
+      `/api/items/${item_id}/`,
       {
         method: 'DELETE',
         headers: {

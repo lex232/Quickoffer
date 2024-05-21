@@ -11,6 +11,7 @@ const ItemsEdit = () => {
         id,
         title,
         brand,
+        group,
         price_retail,
         item_type,
         quantity_type,
@@ -24,6 +25,7 @@ const ItemsEdit = () => {
             id={id}
             title={title}
             brand={brand}
+            group={group[0]}
             price_retail={price_retail}
             item_type={item_type}
             quantity_type={quantity_type}

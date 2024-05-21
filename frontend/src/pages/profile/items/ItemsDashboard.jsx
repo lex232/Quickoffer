@@ -45,7 +45,7 @@ const ItemsDashboard = () => {
   };
 
   const HandleDelItem = async (id) => {
-    await clients_api.deleteClient({ news_id: id, })
+    await items_api.deleteItem({ item_id: id, })
       .then(res => {
         console.log(res)
       })
@@ -56,6 +56,7 @@ const ItemsDashboard = () => {
     id,
     title,
     brand,
+    group,
     price_retail,
     item_type,
     quantity_type,
@@ -67,6 +68,7 @@ const ItemsDashboard = () => {
       id: id,
       title: title,
       brand: brand,
+      group: group,
       price_retail: price_retail,
       item_type: item_type,
       quantity_type: quantity_type,
@@ -118,6 +120,7 @@ const ItemsDashboard = () => {
                     results.id,
                     results.title,
                     results.brand,
+                    results.group,
                     results.price_retail,
                     results.item_type,
                     results.quantity_type,
