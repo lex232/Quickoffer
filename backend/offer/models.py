@@ -111,11 +111,12 @@ class Client(models.Model):
         null=True,
         blank=True
     )
+    pub_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'клиент'
         verbose_name_plural = 'клиенты'
-        ordering = ['-title']
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.title
@@ -295,7 +296,7 @@ class OfferForCustomer(models.Model):
     name_client = models.ForeignKey(
         Client,
         verbose_name='Клиент',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         blank=True,
         null=True,
     )

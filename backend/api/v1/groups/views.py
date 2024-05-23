@@ -34,7 +34,7 @@ class GroupOnCreateViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для категорий разделов.
     Только товары и услуги без родительских категорий"""
 
-    queryset = Group.objects.all()
+    # queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (IsAuthenticated,)
     pagination_class = None

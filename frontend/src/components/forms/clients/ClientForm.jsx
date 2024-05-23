@@ -119,20 +119,75 @@ const ClientForm = ({
   return (
       <form>
           <div className="form pt-1">
-            <input type="header" defaultValue={title} className="form-control my-2" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
-          <select className='form-select my-2' value={companyTypeArea} aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
-            <option value='ip'>ИП</option>
-            <option value='ooo'>ООО</option>
-          </select>
+            <div className="form d-flex">
+            <span className='col-3'>Наименование:</span>
+            <div className='col-9'>
+              <input type="text" defaultValue={title} className="form-control my-2" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
+              </div>
+          </div>
+          <div className="form d-flex">
+            <span className='col-3'>Тип компании:</span>
+            <div className='col-9'>
+              <select className='form-select my-2' value={companyTypeArea} aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
+                <option value='ip'>ИП</option>
+                <option value='ooo'>ООО</option>
+              </select>
+              </div>
+          </div>
+          <div className="form d-flex">
+            <span className='col-3'>ОГРН:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={ogrn} className="form-control my-2" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>ИНН:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={inn} className="form-control my-2" id="Inn" placeholder="ИНН" onChange={(e) => setInn(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>КПП:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={kpp} className="form-control my-2" id="Kpp" placeholder="КПП" onChange={(e) => setKpp(e.target.value)} />
+            </div>
+          </div>
+          <div className="form d-flex">
+            <span className='col-3'>Адрес регистрации:</span>
+            <div className='col-9'>          
             <input type="text" defaultValue={address_reg} className="form-control my-2" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => setAddressReg(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>Адрес местонахождения:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={address_post} className="form-control my-2" id="Address" placeholder="Адрес местонахождения" onChange={(e) => setAddressPost(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>Расчетный счет:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={bill_num} className="form-control my-2" id="Bill" placeholder="Расчетный счет" onChange={(e) => setBillNum(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>Корреспондентский счет:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={bill_corr_num} className="form-control my-2" id="CorrBill" placeholder="Корреспондентский счет" onChange={(e) => setBillCorrNum(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>Наименование банка:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={bank_name} className="form-control my-2" id="BankName" placeholder="Наименование банка" onChange={(e) => setBankName(e.target.value)} />
+            </div>
+          </div>          
+          <div className="form d-flex">
+            <span className='col-3'>Телефон организации:</span>
+            <div className='col-9'>
             <input type="text" defaultValue={phone_company} className="form-control my-2" id="PhoneCompany" placeholder="Телефон организации" onChange={(e) => setPhoneCompany(e.target.value)} />
+            </div>
+          </div>          
           </div>
           <div className='d-flex'>
             {preview && <div className='d-flex position-relative'>
