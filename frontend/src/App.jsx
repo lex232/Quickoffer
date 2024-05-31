@@ -13,6 +13,7 @@ import CatalogPage from './pages/site/catalog/Catalog';
 
 // Страницы для авторизованного пользователя
 import LoginPage from './pages/auth/LoginPage';
+import RegistrationPage from './pages/auth/RegistrationPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
@@ -128,10 +129,8 @@ function App() {
                   user={user}/>}>
             </Route>
 
-            <Route path="/login" element={<LoginPage
-              loginstate={loggedIn} 
-              onSignIn={authorization} />
-            }/>
+            <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />}/>
+            <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />}/>
 
             <Route path="/profile" element={
               <RequireAuth loginstate={loggedIn}>

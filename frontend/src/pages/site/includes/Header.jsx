@@ -40,7 +40,10 @@ const Header = ({ loginstate, onSignOut, user }) => {
   
   const NonAuthUser = () => {  
     return (
-      <li className="nav-item"><a href="/login" className="nav-link link-dark px-2 text-black"><AuthIco fill="black"  transform='scale(1)' baseProfile='tiny' width={16} className='me-2'/>Войти</a></li>
+      <div>
+        <li className="nav-item"><a href="/login" className="nav-link link-dark px-2 text-black"><AuthIco fill="black"  transform='scale(1)' baseProfile='tiny' width={16} className='me-2'/>Войти</a></li>
+        <li className="nav-item"><a href="/registration" className="nav-link link-dark px-2 text-black"><AuthIco fill="black"  transform='scale(1)' baseProfile='tiny' width={16} className='me-2'/>Регистрация</a></li>
+      </div>
     )
   }
 
