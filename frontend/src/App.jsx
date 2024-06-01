@@ -3,17 +3,16 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import React, { useState, useEffect } from 'react';
 import { AuthContext, UserContext } from './contexts'
 
-import logo from './logo.svg';
 import './App.css';
 import user_api from './api/user_api';
 
 // Страницы
 import MainPage from './pages/site/mainpage/Main'
 import CatalogPage from './pages/site/catalog/Catalog';
-
-// Страницы для авторизованного пользователя
 import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
+
+// Страницы для авторизованного пользователя
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
@@ -94,6 +93,7 @@ function App() {
     user_api.signout()
       .then(res => {
         localStorage.removeItem('token')
+        localStorage.removeItem('items')
         setLoggedIn(false)
       })
       .catch(err => {

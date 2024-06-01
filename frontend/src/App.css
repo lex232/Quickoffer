@@ -403,3 +403,13 @@ Use the modern Firefox focus style for all focusable elements.
   outline: auto;
 }
 
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}

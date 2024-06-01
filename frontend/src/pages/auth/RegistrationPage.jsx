@@ -6,19 +6,19 @@ import RegistrationForm from '../../components/forms/auth/Registration.jsx';
 const RegistrationPage = ({ loginstate }) => {
 
     return (
-        <div>
-            <div className="container-fluid">
+        <body>
+            <header className="container-fluid">
                 <Header/>
-            </div>
-            <div className="container px4">
+            </header>
+            <main className="container px4">
                 <div className="row">
-                    <div className="col-3 text-center mx-auto"><RegistrationForm loginstate={loginstate}/></div>
+                    <div className="col-sm-9 col-md-7 col-lg-3 mx-auto text-center"><RegistrationForm loginstate={loginstate}/></div>
                 </div>
-            </div>
-            <div className="container-fluid">
+            </main>
+            <footer className="container-fluid">
                 <Footer/>
-            </div>
-        </div>
+            </footer>
+        </body>
       );
     };
     

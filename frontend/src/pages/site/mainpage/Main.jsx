@@ -8,11 +8,11 @@ import { ReactComponent as NextIco } from '../../../static/icons/main/next.svg'
 const MainPage = ({ loginstate, onSignOut, user }) => {
 
     return (
-            <div>
-                <div className="container-fluid">
+            <body>
+                <header className="container-fluid">
                     <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
-                </div>
-                <div className="container-fluid">
+                </header>
+                <main className="container-fluid">
                     <div className="row">
                         <div className="position-relative overflow-hidden pt-5 pb-5 mt-3 mb-3 text-center mainbackground">
                             <div className="col-md-6 p-lg-5 mx-auto my-5">
@@ -25,11 +25,11 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div classNameName="container-fluid">
+                </main>
+                <footer classNameName="container-fluid">
                     <Footer/>
-                </div>
-            </div>
+                </footer>
+            </body>
       );
     };
     
