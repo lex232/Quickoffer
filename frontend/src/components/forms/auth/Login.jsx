@@ -25,7 +25,7 @@ const Login = ({ loginstate, onSignIn }) => {
             <h1 className="h3 mb-3 fw-normal">Войдите</h1>
 
             <div className="form-floating">
-                <input type="username" className="form-control my-3" id="floatingInput" placeholder="example@example.com" onChange={(e) => setLogin(e.target.value)}/>
+                <input type="username" className="form-control my-3" id="floatingInput" placeholder="Login" onChange={(e) => setLogin(e.target.value)}/>
                 <label for="floatingInput">Логин</label>
             </div>
             <div className="form-floating">

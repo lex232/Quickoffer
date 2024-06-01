@@ -33,6 +33,19 @@ class UserApi {
     ).then(this.checkResponse)
   }
 
+  signup ({ email, password, username, first_name }) {
+    return fetch(
+      `/api/users/`,
+      {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          email, password, username, first_name
+        })
+      }
+    ).then(this.checkResponse)
+  }
+
   signout () {
     const token = localStorage.getItem('token')
     return fetch(

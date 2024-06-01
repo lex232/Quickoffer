@@ -51,7 +51,7 @@ class UserViewSet(mixins.CreateModelMixin,
 
         if self.action == 'list' or self.action == 'retrieve':
             return UserGetSerializerAll
-        elif self.action == 'post':
+        elif self.action == 'create':
             return UserPostSerializer
         return UserGetSerializer
 
