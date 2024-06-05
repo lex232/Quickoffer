@@ -403,6 +403,10 @@ Use the modern Firefox focus style for all focusable elements.
   outline: auto;
 }
 
+.header {
+  background-color: white;
+  border-bottom: #e5e7eb;
+}
 
 body {
   min-height: 100vh;
@@ -412,4 +416,13 @@ body {
 
 footer {
   margin-top: auto;
+}
+
+.profile-body {
+  background-color: #f6f8fc;
+}
+
+.btn-primary {
+  background-color: #5c61f2 !important;
+  border-color: #5c61f2 !important;
 }

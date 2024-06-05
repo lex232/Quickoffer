@@ -26,24 +26,39 @@ const ClientsEdit = () => {
     } = state;
 
     return (
-        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h4 className="h4 mt-3 mb-2 fw-normal text-start">Редактировать клиента "{title}"</h4>
-            <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3">
-                <ClientForm 
-                    id={id}
-                    title={title}
-                    company_type={company_type}
-                    ogrn={ogrn}
-                    inn={inn}
-                    kpp={kpp}
-                    address_reg={address_reg}
-                    address_post={address_post}
-                    bill_num={bill_num}
-                    bill_corr_num={bill_corr_num}
-                    bank_name={bank_name}
-                    phone_company={phone_company}
-                    image={image}/>
-            </div>
+        <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+      
+            <div class="container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-sm-6 my-3 text-start">
+                            <h3>Редактировать организацию/ клиента</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="col-md-12 project-list">
+          <     div class="card-header">
+                    <div className="card-body">           
+                        <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3">
+                            <ClientForm 
+                                id={id}
+                                title={title}
+                                company_type={company_type}
+                                ogrn={ogrn}
+                                inn={inn}
+                                kpp={kpp}
+                                address_reg={address_reg}
+                                address_post={address_post}
+                                bill_num={bill_num}
+                                bill_corr_num={bill_corr_num}
+                                bank_name={bank_name}
+                                phone_company={phone_company}
+                                image={image}/>
+                        </div>
+                    </div>
+                </div>
+            </div>        
         </main>
     );
 };

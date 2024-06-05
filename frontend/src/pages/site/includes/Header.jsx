@@ -79,7 +79,7 @@ const Header = ({ loginstate, onSignOut, user }) => {
 
   return (
     <div className="container-fluid">
-    <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header className="d-flex flex-wrap justify-content-center py-3">
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <img className="bi text-muted flex-shrink-0 ms-5" width="200" src={logo} alt=""/>
       </a>

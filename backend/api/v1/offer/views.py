@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 from PIL import Image as ImagePIL
 
 from reportlab.pdfgen import canvas
@@ -40,6 +41,8 @@ class OfferViewSet(viewsets.ModelViewSet):
 
     serializer_class = OfferSerializer
     permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['status_type']
 
     def get_queryset(self):
         """Показываем только КП авторизованного пользователя"""

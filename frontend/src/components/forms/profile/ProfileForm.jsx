@@ -24,11 +24,10 @@ const ProfileForm = ({
 }) => {
   const navigate = useNavigate()
 
-  const [ idProfile, setIdProfile ] = useState(id)
+  // const [ idProfile, setIdProfile ] = useState(id)
   const [ companyNameArea, setCompanyName ] = useState(company_name)
   const [ companyNameDocsArea, setCompanyNameDocs ] = useState(company_name_for_docs)
   const [ companyTypeArea, setCompanyType ] = useState(company_type)
-  console.log(companyTypeArea, "COMTYPE", company_type)
   const [ ogrnArea, setOgrn ] = useState(ogrn)
   const [ innArea, setInn ] = useState(inn)
   const [ kppArea, setKpp ] = useState(kpp)

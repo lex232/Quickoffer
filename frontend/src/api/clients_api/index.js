@@ -133,12 +133,18 @@ class ApiClients {
   }
   
   getClientsPaginate ({
-    page
+    page,
+    type_company,
   }) {
+    const token = localStorage.getItem('token')
     return fetch(
-      `/api/clients/?page=${page}`,
+      `/api/clients/?page=${page}&company_type=${type_company}`,
       {
         method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        },
       }
     ).then(this.checkResponse)
   }

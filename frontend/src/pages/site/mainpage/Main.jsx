@@ -25,6 +25,22 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                             </div>
                         </div>
                     </div>
+
+                    <section class="" >
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 wow pulse">
+                                <div class="title">
+                                    <h2>Наши возможности<i class="fa fa-circle"></i></h2>
+                                </div>
+                            </div>
+                            <div class="col-sm-12"> 
+ 
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+
                 </main>
                 <footer classNameName="container-fluid">
                     <Footer/>

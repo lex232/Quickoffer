@@ -5,6 +5,7 @@ import ProfileSidebar from './sidebar/ProfileSidebar.jsx';
 
 import { Outlet } from 'react-router-dom';
 
+
 const MainProfile = ({ loginstate, onSignOut, user }) => {
 
     return (

@@ -7,3 +7,24 @@
   --bs-bg-opacity: 1;
   margin-left: 0;
 }
+
+.landing-page section .title {
+  margin-bottom: 35px;
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.landing-page section .title h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #5c61f2;
+  margin-bottom: 0;
+  position: relative;
+}

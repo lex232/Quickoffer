@@ -13,6 +13,7 @@ User = get_user_model()
 ORGANIZATION_TYPE = [
     ('ip', 'ИП'),
     ('ooo', 'ООО'),
+    ('fiz', 'Физическое лицо'),
 ]
 CHOICE_TYPE = [
     ('pc', 'шт.'),
@@ -29,6 +30,7 @@ STATUS_TYPE = [
     ('in_prepayment', 'получена предоплата'),
     ('in_install', 'в работе'),
     ('in_payment', 'получена оплата'),
+    ('denied', 'отказано'),
 ]
 
 
@@ -175,13 +177,11 @@ class Brand(models.Model):
         max_length=100,
         unique=True
     )
-
     description = models.TextField(
         verbose_name='описание',
         null=True,
         blank=True
     )
-
     image = models.ImageField(
         verbose_name='лого бренда',
         upload_to='media/brand/image',
@@ -218,7 +218,6 @@ class Item(models.Model):
         null=True,
         blank=True
     )
-
     group = TreeManyToManyField(
         'Group',
         blank=True,

@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 
-from api.permissions import IsAdminOrReadOnly
 from offer.models import Client
 from api.v1.clients.serializers import (
     ClientSerializer,
@@ -21,6 +20,8 @@ class ClientOfferViewSet(viewsets.ModelViewSet):
 
     serializer_class = ClientSerializer
     permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend, )
+    filterset_fields = ['company_type']
 
     def get_queryset(self):
         """Показываем только клиентов авторизованного пользователя"""

@@ -2,7 +2,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-
 from django_filters.rest_framework import DjangoFilterBackend
 
 from api.permissions import IsAdminOrReadOnly
@@ -22,6 +21,8 @@ class ItemUserViewSet(viewsets.ModelViewSet):
 
     queryset = ItemUser.objects.all()
     permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ['item_type']
 
     def get_queryset(self):
         """Показываем только товары авторизованного пользователя"""

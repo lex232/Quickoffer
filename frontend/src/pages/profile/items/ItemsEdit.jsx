@@ -19,18 +19,34 @@ const ItemsEdit = () => {
         image,} = state;
 
     return (
-        <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h4 className="h4 mt-3 mb-2 fw-normal text-start">Редактировать товар/ услугу "{title}"</h4>
-            <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3"><ItemForm 
-            id={id}
-            title={title}
-            brand={brand}
-            group={group[0]}
-            price_retail={price_retail}
-            item_type={item_type}
-            quantity_type={quantity_type}
-            description={description}
-            image={image}/></div>
+        <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+            
+            <div class="container-fluid">
+                <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6 my-3 text-start">
+                    <h3>Создать товар/ услугу</h3>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-12 project-list">
+                <div class="card-header">
+                    <div className="card-body">
+                        <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3"><ItemForm 
+                            id={id}
+                            title={title}
+                            brand={brand}
+                            group={group[0]}
+                            price_retail={price_retail}
+                            item_type={item_type}
+                            quantity_type={quantity_type}
+                            description={description}
+                            image={image}/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </main>
     );
 };

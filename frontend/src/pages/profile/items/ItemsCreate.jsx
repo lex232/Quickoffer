@@ -5,9 +5,24 @@ import ItemForm from '../../../components/forms/items/ItemsForm';
 
 const ItemsCreate = () => {
   return (
-    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <h4 className="h4 mt-3 mb-2 fw-normal text-start">Создать товар/ услугу</h4>
-          <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-3"><ItemForm /></div>
+    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+      
+      <div class="container-fluid">
+        <div class="page-title">
+          <div class="row">
+            <div class="col-sm-6 my-3 text-start">
+              <h3>Создать товар/ услугу</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 project-list">
+        <div class="card-header">
+          <div className="card-body">
+            <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-3"><ItemForm /></div>
+          </div>
+        </div>
+      </div> 
     </main>
   );
 };

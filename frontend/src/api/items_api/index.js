@@ -120,10 +120,10 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
-  getItemsUserPaginate ({ page }) {
+  getItemsUserPaginate ({ page, status }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/itemsuser/`,
+      `/api/itemsuser/?page=${page}&item_type=${status}`,
       {
         method: 'GET',
         headers: {

@@ -131,6 +131,7 @@ const ClientForm = ({
               <select className='form-select my-2' value={companyTypeArea} aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
                 <option value='ip'>ИП</option>
                 <option value='ooo'>ООО</option>
+                <option value='fiz'>Физическое лицо</option>
               </select>
               </div>
           </div>

@@ -81,11 +81,12 @@ deleteOffer ({ offer_id }) {
 }
 
 getOfferPaginate ({
-  page
+  page,
+  status
 }) {
   const token = localStorage.getItem('token')
   return fetch(
-    `/api/offers/?page=${page}`,
+    `/api/offers/?page=${page}&status_type=${status}`,
     {
       method: 'GET',
       headers: {
