@@ -426,3 +426,19 @@ footer {
   background-color: #5c61f2 !important;
   border-color: #5c61f2 !important;
 }
+
+.container-m {
+	max-width: 1024px;
+	margin: 0 auto !important;
+	padding-left: 20px;
+	padding-right: 20px;
+	position: relative;
+}
+
+.container-s {
+	max-width: 920px;
+	margin: 0 auto !important;
+	padding-left: 20px;
+	padding-right: 20px;
+	position: relative;
+}

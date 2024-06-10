@@ -27,15 +27,86 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                     </div>
 
                     <section class="" >
-                        <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 wow pulse">
-                                <div class="title">
-                                    <h2>Наши возможности<i class="fa fa-circle"></i></h2>
+
+                    <div id="features" class="flex-split">
+                        <div class="container-s">
+                            <div class="flex-intro align-center wow fadeIn">
+                            <h2>Считай быстро и эффективно</h2>
+                            <p> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
+                            </div>
+                            <div class="flex-inner align-center">
+                                <div class="f-image wow">
+                                <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
+                                </div>
+                                <div class="f-text">
+                                    <div class="left-content">
+                                        <h2>Личная база клиентов.</h2>
+                                        <p> Создавай своих клиентов, чтобы привязывать к ним КП.</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12"> 
- 
+
+                            <div class="flex-inner flex-inverted align-center">
+                                <div class="f-image f-image-inverted">
+                                    <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
+                                </div>
+                                <div class="f-text">
+                                    <div class="left-content">
+                                    <h2>Нет товара в нашей базе?.</h2>
+                                    <p> Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-inner align-center">
+                                <div class="f-image wow">
+                                <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
+                                </div>
+                                <div class="f-text">
+                                    <div class="left-content">
+                                        <h2>Формируй документы.</h2>
+                                        <p> Скачай PDF счет или КП для отправки за пару кликов</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+
+
+                        <div class="yd-stats wow fadeIn">
+                        <div class="container-s">
+                            <div class="row text-center">
+                            <div class="col-sm-12">
+                                <div class="intro">
+                                <h2>Наши показатели</h2>
+                                <p>Не забываем каждое КП и каждого пользователя.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="counter-up">
+                                    <h3><span class="counter">47</span>%</h3>
+                                <div class="counter-text">
+                                    <h2>Пользователей</h2>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="counter-up">
+                                    <h3><span class="counter">33</span>%</h3>
+                                <div class="counter-text">
+                                    <h2>Товаров в базе</h2>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="counter-up">
+                                    <h3><span class="counter">33</span>%</h3>
+                                <div class="counter-text">
+                                    <h2>Коммерческих предложений</h2>
+                                </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                         </div>
