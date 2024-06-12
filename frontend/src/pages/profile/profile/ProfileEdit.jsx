@@ -31,29 +31,29 @@ const ProfileEdit = () => {
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
       
-        <div class="container-fluid">
-          <div class="page-title">
-            <div class="row">
-              <div class="col-sm-6 my-3 text-start">
+        <div className="container-fluid">
+          <div className="page-title">
+            <div className="row">
+              <div className="col-sm-6 my-3 text-start">
                 <h3>Редактировать свои реквизиты</h3>
               </div>
             </div>
           </div>
         </div>      
 
-        <div class="col-md-12 project-list">
-        <div class="card-header">
+        <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body">
            
             <div className="d-flex">
               {isLoadding && <div className="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Загрузка...</span>
+                <span className="visually-hidden">Загрузка...</span>
               </div>}
             </div>
 
           <div className="d-flex">
             {isLoadding && <div className="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Загрузка...</span>
+              <span className="visually-hidden">Загрузка...</span>
             </div>}
           </div>
 

@@ -40,6 +40,18 @@ class ApiItems {
     image,
   }) {
     const token = localStorage.getItem('token')
+
+    // Особенности обработки групп
+    if (group === undefined || group === 0) {
+      group = undefined
+    } else {
+      group = [group]
+    }
+
+    if (brand === 0) {
+      brand = undefined
+    }
+
     return fetch(
       '/api/itemsuser/',
       {
@@ -51,7 +63,7 @@ class ApiItems {
         body: JSON.stringify({
           title,
           description,
-          group: [group],
+          group,
           brand,
           price_retail,
           quantity_type,
@@ -67,14 +79,26 @@ class ApiItems {
     title,
     description,
     group,
+    brand,
     price_retail,
     quantity_type,
     item_type,
     image,
   }) {
+
+    // Особенности обработки групп
+    if (group === undefined || group === 0) {
+      group = undefined
+    } else {
+      group = [group]
+    }
+    if (brand === 0) {
+      brand = undefined
+    }
+
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/items/${item_id}/`,
+      `/api/itemsuser/${item_id}/`,
       {
         method: 'PATCH',
         headers: {
@@ -85,7 +109,8 @@ class ApiItems {
           id: item_id,
           title,
           description,
-          group: [group],
+          group,
+          brand,
           price_retail,
           quantity_type,
           item_type,

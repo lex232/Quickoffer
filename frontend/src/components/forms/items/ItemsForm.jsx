@@ -67,13 +67,6 @@ const ItemForm = ({
     .catch((e) => console.log(e))
   }
 
-  const handleChangeGroup = (e) => {
-    // Устанавливаем номер категории на событии onChange
-    e.preventDefault();
-    setGroup(Number(e.target.value));
-    console.log(e.target.value)
-  }
-
   const handleChangeImage = (e) => {
     // Устанавливаем картинку записи на событии onChange
     // Если валидного файла нет, устанавливаем картинку в undefined
@@ -104,7 +97,7 @@ const ItemForm = ({
     if (image === null) {
       image = undefined
     }
-
+  
     const data = {
       title: titleArea,
       description: descriptionArea,
@@ -115,7 +108,7 @@ const ItemForm = ({
       item_type: itemTypeArea,
       image: selectedImage,
     }
-
+    console.log(data, 'BEFORE API')
     if (id === undefined) {
       // Если из состояния не пришел id, отправляем POST запрос
       items_api.createItem(data)
@@ -156,10 +149,15 @@ const ItemForm = ({
           <div className='col-9'>
           {listGroups && <div className="form">
              <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
+              <option value=''>---</option>
               {listGroups.map((catList) => {
-                console.log(groupArea, catList.id, brandArea)
+                if (groupArea) {
+                  if (groupArea.id === catList.id) {setGroup(Number(catList.id))}
+                }
+                // console.log(groupArea.id, catList.id, groupArea)
                 return (
-                groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option> 
+                groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option>
+                
               )
               })}
             </select>
@@ -171,10 +169,14 @@ const ItemForm = ({
           <div className='col-9'>
           {listBrands && <div className="form">
              <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
+              <option value=''>---</option>
               {listBrands.map((brandList) => {
+                // console.log(brandArea, brandList, brandArea)
+                if (brandArea === brandList.title) {setBrand(Number(brandList.id))}
                 return (
-                brandArea === brandList.title ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
-              )
+                  brandArea === brandList.id ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
+                )
+              
               })}
             </select>
           </div>}

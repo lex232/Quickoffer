@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 
 import clients_api from '../../../api/clients_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
+import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -66,13 +67,6 @@ const ClientDashboard = () => {
     setTypeCompany(val)
   }
 
-  const ReadCompanyType = (type) => {
-    if (type==='ip') { return 'ИП' }
-    else if (type==='ooo') { return 'ООО' }
-    else if (type==='fiz') { return 'Физ. лицо' }
-    else {return 'нет'}
-  }
-
   const HandleEditClient = async (
     id,
     title,
@@ -114,38 +108,38 @@ const ClientDashboard = () => {
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
 
-    <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col-sm-6 my-3 text-start">
+    <div className="container-fluid">
+        <div className="page-title">
+          <div className="row">
+            <div className="col-sm-6 my-3 text-start">
               <h3>Список моих клиентов</h3>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12 project-list">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-9 p-0 d-flex">
-                <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setTypeCompany('')}><Target />Все</a></li>
-                  <li class="nav-item"><a class="nav-link" id="ip-items-tab" data-bs-toggle="tab" href="#top-ip" role="tab" aria-controls="top-ip" aria-selected="false" onClick={(e) => setTypeCompany('ip')}><Briefcase />ИП</a></li>
-                  <li class="nav-item"><a class="nav-link" id="ooo-top-tab" data-bs-toggle="tab" href="#top-ooo" role="tab" aria-controls="top-ooo" aria-selected="false" onClick={(e) => setTypeCompany('ooo')}><Folder />ООО</a></li>
-                  <li class="nav-item"><a class="nav-link" id="fiz-top-tab" data-bs-toggle="tab" href="#top-fiz" role="tab" aria-controls="top-fiz" aria-selected="false" onClick={(e) => setTypeCompany('fiz')}><UserCheck />Физическое лицо</a></li>
+      <div className="row">
+        <div className="col-md-12 project-list">
+          <div className="card-header">
+            <div className="row">
+              <div className="col-md-9 p-0 d-flex">
+                <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setTypeCompany('')}><Target />Все</a></li>
+                  <li className="nav-item"><a className="nav-link" id="ip-items-tab" data-bs-toggle="tab" href="#top-ip" role="tab" aria-controls="top-ip" aria-selected="false" onClick={(e) => setTypeCompany('ip')}><Briefcase />ИП</a></li>
+                  <li className="nav-item"><a className="nav-link" id="ooo-top-tab" data-bs-toggle="tab" href="#top-ooo" role="tab" aria-controls="top-ooo" aria-selected="false" onClick={(e) => setTypeCompany('ooo')}><Folder />ООО</a></li>
+                  <li className="nav-item"><a className="nav-link" id="fiz-top-tab" data-bs-toggle="tab" href="#top-fiz" role="tab" aria-controls="top-fiz" aria-selected="false" onClick={(e) => setTypeCompany('fiz')}><UserCheck />Физическое лицо</a></li>
                 </ul>
               </div>
-              <div class="col-md-3 p-0">                    
-                <div class="form-group mb-0 me-0"></div><button onClick={(e) => CreateClient(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить клиента</button>
+              <div className="col-md-3 p-0">                    
+                <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateClient(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить клиента</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body"></div>
 
             <div className="table-responsive product-table">

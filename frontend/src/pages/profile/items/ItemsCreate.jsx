@@ -7,17 +7,17 @@ const ItemsCreate = () => {
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
       
-      <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col-sm-6 my-3 text-start">
+      <div className="container-fluid">
+        <div className="page-title">
+          <div className="row">
+            <div className="col-sm-6 my-3 text-start">
               <h3>Создать товар/ услугу</h3>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body">
             <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-3"><ItemForm /></div>
           </div>

@@ -394,12 +394,12 @@ const OfferForm = ({
               <table className='table table-sm offer'>
                 <thead>
                   <tr>
-                    <th class="col-1">Позиция</th>
-                    <th class="col-4">Название</th>
-                    <th class="col-1">Цена</th>
-                    <th class="col-1">Закупочная цена</th>
-                    <th class="col-1">Кол-во</th>
-                    <th class="col-1">Сумма</th>
+                    <th className="col-1">Позиция</th>
+                    <th className="col-4">Название</th>
+                    <th className="col-1">Цена</th>
+                    <th className="col-1">Закупочная цена</th>
+                    <th className="col-1">Кол-во</th>
+                    <th className="col-1">Сумма</th>
                     <th scope="col">Изображение</th>
                     <th scope="col"></th>
                   </tr>
@@ -417,14 +417,14 @@ const OfferForm = ({
                     className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
                   >
                   <td>{index+1}:</td>
-                  <td class="col-4">{item.title}</td>
-                  <td class="col-1"><input value={item.item_price_retail} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} /></td>
-                  <td class="col-1"><input value={item.item_price_purchase} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} /></td>
+                  <td className="col-4">{item.title}</td>
+                  <td className="col-1"><input value={item.item_price_retail} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} /></td>
+                  <td className="col-1"><input value={item.item_price_purchase} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} /></td>
                   <td><input value={item.amount} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} /></td>
                   <td>{item.item_price_retail * item.amount}</td>
                   <td><img src={item.image} height="100"></img></td>
                   <td className="col-1"><button onClick={(e) => deleteItemOffer(index, e)}><DeleteIco fill="red"/></button></td>
-                  <i class="fas fa-arrows-alt-v"></i>
+                  <i className="fas fa-arrows-alt-v"></i>
                 </tr>
                 )
               })}

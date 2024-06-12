@@ -62,11 +62,6 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
 class OfferFullSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП - полное"""
 
-    # name_client = serializers.SlugRelatedField(
-    #     read_only=True,
-    #     slug_field='title'
-    # )
-
     name_client = ClientSerializer()
     items_for_offer = OfferItemRelateSerializer(
         many=True,
@@ -120,7 +115,8 @@ class OfferPostSerializer(serializers.ModelSerializer):
 
     def processing_items(self, offer, items):
         """Сохранение связанной модели Товар-КП
-        для каждой позиции отдельно в цикле"""
+        для каждой позиции отдельно в цикле
+        А также подсчет стоимости работ и товаров в КП"""
 
         total_price_goods = 0
         total_price_work = 0

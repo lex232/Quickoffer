@@ -4,6 +4,9 @@ import './style.css'
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
 import { ReactComponent as NextIco } from '../../../static/icons/main/next.svg'
+import MyClients from '../../../static/image/mainpage/my_clients_min.png';
+import MyItem from '../../../static/image/mainpage/my_items_min.png';
+import MyOffers from '../../../static/image/mainpage/my_offers_min.jpg';
 
 const MainPage = ({ loginstate, onSignOut, user }) => {
 
@@ -19,96 +22,94 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 <h1 className="display-5 fw-bold">Создай КП, которое продает!</h1>
                                 <h3 className="fw-normal text-muted mb-3">и автоматизирует весь пакет документов</h3>
                                 <div className="d-flex gap-3 justify-content-center lead fw-normal">
-                                    <a className="icon-link text-white text-decoration-none" href="#">узнать больше<NextIco fill="white" width="24px" height="24px" class="mx-auto"/></a>
-                                    <a className="ms-2 icon-link text-white text-decoration-none" href="#">тарифы<NextIco fill="white" width="24px" height="24px" class="mx-auto"/></a>
+                                    <a className="icon-link text-white text-decoration-none" href="#">узнать больше<NextIco fill="white" width="24px" height="24px" className="mx-auto"/></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <section class="" >
+                    <section className="" >
 
-                    <div id="features" class="flex-split">
-                        <div class="container-s">
-                            <div class="flex-intro align-center wow fadeIn">
-                            <h2>Считай быстро и эффективно</h2>
-                            <p> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
-                            </div>
-                            <div class="flex-inner align-center">
-                                <div class="f-image wow">
-                                <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
+                        <div id="features" className="flex-split">
+                            <div className="container-s">
+                                <div className="flex-intro align-center wow fadeIn">
+                                <h2>Считай быстро и эффективно</h2>
+                                <p> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
                                 </div>
-                                <div class="f-text">
-                                    <div class="left-content">
-                                        <h2>Личная база клиентов.</h2>
-                                        <p> Создавай своих клиентов, чтобы привязывать к ним КП.</p>
+                                <div className="flex-inner align-center">
+                                    <div className="f-image wow">
+                                    <img className="img-fluid" src={MyClients} alt="Feature"></img>
+                                    </div>
+                                    <div className="f-text">
+                                        <div className="left-content">
+                                            <h2>Личная база клиентов.</h2>
+                                            <p> Создавай своих клиентов, чтобы привязывать к ним КП.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="flex-inner flex-inverted align-center">
-                                <div class="f-image f-image-inverted">
-                                    <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
-                                </div>
-                                <div class="f-text">
-                                    <div class="left-content">
-                                    <h2>Нет товара в нашей базе?.</h2>
-                                    <p> Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.</p>
+                                <div className="flex-inner flex-inverted align-center">
+                                    <div className="f-image f-image-inverted">
+                                        <img className="img-fluid" src={MyItem} alt="Feature"></img>
+                                    </div>
+                                    <div className="f-text">
+                                        <div className="left-content">
+                                        <h2>Нет товара в нашей базе?.</h2>
+                                        <p> Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="flex-inner align-center">
-                                <div class="f-image wow">
-                                <img class="img-fluid" src="assets/images/feature.png" alt="Feature"></img>
-                                </div>
-                                <div class="f-text">
-                                    <div class="left-content">
-                                        <h2>Формируй документы.</h2>
-                                        <p> Скачай PDF счет или КП для отправки за пару кликов</p>
+                                <div className="flex-inner align-center">
+                                    <div className="f-image wow">
+                                        <img className="img-fluid" src={MyOffers} alt="Feature"></img>
+                                    </div>
+                                    <div className="f-text">
+                                        <div className="left-content">
+                                            <h2>Формируй документы.</h2>
+                                            <p> Скачай PDF счет или КП для отправки за пару кликов</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        </div>
-
-
-                        <div class="yd-stats wow fadeIn">
-                        <div class="container-s">
-                            <div class="row text-center">
-                            <div class="col-sm-12">
-                                <div class="intro">
-                                <h2>Наши показатели</h2>
-                                <p>Не забываем каждое КП и каждого пользователя.</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="counter-up">
-                                    <h3><span class="counter">47</span>%</h3>
-                                <div class="counter-text">
-                                    <h2>Пользователей</h2>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="counter-up">
-                                    <h3><span class="counter">33</span>%</h3>
-                                <div class="counter-text">
-                                    <h2>Товаров в базе</h2>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="counter-up">
-                                    <h3><span class="counter">33</span>%</h3>
-                                <div class="counter-text">
-                                    <h2>Коммерческих предложений</h2>
-                                </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
+
+                        <div className="yd-stats wow fadeIn">
+                            <div className="container-s">
+                                <div className="row text-center">
+                                <div className="col-sm-12">
+                                    <div className="intro">
+                                    <h2>Мы в цифрах</h2>
+                                    <p>Не забываем каждое КП и каждого пользователя.</p>
+                                    </div>
+                                </div>
+                                <div className="col-sm-4">
+                                    <div className="counter-up">
+                                        <h3><span className="counter">2</span></h3>
+                                    <div className="counter-text">
+                                        <h2>Пользователей</h2>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-4">
+                                    <div className="counter-up">
+                                        <h3><span className="counter">3452</span></h3>
+                                    <div className="counter-text">
+                                        <h2>Товаров в базе</h2>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-4">
+                                    <div className="counter-up">
+                                        <h3><span className="counter">721</span></h3>
+                                    <div className="counter-text">
+                                        <h2>Коммерческих предложений</h2>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
 

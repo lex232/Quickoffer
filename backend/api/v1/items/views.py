@@ -36,6 +36,8 @@ class ItemUserViewSet(viewsets.ModelViewSet):
 
         if self.action == 'list' or self.action == 'retrieve':
             return ItemSerializer
+        # elif self.action == 'update':
+        #
         return ItemPostSerializer
 
 

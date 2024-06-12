@@ -39,7 +39,7 @@ const SuccessFailedPopup = ({open, title, result, link_redirect}) => {
                                 </div>
                                 <div className="d-flex px-4">
                                     <p className="fs-6 mx-auto">
-                                        {result === true ? <StatusOk transform='scale(3)' fill="green" class="mx-auto"/> : <DeleteIco transform='scale(3)' fill="red" class="mx-auto"/>}
+                                        {result === true ? <StatusOk transform='scale(3)' fill="green" className="mx-auto"/> : <DeleteIco transform='scale(3)' fill="red" className="mx-auto"/>}
                                         <br />
                                         {result === true ? "Отправлено успешно" : "Произошла ошибка. Попробуйте заполнить снова"}
                                     </p>

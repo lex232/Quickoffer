@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import items_api from '../../../api/items_api';
 import getDate from '../../../utils/getDate';
 import DeletePopup from '../../../components/popup/DeletePopup';
+import ReadItemType from '../../../utils/text-operations/replaceItemType';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -94,37 +95,37 @@ const ItemsDashboard = () => {
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
 
-      <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col-sm-6 my-3 text-start">
+      <div className="container-fluid">
+        <div className="page-title">
+          <div className="row">
+            <div className="col-sm-6 my-3 text-start">
               <h3>Список товаров и услуг</h3>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12 project-list">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-9 p-0 d-flex">
-                <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setStatus('')}><Target />Все</a></li>
-                  <li class="nav-item"><a class="nav-link" id="top-items-tab" data-bs-toggle="tab" href="#top-items" role="tab" aria-controls="top-items" aria-selected="false" onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
-                  <li class="nav-item"><a class="nav-link" id="service-top-tab" data-bs-toggle="tab" href="#top-service" role="tab" aria-controls="top-service" aria-selected="false" onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
+      <div className="row">
+        <div className="col-md-12 project-list">
+          <div className="card-header">
+            <div className="row">
+              <div className="col-md-9 p-0 d-flex">
+                <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setStatus('')}><Target />Все</a></li>
+                  <li className="nav-item"><a className="nav-link" id="top-items-tab" data-bs-toggle="tab" href="#top-items" role="tab" aria-controls="top-items" aria-selected="false" onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
+                  <li className="nav-item"><a className="nav-link" id="service-top-tab" data-bs-toggle="tab" href="#top-service" role="tab" aria-controls="top-service" aria-selected="false" onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
                   </ul>
               </div>
-              <div class="col-md-3 p-0">                    
-                <div class="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить позицию</button>
+              <div className="col-md-3 p-0">                    
+                <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить позицию</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body"></div>
 
             <div className="table-responsive product-table">
@@ -149,8 +150,15 @@ const ItemsDashboard = () => {
                         <td>{getDate(results.pub_date)}</td>
                         <td>{results.brand}</td>
                         <td>{results.price_retail} руб</td>
-                        <td>{results.item_type}</td>
-                        <td>{results.group}</td>
+                        <td>{ReadItemType(results.item_type)}</td>
+                        <td>{results.group.map((res_groups) => {
+                          return (
+                            <div>
+                              {res_groups.title}
+                            </div>
+                          )})}
+                        
+                        </td>
                         <td><button onClick={(e) => HandleEditItem(
                           results.id,
                           results.title,
