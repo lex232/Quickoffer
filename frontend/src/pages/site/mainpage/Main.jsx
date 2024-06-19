@@ -1,4 +1,5 @@
 import React from 'react';
+import CountUp from 'react-countup';
 
 import './style.css'
 import Header from '../includes/Header.jsx';
@@ -32,43 +33,45 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
 
                         <div id="features" className="flex-split">
                             <div className="container-s">
-                                <div className="flex-intro align-center wow fadeIn">
-                                <h2>Считай быстро и эффективно</h2>
-                                <p> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
+                                <div className="align-center flex-intro">
+                                    <h2 className='section-title mt-2'>Считай быстро и эффективно</h2>
+                                    <div className='line-divider'></div>
+                                    <p className='mb-5'> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
                                 </div>
-                                <div className="flex-inner align-center">
-                                    <div className="f-image wow">
-                                    <img className="img-fluid" src={MyClients} alt="Feature"></img>
+
+                                <div class="row content">
+                                    <div class="col-md-5" data-aos="fade-right">
+                                        <img src={MyClients} class="img-fluid" alt=""></img>
                                     </div>
-                                    <div className="f-text">
-                                        <div className="left-content">
-                                            <h2>Личная база клиентов.</h2>
-                                            <p> Создавай своих клиентов, чтобы привязывать к ним КП.</p>
-                                        </div>
+                                    <div class="col-md-7 pt-5 flex-intro" data-aos="fade-left ">
+                                        <h3>Личная база клиентов.</h3>
+                                        <p class="f-text">
+                                            Создавай своих клиентов, чтобы привязывать к ним КП.
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="flex-inner flex-inverted align-center">
-                                    <div className="f-image f-image-inverted">
-                                        <img className="img-fluid" src={MyItem} alt="Feature"></img>
+                                <div class="row content">
+                                    <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+                                        <img src={MyItem} class="img-fluid" alt=""></img>
                                     </div>
-                                    <div className="f-text">
-                                        <div className="left-content">
-                                        <h2>Нет товара в нашей базе?.</h2>
-                                        <p> Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.</p>
-                                        </div>
+                                    <div class="col-md-7 pt-5 order-2 order-md-1 flex-intro" data-aos="fade-right">
+                                        <h3>Нет товара в нашей базе?.</h3>
+                                        <p class="f-text">
+                                            Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="flex-inner align-center">
-                                    <div className="f-image wow">
-                                        <img className="img-fluid" src={MyOffers} alt="Feature"></img>
+                                <div class="row content">
+                                    <div class="col-md-5" data-aos="fade-right">
+                                        <img src={MyOffers} class="img-fluid" alt=""></img>
                                     </div>
-                                    <div className="f-text">
-                                        <div className="left-content">
-                                            <h2>Формируй документы.</h2>
-                                            <p> Скачай PDF счет или КП для отправки за пару кликов</p>
-                                        </div>
+                                    <div class="col-md-7 pt-5 flex-intro" data-aos="fade-left ">
+                                        <h3>Формируй документы.</h3>
+                                        <p class="f-text">
+                                            Скачай PDF счет или КП для отправки за пару кликов.
+                                        </p>
                                     </div>
                                 </div>
 
@@ -86,7 +89,9 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
-                                        <h3><span className="counter">2</span></h3>
+                                        <h3>
+                                            <span className="counter"><CountUp end={4} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span>
+                                        </h3>
                                     <div className="counter-text">
                                         <h2>Пользователей</h2>
                                     </div>
@@ -94,7 +99,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
-                                        <h3><span className="counter">3452</span></h3>
+                                        <h3><span className="counter"><CountUp end={3452} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
                                     <div className="counter-text">
                                         <h2>Товаров в базе</h2>
                                     </div>
@@ -102,7 +107,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
-                                        <h3><span className="counter">721</span></h3>
+                                        <h3><span className="counter"><CountUp end={721} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
                                     <div className="counter-text">
                                         <h2>Коммерческих предложений</h2>
                                     </div>
