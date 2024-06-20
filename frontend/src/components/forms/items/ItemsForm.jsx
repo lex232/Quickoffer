@@ -154,10 +154,8 @@ const ItemForm = ({
                 if (groupArea) {
                   if (groupArea.id === catList.id) {setGroup(Number(catList.id))}
                 }
-                // console.log(groupArea.id, catList.id, groupArea)
                 return (
                 groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option>
-                
               )
               })}
             </select>
@@ -171,12 +169,10 @@ const ItemForm = ({
              <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
               <option value=''>---</option>
               {listBrands.map((brandList) => {
-                // console.log(brandArea, brandList, brandArea)
                 if (brandArea === brandList.title) {setBrand(Number(brandList.id))}
                 return (
                   brandArea === brandList.id ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
                 )
-              
               })}
             </select>
           </div>}

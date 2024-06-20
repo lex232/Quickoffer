@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 
+import main_page_api from '../../../api/main_page_api';
 import './style.css'
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
@@ -10,6 +11,22 @@ import MyItem from '../../../static/image/mainpage/my_items_min.png';
 import MyOffers from '../../../static/image/mainpage/my_offers_min.jpg';
 
 const MainPage = ({ loginstate, onSignOut, user }) => {
+
+    const [info, setInfo] = useState([]);
+
+    const getAdmin = () => {
+        main_page_api.getMainPageInfo()
+        .then(res => {
+          setInfo(res);
+        })
+        .catch((e) => console.log(e))
+    }
+
+    useEffect(() => {
+        // Получить все новости при загрузке страницы
+        getAdmin();
+      }, [])
+      ;
 
     return (
             <body>
@@ -90,7 +107,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 <div className="col-sm-4">
                                     <div className="counter-up">
                                         <h3>
-                                            <span className="counter"><CountUp end={4} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span>
+                                            <span className="counter"><CountUp end={info.count_clients} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span>
                                         </h3>
                                     <div className="counter-text">
                                         <h2>Пользователей</h2>
@@ -99,7 +116,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
-                                        <h3><span className="counter"><CountUp end={3452} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
+                                        <h3><span className="counter"><CountUp end={info.count_items} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
                                     <div className="counter-text">
                                         <h2>Товаров в базе</h2>
                                     </div>
@@ -107,7 +124,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
-                                        <h3><span className="counter"><CountUp end={721} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
+                                        <h3><span className="counter"><CountUp end={info.count_offers} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
                                     <div className="counter-text">
                                         <h2>Коммерческих предложений</h2>
                                     </div>

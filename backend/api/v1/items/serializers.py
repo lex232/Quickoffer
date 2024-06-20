@@ -71,7 +71,6 @@ class ItemPostSerializer(serializers.ModelSerializer):
             instance.group.clear()
         # Удаляем группу если с фронта пришел 0
         check_brand = validated_data.get('brand')
-        print('PATCH VALIDATED', validated_data, "BRAND", check_brand, "GROUP", check_group)
         if check_brand == None:
             instance.brand = None
 

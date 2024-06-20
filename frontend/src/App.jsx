@@ -1,4 +1,7 @@
-// APP QuickOffer
+/**
+* APP QuickOffer - Приложение коммерческих предложений для
+* монтажников СКС, электриков и т.д.
+*/
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { AuthContext, UserContext } from './contexts'
@@ -6,13 +9,17 @@ import { AuthContext, UserContext } from './contexts'
 import './App.css';
 import user_api from './api/user_api';
 
-// Страницы
+/**
+* Страницы
+*/
 import MainPage from './pages/site/mainpage/Main'
 import CatalogPage from './pages/site/catalog/Catalog';
 import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
 
-// Страницы для авторизованного пользователя
+/**
+* Страницы для авторизованного пользователя
+*/
 import ProfilePage from './pages/profile/ProfilePage';
 import ProfileDashboard from './pages/profile/main/ProfileMain';
 
@@ -27,23 +34,21 @@ import ItemsEdit from './pages/profile/items/ItemsEdit';
 import OfferDashboard from './pages/profile/offer/OfferDashboard';
 import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferShow from './pages/profile/offer/OfferShow';
+import OfferEdit from './pages/profile/offer/OfferEdit';
 
 import ProfileEdit from './pages/profile/profile/ProfileEdit';
 
 function RequireAuth({ children, loginstate=false }) {
   let location = useLocation();
   if (!loginstate) {
-    // Перенаправляет на страницу логина
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   return children;
 }
 
 function App() {
   const [ loggedIn, setLoggedIn ] = useState(null)
   const [ user, setUser ] = useState({})
-
   const [ cart, setCart ] = useState([])
 
   const authorization = (username, password) => {
@@ -104,9 +109,8 @@ function App() {
       })
   }
 
-  // Не грузим рендер, пока не получили значение авторизации
   if (loggedIn === null) {
-    return <div className="">Loading!!</div>
+    return <div className="">Loading...</div>
   }
 
   return (
@@ -151,6 +155,7 @@ function App() {
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>
               <Route path="offer/create" element={<OfferCreate />}/>
+              <Route path='offer/edit' element={<OfferEdit />}/>
 
               <Route path="my-organization/edit" element={<ProfileEdit />}/>
             </Route>

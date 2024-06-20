@@ -38,15 +38,18 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
 
     description = serializers.ReadOnlyField(source='item.description')
     image = serializers.SerializerMethodField()
+    item_id = serializers.SerializerMethodField()
 
     class Meta:
         model = OfferItems
         fields = (
             'id',
             'item',
+            'item_id',
             'position',
             'amount',
             'item_price_retail',
+            'item_price_purchase',
             'description',
             'image',
         )
@@ -58,6 +61,11 @@ class OfferItemRelateSerializer(serializers.ModelSerializer):
             img_link = self.context['request'].build_absolute_uri('/media/' + str(obj.item.image))
             return img_link
         return None
+
+    def get_item_id(self, obj):
+        """Находим id модели товара"""
+
+        return obj.item.id
 
 class OfferFullSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели КП - полное"""
@@ -120,6 +128,7 @@ class OfferPostSerializer(serializers.ModelSerializer):
 
         total_price_goods = 0
         total_price_work = 0
+        pos = 1
 
         for item in items:
             current_item = Item.objects.get(pk=item['id'])
@@ -139,8 +148,10 @@ class OfferPostSerializer(serializers.ModelSerializer):
                 item=current_item,
                 amount=current_quantity,
                 item_price_retail=current_price_retail,
-                item_price_purchase=current_price_purchase
+                item_price_purchase=current_price_purchase,
+                position=pos,
             )
+            pos += 1
 
         return total_price_goods, total_price_work
 

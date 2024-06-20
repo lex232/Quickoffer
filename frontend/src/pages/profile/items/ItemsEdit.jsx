@@ -4,6 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemForm from '../../../components/forms/items/ItemsForm';
 import { useLocation } from 'react-router-dom';
 
+
+/**
+* Редактирование товара/ услуги
+*/
 const ItemsEdit = () => {
 
     const {state} = useLocation();
@@ -25,7 +29,7 @@ const ItemsEdit = () => {
                 <div className="page-title">
                 <div className="row">
                     <div className="col-sm-6 my-3 text-start">
-                    <h3>Создать товар/ услугу</h3>
+                    <h3>Редактировать товар/ услугу</h3>
                     </div>
                 </div>
                 </div>

@@ -9,6 +9,7 @@ import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
+import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare } from 'react-feather'
 import './styles.css'
 
@@ -66,6 +67,12 @@ const OfferDashboard = () => {
   const HandleShowOffer = async (id, e) => {
     e.preventDefault();
     return navigate("show", {state: {id: id}})
+  }
+
+  const HandleEditOffer = async (id, e) => {
+    e.preventDefault();
+    localStorage.removeItem('items')
+    return navigate("/profile/offer/edit", {state: {id: id}})
   }
 
   const HandleDelOffer = async (id) => {
@@ -143,8 +150,9 @@ const OfferDashboard = () => {
                             <br></br>Оборудование: {results.final_price_goods} руб
                             <br></br>Работы: {results.final_price_work} руб
                         </td>
-                        <td><button onClick={(e) => HandleShowOffer(results.id, e)}>
-                          <EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button>
+                        <td>
+                          <button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button>
+                          <button onClick={(e) => HandleEditOffer(results.id, e)}><PencilIco fill="orange"/></button>
                           <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id}/>
                         </td>
                       </tr>

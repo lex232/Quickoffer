@@ -382,7 +382,8 @@ class OfferItems(models.Model):
     class Meta:
         verbose_name = 'количество товара в КП'
         verbose_name_plural = 'количество товаров в КП'
-        ordering = ['-position']
+        # Тут еще надо проверить как лучше ордеринг организовать
+        ordering = ['position']
         constraints = [
             models.UniqueConstraint(
                 fields=['offer', 'item'],

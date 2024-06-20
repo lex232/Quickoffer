@@ -34,6 +34,7 @@ class ClientAdmin(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
+        'pk',
         'title',
         'description',
         'brand',
@@ -46,6 +47,7 @@ class ItemAdmin(admin.ModelAdmin):
 @admin.register(ItemUser)
 class ItemUserAdmin(admin.ModelAdmin):
     list_display = (
+        'pk',
         'author',
         'title',
         'description',

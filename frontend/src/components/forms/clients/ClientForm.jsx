@@ -118,12 +118,12 @@ const ClientForm = ({
 
   return (
       <form>
-          <div className="form pt-1">
-            <div className="form d-flex">
+        <div className="form pt-1">
+          <div className="form d-flex">
             <span className='col-3'>Наименование:</span>
             <div className='col-9'>
               <input type="text" defaultValue={title} className="form-control my-2" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
-              </div>
+            </div>
           </div>
           <div className="form d-flex">
             <span className='col-3'>Тип компании:</span>
@@ -138,7 +138,7 @@ const ClientForm = ({
           <div className="form d-flex">
             <span className='col-3'>ОГРН:</span>
             <div className='col-9'>
-            <input type="text" defaultValue={ogrn} className="form-control my-2" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />
+              <input type="text" defaultValue={ogrn} className="form-control my-2" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />
             </div>
           </div>          
           <div className="form d-flex">

@@ -7,6 +7,9 @@ from api.v1.users.views import (
     UserViewSet,
     ProfileViewSet
 )
+from api.v1.main_page.views import (
+    MainPageView
+)
 from api.v1.items.views import (
     ItemViewSet,
     ItemFinderViewSet,
@@ -109,6 +112,7 @@ router_offer.register(
 api_urlpatterns = [
     # Роутер инфорации главной админ страницы
     path('api/profile-main', ProfileMainView.as_view(), name="profile-main"),
+    path('api/main-page', MainPageView.as_view(), name="main-page"),
     path('api/', include(router_offer.urls)),
     path('api/auth/', include('djoser.urls.authtoken')),
     # API СХЕМА

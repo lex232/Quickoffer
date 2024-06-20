@@ -23,6 +23,7 @@ const OfferForm = ({
   const navigate = useNavigate()
   const [ nameArea, setName ] = useState(name_offer)
   const [ clientArea, setClient ] = useState(name_client)
+  const [ statusOffer, setStatusOffer] = useState(status_type);
 
   // Самая главная переменная - итоговый список КП
   let items = []
@@ -105,6 +106,9 @@ const OfferForm = ({
 
   useEffect(_ => {
     calculateFinalPrice()
+    console.log("LIST CHANGED OFFER", list)
+    console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
+    
   }, [list])
 
   // onDragStart fires when an element
@@ -121,9 +125,7 @@ const OfferForm = ({
     });
      
      
-    // Note: this is only for Firefox.
-    // Without it, the DnD won't work.
-    // But we are not using it.
+    // Для firefox. Это не используется, но без этого DnD не работает. 
     event.dataTransfer.setData("text/html", '');
   }
   
@@ -132,9 +134,7 @@ const OfferForm = ({
   // In this case, any of the items on the list
   const onDragOver = (event) => {
     
-    // in order for the onDrop
-    // event to fire, we have
-    // to cancel out this one
+    // in order for the onDrop event to fire, we have to cancel out this one
     event.preventDefault();
      
     let newList = dragAndDrop.originalOrder;
@@ -218,7 +218,8 @@ const OfferForm = ({
         item_price_purchase: itemValue.price_retail,
         amount: "1",
         description: itemValue.description ,
-        image: itemValue.image
+        image: itemValue.image,
+        // position: list.length + 1,
       })
       setList(prepareToAddList);
       localStorage.setItem("items", JSON.stringify(list));
@@ -286,8 +287,10 @@ const OfferForm = ({
   }
 
   const ClearOffer = () => {
-    // Очищаем локал сторедж
+    // Очищаем локал сторедж и состояние списка товаров
     localStorage.removeItem("items")
+    items = []
+    setList([])
   }
 
   const CheckSameItem = (id_add) => {
@@ -329,13 +332,29 @@ const OfferForm = ({
   return (
     
       <form>
-
-          <div className="form">
-            <input type="header" defaultValue={name_offer} className="form-control my-3" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
+          <div className="form d-flex">
+            <span className='col-lg-2 col-sm-4'>Название КП* :</span>
+            <div className="col-lg-10 col-sm-8">
+              <input type="header" defaultValue={name_offer} className="form-control mb-1" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
+            </div>
           </div>
-          <div className="form">
-              <span className='ps-2'>Добавить клиента:</span>
-              <input className="form-control my-3" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
+          <div className="form d-flex">
+            <span className='col-lg-2 col-sm-4'>Статус КП:</span>
+            <div className='col-lg-10 col-sm-8'>
+              <select className='form-select my-1' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
+                <option value='in_edit'>на редактировании</option>
+                <option value='in_process'>КП отправлено</option>
+                <option value='in_prepayment'>получена предоплата</option>
+                <option value='in_install'>в работе</option>
+                <option value='in_payment'>получена оплата</option>
+                <option value='denied'>отказано</option>
+              </select>
+            </div>
+          </div>
+          <div className="form d-flex">
+              <span className='col-lg-2 col-sm-4'>Добавить клиента:</span>
+              <div className='col-lg-10 col-sm-8'>
+              <input className="form-control my-1" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
                 onChange={e => {
                   const valueForClient = e.target.value
                   setClientValue({
@@ -346,31 +365,36 @@ const OfferForm = ({
                 setShowClients(true)
               }}
               value={clientValue.title} />
-
-              {showClients && clientList.length > 0 && <ClientsSearch
-                clients={clientList}
-                onClick={({ id, title }) => {
-                  handleClientAutofill({ id, title })
-                  setClientList([])
-                  setShowClients(false)
-              }} />
-              }
+              </div>
           </div>
           <div>
-            <div>
-              <span className='ps-2'>Добавить товар/ услугу:</span>
-              <input className="form-control my-3" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
-                onChange={e => {
-                  const valueForItem = e.target.value
-                  setItemValue({
-                    title: valueForItem
-                  })
+            {showClients && clientList.length > 0 && <ClientsSearch
+              clients={clientList}
+              onClick={({ id, title }) => {
+                handleClientAutofill({ id, title })
+                setClientList([])
+                setShowClients(false)
+            }}/>
+            }
+          </div>
+          <div>
+            <div className="form d-flex">
+              <span className='col-lg-2 col-sm-4'>Добавить товар/ услугу:</span>
+              <div className='col-lg-10 col-sm-8'>
+                <input className="form-control mt-1" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
+                  onChange={e => {
+                    const valueForItem = e.target.value
+                    setItemValue({
+                      title: valueForItem
+                    })
+                  }}
+                onFocus={_ => {
+                  setShowItems(true)
                 }}
-              onFocus={_ => {
-                setShowItems(true)
-              }}
-              value={itemValue.title} />
-
+                value={itemValue.title} />
+              </div>
+              </div>
+              <div>
               {showItems && itemList.length > 0 && <ItemSearch
                 items={itemList}
                 onClick={({ id, title, price_retail, image, description }) => {
@@ -379,7 +403,6 @@ const OfferForm = ({
                   setShowItems(false)
               }} />
               }
-
               {itemValue.id && 
                 <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24} /><span className='ps-2'>Добавить позицию</span></button>
               }
@@ -406,7 +429,7 @@ const OfferForm = ({
                 </thead>
               {list.map((item, index) => {
                 return(
-                <tr 
+                <tr
                     key={index}
                     data-position={index}
                     draggable

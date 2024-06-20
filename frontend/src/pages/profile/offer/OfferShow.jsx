@@ -7,6 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import offer_api from '../../../api/offer_api';
 
 
+/**
+* Отображение КП
+*/
 const OfferShow = () => {
   const navigate = useNavigate()
   const {state} = useLocation();
@@ -16,9 +19,6 @@ const OfferShow = () => {
   const [itemsOffer, setItemsOffer] = useState([]);
   const [clientInfo, setClientInfo] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
-
-  const [totalPrice, setTotalPrice] = useState(0)
-  let total
 
   useEffect(() => {
     // Получить все новости при загрузке страницы
@@ -31,15 +31,9 @@ const OfferShow = () => {
       id: id,
     })
     .then(res => {
-      total = 0
       setCurrentOffer(res);
       setItemsOffer(res.items_for_offer);
       setClientInfo(res.name_client);
-      res.items_for_offer.map((item) => {
-        total += item.item_price_retail * item.amount
-      })
-      setTotalPrice(total)
-      console.log(total)
     })
     .catch((e) => console.log(e))
     .finally(()=> setIsLoadding(false))
@@ -76,7 +70,7 @@ const OfferShow = () => {
           </div>}
       </div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Просмотр КП для компании {clientInfo.title}</h1>
+        <h1 className="h2">Просмотр КП {clientInfo && <span>для компании {clientInfo.title}</span>}</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
             <button onClick={(e) => DownloadOffer(e)} type="button" className="btn btn-sm btn-outline-secondary">Скачать PDF</button>
@@ -90,12 +84,12 @@ const OfferShow = () => {
             <tr>ИНН:</tr>
             <tr>Адрес регистрации:</tr>
           </td>
-          <td className='text-start ps-4 pb-4'>
+          {clientInfo && <td className='text-start ps-4 pb-4'>
             <tr>{currentOffer.name_offer}</tr>
             <tr>{ReplaceTypeCompany(clientInfo.company_type)} {clientInfo.title}</tr>
             <tr>{clientInfo.inn}</tr>
             <tr>{clientInfo.address_reg}</tr>
-          </td>
+          </td>}
       </table>
       <div className="table-responsive">
       {itemsOffer.map((results) => {
