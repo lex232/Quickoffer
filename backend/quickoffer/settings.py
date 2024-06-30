@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Плагины
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'mptt',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,5 +145,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.parsers.MultiPartParser',
     #],
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
