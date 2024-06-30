@@ -24,7 +24,6 @@ env = environ.Env(
 DEBUG = env('DEBUG_MODE')
 SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-print(ALLOWED_HOSTS)
 
 CUT_NAME = 20
 
