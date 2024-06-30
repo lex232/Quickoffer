@@ -20,9 +20,9 @@ defusedxml==0.7.1
 Django==4.1.6
 django-environ==0.11.2
 django-filter==22.1
-django-js-asset @ file:///D:/Dev/quickoffer/backend/django_js_asset-2.2.0-py3-none-any.whl#sha256=7ef3e858e13d06f10799b56eea62b1e76706f42cf4e709be4e13356bc0ae30d8
-django-mptt @ file:///D:/Dev/quickoffer/backend/django_mptt-0.16.0-py3-none-any.whl#sha256=8716849ba3318d94e2e100ed0923a05c1ffdf8195f8472b690dbaf737d2af3b5
-django-mptt-admin @ file:///D:/Dev/quickoffer/backend/django_mptt_admin-2.6.2-py2.py3-none-any.whl#sha256=67fc10577455c32ddf223f97485e95f8c35f8c391c772b0bbd47a03aff6593ad
+django-js-asset
+django-mptt
+django-mptt-admin
 django-templated-mail==1.1.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==4.8.0
