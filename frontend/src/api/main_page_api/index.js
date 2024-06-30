@@ -23,7 +23,7 @@ class ApiMainPage {
 
   getMainPageInfo () {
     return fetch(
-      `/api/main-page`,
+      `/api/main-page/`,
       {
         method: 'GET',
       }

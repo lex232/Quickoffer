@@ -150,4 +150,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://offercreator.ru']
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

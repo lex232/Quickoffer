@@ -24,7 +24,7 @@ class ApiMainProfile {
   getMainProfileInfo () {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/profile-main`,
+      `/api/profile-main/`,
       {
         method: 'GET',
         headers: {
