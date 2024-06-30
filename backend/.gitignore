@@ -14,6 +14,9 @@ demo.py
 backups
 /backups/
 .backups
+/static/
+static/
+/static
 
 
 /plates/
