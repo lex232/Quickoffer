@@ -15,17 +15,16 @@ env = environ.Env(
     POSTGRES_DB=(str, 'django'),
     POSTGRES_USER=(str, 'postgres'),
     POSTGRES_PASSWORD=(str, 'mysecretpassword'),
-    DB_NAME=(str, 'quickoffer'),
     DB_HOST=(str, 'db'),
     DB_PORT=(int, 5432),
     ALLOWED_HOSTS=(list, ['127.0.0.1', 'localhost']),
 )
 
+
 DEBUG = env('DEBUG_MODE')
-
 SECRET_KEY = env('SECRET_KEY')
-
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+print(ALLOWED_HOSTS)
 
 CUT_NAME = 20
 
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'mptt',
     'django_mptt_admin',
-    # 'djoser',
     'django_filters',
     # Приложения
     'offer.apps.OfferConfig',
