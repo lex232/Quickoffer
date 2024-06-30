@@ -125,11 +125,14 @@ class OfferViewSet(viewsets.ModelViewSet):
             aspect_logo = logo_w / logo_h
 
             # Блок заказчик
-            customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
             table_customer = [['Заказчик:'], ['ИНН:'], ['Адрес регистрации:']]
-            table_customer[0].append(customer.title)
-            table_customer[1].append(customer.inn)
-            table_customer[2].append(customer.address_reg)
+            try:
+                customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
+                table_customer[0].append(customer.title)
+                table_customer[1].append(customer.inn)
+                table_customer[2].append(customer.address_reg)
+            except:
+                pass
 
             # Формируем таблицу
             table_style = [
