@@ -16,7 +16,6 @@ const ItemsArea = ({ category_id }) => {
     let currentpage = 1;
 
     let items = []
-    let ls_items = []
 
     // Получаем корзину из локального хранилища
     if (localStorage.getItem("items")) {
@@ -97,6 +96,7 @@ const ItemsArea = ({ category_id }) => {
         })
         localStorage.setItem("items", JSON.stringify(prepareToAddList));
         getItems(currentpage, category_id);
+        window.dispatchEvent(new Event("storage"));
     }
 
     const CartRemoveItem = ( id_item, e ) => {
@@ -108,6 +108,7 @@ const ItemsArea = ({ category_id }) => {
         prepareToDeleteList.splice(index, 1)
         localStorage.setItem("items", JSON.stringify(prepareToDeleteList));
         getItems(currentpage, category_id);
+        window.dispatchEvent(new Event("storage"));
     }
 
     return (

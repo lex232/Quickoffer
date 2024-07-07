@@ -20,9 +20,12 @@ class ApiOffer {
     checkFileDownloadResponse (res) {
       return new Promise((resolve, reject) => {
         if (res.status < 400) {
-          const filename = res.headers
+          const filename_test = res.headers
           .get('content-disposition')
           .split('filename=')[1]
+          console.log(filename_test)
+          const filename = 'offer'+ filename_test +'.pdf'
+
           return res.blob().then(blob => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');

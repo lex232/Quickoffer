@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,12 +18,22 @@ const Header = ({ loginstate, onSignOut, user }) => {
   const active_url = "nav-link active text-black"
   const non_active_url = "nav-link text-black"
 
+
   let items = []
 
   // Сохраняем корзину в локальное хранилище
   if (localStorage.getItem("items")) {
       items = JSON.parse(localStorage.getItem("items"));
   }
+  
+  // Динамическая проверка элементов корзины, чтобы сразу отобразить в хэдере
+  const [ item_length, setItemLength ] = useState(items.length)
+  window.addEventListener('storage', () => {
+    if (localStorage.getItem("items")) {
+      items = JSON.parse(localStorage.getItem("items"));
+    }
+    setItemLength(items.length)
+  })
 
  // Подсветка активной ссылки
  const check_url_header = new activeUrl(pathname, active_url, non_active_url)
@@ -57,8 +67,8 @@ const Header = ({ loginstate, onSignOut, user }) => {
           <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-2"><ExitIco fill="black"  transform='scale(1)' baseProfile='tiny' width={20} className='me-2'/>Выйти</button></li>
         </div>
         <div className="nav-item py-2 ps-2 position-relative">
-          {items.length > 0 && <div><Link to="/profile/offer/create" className='nav-item dark py-2 text-black'>Корзина КП</Link>
-            <div className='circle-number position-absolute top-0 start-100 translate-middle'>{items.length}</div>
+          {item_length > 0 && <div><Link to="/profile/offer/create" className='nav-item dark py-2 text-black'>Корзина КП</Link>
+            <div className='circle-number position-absolute top-0 start-100 translate-middle'>{item_length}</div>
           </div>
           }
         </div>

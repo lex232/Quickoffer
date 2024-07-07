@@ -201,6 +201,7 @@ const OfferForm = ({
       isDragging: false
     });
     calculateFinalPrice()
+    window.dispatchEvent(new Event("storage"));
   }
 
   const handlePlusItem = (e) => {
@@ -232,6 +233,7 @@ const OfferForm = ({
       });
       calculateFinalPrice()
     }
+    window.dispatchEvent(new Event("storage"));
   }
 
   const calculateFinalPrice = () => {

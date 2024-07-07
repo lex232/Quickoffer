@@ -97,9 +97,9 @@ class OfferViewSet(viewsets.ModelViewSet):
                 else:
                     image = None
                 table_data[index + 1].append(image)
-
+            print("OFFER", offer_id.id)
             response = HttpResponse(content_type='application/pdf')
-            response['Content-Disposition'] = 'attachment; filename="file.pdf"'
+            response['Content-Disposition'] = f'attachment; filename="{offer_id.id}"'
             p = canvas.Canvas(response, pagesize=letter)
             pdfmetrics.registerFont(TTFont('Roboto-Regular', 'Roboto-Regular.ttf'))
             p.setFont('Roboto-Regular', 10)
