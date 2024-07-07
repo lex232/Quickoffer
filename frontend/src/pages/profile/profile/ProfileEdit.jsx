@@ -58,7 +58,7 @@ const ProfileEdit = () => {
           </div>
 
 
-          <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-3">
+          <div className="col-lg-6 col-md-9 col-sm-12 text-start mx-3">
             <ProfileForm
               id={currentProfileData.id}
               company_name={currentProfileData.company_name}

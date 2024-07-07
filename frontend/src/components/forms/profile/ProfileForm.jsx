@@ -177,8 +177,8 @@ const ProfileForm = ({
 return (
 <form className='my-3'>
       <div className="form d-flex">
-        <span className='col-3'>Юридическое имя:</span>
-        <div className='col-9'>
+        <span className='col-12'>Юридическое имя:</span>
+        <div className='col-12'>
           <input type="header" defaultValue={company_name} className="form-control my-1" id="NameCompany" placeholder="Наименование ООО или ИП для документов *" onChange={(e) => handleChangeCompanyName(e)} /> 
         </div>
       </div>
