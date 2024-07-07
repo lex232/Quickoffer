@@ -51,6 +51,7 @@ const Header = ({ loginstate, onSignOut, user }) => {
     let username = user.username
     return (
       <div className='nav'>
+        <li className="nav-item"><a href="/catalog" className={check_url_header.check_absolute_url("about")} aria-current="page">Каталог</a></li>
         <div className="nav-item">
           <Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none"><UserIco fill="black"  transform='scale(1)' baseProfile='tiny' width={14} className='me-2'/>{username}</div></Link>
           <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-2"><ExitIco fill="black"  transform='scale(1)' baseProfile='tiny' width={20} className='me-2'/>Выйти</button></li>
@@ -85,7 +86,6 @@ const Header = ({ loginstate, onSignOut, user }) => {
       </a>
       <ul className="nav nav-pills">
         <li className="nav-item"><a href="/" className={check_url_header.check_absolute_url("about")} aria-current="page">О проекте</a></li>
-        <li className="nav-item"><a href="/catalog" className={check_url_header.check_absolute_url("about")} aria-current="page">Каталог</a></li>
         <HeaderAuthOption />
       </ul>
      
