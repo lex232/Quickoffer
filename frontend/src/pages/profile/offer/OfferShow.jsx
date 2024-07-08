@@ -5,12 +5,13 @@ import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import offer_api from '../../../api/offer_api';
+import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 
 
-/**
-* Отображение КП
-*/
 const OfferShow = () => {
+  /**
+  * Отображение КП
+  */
   const navigate = useNavigate()
   const {state} = useLocation();
   const {id} = state;
@@ -40,6 +41,9 @@ const OfferShow = () => {
 }
 
   const DownloadOffer = (e) => {
+    /**
+    * Скачать КП в pdf
+    */
     e.preventDefault();
     offer_api.downloadOffer({
       id: id,
@@ -50,16 +54,18 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
-  const ReplaceTypeCompany = (type) => {
-    if (type === 'ip') {
-      return 'ИП'
-    }
-    else if (type === 'ooo') {
-      return 'ООО'
-    }
-    else {
-      return ''
-    }
+  const DownloadBillWork = (e) => {
+    /**
+    * Скачать счет на работы
+    */
+    e.preventDefault();
+    offer_api.downloadBillWork({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
   }
 
   return (
@@ -73,6 +79,7 @@ const OfferShow = () => {
         <h1 className="h2">Просмотр КП {clientInfo && <span>для компании {clientInfo.title}</span>}</h1>
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
+            <button onClick={(e) => DownloadBillWork(e)} type="button" className="btn btn-sm btn-outline-secondary">Счет (работы)</button>
             <button onClick={(e) => DownloadOffer(e)} type="button" className="btn btn-sm btn-outline-secondary">Скачать PDF</button>
           </div>
         </div>
@@ -86,7 +93,7 @@ const OfferShow = () => {
           </td>
           {clientInfo && <td className='text-start ps-4 pb-4'>
             <tr>{currentOffer.name_offer}</tr>
-            <tr>{ReplaceTypeCompany(clientInfo.company_type)} {clientInfo.title}</tr>
+            <tr>{ReadCompanyType(clientInfo.company_type)} {clientInfo.title}</tr>
             <tr>{clientInfo.inn}</tr>
             <tr>{clientInfo.address_reg}</tr>
           </td>}

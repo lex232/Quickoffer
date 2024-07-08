@@ -1,4 +1,6 @@
 """API DRF OFFERS views"""
+import os
+import io
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -17,6 +19,9 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import inch
 from reportlab.lib.utils import ImageReader
+
+from docxtpl import DocxTemplate
+from quickoffer.settings import BASE_DIR
 
 from api.permissions import IsAdminOrReadOnly
 from offer.models import (
@@ -175,4 +180,34 @@ class OfferViewSet(viewsets.ModelViewSet):
             )
             p.showPage()
             p.save()
+            return response
+
+    @action(detail=True,
+            methods=['get'],
+            permission_classes=(AllowAny,))
+    def download_bill_work(self, request, **kwargs):
+        """Скачивание счета на работы в формате doc"""
+
+        if request.method == 'GET':
+            path_to_file = BASE_DIR
+            print(BASE_DIR)
+            # file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'schet_na_oplatu_wo_buh.docx')
+            file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'test.docx')
+            doc = DocxTemplate(file)
+
+            print("OPENED DOC", doc)
+            context = {'bank' : 'Сбербанк', 'inn' : '8823232223'}
+            doc.render(context)
+
+            doc_io = io.BytesIO()  # create a file-like object
+            doc.save(doc_io)  # save data to file-like object
+            doc_io.seek(0)  # go to the beginning of the file-like object
+
+            response = HttpResponse(doc_io)
+
+            # Content-Disposition header makes a file downloadable
+            response["Content-Disposition"] = "attachment; filename=generated_doc.docx"
+
+            # Set the appropriate Content-Type for docx file
+            response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             return response

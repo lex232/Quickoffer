@@ -17,7 +17,7 @@ class ApiOffer {
     }
 
     // Проверка ответа, если возвращается файл в content-disposition
-    checkFileDownloadResponse (res) {
+    checkFileDownloadResponsePdf (res) {
       return new Promise((resolve, reject) => {
         if (res.status < 400) {
           const filename_test = res.headers
@@ -25,6 +25,30 @@ class ApiOffer {
           .split('filename=')[1]
           console.log(filename_test)
           const filename = 'offer'+ filename_test +'.pdf'
+
+          return res.blob().then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          })
+        }
+        reject()
+      })
+    }
+
+    // Проверка ответа, если возвращается файл в content-disposition
+    checkFileDownloadResponseWord (res) {
+      return new Promise((resolve, reject) => {
+        if (res.status < 400) {
+          const filename_test = res.headers
+          .get('content-disposition')
+          .split('filename=')[1]
+          console.log(filename_test)
+          const filename = 'offer'+ filename_test +'.doc'
 
           return res.blob().then(blob => {
             const url = window.URL.createObjectURL(blob);
@@ -119,12 +143,33 @@ getCurrentOffer ({
 downloadOffer ({
   id
 }) {
+  const token = localStorage.getItem('token')
   return fetch(
     `/api/offers/${id}/download_pdf/`,
     {
       method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
     }
-  ).then(this.checkFileDownloadResponse)
+  ).then(this.checkFileDownloadResponsePdf)
+}
+
+downloadBillWork ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_bill_work/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
 }
 
 }
