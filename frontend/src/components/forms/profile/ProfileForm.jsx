@@ -20,7 +20,10 @@ const ProfileForm = ({
   bill_num,
   bill_corr_num,
   bank_name,
-  image
+  image,
+  phone,
+  bik,
+  ruk
 }) => {
   const navigate = useNavigate()
 
@@ -36,6 +39,9 @@ const ProfileForm = ({
   const [ billNumArea, setBillNum ] = useState(bill_num)
   const [ billCorrNumArea, setBillCorrNum ] = useState(bill_corr_num)
   const [ bankNameArea, setBankName ] = useState(bank_name)
+  const [ phoneArea, setPhone ] = useState(phone)
+  const [ bikArea, setBik ] = useState(bik)
+  const [ rukArea, setRuk ] = useState(ruk)
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
   // Ссылка на имя файла в форме
@@ -68,57 +74,58 @@ const ProfileForm = ({
   }, [company_type])
 
   const handleChangeCompanyName = (e) => {
-    // Устанавливаем имя записи на событии onChange
     setCompanyName(e.target.value);
   }
 
   const handleChangeCompanyDocs = (e) => {
-    // Устанавливаем имя записи на событии onChange
     setCompanyNameDocs(e.target.value);
   }
 
   const handleChangeOgrn = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setOgrn(e.target.value);
   }
 
   const handleChangeInn = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setInn(e.target.value);
   }
 
   const handleChangeKpp = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setKpp(e.target.value);
   }
 
   const handleChangeAddressReg = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setAddressReg(e.target.value);
   }
 
   const handleChangeAddressPost = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setAddressPost(e.target.value);
   }
 
   const handleChangeBillNum = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setBillNum(e.target.value);
   }
 
   const handleChangeBillCorrNum = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setBillCorrNum(e.target.value);
   }
 
   const handleChangeBankName = (e) => {
-    // Устанавливаем текст записи на событии onChange
     setBankName(e.target.value);
   }
 
+  const handleChangePhone = (e) => {
+    setPhone(e.target.value);
+  }
+
+  const handleChangeBik = (e) => {
+    setBik(e.target.value);
+  }
+
+  const handleChangeRuk = (e) => {
+    setRuk(e.target.value);
+  }
+
   const handleChangeCompanyType = (e) => {
-    // Устанавливаем значение типа компании onChange
     setCompanyType(e.target.value);
   }
 
@@ -166,6 +173,9 @@ const ProfileForm = ({
       bill_num: billNumArea,
       bill_corr_num: billCorrNumArea,
       bank_name: bankNameArea,
+      phone: phoneArea,
+      bik: bikArea,
+      ruk: rukArea
     }
 
     // PATCH всегда, потому-что профиль создается при создании пользователя
@@ -240,9 +250,27 @@ return (
         </div>
       </div>
       <div className="form d-flex">
+        <div className='col-3'>БИК:</div>
+        <div className='col-9'>
+          <input type="header" defaultValue={bik} className="form-control my-1" id="CorrBill" placeholder="БИК" onChange={(e) => handleChangeBik(e)} />
+        </div>
+      </div>
+      <div className="form d-flex">
         <div className='col-3'>Название банка:</div>
         <div className='col-9'>
           <input type="header" defaultValue={bank_name} className="form-control my-1" id="BankName" placeholder="Наименование банка" onChange={(e) => handleChangeBankName(e)} />
+        </div>
+      </div>
+      <div className="form d-flex">
+        <div className='col-3'>Телефон:</div>
+        <div className='col-9'>
+          <input type="header" defaultValue={phone} className="form-control my-1" id="CorrBill" placeholder="Телефон" onChange={(e) => handleChangePhone(e)} />
+        </div>
+      </div>
+      <div className="form d-flex">
+        <div className='col-3'>Руководитель (для подписи):</div>
+        <div className='col-9'>
+          <input type="header" defaultValue={ruk} className="form-control my-1" id="CorrBill" placeholder="Руководитель" onChange={(e) => handleChangeRuk(e)} />
         </div>
       </div>
       <div className='d-flex'>

@@ -172,6 +172,22 @@ downloadBillWork ({
   ).then(this.checkFileDownloadResponseWord)
 }
 
+downloadBillItems ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_bill_items/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
+}
+
 }
 
 export default new ApiOffer(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

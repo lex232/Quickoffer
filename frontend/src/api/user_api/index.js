@@ -186,6 +186,9 @@ class UserApi {
     bill_num,
     bill_corr_num,
     bank_name,
+    phone,
+    bik,
+    ruk
   }) {
     const token = localStorage.getItem('token')
     return fetch(
@@ -209,6 +212,9 @@ class UserApi {
           bill_num,
           bill_corr_num,
           bank_name,
+          phone,
+          bik,
+          ruk
         })
       }
     ).then(this.checkResponse)

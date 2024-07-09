@@ -68,6 +68,20 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
+  const DownloadBillItems = (e) => {
+    /**
+    * Скачать счет на товары
+    */
+    e.preventDefault();
+    offer_api.downloadBillItems({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
+  }
+
   return (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-5">
       <div className="d-flex">
@@ -80,6 +94,7 @@ const OfferShow = () => {
         <div className="btn-toolbar mb-2 mb-md-0">
           <div className="btn-group me-2">
             <button onClick={(e) => DownloadBillWork(e)} type="button" className="btn btn-sm btn-outline-secondary">Счет (работы)</button>
+            <button onClick={(e) => DownloadBillItems(e)} type="button" className="btn btn-sm btn-outline-secondary">Счет (товары)</button>
             <button onClick={(e) => DownloadOffer(e)} type="button" className="btn btn-sm btn-outline-secondary">Скачать PDF</button>
           </div>
         </div>

@@ -73,6 +73,9 @@ const ProfileEdit = () => {
               bill_corr_num={currentProfileData.bill_corr_num}
               bank_name={currentProfileData.bank_name}
               image={currentProfileData.image}
+              phone={currentProfileData.phone}
+              bik={currentProfileData.bik}
+              ruk={currentProfileData.ruk}
           /></div>
           </div>
       </div>

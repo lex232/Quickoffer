@@ -483,6 +483,18 @@ class Profile(models.Model):
         null=True,
         blank=True
     )
+    bik = models.CharField(
+        verbose_name='БИК',
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    ruk = models.CharField(
+        verbose_name='Руководитель (подписант)',
+        max_length=200,
+        null=True,
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         """Фото профиля компании"""
