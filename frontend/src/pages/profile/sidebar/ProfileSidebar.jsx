@@ -9,7 +9,7 @@ import { Box, Book, Users, Layers, Grid, Minus, ChevronRight, ChevronDown } from
 import './styles.css'
 
 
-const ProfileSidebar = () => {
+const ProfileSidebar = ({ styleCollapse }) => {
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -21,9 +21,9 @@ const ProfileSidebar = () => {
 
 
   return (
-    <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse">
+    <nav id="sidebarMenu" className={styleCollapse}>
     
-      <div className="position-sticky sidebar-sticky">
+      <div className="position-sticky sidebar-sticky mb-4">
 
         <div className="sidebar-heading d-flex align-items-center px-3 mt-4 mb-1 fw-bold text-muted item-sidebar-custom" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
                 <Box /><span className='px-2'>Основное</span><span className='position-absolute end-0'><ChevronRight className='right-chevron'/></span>

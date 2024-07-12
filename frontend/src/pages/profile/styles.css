@@ -1,0 +1,9 @@
+.button-on-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .button-on-mobile {
+        display: block;
+    }
+}

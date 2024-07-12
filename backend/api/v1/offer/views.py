@@ -314,9 +314,9 @@ class OfferViewSet(viewsets.ModelViewSet):
                 pass
 
             doc.render(context)
-            doc_io = io.BytesIO()  # create a file-like object
-            doc.save(doc_io)  # save data to file-like object
-            doc_io.seek(0)  # go to the beginning of the file-like object
+            doc_io = io.BytesIO()
+            doc.save(doc_io)
+            doc_io.seek(0)
 
             response = HttpResponse(doc_io)
 

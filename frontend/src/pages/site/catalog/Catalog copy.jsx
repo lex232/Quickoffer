@@ -5,7 +5,7 @@ import Footer from '../includes/Footer.jsx';
 import ItemsArea from '../items-area/ItemsArea.jsx';
 
 import group_api from '../../../api/group_api';
-import { AlignJustify, XCircle, Menu } from 'react-feather';
+import { AlignJustify, XCircle } from 'react-feather';
 import './styles.css'
 
 
@@ -16,10 +16,8 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [ choosenCategory, setChoosenCategory ] = useState(undefined)
     const [ choosenTree, setChoosenTree ] = useState(undefined)
 
-    // const style_visible = "col-md-3 col-lg-2 d-md-block sidebar collapse"
-    // const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar"
-    const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
-    const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
+    const style_visible = "col-md-3 col-lg-2 d-md-block sidebar collapse"
+    const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar"
 
     const [ isCollapsed, setIsCollapsed] = useState(style_visible)
 
@@ -68,26 +66,23 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                     </div>}
                 </div>
                 <div className="container-fluid">
-                <div className="row">
+                <div className="row g-3">
                     <div>
-                        <button className='button-on-mobile ps-3 pb-2' onClick={(e) => handleMenu(e)}>
+                        <button className='button-on-mobile ps-3' onClick={(e) => handleMenu(e)}>
                             {style_visible === isCollapsed ? <AlignJustify /> : <XCircle />}
                         </button>
                     </div>
                     <nav id="sidebarMenu" className={isCollapsed}>
-                        <div className="position-sticky pt-3 sidebar-sticky mb-2">
-                            <h3 className='header-category'><Menu /> Категории</h3>
+                        <div className="position-sticky pt-3 sidebar-sticky">
+                            <h3>Категории</h3>
                             <ul className="nav nav-pills flex-column gap-2">
                                 {listGroups.map((results) => {
                                     return (
                                             results.level === 0 
                                             &&
-                                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-custom" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
-                                                <span className='position-absolute end-0'></span>
-                                                <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id)}>
-                                                    {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}
-                                                </button> 
-                                            </div>
+                                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id)}>
+                                                {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}
+                                            </button> 
                                             ||
                                             choosenTree === results.tree_id && results.level !== 0
                                             &&

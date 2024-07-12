@@ -1,3 +1,7 @@
+.header-category{
+    color: white
+}
+
 .card-image {
     width: 110px;
     height: 110px;
@@ -18,4 +22,62 @@
     font-size: 0.7em;
     text-align: start;
     padding-left: 20px;
+    color: aliceblue
 }
+
+.button-on-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .button-on-mobile {
+        display: block;
+    }
+}
+
+.nav-item {
+    padding-top: 0px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show {
+    background-color: rgb(255, 255, 255);
+    color: #171829
+}
+
+.sidebar-custom {
+    background-color: #171829;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 768px) {
+    .sidebar-custom {
+        background-color: #171829;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.sidebar-list {
+    color: aliceblue;
+}
+
+.item-sidebar-custom {
+    color: aliceblue !important;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.item-min-sidebar {
+    text-align: start;
+    padding-left: 20px;
+}
+
+div[aria-expanded=true] .right-chevron {
+   transition: .3s transform ease-in-out;
+   transform: rotate(90deg);
+}
+
+

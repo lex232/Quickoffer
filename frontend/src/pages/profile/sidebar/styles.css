@@ -5,6 +5,15 @@
     flex-direction: column;
 }
 
+@media only screen and (max-width: 768px) {
+    .sidebar-custom {
+        background-color: #171829;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .sidebar-list {
     color: aliceblue;
 }
@@ -24,4 +33,3 @@ div[aria-expanded=true] .right-chevron {
    transition: .3s transform ease-in-out;
    transform: rotate(90deg);
 }
-

@@ -6,7 +6,7 @@ import './styles.css'
 import { ReactComponent as TrashIco } from '../../../static/image/icons/trash.svg'
 import AddNewLine from '../../../utils/text-operations/addNewLine';
 
-const ItemsArea = ({ category_id }) => {
+const ItemsArea = ({ category_id, loginstate }) => {
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
