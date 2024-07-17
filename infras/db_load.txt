@@ -1,0 +1,2 @@
+Загрузка категорий из демо
+python manage.py load_db_cats
