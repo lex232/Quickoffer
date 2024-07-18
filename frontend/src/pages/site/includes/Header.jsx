@@ -12,6 +12,9 @@ import { ReactComponent as ExitIco } from '../../../static/image/iconsheader/loc
 import './styles.css'
 
 const Header = ({ loginstate, onSignOut, user }) => {
+  /**
+  * Шапка сайта
+  */
 
   const location = useLocation();
   const pathname = location.pathname;

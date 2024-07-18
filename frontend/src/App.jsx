@@ -16,6 +16,7 @@ import MainPage from './pages/site/mainpage/Main'
 import CatalogPage from './pages/site/catalog/Catalog';
 import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
+import PrivacyPage from './pages/site/privacy/PrivacyPage';
 
 /**
 * Страницы для авторизованного пользователя
@@ -38,7 +39,11 @@ import OfferEdit from './pages/profile/offer/OfferEdit';
 
 import ProfileEdit from './pages/profile/profile/ProfileEdit';
 
+
 function RequireAuth({ children, loginstate=false }) {
+  /**
+  * Проверка необходимости авторизации
+  */
   let location = useLocation();
   if (!loginstate) {
     return <Navigate to="/login" state={{ from: location }} replace />;
@@ -47,10 +52,17 @@ function RequireAuth({ children, loginstate=false }) {
 }
 
 function App() {
+  /**
+  * Главный компонент приложения
+  */
+
   const [ loggedIn, setLoggedIn ] = useState(null)
   const [ user, setUser ] = useState({})
 
   const authorization = (username, password) => {
+    /**
+    * Проверка авторизации через Token 
+    */
     user_api.signin({
       username, password
     }).then(res => {
@@ -94,6 +106,9 @@ function App() {
   }, []);
 
   const onSignOut = () => {
+    /**
+    * Удаление токена - выход пользователя
+    */
     user_api.signout()
       .then(res => {
         localStorage.removeItem('token')
@@ -119,18 +134,9 @@ function App() {
         <BrowserRouter>
 
           <Routes>
-            <Route path="/" element={
-                <MainPage 
-                  loginstate={loggedIn}
-                  onSignOut={onSignOut}
-                  user={user}/>}>
-            </Route>
-            <Route path='/catalog' element={
-                <CatalogPage
-                  loginstate={loggedIn}
-                  onSignOut={onSignOut}
-                  user={user}/>}>
-            </Route>
+            <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
+            <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
+            <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
 
             <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />}/>
             <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />}/>

@@ -10,14 +10,15 @@ import './styles.css'
 
 
 const CatalogPage = ({ loginstate, onSignOut, user }) => {
+    /**
+    * Страница каталога
+    */
 
     const [ listGroups, setListGroups ] = useState([])
     const [ isLoaddingCat, setIsLoaddingCat ] = useState(true)
     const [ choosenCategory, setChoosenCategory ] = useState(undefined)
     const [ choosenTree, setChoosenTree ] = useState(undefined)
 
-    // const style_visible = "col-md-3 col-lg-2 d-md-block sidebar collapse"
-    // const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar"
     const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
     const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
 

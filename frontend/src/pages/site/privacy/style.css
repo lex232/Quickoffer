@@ -1,0 +1,15 @@
+.purpose-table, .purpose-table th, .purpose-table td {
+  border: 1px solid #d8d8d8;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.purpose-table {
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.purpose-table th, .purpose-table td {
+  vertical-align: top;
+  padding: .5em .75em;
+}

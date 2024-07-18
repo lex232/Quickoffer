@@ -7,6 +7,9 @@ import { ReactComponent as TrashIco } from '../../../static/image/icons/trash.sv
 import AddNewLine from '../../../utils/text-operations/addNewLine';
 
 const ItemsArea = ({ category_id, loginstate }) => {
+    /**
+    * Блок товаров в каталоге
+    */
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);

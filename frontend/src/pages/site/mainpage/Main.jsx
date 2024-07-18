@@ -11,7 +11,9 @@ import MyItem from '../../../static/image/mainpage/my_items_min.png';
 import MyOffers from '../../../static/image/mainpage/my_offers_min.jpg';
 
 const MainPage = ({ loginstate, onSignOut, user }) => {
-
+    /**
+    * Главная страница
+    */
     const [info, setInfo] = useState([]);
 
     const getAdmin = () => {
@@ -23,7 +25,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
     }
 
     useEffect(() => {
-        // Получить все новости при загрузке страницы
+        // Получить данные из БД для главной страницы
         getAdmin();
       }, [])
       ;
