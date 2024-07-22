@@ -5,6 +5,9 @@ import './style.css'
 
 
 const PrivacyPage = ({ loginstate, onSignOut, user }) => {
+    /**
+    * Политика сбора персональных данных
+    */
 
     return (
         <body>

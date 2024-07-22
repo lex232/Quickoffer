@@ -17,6 +17,7 @@ import CatalogPage from './pages/site/catalog/Catalog';
 import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
 import PrivacyPage from './pages/site/privacy/PrivacyPage';
+import TermsOfUsePage from './pages/site/privacy/TermsOfUsePage';
 
 /**
 * Страницы для авторизованного пользователя
@@ -135,8 +136,9 @@ function App() {
 
           <Routes>
             <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-            <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
             <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
+            <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
+            <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
 
             <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />}/>
             <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />}/>

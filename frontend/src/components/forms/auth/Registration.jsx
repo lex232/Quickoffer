@@ -65,7 +65,7 @@ const RegistrationForm = ({ loginstate }) => {
             <button onClick={(e) => handleRegistrationCLiсk(e)} className="w-100 btn btn-lg btn-primary mb-3" type="submit">Продолжить</button>
 
             <div className='text-center'>
-                Нажимая «Продолжить», вы принимаете <a href="">пользовательское соглашение</a> и <a href="/privacy">политику конфиденциальности</a>
+                Нажимая «Продолжить», вы принимаете <a href="/terms">пользовательское соглашение</a> и <a href="/privacy">политику конфиденциальности</a>
             </div>
         </form>
         </main>
