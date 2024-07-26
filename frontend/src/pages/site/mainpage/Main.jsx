@@ -95,7 +95,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                             </div>
                         </section>
 
-                    <section className="">
+                    <section id="feautures" className="feautures pb-4">
                         <div id="features" className="flex-split">
                             <div className="container-s">
                                 <div className="align-center flex-intro">
@@ -138,7 +138,9 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 </div>
                             </div>
                         </div>
+                    </section>
 
+                    <section id="counters" className="counters">
                         <div className="yd-stats wow fadeIn">
                             <div className="container-s">
                                 <div className="row text-center">

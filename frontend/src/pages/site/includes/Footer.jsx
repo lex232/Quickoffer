@@ -11,7 +11,7 @@ const Footer = () => {
   
   return (
     <div className="container-fluid">
-    <footer className="d-flex flex-wrap py-3 my-4 border-top">
+    <footer className="d-flex flex-wrap py-3 my-4 px-4 border-top">
         <ul className="col-6 nav">
           <p className="nav-item text-muted">&copy; {YearNow()} QuickOffer (с)</p>
         </ul>

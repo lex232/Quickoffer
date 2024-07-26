@@ -28,7 +28,7 @@ const ItemsEdit = () => {
             <div className="container-fluid">
                 <div className="page-title">
                 <div className="row">
-                    <div className="col-sm-6 my-3 text-start">
+                    <div className="col-sm-6 my-3 text-start ps-4">
                     <h3>Редактировать товар/ услугу</h3>
                     </div>
                 </div>

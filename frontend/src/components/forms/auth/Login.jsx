@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './styles.css'
 
 const Login = ({ loginstate, onSignIn }) => {
     const [ login, setLogin ] = useState(null)
     const [ password, setPass ] = useState(null)
+    let {state} = useLocation();
+    let success = undefined
+
+    if (state) {
+        success = state.success;
+    }
     const navigate = useNavigate()
 
     function handleLoginCLiсk(e) {
         // Обработать клик
         e.preventDefault();
+        success = undefined
+        state = undefined
         onSignIn(login, password)
     }
 
@@ -21,6 +29,7 @@ const Login = ({ loginstate, onSignIn }) => {
     return (
         <main className="form-signin w-100">
             <form>
+                {success && <span><h4 className="h4 mb-3 fw-normal">Регистрация успешно завершена!</h4></span>}
                 <h1 className="h3 mb-3 fw-normal">Войдите</h1>
 
                 <div className="form-floating">

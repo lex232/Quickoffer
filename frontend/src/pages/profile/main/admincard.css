@@ -12,7 +12,6 @@
 
 .text-primary {
     color:#4e73df!important;
-    text-align:left;
 }
 a.text-primary:focus,
 a.text-primary:hover {
@@ -30,4 +29,21 @@ a.text-primary:hover {
 .text-gray-800 {
     color:#5a5c69!important;
     text-align:left;
+}
+
+.card-move {
+    transition: all 0.3s ease;
+}
+
+.card-move:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-body-move .display-4 {
+    transition: all 0.3s ease;
+}
+
+.card-move:hover .card-body-move .display-4 {
+    transform: scale(1.1);
 }

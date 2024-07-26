@@ -111,7 +111,7 @@ const ClientDashboard = () => {
     <div className="container-fluid">
         <div className="page-title">
           <div className="row">
-            <div className="col-sm-6 my-3 text-start">
+            <div className="col-sm-6 my-3 text-start ps-4">
               <h3>Список моих клиентов</h3>
             </div>
           </div>

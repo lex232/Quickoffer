@@ -10,7 +10,7 @@ const OfferCreate = () => {
       <div class="container-fluid">
         <div class="page-title">
           <div class="row">
-            <div class="col-sm-6 my-3 text-start">
+            <div class="col-sm-6 my-3 text-start ps-4">
               <h3>Создать КП</h3>
             </div>
           </div>

@@ -72,7 +72,7 @@ const Header = ({ loginstate, onSignOut, user }) => {
           }
         </li>
           <li className="nav-item "><Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none">{username}</div></Link></li>
-          <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-2">Выйти</button></li>
+          <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-3">Выйти</button></li>
       </div>
     )
   }
@@ -90,17 +90,16 @@ const Header = ({ loginstate, onSignOut, user }) => {
   }
 
   return (
-    <div className="container-fluid">
-    <header className="d-flex flex-wrap justify-content-center py-3">
-      <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <img className="bi text-muted flex-shrink-0" width="200" src={logo} alt=""/>
-      </a>
-      <ul className="nav nav-pills">
-        <HeaderAuthOption />
-      </ul>
-     
-    </header>
-  </div>
+    <div className="container-fluid px-3">
+      <header className="d-flex flex-wrap justify-content-center py-3">
+        <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <img className="bi text-muted flex-shrink-0" width="200" src={logo} alt=""/>
+        </a>
+        <ul className="nav nav-pills">
+          <HeaderAuthOption />
+        </ul>
+      </header>
+    </div>
   );
 };
 

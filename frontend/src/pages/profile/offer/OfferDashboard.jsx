@@ -89,7 +89,7 @@ const OfferDashboard = () => {
       <div class="container-fluid">
         <div class="page-title">
           <div class="row">
-            <div class="col-sm-6 my-3 text-start">
+            <div class="col my-3 text-start ps-4">
               <h3>Список коммерческих предложений</h3>
             </div>
           </div>

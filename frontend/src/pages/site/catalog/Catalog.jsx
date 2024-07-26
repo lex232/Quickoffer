@@ -83,7 +83,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                                     return (
                                             results.level === 0 
                                             &&
-                                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-custom" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
+                                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-custom px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
                                                 <span className='position-absolute end-0'></span>
                                                 <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id)}>
                                                     {results.id === choosenCategory ? <li className="nav-link active">{results.title}</li> : <li className="nav-item">{results.title}</li>}

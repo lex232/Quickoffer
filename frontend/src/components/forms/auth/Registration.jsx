@@ -20,7 +20,7 @@ const RegistrationForm = ({ loginstate }) => {
         user_api.signup({ email: mail, password, username: login, first_name: name})
           .then(res => {
             if (res) {
-                return navigate("/login/")
+                return navigate("/login/", {state: {success: true}})
             }
           })
           .catch(err => {
