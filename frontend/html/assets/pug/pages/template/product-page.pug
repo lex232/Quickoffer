@@ -1,0 +1,265 @@
+- var theme_customizer      = true;
+- var owlcarousel           = true;
+- var rating                = true;
+- var ecommerce             = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+- var slick                 = true ;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Product Page
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ecommerce
+                    li.breadcrumb-item.active Product Page
+          // Container-fluid starts
+          .container-fluid
+            div
+              .row.product-page-main.p-0
+                .col-xl-5.col-md-6.box-col-7.dash-xl-50
+                  .card
+                    .card-body
+                      .row
+                        .col-xl-9.product-main
+                          .pro-slide-single
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/01.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/02.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/03.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/04.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/05.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/06.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/07.jpg', alt='')
+                            div
+                              img.img-fluid(src='../assets/images/ecommerce/08.jpg', alt='')
+                        .col-xl-3.product-thumbnail
+                          .pro-slide-right
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/01.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/02.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/03.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/04.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/05.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/06.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/07.jpg', alt='')
+                            div
+                              .slide-box
+                                img(src='../assets/images/ecommerce/08.jpg', alt='')
+                .col-xl-5.box-col-12.proorder-xl-3.dash-xl-100
+                  .card
+                    .card-body
+                      .pro-group.pt-0.border-0
+                        .product-page-details.mt-0
+                          h3 Women Pink shirt.
+                          .pro-review
+                            .d-flex
+                              select#u-rating-fontawesome(name='rating', autocomplete='off')
+                                option(value='1') 1
+                                option(value='2') 2
+                                option(value='3') 3
+                                option(value='4') 4
+                                option(value='5') 5
+                              span (250 review)
+                        .product-price
+                          | $26.00  
+                          del $350.00 
+                        .color-selector
+                          ul
+                            li.active.white
+                            li.bg-primary                                               
+                            li.bg-secondary
+                            li.bg-success
+                            li.bg-warning
+                            li.bg-danger
+                        a.btn.btn-secondary.mt-0(href="cart.html")
+                            i.fa.fa-shopping-cart.me-2
+                            | Buy Now
+                      .pro-group
+                        p.mb-0
+                          | Rock Paper Scissors Various Dots Half Sleeves Girl’s Regular Fit T-Shirt I 100% Cotton T Shirt with Half Sleeve Round Neck I Regular Wear Solid Kids Tees and Black Sleeve.
+                      .pro-group
+                        .row
+                          .col-md-6
+                            table
+                              tbody
+                                tr
+                                  td 
+                                    b Availability &nbsp;: &nbsp;
+                                  td.txt-success In stock
+                                tr
+                                  td 
+                                    b Brand &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                  td Pixelstrap
+                          .col-md-6
+                              table
+                                tbody
+                                  tr
+                                    td 
+                                      b Seller &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+                                    td ABC
+                                  tr
+                                    td 
+                                      b Fabric &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+                                    td Cotton                                
+                      .pro-group
+                        .row
+                          .col-md-4.xl-50.box-col-50
+                            h6.product-title share it
+                          .col-md-7.xl-50.box-col-50
+                            .product-icon
+                              ul.product-social
+                                li.d-inline-block
+                                  a(href='https://www.facebook.com' target="_blank")
+                                    i.fa.fa-facebook
+                                li.d-inline-block
+                                  a(href='https://www.google.com/')
+                                    i.fa.fa-google-plus
+                                li.d-inline-block
+                                  a(href='https://twitter.com/')
+                                    i.fa.fa-twitter
+                                li.d-inline-block
+                                  a(href='https://www.instagram.com/')
+                                    i.fa.fa-instagram                                
+                              form.d-inline-block.f-right                             
+                      .pro-group.pb-0
+                        .pro-shop
+                          a.btn.btn-primary.m-r-10(href="cart.html")                                 
+                            i.fa.fa-shopping-basket.me-2
+                            | Add To Cart
+                          a.btn.btn-danger(href="list-wish.html")
+                            i.fa.fa-heart.me-2
+                            | Add To WishList                                  
+                .col-xl-2.col-md-6.box-col-5.dash-xl-50.proorder-lg-1
+                  .card
+                    .card-body
+                      // side-bar colleps block stat
+                      .filter-block
+                        h4 Brand 
+                        ul
+                          li
+                            .form-check
+                              input#Raymond.form-check-input(type='checkbox' value='')
+                              label.form-check-label(for='Raymond')
+                                | Raymond
+                          li
+                            .form-check
+                              input#Pepe-Jeans.form-check-input(type='checkbox' value='')
+                              label.form-check-label(for='Pepe-Jeans')
+                                | Pepe-Jeans
+                          li
+                            .form-check
+                              input#Celio.form-check-input(type='checkbox' value='')
+                              label.form-check-label(for='Celio')
+                                | Celio
+                          li
+                            .form-check
+                              input#aime.form-check-input(type='checkbox' value='')
+                              label.form-check-label(for='aime')
+                                | aime
+                          li
+                            .form-check
+                              input#aliff.form-check-input(type='checkbox' value='')
+                              label.form-check-label(for='aliff')
+                                | aliff
+                  .card
+                    .card-body
+                      .collection-filter-block
+                        ul.pro-services
+                          li
+                            .d-flex
+                              i(data-feather='truck')
+                              .flex-grow-1
+                                h5 Free Shipping                                    
+                                p.mb-0 Free Shipping World Wide
+                          li
+                            .d-flex
+                              i(data-feather='clock')
+                              .flex-grow-1
+                                h5 24 X 7 Service                                    
+                                p.mb-0 Online Service For New Customer                                 
+                    // silde-bar colleps block end here
+            .card
+              .row.product-page-main
+                .col-sm-12
+                  ul#top-tab.nav.nav-tabs.border-tab.mb-0(role='tablist')
+                    li.nav-item
+                      a#top-home-tab.nav-link.active(data-bs-toggle='tab', href='#top-home', role='tab', aria-controls='top-home', aria-selected='false')
+                        | Febric
+                      .material-border
+                    li.nav-item
+                      a#profile-top-tab.nav-link(data-bs-toggle='tab', href='#top-profile', role='tab', aria-controls='top-profile', aria-selected='false') Video
+                      .material-border
+                    li.nav-item
+                      a#contact-top-tab.nav-link(data-bs-toggle='tab', href='#top-contact', role='tab', aria-controls='top-contact', aria-selected='true')
+                        | Details
+                      .material-border
+                    li.nav-item
+                      a#brand-top-tab.nav-link(data-bs-toggle='tab', href='#top-brand', role='tab', aria-controls='top-brand', aria-selected='true')
+                        | Brand
+                      .material-border
+                  #top-tabContent.tab-content
+                    #top-home.tab-pane.fade.active.show(role='tabpanel', aria-labelledby='top-home-tab')
+                      p.mb-0.m-t-20
+                        | Refresh your wardrobe with this chic top. With an eye-catching square neck, this top also features pretty puff sleeves. Stunning pink colour Classic solid pattern Square neck Elasticated puff sleeves Belt included, Polyester fabric, machine wash.."
+                      p.mb-0.m-t-20
+                        | Tee Stores is an Indian contemporary clothing brand. The product pages display a fine quality fabric with colorful description. We offer many vivid designs, art, styles that "combine heritage with modernity, simplicity, playfulness and street style"."
+                    #top-profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-top-tab')
+                      p.mb-0.m-t-20
+                        | Lorate Solid Men's Fashion Full Sleeves Latest Jacket for Men With
+                        br 
+                        | Button Closure Long Sleeve Casual Torn Lycra Denim Jacket.
+                    #top-contact.tab-pane.fade(role='tabpanel', aria-labelledby='contact-top-tab')
+                      p.mb-0.m-t-20
+                        | Rock Paper Scissors Various Dots Half Sleeves Girl’s Regular Fit T-Shirt I 100% Cotton
+                        br
+                        | T Shirt with Half Sleeve Round Neck I Regular Wear Solid Kids Tees and Black Sleeve.
+                    #top-brand.tab-pane.fade(role='tabpanel', aria-labelledby='brand-top-tab')
+                      p.mb-0.m-t-20
+                        | Product Dimensions : 18 x 18 x 4 cm
+                        br
+                        | Date First Available : 31 March 2022
+                        br
+                        | Manufacturer : Tee Stores
+                        br
+                        | Item part number : TS-WT721-XS-WHITE
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

@@ -1,0 +1,261 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Bootstrap Tabs
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Tabs
+                    li.breadcrumb-item.active Bootstrap Tabs
+          // Container-fluid starts                    
+          .container-fluid
+            .row
+              .col-sm-12.col-xl-6
+                .card.basic-tab
+                  .card-header.pb-0
+                    h4 Basic Tabs
+                  .card-body
+                    ul#myTab.nav.nav-tabs(role='tablist')
+                      li.nav-item
+                        a#home-tab.nav-link.active(data-bs-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true') Home
+                      li.nav-item.dropdown
+                        a.nav-link.dropdown-toggle.bg-transparent.border-none(data-bs-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Dropdown
+                        .dropdown-menu
+                          a#profile-tab.dropdown-item(data-bs-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Action
+                          a.dropdown-item(href='#') Another action
+                          a.dropdown-item(href='#') Something else here
+                          a.dropdown-item(href='#') Separated link
+                      li.nav-item
+                        a#profile-tabs.nav-link(data-bs-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Profile
+                      li.nav-item
+                        a#contact-tab.nav-link(data-bs-toggle='tab', href='#contact', role='tab', aria-controls='contact', aria-selected='false') Contact
+                    #myTabContent.tab-content
+                      #home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #contact.tab-pane.fade(role='tabpanel', aria-labelledby='contact-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Tabs bottom left Align
+                  .card-body
+                    #bottom-tabContent.tab-content
+                      #bottom-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='bottom-home-tab')
+                        p.m-b-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #bottom-profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-bottom-tab')
+                        p.m-b-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #bottom-contact.tab-pane.fade(role='tabpanel', aria-labelledby='contact-bottom-tab')
+                        p.m-b-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                    ul#bottom-tab.nav.nav-tabs.nav-bottom(role='tablist')
+                      li.nav-item
+                        a#bottom-home-tab.nav-link.active(data-bs-toggle='tab', href='#bottom-home', role='tab', aria-controls='bottom-home', aria-selected='true')
+                          i.icofont.icofont-ui-home
+                          | Home
+                      li.nav-item
+                        a#profile-bottom-tab.nav-link(data-bs-toggle='tab', href='#bottom-profile', role='tab', aria-controls='profile-icon', aria-selected='false')
+                          i.icofont.icofont-man-in-glasses
+                          | Profile
+                      li.nav-item
+                        a#contact-bottom-tab.nav-link(data-bs-toggle='tab', href='#bottom-contact', role='tab', aria-controls='contact-icon', aria-selected='false')
+                          i.icofont.icofont-contacts
+                          | Contact
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Tabs With Icon 
+                  .card-body
+                    ul#icon-tab.nav.nav-tabs(role='tablist')
+                      li.nav-item
+                        a#icon-home-tab.nav-link.active(data-bs-toggle='tab', href='#icon-home', role='tab', aria-controls='icon-home', aria-selected='true')
+                          i.icofont.icofont-ui-home
+                          | Home
+                      li.nav-item
+                        a#profile-icon-tab.nav-link(data-bs-toggle='tab', href='#profile-icon', role='tab', aria-controls='profile-icon', aria-selected='false')
+                          i.icofont.icofont-man-in-glasses
+                          | Profile
+                      li.nav-item
+                        a#contact-icon-tab.nav-link(data-bs-toggle='tab', href='#contact-icon', role='tab', aria-controls='contact-icon', aria-selected='false')
+                          i.icofont.icofont-contacts
+                          | Contact
+                    #icon-tabContent.tab-content
+                      #icon-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='icon-home-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #profile-icon.tab-pane.fade(role='tabpanel', aria-labelledby='profile-icon-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #contact-icon.tab-pane.fade(role='tabpanel', aria-labelledby='contact-icon-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Tabs Right Align
+                  .card-body
+                    ul#right-tab.nav.nav-tabs.nav-right(role='tablist')
+                      li.nav-item
+                        a#right-home-tab.nav-link.active(data-bs-toggle='tab', href='#right-home', role='tab', aria-controls='right-home', aria-selected='true')
+                          i.icofont.icofont-ui-home
+                          | Home
+                      li.nav-item
+                        a#profile-right-tab.nav-link(data-bs-toggle='tab', href='#right-profile', role='tab', aria-controls='profile-icon', aria-selected='false')
+                          i.icofont.icofont-man-in-glasses
+                          | Profile
+                      li.nav-item
+                        a#contact-right-tab.nav-link(data-bs-toggle='tab', href='#right-contact', role='tab', aria-controls='contact-icon', aria-selected='false')
+                          i.icofont.icofont-contacts
+                          | Contact
+                    #right-tabContent.tab-content
+                      #right-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='right-home-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #right-profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-right-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #right-contact.tab-pane.fade(role='tabpanel', aria-labelledby='contact-right-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Tabs Vertical
+                  .card-body
+                    .row
+                      .col-sm-4.col-xs-12
+                        #v-pills-tab.nav.flex-column.nav-pills(role='tablist', aria-orientation='vertical')
+                          a#v-pills-home-tab.nav-link.active(data-bs-toggle='pill', href='#v-pills-home', role='tab', aria-controls='v-pills-home', aria-selected='true') Home
+                          a#v-pills-profile-tab.nav-link(data-bs-toggle='pill', href='#v-pills-profile', role='tab', aria-controls='v-pills-profile', aria-selected='false') Profile
+                          a#v-pills-messages-tab.nav-link(data-bs-toggle='pill', href='#v-pills-messages', role='tab', aria-controls='v-pills-messages', aria-selected='false') Messages
+                          a#v-pills-settings-tab.nav-link(data-bs-toggle='pill', href='#v-pills-settings', role='tab', aria-controls='v-pills-settings', aria-selected='false') Settings
+                      .col-sm-8.col-xs-12
+                        #v-pills-tabContent.tab-content
+                          #v-pills-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='v-pills-home-tab')
+                            p.mb-0
+                              | 1. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                          #v-pills-profile.tab-pane.fade(role='tabpanel', aria-labelledby='v-pills-profile-tab')
+                            p.mb-0
+                              | 2. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                          #v-pills-messages.tab-pane.fade(role='tabpanel', aria-labelledby='v-pills-messages-tab')
+                            p.mb-0
+                              | 3. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                          #v-pills-settings.tab-pane.fade(role='tabpanel', aria-labelledby='v-pills-settings-tab')
+                            p.mb-0
+                              | 4. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Pill Tabs
+                  .card-body
+                    ul#pills-tab.nav.nav-pills(role='tablist')
+                      li.nav-item
+                        a#pills-home-tab.nav-link.active(data-bs-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home', aria-selected='true') Home
+                          .d-flex
+                      li.nav-item
+                        a#pills-profile-tab.nav-link(data-bs-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', aria-selected='false') Profile
+                      li.nav-item
+                        a#pills-contact-tab.nav-link(data-bs-toggle='pill', href='#pills-contact', role='tab', aria-controls='pills-contact', aria-selected='false') Contact
+                    #pills-tabContent.tab-content
+                      #pills-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-home-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      #pills-profile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-profile-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      #pills-contact.tab-pane.fade(role='tabpanel', aria-labelledby='pills-contact-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Primary Color with icon
+                    span
+                      | Add 
+                      code .nav-primary, .nav-info, .nav-warning
+                      |  class with different color.
+                  .card-body
+                    ul#pills-warningtab.nav.nav-tabs.nav-primary(role='tablist')
+                      li.nav-item
+                        a#pills-warninghome-tab.nav-link.active(data-bs-toggle='pill', href='#pills-warninghome', role='tab', aria-controls='pills-warninghome', aria-selected='true')
+                          i.icofont.icofont-ui-home
+                          | Home
+                      li.nav-item
+                        a#pills-warningprofile-tab.nav-link(data-bs-toggle='pill', href='#pills-warningprofile', role='tab', aria-controls='pills-warningprofile', aria-selected='false')
+                          i.icofont.icofont-man-in-glasses
+                          | Profile
+                      li.nav-item
+                        a#pills-warningcontact-tab.nav-link(data-bs-toggle='pill', href='#pills-warningcontact', role='tab', aria-controls='pills-warningcontact', aria-selected='false')
+                          i.icofont.icofont-contacts
+                          | Contact
+                    #pills-warningtabContent.tab-content
+                      #pills-warninghome.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-warninghome-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #pills-warningprofile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-warningprofile-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #pills-warningcontact.tab-pane.fade(role='tabpanel', aria-labelledby='pills-warningcontact-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Secondary Color
+                    span
+                      | Add 
+                      code .nav-secondary , .nav-success, .nav-dark
+                      |  class with different color.
+                  .card-body
+                    ul#pills-successtab.nav.nav-pills.nav-secondary(role='tablist')
+                      li.nav-item
+                        a#pills-successhome-tab.nav-link.active(data-bs-toggle='pill', href='#pills-successhome', role='tab', aria-controls='pills-successhome', aria-selected='true')
+                          i.icofont.icofont-ui-home
+                          | Home
+                      li.nav-item
+                        a#pills-successprofile-tab.nav-link(data-bs-toggle='pill', href='#pills-successprofile', role='tab', aria-controls='pills-successprofile', aria-selected='false')
+                          i.icofont.icofont-man-in-glasses
+                          | Profile
+                      li.nav-item
+                        a#pills-successcontact-tab.nav-link(data-bs-toggle='pill', href='#pills-successcontact', role='tab', aria-controls='pills-successcontact', aria-selected='false')
+                          i.icofont.icofont-contacts
+                          | Contact
+                    #pills-successtabContent.tab-content
+                      #pills-successhome.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-successhome-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #pills-successprofile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-successprofile-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                      #pills-successcontact.tab-pane.fade(role='tabpanel', aria-labelledby='pills-successcontact-tab')
+                        p.mb-0.m-t-30
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files   

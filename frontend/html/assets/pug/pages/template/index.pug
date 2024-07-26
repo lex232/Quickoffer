@@ -1,0 +1,1095 @@
+- var animate               = true;
+- var typeahead             = true;
+- var typeahead_search      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+- var prism                 = true;
+- var apex                  = true;
+- var chartist              = true;
+- var vector_map            = true;
+- var theme_customizer      = true;
+- var customcard            = true;
+- var clipboard             = true;
+- var dashboard_default     = true;
+- var notify                = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body(onload='startTime()')
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Default
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Dashboard
+                    li.breadcrumb-item.active Default
+          // Container-fluid starts
+          .container-fluid.dashboard-default
+            .row
+              .col-xxl-6.col-xl-5.col-lg-6.dash-45.box-col-40
+                .card.profile-greeting                
+                  .card-body
+                    .d-sm-flex.d-block.justify-content-between
+                      .flex-grow-1 
+                        .weather.d-flex
+                          h2.f-w-400 
+                            span 28
+                              sup
+                                i.fa.fa-circle-o.f-10
+                              | C 
+                          .span.sun-bg
+                             i.icofont.icofont-sun.font-primary
+                        span.font-primary.f-w-700 Sunny Day
+                        p Beautiful Sunny Day Walk
+                      .badge-group
+                        .badge.badge-light-primary.f-12                          
+                          i.fa.fa-clock-o
+                          span#txt
+                    .greeting-user 
+                      .profile-vector
+                        ul.dots-images
+                          li.dot-small.bg-info.dot-1
+                          li.dot-medium.bg-primary.dot-2
+                          li.dot-medium.bg-info.dot-3
+                          li.semi-medium.bg-primary.dot-4
+                          li.dot-small.bg-info.dot-5
+                          li.dot-big.bg-info.dot-6
+                          li.dot-small.bg-primary.dot-7
+                          li.semi-medium.bg-primary.dot-8
+                          li.dot-big.bg-info.dot-9
+                        img.img-fluid(src="../assets/images/dashboard/default/profile.png", alt="")
+                        ul.vector-image 
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon1.png", alt="")
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon3.png", alt="")
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon4.png", alt="")
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon5.png", alt="")
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon6.png", alt="")
+                          li 
+                            img(src="../assets/images/dashboard/default/ribbon7.png", alt="")
+                      h4
+                        a(href="user-profile.html")
+                          span Welcome Back
+                          |  John  
+                        span.right-circle
+                          i.fa.fa-check-circle.font-primary.f-14.middle
+                      div
+                        span.badge.badge-primary Your 5
+                        span.font-primary.f-12.middle.f-w-500.ms-2  Task Is Pending
+              .col-xl-3.col-lg-6.col-md-6.box-col-25
+                .card.total-revenue.overflow-hidden
+                  .card-header
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600.header-text-primary Total Revenue
+                          i.fa.fa-circle
+                        h4 96.564%
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body.p-0
+                    #revenue-chart.revenue-chart
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#revenue')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#revenue
+                          |&lt;div class="card total-revenue overflow-hidden"&gt;
+                          |   &lt;div class="card-header"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Total Revenue
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564%&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="revenue-chart" id="revenue-chart"&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+                .card.total-investment
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Total Investment
+                          i.fa.fa-circle 
+                        h4 96.564%
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .progress.sm-progress-bar
+                      .progress-colors(role='progressbar', style='width: 100%', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100')
+                        .bg-secondary.progress-1
+                        .bg-primary.progress-2
+                    .bottom-progress
+                      span.badge.round-badge-primary.font-worksans 3.56% 
+                        i.fa.fa-caret-up
+                      span.pull-right.font-primary.font-worksans.f-w-700 75%
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#investment')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#investment
+                          |&lt;div class="card total-investment"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Total Investment
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564%&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="progress sm-progress-bar"&gt;
+                          |       &lt;div class="progress-colors" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"&gt;
+                          |         &lt;div class="bg-secondary.progress-1"&gt;&lt;/div&gt;
+                          |         &lt;div class="bg-primary.progress-2"&gt;&lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xxl-3.col-xl-4.col-md-6.dash-30.box-col-35
+                .card.our-user
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Our Total Users
+                          i.fa.fa-circle
+                        h4 96.564%
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .user-chart
+                      #user-chart
+                      .icon-donut
+                        i(data-feather='arrow-up-circle')
+                    ul 
+                      li
+                        p.f-w-600.font-primary.f-12 Desktop
+                        span.f-w-600 96.564%
+                      li  
+                        p.f-w-600.font-primary.f-12 Mobile 
+                        span.f-w-600 92.624%
+                      li 
+                        p.f-w-600.font-primary.f-12 Tablet 
+                        span.f-w-600 46.564%
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#users')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#users
+                          |&lt;div class="card our-user"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Users
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564% &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body"&gt;
+                          |     &lt;div class="user-chart"&gt;
+                          |       &lt;div id="user-chart"&gt;&lt;/div&gt;
+                          |       &lt;div class="icon-donut"&gt;
+                          |         &lt;i class="feather feather-arrow-up-circle"&gt;&lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |     &lt;ul&gt;
+                          |       &lt;li&gt;
+                          |         &lt;p class="f-w-600 font-primary f-12"&gt; Desktop &lt;/p&gt;
+                          |         &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
+                          |       &lt;/li&gt;
+                          |       &lt;li&gt;
+                          |         &lt;p class="f-w-600 font-primary f-12"&gt; Mobile &lt;/p&gt;
+                          |         &lt;span class="f-w-600"&gt; 92.624% &lt;/span&gt;
+                          |       &lt;/li&gt;
+                          |       &lt;li&gt;
+                          |         &lt;p class="f-w-600 font-primary f-12"&gt; Tablet &lt;/p&gt;
+                          |         &lt;span class="f-w-600"&gt; 46.564% &lt;/span&gt;
+                          |       &lt;/li&gt;
+                          |     &lt;/ul&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-4.col-lg-6.box-col-30.xl-30
+                .card.our-earning
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Our Total Earning
+                          i.fa.fa-circle 
+                        h4 96.564%
+                        .setting-list
+                          ul.list-unstyled.setting-option
+                            li
+                              .setting-light
+                                i.icon-layout-grid2
+                            li
+                              i.view-html.fa.fa-code.font-white
+                            li
+                              i.icofont.icofont-maximize.full-card.font-white
+                            li
+                              i.icofont.icofont-minus.minimize-card.font-white
+                            li
+                              i.icofont.icofont-refresh.reload-card.font-white
+                            li
+                              i.icofont.icofont-error.close-card.font-white 
+                  .card-body.p-0
+                    .earning-chart
+                      #earning-chart
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#earning')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#earning
+                          |&lt;div class="card our-earning"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Earning
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564% &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="earning-chart"&gt;
+                          |       &lt;div id="earning-chart"&gt;&lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-footer"&gt;
+                          |     &lt;ul class="d-sm-flex d-block"&gt;
+                          |       &lt;li&gt;
+                          |         &lt;p class="f-w-600 font-primary f-12"&gt; Daily Earning
+                          |         &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
+                          |       &lt;/li&gt;
+                          |       &lt;li&gt;
+                          |         &lt;p class="f-w-600 font-primary f-12"&gt; Monthly Earning
+                          |         &lt;span class="f-w-600"&gt; 96.564% &lt;/span&gt;
+                          |       &lt;/li&gt;
+                          |     &lt;/ul&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+                  .card-footer
+                    ul.d-sm-flex.d-block
+                      li
+                        p.f-w-600.font-primary.f-12 Daily Earning
+                        span.f-w-600 96.564%
+                      li  
+                        p.f-w-600.font-primary.f-12 Monthly Earning 
+                        span.f-w-600 96.564%
+              .col-xl-4.col-md-6.box-col-40.xl-40
+                .card.appointment-detail
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary total appointment
+                          i.fa.fa-circle 
+                        h4 12 meet
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .table-responsive.theme-scrollbar
+                      table.table
+                        tbody
+                          tr
+                            td
+                              .d-flex
+                                img.img-fluid.align-top.circle(src="../assets/images/dashboard/default/01.png", alt="")
+                                .flex-grow-1
+                                  a(href="user-profile.html")
+                                    span Ossim keter
+                                  p.mb-0 1 Hour
+                                .active-status.active-online
+                            td 16 August 
+                            td.text-end
+                              button.btn.btn-primary(type="button" onclick="document.location='user-cards.html'") Pending
+                          tr 
+                            td 
+                              .d-flex
+                                img.img-fluid.align-top.circle(src="../assets/images/dashboard/default/02.png", alt="")
+                                .flex-grow-1
+                                  a(href="user-profile.html")
+                                    span Venter loren
+                                  p.mb-0 Now
+                                .active-status.active-busy
+                            td 21 September 
+                            td.text-end
+                              button.btn.btn-secondary(type="button" onclick="document.location='user-cards.html'") Done
+                                i.fa.fa-check-circle
+                          tr 
+                            td 
+                              .d-flex
+                                img.img-fluid.align-top.circle(src="../assets/images/dashboard/default/03.png", alt="")
+                                .flex-grow-1
+                                  a(href="user-profile.html")
+                                    span Fran loain
+                                  p.mb-0 2 Day After
+                                .active-status.active-offline
+                            td 06 March
+                            td.text-end
+                              button.btn.btn-success(type="button" onclick="document.location='user-cards.html'") Pending
+                          tr
+                            td 
+                              .d-flex
+                                img.img-fluid.align-top.circle(src="../assets/images/dashboard/default/04.png", alt="")
+                                .flex-grow-1
+                                  a(href="user-profile.html")
+                                    span Loften Horen
+                                  p.mb-0 Day End
+                                .active-status.active-online
+                            td 12 February
+                            td.text-end
+                              button.btn.btn-info(type="button" onclick="document.location='user-cards.html'") Pending
+                          tr 
+                            td 
+                              .d-flex
+                                img.img-fluid.align-top.circle(src="../assets/images/dashboard/default/05.png", alt="")
+                                .flex-grow-1
+                                  a(href="user-profile.html")
+                                    span Loie fenter
+                                  p.mb-0 2 Day After
+                                .active-status.active-offline
+                            td 06 March
+                            td.text-end
+                              button.btn.btn-danger(type="button" onclick="document.location='user-cards.html'") Pending
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#appoinment')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#appoinment
+                          |&lt;div class="card appointment-detail"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; total appointment
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 12 meet &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body"&gt;
+                          |     &lt;div class="table-responsive.theme-scrollbar"&gt;
+                          |       &lt;table class="table"&gt;
+                          |         &lt;tbody&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/01.png" alt=""&gt;&lt;/img&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;a href="user-profile.html"&gt;
+                          |                     &lt;span&gt;Ossim keter&lt;/span&gt;
+                          |                   &lt;/a&gt;
+                          |                   &lt;p class="mb-0"&gt; 1 Hour &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; 16 august &lt;/td&gt;
+                          |             &lt;td class="text-end"&gt;
+                          |               &lt;button class="btn btn-primary" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
+                          |             &lt;/td&gt; 
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/02.png" alt=""&gt;&lt;/img&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;a href="user-profile.html"&gt;
+                          |                     &lt;span&gt;Venter loren&lt;/span&gt;
+                          |                   &lt;/a&gt;
+                          |                   &lt;p class="mb-0"&gt; Now &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-busy"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; 21 September &lt;/td&gt;
+                          |             &lt;td class="text-end"&gt;
+                          |               &lt;button class="btn btn-secondary" type="button" onclick="document.location='user-cards.html'"&gt; Done 
+                          |                 &lt;i class="fa fa-check-circle"&gt;
+                          |               &lt;/button&gt;
+                          |             &lt;/td&gt; 
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/03.png" alt=""&gt;&lt;/img&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;a href="user-profile.html"&gt;
+                          |                     &lt;span&gt;Fran loain&lt;/span&gt;
+                          |                   &lt;/a&gt;
+                          |                   &lt;p class="mb-0"&gt; 2 Day After &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; 06 March &lt;/td&gt;
+                          |             &lt;td class="text-end"&gt;
+                          |               &lt;button class="btn btn-success" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
+                          |             &lt;/td&gt; 
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/04.png" alt=""&gt;&lt;/img&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;a href="user-profile.html"&gt;
+                          |                     &lt;span&gt;Loften Horen&lt;/span&gt;
+                          |                   &lt;/a&gt;
+                          |                   &lt;p class="mb-0"&gt; Day End &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; 12 February &lt;/td&gt;
+                          |             &lt;td class="text-end"&gt;
+                          |               &lt;button class="btn btn-info" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
+                          |             &lt;/td&gt; 
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;img class="img-fluid align-top circle" src="../assets/images/dashboard/default/05.png" alt=""&gt;&lt;/img&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;a href="user-profile.html"&gt;
+                          |                     &lt;span&gt;Loie fenter&lt;/span&gt;
+                          |                   &lt;/a&gt;
+                          |                   &lt;p class="mb-0"&gt; 2 Day After &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-offline"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; 06 March &lt;/td&gt;
+                          |             &lt;td class="text-end"&gt;
+                          |               &lt;button class="btn btn-danger" type="button" onclick="document.location='user-cards.html'"&gt; Pending &lt;/button&gt;
+                          |             &lt;/td&gt; 
+                          |           &lt;/tr&gt;
+                          |         &lt;/tbody&gt;
+                          |       &lt;/table&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-4.col-md-6.box-col-30.xl-30
+                .card.use-country
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary User By Country
+                          i.fa.fa-circle 
+                        h4 96.564%
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    #asia.jvector-map-height
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#country')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#country
+                          |&lt;div class="card use-country"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; User By Country
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564%&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="jvector-map-height" id="asia"&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-12.box-col-12
+                .card.total-growth
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Our Total Growth
+                          i.fa.fa-circle 
+                        h4 96.564%
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body.pb-0
+                    .growth-chart 
+                      #growth-chart
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#growth')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#growth
+                          |&lt;div class="card total-growth"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Our Total Growth
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 96.564%&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="growth-chart"&gt;
+                          |       &lt;div id="growth-chart"&gt;&lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-4.col-md-6.box-col-33
+                .card
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Recent Activity
+                          i.fa.fa-circle 
+                        h4 New & Update
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .activity-timeline
+                      .d-flex
+                        .activity-line
+                        .activity-dot-primary
+                        .flex-grow-1
+                          span.f-w-600.d-block Updated Product
+                          p.mb-0 I like to be real. I don't like things to be staged or fussy.
+                      .d-flex
+                        .activity-dot-primary
+                        .flex-grow-1
+                          span.f-w-600.d-block You liked James products
+                          p.mb-0 If you have it, you can make anything look good.
+                      .d-flex.align-items-start
+                        .activity-dot-secondary
+                        .flex-grow-1
+                          span.f-w-600.d-block James just like your product
+                          p.mb-0 I like to design everything to do with the body.
+                        i.fa.fa-circle.circle-dot-primary
+                      .d-flex
+                        .activity-dot-primary
+                        .flex-grow-1
+                          span.f-w-600.d-block Jenna commented on your product
+                          p.mb-0 Fashion fades, only style remain the same.
+                      .d-flex.align-items-start
+                        .activity-dot-secondary
+                        .flex-grow-1
+                          span.f-w-600.d-block Jihan Doe just like your product
+                          p.mb-0 Design and style should work toward making you look good and feel good without lot of effort.
+                        i.fa.fa-circle.circle-dot-secondary
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#activity')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#activity
+                          |&lt;div class="card"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Recent Activity
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; New & Update &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="activity-timeline"&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-line"&gt;&lt;/div&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;span class="f-w-600 d-block"&gt; Updated Product &lt;/span &gt;
+                          |           &lt;p class="mb-0"&gt; I like to be real. I don't like things to be staged or fussy.&lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;span class="f-w-600 d-block"&gt; You liked James products &lt;/span &gt;
+                          |           &lt;p class="mb-0"&gt; If you have it, you can make anything look good.&lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex align-items-start"&gt;
+                          |         &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;span class="f-w-600 d-block"&gt; James just like your product &lt;/span &gt;
+                          |           &lt;p class="mb-0"&gt; I like to design everything to do with the body.&lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;span class="f-w-600 d-block"&gt; Jenna commented on your product &lt;/span &gt;
+                          |           &lt;p class="mb-0"&gt;Fashion fades, only style remain the same.&lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex align-items-start"&gt;
+                          |         &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;span class="f-w-600 d-block"&gt; James just like your product &lt;/span &gt;
+                          |           &lt;p class="mb-0"&gt;Design and style should work toward making you look good and feel good without lot of effort.&lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt; 
+              .col-xl-4.proorder.box-col-33
+                .card.user-chat
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600.header-text-primary Chat With Our Users
+                          i.fa.fa-circle 
+                        h4 Chat
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body.chat-box
+                    .d-flex.left-chat
+                      .flex-grow-1
+                        .message-main
+                          p.mb-0 Hii
+                        .sub-message.message-main
+                          p.mb-0 Good Evening, My Friend
+                      p.f-w-500.mb-0.px-0 7:28 PM
+                    .d-flex.right-chat
+                      .flex-grow-1.text-end
+                        .message-main.pull-right
+                          p.text-start.mb-0
+                            | What can do for you
+                          .clearfix
+                    .d-flex.left-chat
+                      .flex-grow-1
+                        .sub-message.message-main.mt-0
+                          p.mb-0 Can i Borrow some money
+                    .input-group
+                      input#mail.form-control(type='text', placeholder='Type Your Message', name='text')
+                      .send-msg
+                        i(data-feather='send')
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#chat')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#chat
+                          |&lt;div class="card user-chat"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Chat With Our Users
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; Chat&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body chat-box"&gt;
+                          |     &lt;div class="d-flex left-chat"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;div class="message-main"&gt; 
+                          |           &lt;p class="mb-0"&gt; Hii &lt;/p&gt;
+                          |         &lt;/div &gt;
+                          |         &lt;div class="sub-message message-main"&gt; 
+                          |           &lt;p class="mb-0"&gt; Good Evening, My Friend &lt;/p&gt;
+                          |         &lt;/div &gt;
+                          |       &lt;/div&gt;
+                          |       &lt;p class="f-w-500 mb-0 px-0"&gt; 7:28 PM &lt;/p&gt;
+                          |     &lt;/div&gt;
+                          |     &lt;div class="d-flex right-chat"&gt;
+                          |       &lt;div class="flex-grow-1 text-end"&gt;
+                          |         &lt;div class="message-main pull-right"&gt; 
+                          |           &lt;p class="text-start mb-0"&gt; What can do for you &lt;/p&gt;
+                          |           &lt;div class="clearfix"&gt;&lt;/div&gt;
+                          |         &lt;/div &gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |     &lt;div class="d-flex left-chat"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;div class="sub-message message-main mt-0"&gt; 
+                          |           &lt;p class="mb-0"&gt; Can i Borrow some money &lt;/p&gt;
+                          |         &lt;/div &gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |     &lt;div class="input-group"&gt;
+                          |       &lt;input id="mail" class="form-control" type="text" placeholder="Type Your Message" name="text"/&gt;
+                          |       &lt;div class="send-msg"&gt;
+                          |         &lt;i class="feather feather-send"&gt;&lt;/i&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-4.col-md-6.box-col-33
+                .card.our-todolist
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1 
+                        p.square-after.f-w-600.header-text-primary Our To-Do List
+                          i.fa.fa-circle 
+                        h4 Todo List
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .activity-timeline.todo-timeline
+                      .d-flex
+                        .activity-line
+                        .activity-dot-primary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                          .d-flex.mt-0
+                            img.img-fluid.img-30(src='../assets/images/dashboard/default/todo.png', alt='')
+                            .flex-grow-1
+                              span.f-w-600 New Order $2340
+                                i.fa.fa-circle.circle-dot-primary.pull-right
+                              p.mb-0 Update New Product Pdf And Delivery Product
+                      .d-flex
+                        .activity-dot-secondary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                            span.badge.badge-primary.ms-2 New
+                          span.f-w-600 James just like your product
+                            i.fa.fa-circle.circle-dot-secondary.pull-right
+                      .d-flex
+                        .activity-dot-primary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                          span.f-w-600 Jihan Doe just like your product
+                          p.mb-0 Design and style should work making you look good and feel good without lot of effort.
+                      .d-flex
+                        .activity-dot-primary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                          span.f-w-600 Take Our Client Metting
+                            i.fa.fa-circle.circle-dot-primary.pull-right
+                          p.mb-0 Hosting an effective client meeting.
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#to-do')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#to-do
+                          |&lt;div class="card our-todolist"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600 header-text-primary"&gt; Our To-Do List
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; Todo List &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body p-0"&gt;
+                          |     &lt;div class="activity-timeline"&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-line"&gt;&lt;/div&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="todo-font mt-0"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |           &lt;/p &gt;
+                          |           &lt;div class="d-flex mt-0"&gt;
+                          |             &lt;img class="img-fluid img-30" src="../assets/images/dashboard/default/todo.png" alt=""/&gt;
+                          |             &lt;div class="flex-grow-1"&gt;
+                          |               &lt;span class="f-w-600"&gt; New Order $2340
+                          |                 New Order $2340
+                          |                 &lt;i class="fa fa-circle circle-dot-primary pull-right"&gt;
+                          |               &lt;/span&gt;
+                          |               &lt;p class="mb-0"&gt; Update New Product Pdf And Delivery Product &lt;/p&gt;
+                          |             &lt;/div&gt;
+                          |           &lt;/div&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="todo-font mt-0"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |             &lt;span class="badge badge-primary ms-2"&gt; New &lt;/span&gt;
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-600"&gt; James just like your product
+                          |             &lt;i class="fa fa-circle circle-dot-secondary pull-right"&gt;&lt;/i&gt;
+                          |           &lt;/span&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="mt-0 todo-font"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-600"&gt; Jihan Doe just like your product
+                          |           &lt;/span&gt;
+                          |           &lt;p class="mb-0"&gt; Design and style should work making you look good and feel good without lot of effort. &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex"&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="todo-font mt-0"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-600"&gt; Take Our Client Metting
+                          |             &lt;i class="fa fa-circle circle-dot-primary pull-right"&gt;&lt;/i&gt;
+                          |           &lt;/span&gt;
+                          |           &lt;p class="mb-0"&gt; Hosting an effective client meeting. &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt; 
+          // Container-fluid Ends
+        include ../../components/footer        
+    include ../../components/footer-files

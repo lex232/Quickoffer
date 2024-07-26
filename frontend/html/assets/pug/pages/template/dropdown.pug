@@ -1,0 +1,372 @@
+- var theme_customizer      = true;
+- var tooltip               = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Dropdown
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ui Kits
+                    li.breadcrumb-item.active Dropdown
+          // Container-fluid starts
+          .container-fluid.dropdown-page
+            .row
+              .col-sm-12.col-xl-12
+                .card.basic-dropdown
+                  .card-header.pb-0
+                    h4 Dropdown with link
+                  .card-body 
+                    ul.d-flex.flex-wrap
+                      li.onhover-dropdown
+                        span.f-w-600 Dashboard
+                        span
+                          i.middle.ms-2(data-feather="chevron-down")
+                        ul.onhover-show-div.left-dropdown
+                          li 
+                            a(href="index.html" target="_blank") Default
+                          li 
+                            a(href="dashboard-02.html" target="_blank") Ecommerce
+                      li.onhover-dropdown
+                        span.f-w-600 Job Search
+                        span
+                          i.middle.ms-2(data-feather="chevron-down")
+                        ul.onhover-show-div.left-dropdown
+                          li 
+                            a(href="job-cards-view.html" target="_blank") Card view
+                          li 
+                            a(href="job-apply.html" target="_blank") Job apply
+                      li.onhover-dropdown
+                        span.f-w-600 Ecommerce
+                        span
+                          i.middle.ms-2(data-feather="chevron-down")
+                        ul.onhover-show-div.left-dropdown
+                          li 
+                            a(href="product.html" target="_blank") Product
+                          li 
+                            a(href="add-products.html" target="_blank") Add Product
+                          li 
+                            a(href="invoice-template.html" target="_blank") Invoice
+              .col-sm-12.col-xl-12
+                .card
+                  .card-header.pb-0
+                    h4 Basic Dropdown with Color
+                  .card-body 
+                    .dropdown-basic
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-primary(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-secondary(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-success(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-info(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-warning(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-pill.btn-danger(type='button')
+                            | Action 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+              .col-sm-12.col-xl-12
+                .card
+                  .card-header.pb-0
+                    h4 Dropdown Split Button
+                  .card-body 
+                    .dropdown-basic
+                      .btn-group
+                        button.btn.btn-light(type='button') Primary Button
+                        .dropdown.separated-btn
+                          button.btn.btn-primary(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+                      .btn-group
+                        button.btn.btn-light(type='button') Secondary Button
+                        .dropdown.separated-btn
+                          button.btn.btn-secondary(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+                      .btn-group
+                        button.btn.btn-light(type='button') Success Button
+                        .dropdown.separated-btn
+                          button.btn.btn-success(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+                      .btn-group
+                        button.btn.btn-light(type='button') Info Button
+                        .dropdown.separated-btn
+                          button.btn.btn-info(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+                      .btn-group
+                        button.btn.btn-light(type='button') Warning Button
+                        .dropdown.separated-btn
+                          button.btn.btn-warning(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+                      .btn-group
+                        button.btn.btn-light(type='button') Danger Button
+                        .dropdown.separated-btn
+                          button.btn.btn-danger(type='button')
+                            i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Link 1
+                            a(href='#') Link 2
+                            a(href='#') Link 3
+              .col-sm-12.col-xl-12
+                .card
+                  .card-header.pb-0
+                    h4 Rounded Dropdown
+                  .card-body 
+                    .dropdown-basic
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-primary.btn-round(type='button')
+                            | Primary Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-secondary.btn-round(type='button')
+                            | Secondary Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-success.btn-round(type='button')
+                            | Success Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-info.btn-round(type='button')
+                            | Info Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-warning.btn-round(type='button')
+                            | Warning Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+                      .dropdown
+                        .btn-group.mb-0
+                          button.dropbtn.btn-danger.btn-round(type='button')
+                            | Danger Button 
+                            span
+                              i.icofont.icofont-arrow-down
+                          .dropdown-content
+                            a(href='#') Action
+                            a(href='#') Another Action
+                            a(href='#') Something Else Here
+                            a(href='#') Separated Link 
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Dropdown With Divider
+                    span
+                      | Use a class 
+                  .card-body 
+                    .dropdown-basic
+                      .dropdown
+                        button.dropbtn.btn-pill.btn-primary(type='button')
+                          | Dropdown Button 
+                          span
+                            i.icofont.icofont-arrow-down
+                        .dropdown-content
+                          a(href='#') Link 1
+                          a(href='#') Link 2
+                          a(href='#') Link 3
+                          a(href='#') Another Link
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Dropdown With Header
+                    span
+                      | Use a class 
+                      code .dropdown-header
+                  .card-body 
+                    .dropdown-basic
+                      .dropdown
+                        button.dropbtn.btn-pill.btn-primary(type='button')
+                          | Dropdown Button 
+                          span
+                            i.icofont.icofont-arrow-down
+                        .dropdown-content
+                          h5.dropdown-header Dropdown header
+                          a(href='#') Link 1
+                          a(href='#') Link 2
+                          h5.dropdown-header Dropdown header
+                          a(href='#') Another Link
+              .col-sm-12.col-xl-4
+                .card
+                  .card-header.pb-0
+                    h4 Dropdown With Disable
+                    span
+                      | Use a class 
+                      code .dropdown-disabled
+                  .card-body 
+                    .dropup-basic.dropdown-basic
+                      .dropup.dropdown
+                        button.dropbtn.btn-pill.btn-dark(type='button')
+                          | Dropdown Button 
+                          span
+                            i.icofont.icofont-arrow-up
+                        .dropup-content.dropdown-content
+                          a(href='#') Normal
+                          a.active(href='#') Active
+                          a.disabled(href='#') Disabled
+              .col-sm-12.col-xl-8
+                .card
+                  .card-header.pb-0
+                    h4 Dropdown With Direction
+                    span
+                      | Use a class 
+                      code .drop-up
+                  .card-body 
+                    .dropup-basic.dropdown-basic
+                      .dropup.dropdown.me-3
+                        button.dropbtn.btn-pill.btn-secondary(type='button')
+                          | Drop up 
+                          span
+                            i.icofont.icofont-arrow-up
+                        .dropup-content.dropdown-content
+                          a(href='#') Bookmark
+                          a(href='#') Contact
+                      .dropend.dropdown.me-3
+                        button.dropbtn.btn-pill.btn-danger(type='button', data-bs-toggle="dropdown")
+                          | Drop End 
+                          span
+                            i.icofont.icofont-arrow-right
+                        .dropend-content.dropdown-content
+                          a(href='#') Task
+                          a(href='#') Calendar
+                      .dropdown.dropdown.me-3
+                        button.dropbtn.btn-pill.btn-info(type='button')
+                          | Drop down 
+                          span
+                            i.icofont.icofont-arrow-down
+                        .dropdown-content
+                          a(href='#') To-do
+                          a(href='#') Editor
+                      .dropstart.dropdown.me-3
+                        button.dropbtn.btn-pill.btn-success(type='button')
+                          | Drop Start 
+                          span
+                            i.icofont.icofont-arrow-left
+                        .dropstart-content.dropdown-content
+                          a(href='#') Map
+                          a(href='#') Chart
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

@@ -1,5 +1,5 @@
 .mainbackground {
-  background: url('../../../static/image/background/back_4.jpg');
+  background: url('../../../static/image/background/back.jpg');
   background-color: rgba(227, 227, 227, 0.1) !important;
   height: 100% !important;
   background-repeat: no-repeat;
@@ -8,7 +8,46 @@
   margin-left: 0;
 }
 
+.li-no-style {
+  list-style-type: none !important;
+  align-items: start;
+}
 
+.circle {
+  width: 65px !important;
+  height: 65px;
+  border-radius: 30%;
+  border: 1px solid #342e49;
+  position: relative;
+  box-shadow: 0 0 3px rgba(99, 142, 192, 0.67);
+  display: inline-block;
+  vertical-align: middle;
+  margin: 25px;
+}
+
+.circle-ico {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  color:  #2d405f;
+}
+
+.container-fluid {
+  --bs-gutter-x: 0rem !important;
+}
+
+#after-header {
+  --bs-gutter-x: 1.5rem;
+  background: url('../../../static/image/background/back.jpg') no-repeat center top;
+}
+
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
 
 .section-title{
   font-size: 32px;
@@ -52,9 +91,11 @@
   position: relative;
 }
 
+
+
 .yd-stats {
 	padding: 100px 0;
-	background: #6d48e5;
+	background: #342e49;
 }
 
 .yd-stats .intro h2 {

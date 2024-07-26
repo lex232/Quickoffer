@@ -1,0 +1,83 @@
+/**=====================
+     27. Coming Soon CSS Start
+==========================**/
+.comingsoon-bgimg {
+  background: url(../images/other-images/coming-soon-bg.jpg);
+  background-position: bottom;
+  background-size: cover;
+}
+.bg-commingsoon{
+  background-color: rgba($primary-color , 0.1);
+}
+.comingsoon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 50px 0;
+  .logo-wrraper {
+    img {
+      height: 100px;
+      width: auto;
+    }
+  }
+  .comingsoon-inner {
+    h5 {
+      font-size: 45px;
+      letter-spacing: 1px;
+      color: $theme-body-sub-title-color;
+      font-weight: 700;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+    .countdown {
+      padding: 30px 0;
+      border-top: 1px solid $gray-60;
+      border-bottom: 1px solid $gray-60;
+      .time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: $white;
+        font-weight: 500;
+        width: 100px;
+        height: 100px;
+        font-size: 36px;
+        background: var(--theme-deafult);
+        border-radius: 20px;
+      }
+      .title {
+        padding-top: 13px;
+        font-size: 14px;
+        font-weight: 400;
+        color: $theme-body-sub-title-color;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      ul li {
+        display: inline-block;
+        text-transform: uppercase;
+        margin: 0 20px;
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    transition: 1s opacity;
+  }
+}
+/**=====================
+    27. Coming Soon CSS Ends
+==========================**/

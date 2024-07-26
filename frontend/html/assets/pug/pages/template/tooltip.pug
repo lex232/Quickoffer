@@ -1,0 +1,60 @@
+- var tooltip               = true;
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Tooltip
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ui Kits
+                    li.breadcrumb-item.active Tooltip
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Directions 
+                  .card-body 
+                    .btn-showcase
+                      button.btn.btn-primary(type='button', data-bs-toggle='tooltip', data-bs-placement='top', title='Tooltip on top')
+                        | Top Tooltip
+                      button.btn.btn-primary(type='button', data-bs-toggle='tooltip', data-bs-placement='right', title='Tooltip on right')
+                        | Right Tooltip
+                      button.btn.btn-primary(type='button', data-bs-toggle='tooltip', data-bs-placement='bottom', title='Tooltip on bottom')
+                        | Bottom Tooltip
+                      button.btn.btn-primary(type='button', data-bs-toggle='tooltip', data-bs-placement='left', title='Tooltip on left')
+                        | Left Tooltip
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 HTML elements with direction
+                  .card-body
+                    .btn-showcase
+                      button.btn.btn-primary(type='button', data-bs-toggle='m-tooltip', data-bs-trigger='click', data-bs-placement='left', title="<em>Tooltip</em> <u>with</u> <b>HTML</b>", data-bs-html='true', data-bs-title='Tooltip <b>with</b> <code>HTML</code>') Click me
+                      button.btn.btn-primary(type='button', data-bs-toggle='m-tooltip', data-bs-trigger='click', data-bs-placement='top', title="<em>Tooltip</em> <u>with</u> <b>HTML</b>", data-bs-html='true', data-bs-title='Tooltip <b>with</b> <code>HTML</code>') Click me
+                      button.btn.btn-primary(type='button', data-bs-toggle='m-tooltip', data-bs-trigger='click', data-bs-placement='bottom', title="<em>Tooltip</em> <u>with</u> <b>HTML</b>", data-bs-html='true', data-bs-title='Tooltip <b>with</b> <code>HTML</code>') Click me
+                      button.btn.btn-primary(type='button', data-bs-toggle='m-tooltip', data-bs-trigger='click', data-bs-placement='right', title="<em>Tooltip</em> <u>with</u> <b>HTML</b>", data-bs-html='true', data-bs-title='Tooltip <b>with</b> <code>HTML</code>') Click me
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

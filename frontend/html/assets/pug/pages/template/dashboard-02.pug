@@ -1,0 +1,1419 @@
+- var theme_customizer      = true;
+- var apex                  = true;
+- var owlcarousel           = true;
+- var dashboard_2           = true;
+- var notify                = true;
+- var animate               = true;
+- var knobchart             = true;
+- var page_knobchart        = true;
+- var date_picker           = true;
+- var typeahead             = true;
+- var typeahead_search      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+- var customcard            = true;
+- var clipboard             = true;
+- var prism                 = true;
+
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Ecommerce
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Dashboard
+                    li.breadcrumb-item.active Ecommerce
+          // Container-fluid starts
+          .container-fluid.dashboard-2
+            .row   
+              .col-xl-9.col-md-12.box-col-70.xl-70
+                .row 
+                  .col-lg-4.col-md-6.box-col-4
+                    .card.profit-card
+                      .card-header.pb-0
+                        .d-flex.justify-content-between
+                          .flex-grow-1
+                            p.square-after.f-w-600.header-text-primary Our Total Profit
+                              i.fa.fa-circle 
+                            h4 $8,55,462
+                      .card-body
+                        .d-flex
+                          .flex-grow-1
+                            .profit-wrapper.header-text-primary.icon-bg-primary
+                              i.fa.fa-arrow-up
+                            h6.header-text-primary 79.21%
+                            p.mb-0 More Than last month
+                        .right-side.icon-right-primary
+                          i.fa.fa-usd
+                          .shap-block
+                            .rounded-shap.animate-bg-primary
+                              i
+                              i
+                        
+                  .col-lg-4.col-md-6.box-col-4
+                    .card.visitor-card
+                      .card-header.pb-0
+                        .d-flex.justify-content-between
+                          .flex-grow-1
+                            p.square-after.f-w-600.header-text-info Our Total Visitor
+                              i.fa.fa-circle 
+                            h4 813K
+                      .card-body
+                        .d-flex
+                          .flex-grow-1
+                            .profit-wrapper.header-text-info.icon-bg-info
+                              i.fa.fa-arrow-up
+                            h6.header-text-info 86.94%
+                            p.mb-0 More Than last month
+                        .right-side.icon-right-info
+                          i.fa.fa-user
+                          .shap-block
+                            .rounded-shap.animate-bg-primary
+                              i
+                              i
+                  .col-lg-4.col-md-12.box-col-4
+                    .card.sell-card
+                      .card-header.pb-0
+                        .d-flex.justify-content-between
+                          .flex-grow-1
+                            p.square-after.f-w-600.header-text-success Our Total Sold
+                              i.fa.fa-circle 
+                            h4 2,41,658
+                          
+                      .card-body
+                        .d-flex
+                          .flex-grow-1
+                            .profit-wrapper.header-text-success.icon-bg-success
+                              i.fa.fa-arrow-up
+                            h6.header-text-success 94.40%
+                            p.mb-0 Look Pretty Good
+                        .right-side.icon-right-success
+                          i.fa.fa-shopping-basket
+                          .shap-block
+                            .rounded-shap.animate-bg-secondary
+                              i
+                              i
+                        
+                  .col-lg-12.col-md-12.box-col-12
+                    .card.best-seller
+                      .card-header.pb-0
+                        .d-flex.justify-content-between
+                          .flex-grow-1
+                            p.square-after.f-w-600 Our Total Sold
+                              i.fa.fa-circle 
+                          .setting-list
+                            ul.list-unstyled.setting-option
+                              li
+                                .setting-light
+                                  i.icon-layout-grid2
+                              li
+                                i.view-html.fa.fa-code.font-white
+                              li
+                                i.icofont.icofont-maximize.full-card.font-white
+                              li
+                                i.icofont.icofont-minus.minimize-card.font-white
+                              li
+                                i.icofont.icofont-refresh.reload-card.font-white
+                              li
+                                i.icofont.icofont-error.close-card.font-white 
+                      .card-body.pt-0
+                        .table-responsive.theme-scrollbar
+                          table.table.table-bordernone
+                            thead
+                              tr
+                                th.f-26 Best Seller
+                                th Date
+                                th Product
+                                th Country
+                                th Total
+                                th Status
+                                th 
+                            tbody
+                              tr
+                                td 
+                                  .d-flex.align-items-center
+                                    .flex-shrink-0
+                                      img.img-fluid(src="../assets/images/dashboard-2/dash-2/01.png", alt="")
+                                    .flex-grow-1
+                                      span.f-14.f-w-600 
+                                        a(href="user-profile.html") Ossim keter
+                                      p.mb-0 2022
+                                    .active-status.active-online
+                                td 16 August
+                                td Clothes
+                                td 
+                                  i.flag-icon.flag-icon-gb
+                                td 
+                                  span $1,58,652
+                                td 
+                                  span Success
+                                  i.fa.fa-check-circle.f-14
+                                td
+                                  span 
+                                    a(href="edit-profile.html") Edit
+                              tr
+                                td 
+                                  .d-flex.align-items-center
+                                    img.img-fluid(src="../assets/images/dashboard-2/dash-2/02.png", alt="")
+                                    .flex-grow-1
+                                      span.f-14.f-w-600 
+                                        a(href="user-profile.html") Venter loren
+                                      p.mb-0 2021
+                                    .active-status.active-online
+                                td 21 Sept
+                                td Shoes
+                                td 
+                                  i.flag-icon.flag-icon-us
+                                td 
+                                  span $95,025
+                                td 
+                                  span Success
+                                  i.fa.fa-check-circle.f-14
+                                td 
+                                  span
+                                    a(href="edit-profile.html") Edit
+                              tr
+                                td 
+                                  .d-flex.align-items-center
+                                    img.img-fluid(src="../assets/images/dashboard-2/dash-2/03.png", alt="")
+                                    .flex-grow-1
+                                      span.f-14.f-w-600 
+                                        a(href="user-profile.html") Fran Loain
+                                      p.mb-0 2022
+                                    .active-status.active-online
+                                td 06 March
+                                td Electronics
+                                td 
+                                  i.flag-icon.flag-icon-za
+                                td 
+                                  span $90,155
+                                td 
+                                  span Success
+                                  i.fa.fa-check-circle.f-14
+                                td 
+                                  span 
+                                    a(href="edit-profile.html") Edit
+                              tr
+                                td 
+                                  .d-flex.align-items-center
+                                    img.img-fluid(src="../assets/images/dashboard-2/dash-2/04.png", alt="")
+                                    .flex-grow-1
+                                      span.f-14.f-w-600 
+                                        a(href="user-profile.html") Loften Horen
+                                      p.mb-0 2021
+                                    .active-status.active-online
+                                td 12 February
+                                td Watch
+                                td 
+                                  i.flag-icon.flag-icon-at
+                                td 
+                                  span $80,658
+                                td 
+                                  span Success
+                                  i.fa.fa-check-circle.f-14
+                                td 
+                                  span 
+                                    a(href="edit-profile.html") Edit
+                              tr
+                                td 
+                                  .d-flex.align-items-center
+                                    img.img-fluid(src="../assets/images/dashboard-2/dash-2/05.png", alt="")
+                                    .flex-grow-1
+                                      span.f-14.f-w-600 
+                                        a(href="user-profile.html") Loie fenter
+                                      p.mb-0 2022
+                                    .active-status.active-online
+                                td 30 January
+                                td Jewellery
+                                td 
+                                  i.flag-icon.flag-icon-br
+                                td 
+                                  span $50,652
+                                td 
+                                  span Success
+                                  i.fa.fa-check-circle.f-14
+                                td 
+                                  span 
+                                    a(href="edit-profile.html") Edit
+                        .code-box-copy
+                          button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#sold-card')
+                            i.icofont.icofont-copy-alt
+                          pre
+                            code.language-html#sold-card
+                              |&lt;div class="card best-seller"&gt;
+                              |   &lt;div class="card-header pb-0"&gt;
+                              |     &lt;div class="d-flex justify-content-between"&gt;
+                              |       &lt;div class="flex-grow-1"&gt;
+                              |         &lt;p class="square-after f-w-600"&gt; Our Total Sold
+                              |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                              |         &lt;/p&gt;
+                              |       &lt;/div&gt;
+                              |       &lt;div class="setting-list"&gt;
+                              |         &lt;ul class="list-unstyled setting-option"&gt;
+                              |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                              |         &lt;/ul&gt;
+                              |       &lt;/div&gt;
+                              |     &lt;/div&gt;
+                              |   &lt;/div&gt;
+                              |   &lt;div class="card-body pt-0"&gt;
+                              |     &lt;div class="table-responsive theme-scrollbar"&gt;
+                              |       &lt;table class="table table-bordernone"&gt;
+                              |         &lt;thead&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;th class="f-26"&gt; Best Seller
+                              |             &lt;/th&gt;
+                              |             &lt;th&gt; Date &lt;/th&gt;
+                              |             &lt;th&gt; Product &lt;/th&gt;
+                              |             &lt;th&gt; Country &lt;/th&gt;
+                              |             &lt;th&gt; Total &lt;/th&gt;
+                              |             &lt;th&gt; Status &lt;/th&gt;
+                              |           &lt;/tr&gt;
+                              |         &lt;/thead&gt;
+                              |         &lt;tbody&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;td&gt;
+                              |               &lt;div class="d-flex align-items-center"&gt;
+                              |                 &lt;div class="flex-shrink-0"&gt;
+                              |                   &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/01.png" alt=""/&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="flex-grow-1"&gt;
+                              |                   &lt;span class="f-14 f-w-600"&gt; 
+                              |                     &lt;a href="user-profile.html"&gt; Ossim keter&lt;/a&gt; &lt;/span&gt;
+                              |                   &lt;p class="mb-0"&gt; 2022 &lt;/p&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                              |               &lt;/div&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt; 16 August &lt;/td&gt;
+                              |             &lt;td&gt; Clothes &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;i class="flag-icon flag-icon-gb"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; $1,58,652 &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; Success &lt;/span&gt;
+                              |               &lt;i class="fa fa-check-circle f-14"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt;
+                              |                 &lt;a href="edit-profile.html"&gt; Edit &lt;/a&gt;
+                              |               &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |           &lt;/tr&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;td&gt;
+                              |               &lt;div class="d-flex align-items-center"&gt;
+                              |                 &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/02.png" alt=""/&gt;
+                              |                 &lt;div class="flex-grow-1"&gt;
+                              |                   &lt;span class="f-14 f-w-600"&gt; &lt;a href="user-profile.html"&gt;Venter loren&lt;/a&gt; &lt;/span&gt;
+                              |                   &lt;p class="mb-0"&gt; 2021 &lt;/p&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                              |               &lt;/div&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt; 21 September &lt;/td&gt;
+                              |             &lt;td&gt; Branded Shoes &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;i class="flag-icon flag-icon-us"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; $95,025 &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; Success &lt;/span&gt;
+                              |               &lt;i class="fa fa-check-circle f-14"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt;
+                              |                 &lt;a href="edit-profile.html"&gt; Edit &lt;/a&gt;
+                              |               &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |           &lt;/tr&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;td&gt;
+                              |               &lt;div class="d-flex align-items-center"&gt;
+                              |                 &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/03.png" alt=""/&gt;
+                              |                 &lt;div class="flex-grow-1"&gt;
+                              |                   &lt;span class="f-14 f-w-600"&gt; &lt;a href="user-profile.html"&gt; Fran Loain &lt;/a&gt; &lt;/span&gt;
+                              |                   &lt;p class="mb-0"&gt; 2022 &lt;/p&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                              |               &lt;/div&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt; 06 March &lt;/td&gt;
+                              |             &lt;td&gt; Electronics &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;i class="flag-icon flag-icon-za"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; $90,155 &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; Success &lt;/span&gt;
+                              |               &lt;i class="fa fa-check-circle f-14"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt;
+                              |                 &lt;a href="edit-profile.html"&gt; Edit &lt;/a&gt;
+                              |               &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |           &lt;/tr&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;td&gt;
+                              |               &lt;div class="d-flex align-items-center"&gt;
+                              |                 &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/04.png" alt=""/&gt;
+                              |                 &lt;div class="flex-grow-1"&gt;
+                              |                   &lt;span class="f-14 f-w-600"&gt; &lt;a href="user-profile.html"&gt; Loften Horen &lt;/a&gt; &lt;/span&gt;
+                              |                   &lt;p class="mb-0"&gt; 2021 &lt;/p&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                              |               &lt;/div&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt; 12 February &lt;/td&gt;
+                              |             &lt;td&gt; Watch &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;i class="flag-icon flag-icon-at"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; $80,658 &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; Success &lt;/span&gt;
+                              |               &lt;i class="fa fa-check-circle f-14"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt;
+                              |                 &lt;a href="edit-profile.html"&gt; Edit &lt;/a&gt;
+                              |               &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |           &lt;/tr&gt;
+                              |           &lt;tr&gt;
+                              |             &lt;td&gt;
+                              |               &lt;div class="d-flex align-items-center"&gt;
+                              |                 &lt;img class="img-fluid" src="../assets/images/dashboard-2/dash-2/05.png" alt=""/&gt;
+                              |                 &lt;div class="flex-grow-1"&gt;
+                              |                   &lt;span class="f-14 f-w-600"&gt; &lt;a href="user-profile.html"&gt;Loie fenter &lt;/a&gt; &lt;/span&gt;
+                              |                   &lt;p class="mb-0"&gt; 2022 &lt;/p&gt;
+                              |                 &lt;/div&gt;
+                              |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                              |               &lt;/div&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt; 30 January &lt;/td&gt;
+                              |             &lt;td&gt; Jewellery &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;i class="flag-icon flag-icon-br"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; $50,652 &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt; Success &lt;/span&gt;
+                              |               &lt;i class="fa fa-check-circle f-14"&gt;&lt;/i&gt;
+                              |             &lt;/td&gt;
+                              |             &lt;td&gt;
+                              |               &lt;span&gt;
+                              |                 &lt;a href="edit-profile.html"&gt; Edit &lt;/a&gt;
+                              |               &lt;/span&gt;
+                              |             &lt;/td&gt;
+                              |           &lt;/tr&gt;
+                              |         &lt;/tbody&gt;
+                              |       &lt;/table&gt;
+                              |     &lt;/div&gt;
+                              |   &lt;/div&gt;
+                              | &lt;/div&gt;
+              .col-xl-3.col-lg-5.col-md-6.box-col-30.xl-30
+                .card.product
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Selling Product
+                          i.fa.fa-circle 
+                        h4 Product
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .table-responsive.theme-scrollbar
+                      table.table
+                        tbody
+                          tr
+                            td
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/1.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Nike Shoes
+                                  p.mb-0 451 item
+                                .active-status.active-online
+                            td -05%
+                            td
+                              span $49.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/2.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Headphone
+                                  p.mb-0 1657 item
+                                .active-status.active-online
+                            td -20%
+                            td
+                              span $28.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/3.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Tree Pot
+                                  p.mb-0 32 item
+                                .active-status.active-online
+                            td -12%
+                            td
+                              span $30.00
+                          tr
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/4.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Black Purse
+                                  p.mb-0 663 item
+                                .active-status.active-online
+                            td -16%
+                            td
+                              span $22.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/5.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Ck Watch
+                                  p.mb-0 4785 item
+                                .active-status.active-online
+                            td -50%
+                            td
+                              span $48.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/6.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") New T-shirt
+                                  p.mb-0 9 item
+                                .active-status.active-online
+                            td -20%
+                            td
+                              span $69.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/7.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Jewellery
+                                  p.mb-0 7878 item
+                                .active-status.active-online
+                            td -10%
+                            td
+                              span $78.00
+                          tr 
+                            td 
+                              .d-flex.align-items-center
+                                img.img-fluid.circle(src="../assets/images/dashboard-2/product/8.png", alt="")
+                                .flex-grow-1
+                                  span 
+                                    a(href="product.html") Smart Phone
+                                  p.mb-0 987 item
+                                .active-status.active-online
+                            td -30%
+                            td
+                              span $36.00
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#sell-product')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#sell-product
+                          |&lt;div class="card product"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600"&gt; Selling Product
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; Product&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body"&gt;
+                          |     &lt;div class="table-responsive theme-scrollbar"&gt;
+                          |       &lt;table class="table"&gt;
+                          |         &lt;tbody&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/1.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Nike Shoes &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 451 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -05% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $49.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/2.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Headphone &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 1657 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -20% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $28.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/3.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Tree Pot &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 32 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -12% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $30.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/4.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Black Purse &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 663 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -16% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $22.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/5.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Ck Watch &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 4785 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -50% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $48.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/6.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; New T-shirt &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 9 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -20% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $69.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/7.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Jewellery &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 7878 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -10% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $78.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex align-items-center"&gt;
+                          |                 &lt;img class="img-fluid circle" src="../assets/images/dashboard-2/product/7.png" alt=""/&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span&gt; &lt;a href="product.html"&gt; Smart Phone &lt;/a&gt; &lt;/span&gt;
+                          |                   &lt;p class="mb-0"&gt; 987 item &lt;/p&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="active-status active-online"&gt;&lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; -30% &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; $36.00 &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |         &lt;/tbody&gt;
+                          |       &lt;/table&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-4.col-lg-7.col-md-6.box-col-38.xl-38
+                .card.goal-view
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Our Goal Overview
+                          i.fa.fa-circle 
+                        h4 Goal Overview
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .goal-chart 
+                      .shap-block
+                          .rounded-shap.animate-bg-secondary
+                            i
+                            i
+                            i
+                      #goal
+                    .code-box-copy
+                          button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#goal-overview')
+                            i.icofont.icofont-copy-alt
+                          pre
+                            code.language-html#goal-overview
+                              |&lt;div class="card goal-view"&gt;
+                              |   &lt;div class="card-header pb-0"&gt;
+                              |     &lt;div class="d-flex justify-content-between"&gt;
+                              |       &lt;div class="flex-grow-1"&gt;
+                              |         &lt;p class="square-after f-w-600"&gt; Our Goal Overview
+                              |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                              |         &lt;/p&gt;
+                              |         &lt;h4&gt; Goal Overview&lt;/h4&gt;
+                              |       &lt;/div&gt;
+                              |       &lt;div class="setting-list"&gt;
+                              |         &lt;ul class="list-unstyled setting-option"&gt;
+                              |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                              |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                              |         &lt;/ul&gt;
+                              |       &lt;/div&gt;
+                              |     &lt;/div&gt;
+                              |   &lt;/div&gt;
+                              |   &lt;div class="card-body"&gt;
+                              |     &lt;div class="goal-chart"&gt;
+                              |       &lt;div class="shape-block"&gt;
+                              |         &lt;div class="rounded-shap animate-bg-secondary"&gt;
+                              |           &lt;i&gt;&lt;/i&gt;
+                              |           &lt;i&gt;&lt;/i&gt;
+                              |           &lt;i&gt;&lt;/i&gt;
+                              |         &lt;/div&gt;
+                              |       &lt;/div&gt;
+                              |       &lt;div id="goal"&gt;&lt;/div&gt;
+                              |     &lt;/div&gt;
+                              |   &lt;/div&gt;
+                              |   &lt;div class="card-footer"&gt;
+                              |     &lt;ul&gt;
+                              |       &lt;li&gt;
+                              |         &lt;h4 class="f-w-700"&gt; $8,54,159 &lt;/h4&gt;
+                              |         &lt;span class="f-w-500"&gt; Completed &lt;/span&gt;
+                              |       &lt;/li&gt;
+                              |       &lt;li&gt;
+                              |         &lt;h4 class="f-w-700"&gt; $9,85,000 &lt;/h4&gt;
+                              |         &lt;span class="f-w-500"&gt; Our Goal &lt;/span&gt;
+                              |       &lt;/li&gt;
+                              |       &lt;li&gt;
+                              |         &lt;h4 class="f-w-700"&gt; $66,264 &lt;/h4&gt;
+                              |         &lt;span class="f-w-500"&gt; In Progress &lt;/span&gt;
+                              |       &lt;/li&gt;
+                              |     &lt;/ul&gt;
+                              |   &lt;/div&gt;
+                              | &lt;/div&gt;
+                  .card-footer
+                    ul 
+                      li
+                        h4.f-w-700 $8,54,159
+                        span.f-w-500 Completed
+                      li  
+                        h4.f-w-700 $9,85,000
+                        span.f-w-500 Our Goal
+                      li 
+                        h4.f-w-700 $66,264
+                        span.f-w-500 In Progress
+              .col-xl-4.col-lg-6.col-md-12.box-col-33
+                .card
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Recent Activity
+                          i.fa.fa-circle 
+                        h4 New & Update
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    .activity-timeline
+                      .d-flex.align-items-start
+                        .activity-line
+                        .activity-dot-secondary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                          span.f-w-700 Updated Product
+                          p.mb-0 I like to be real. I don't like things to be staged or fussy.
+                        i.fa.fa-circle.circle-dot-secondary.pull-right
+                      .d-flex.align-items-start
+                        .activity-dot-primary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                            span.badge.badge-primary.ms-2 New
+                          span.f-w-700 James just like your product
+                          p Design and style should work toward making look good.
+                          ul.img-wrapper
+                            li 
+                              img.img-fluid(src="../assets/images/dashboard-2/product/shoes1.png", alt="")
+                            li
+                              img.img-fluid(src="../assets/images/dashboard-2/product/shoes2.png", alt="")
+                        i.fa.fa-circle.circle-dot-primary.pull-right
+                      .d-flex.align-items-start
+                        .activity-dot-secondary
+                        .flex-grow-1
+                          p.mt-0.todo-font
+                            span.font-primary 20-04-2022 
+                            | Today
+                          span.f-w-700 Jihan Doe just like your product
+                          p.mb-0 If you have it, you can make anything look good.
+                        i.fa.fa-circle.circle-dot-secondary.pull-right
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#activity1')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#activity1
+                          |&lt;div class="card"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600"&gt; Recent Activity
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; New & Update &lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body"&gt;
+                          |     &lt;div class="activity-timeline"&gt;
+                          |       &lt;div class="d-flex align-items-start"&gt;
+                          |         &lt;div class="activity-line"&gt;&lt;/div&gt;
+                          |         &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="todo-font mt-0"&gt; Today
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-700" Updated Product
+                          |           &lt;p class="mb-0"&gt; I like to be real. I don't like things to be staged or fussy. &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |         &lt;i class="fa fa-circle circle-dot-secondary pull-right"&gt;&lt;/i&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex align-items-start"&gt;
+                          |         &lt;div class="activity-dot-primary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="todo-font mt-0"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |             &lt;span class="badge badge-primary ms-2"&gt; New &lt;/span&gt;
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-700"&gt; James just like your product &lt;/span&gt;
+                          |           &lt;p&gt; Design and style should work toward making look good. &lt;/p&gt;
+                          |           &lt;ul&gt;
+                          |             &lt;li&gt;
+                          |               &lt;img class="img-fluid" src="../assets/images/dashboard-2/product/shoes1.png" alt=""/&gt;
+                          |             &lt;/li&gt;
+                          |             &lt;li&gt;
+                          |               &lt;img class="img-fluid" src="../assets/images/dashboard-2/product/shoes2.png" alt=""/&gt;
+                          |             &lt;/li&gt;
+                          |           &lt;/ul&gt;
+                          |           &lt;i class="fa fa-circle circle-dot-secondary pull-right"&gt;&lt;/i&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="d-flex align-items-start"&gt;
+                          |         &lt;div class="activity-dot-secondary"&gt;&lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;p class="mt-0 todo-font"&gt;
+                          |             &lt;span class="font-primary"&gt; 20-04-2022 &lt;/span&gt;
+                          |             Today
+                          |           &lt;/p &gt;
+                          |           &lt;span class="f-w-700"&gt; Jihan Doe just like your product
+                          |           &lt;/span&gt;
+                          |           &lt;p class="mb-0"&gt; If you have it, you can make anything look good. &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |         &lt;i class="fa fa-circle circle-dot-secondary pull-right"&gt;&lt;/i&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt; 
+              .col-xl-4.col-lg-6.col-md-12.box-col-28.xl-28
+                .card.static-card
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Order Statics
+                          i.fa.fa-circle 
+                        h4 6,65,484 Order
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body.pb-0.pt-0
+                    .order-static 
+                      #order-chart
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#order-static')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#order-static
+                          |&lt;div class="card static-card"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600"&gt; Order Statics
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; 6,65,484 Order&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body pb-0 pt-0"&gt;
+                          |     &lt;div class="order-static"&gt;
+                          |       &lt;div id="order-chart"&gt;&lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-footer"&gt;
+                          |     &lt;ul class="d-xxl-flex d-block order-bottom"&gt;
+                          |       &lt;li class="d-flex"&gt;
+                          |         &lt;div class="flex-shrink-0"&gt;
+                          |           &lt;div&gt;
+                          |             &lt;i class="fa fa-arrow-up"&gt;&lt;/i&gt;
+                          |           &lt;/div&gt;
+                          |         &lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;h6&gt; 84,315 order&lt;/h6&gt;
+                          |           &lt;p class="f-w-500"&gt; Last two month order.... &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/li&gt;
+                          |       &lt;li class="d-flex"&gt;
+                          |         &lt;div class="flex-shrink-0"&gt;
+                          |           &lt;div&gt;
+                          |             &lt;i class="fa fa-arrow-up"&gt;&lt;/i&gt;
+                          |           &lt;/div&gt;
+                          |         &lt;/div&gt;
+                          |         &lt;div class="flex-grow-1"&gt;
+                          |           &lt;h6&gt; 65,484 order&lt;/h6&gt;
+                          |           &lt;p class="f-w-500"&gt; Last two Days order.... &lt;/p&gt;
+                          |         &lt;/div&gt;
+                          |       &lt;/li&gt;
+                          |     &lt;/ul&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+                  .card-footer
+                    ul.d-xxl-flex.d-block.order-bottom
+                      li.d-flex
+                        .flex-shrink-0
+                          div
+                            i.fa.fa-arrow-up
+                        .flex-grow-1
+                          h6 84,315 order
+                          p.f-w-500 Last two month order....
+                      li.d-flex
+                        .flex-shrink-0
+                          div
+                            i.fa.fa-arrow-up
+                        .flex-grow-1
+                          h6 61,481 order
+                          p.f-w-500 Last two Days order....
+              .col-xl-4.col-lg-6.col-md-12.box-col-40
+                .card.product-slider
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Latest Offer Product
+                          i.fa.fa-circle 
+                        h4 -60% Offer
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body
+                    #owl-carousel-1.owl-carousel.owl-theme
+                      .item
+                        img.img-fluid(src='../assets/images/dashboard-2/1.png', alt='')
+                        .product-content 
+                          .badge.badge-primary New
+                          h4 
+                            a(href="product.html") Black Apple Airpod
+                            i.fa.fa-check-circle
+                          h5.f-16 $120.00
+                      .item
+                        img.img-fluid(src='../assets/images/dashboard-2/2.png', alt='')
+                        .product-content 
+                          .badge.badge-primary New
+                          h4 
+                            a(href="product.html") Red Hova Sport Shoes
+                            i.fa.fa-check-circle
+                          h5.f-16 $120.00
+                      .item
+                        img.img-fluid(src='../assets/images/dashboard-2/3.png', alt='')
+                        .product-content 
+                          .badge.badge-primary New
+                          h4 
+                            a(href="product.html") Blue Mens Watch
+                            i.fa.fa-check-circle
+                          h5.f-16 $120.00
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#product')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#product
+                          |&lt;div class="card product-slider"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600"&gt; Latest Offer Product
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |         &lt;h4&gt; -60% Offer&lt;/h4&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body"&gt;
+                          |     &lt;div class="owl-carousel owl-theme" id="owl-carousel-1&gt;
+                          |       &lt;div class="item"&gt;
+                          |         &lt;img class="img-fluid" src="../assets/images/dashboard-2/1.png" alt=""/&gt;
+                          |          &lt;div class="product-content "&gt;
+                          |             &lt;div class="badge badge-primary"&gt; New &lt;/div&gt;
+                          |             &lt;h4&gt; &lt;a href="product.html"&gt; Black Apple Airpod &lt;/a&gt;
+                          |               &lt;i class="fa fa-check-circle"&gt;&lt;/i&gt;
+                          |             &lt;/h4&gt;
+                          |             &lt;h5 class="f-16"&gt; $120.00 &lt;/h5&gt;
+                          |          &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="item"&gt;
+                          |         &lt;img class="img-fluid" src="../assets/images/dashboard-2/2.png" alt=""/&gt;
+                          |          &lt;div class="product-content "&gt;
+                          |             &lt;div class="badge badge-primary"&gt; New &lt;/div&gt;
+                          |             &lt;h4&gt;&lt;a href="product.html"&gt; Red Hova Sport Shoes &lt;/a&gt;
+                          |               &lt;i class="fa fa-check-circle"&gt;&lt;/i&gt;
+                          |             &lt;/h4&gt;
+                          |             &lt;h5 class="f-16"&gt; $120.00 &lt;/h5&gt;
+                          |          &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="item"&gt;
+                          |         &lt;img class="img-fluid" src="../assets/images/dashboard-2/3.png" alt=""/&gt;
+                          |          &lt;div class="product-content "&gt;
+                          |             &lt;div class="badge badge-primary"&gt; New &lt;/div&gt;
+                          |             &lt;h4&gt; &lt;a href="product.html"&gt; Blue Mens Watch &lt;/a&gt;
+                          |               &lt;i class="fa fa-check-circle"&gt;&lt;/i&gt;
+                          |             &lt;/h4&gt;
+                          |             &lt;h5 class="f-16"&gt; $120.00 &lt;/h5&gt;
+                          |          &lt;/div&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+              .col-xl-8.col-lg-6.col-md-12.box-col-7
+                .card.order-card
+                  .card-header.pb-0
+                    .d-flex.justify-content-between
+                      .flex-grow-1
+                        p.square-after.f-w-600 Our Total Sold
+                          i.fa.fa-circle
+                      .setting-list
+                        ul.list-unstyled.setting-option
+                          li
+                            .setting-light
+                              i.icon-layout-grid2
+                          li
+                            i.view-html.fa.fa-code.font-white
+                          li
+                            i.icofont.icofont-maximize.full-card.font-white
+                          li
+                            i.icofont.icofont-minus.minimize-card.font-white
+                          li
+                            i.icofont.icofont-refresh.reload-card.font-white
+                          li
+                            i.icofont.icofont-error.close-card.font-white 
+                  .card-body.pt-0
+                    .table-responsive.theme-scrollbar
+                      table.table.table-bordernone
+                        thead
+                          tr
+                            th.f-26 Order List
+                            th Status
+                            th Operator
+                            th Delivery Date
+                            th Delivery Address
+                            th 
+                        tbody
+                          tr
+                            td 
+                              .d-flex
+                                .number-dot
+                                  span.f-w-700 1
+                                .flex-grow-1
+                                  span.f-14.f-w-600 #456861
+                            td 
+                              span Moving
+                            td Ossim Keter
+                            td 16 August
+                            td Green Bay, Wisconsin, London
+                            td $450.00
+                          tr
+                            td 
+                              .d-flex
+                                .number-dot
+                                  span.f-w-700 2
+                                .flex-grow-1
+                                  span.f-14.f-w-600 #846953
+                            td 
+                              span Moving
+                            td Venter Loren
+                            td 21 September
+                            td Summerlin, Nevada, United kingdom
+                            td $136.00
+                          tr
+                            td 
+                              .d-flex
+                                .number-dot
+                                  span.f-w-700 3
+                                .flex-grow-1
+                                  span.f-14.f-w-600 #197568
+                            td 
+                              span Cancel
+                            td Fran Loain
+                            td 06 March
+                            td Atlantic City, New Jersey, UK
+                            td $624.00
+                          tr
+                            td 
+                              .d-flex
+                                .number-dot
+                                  span.f-w-700 4
+                                .flex-grow-1
+                                  span.f-14.f-w-600 #647953
+                            td 
+                              span Pending
+                            td Loften Horen
+                            td 12 February
+                            td Fort Worth, Soun Di, Texas, USA
+                            td $48.00
+                          tr
+                            td 
+                              .d-flex
+                                .number-dot
+                                  span.f-w-700 5
+                                .flex-grow-1
+                                  span.f-14.f-w-600 #447495
+                            td 
+                              span Moving
+                            td Loie Fenter
+                            td 12 February
+                            td Green Bay, Wisconsin, London
+                            td $258.00
+                    .code-box-copy
+                      button.code-box-copy__btn.btn-clipboard(data-clipboard-target='#total-sold')
+                        i.icofont.icofont-copy-alt
+                      pre
+                        code.language-html#total-sold
+                          |&lt;div class="card order-card"&gt;
+                          |   &lt;div class="card-header pb-0"&gt;
+                          |     &lt;div class="d-flex justify-content-between"&gt;
+                          |       &lt;div class="flex-grow-1"&gt;
+                          |         &lt;p class="square-after f-w-600"&gt; Our Total Sold
+                          |           &lt;i class="fa fa-circle"&gt;&lt;/i&gt;
+                          |         &lt;/p&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div class="setting-list"&gt;
+                          |         &lt;ul class="list-unstyled setting-option"&gt;
+                          |           &lt;li&gt;&lt;div class="setting-light"&gt;&lt;i class="icon-layout-grid2"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="view-html fa fa-code font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-maximize full-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-minus minimize-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-refresh reload-card font-white"&gt;&lt;/i&gt;&lt;/li&gt;
+                          |           &lt;li&gt;&lt;i class="icofont icofont-error close-card font-white"&gt; &lt;/i&gt;&lt;/li&gt;
+                          |         &lt;/ul&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;div class="card-body pt-0"&gt;
+                          |     &lt;div class="table-responsive theme-scrollbar"&gt;
+                          |       &lt;table class="table table-bordernone"&gt;
+                          |         &lt;thead&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;th class="f-26"&gt; Order List
+                          |             &lt;/th&gt;
+                          |             &lt;th&gt; Status &lt;/th&gt;
+                          |             &lt;th&gt; Operator &lt;/th&gt;
+                          |             &lt;th&gt; Delivery Date &lt;/th&gt;
+                          |             &lt;th&gt; Delivery Address &lt;/th&gt;
+                          |             &lt;th&gt; &lt;/th&gt;
+                          |           &lt;/tr&gt;
+                          |         &lt;/thead&gt;
+                          |         &lt;tbody&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;div class="number-dot"&gt;
+                          |                   &lt;span class="f-w-700"&gt; 1 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span class="f-14 f-w-600"&gt; #456861 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; Moving &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; Ossim keter &lt;/td&gt;
+                          |             &lt;td&gt; 16 August &lt;/td&gt;
+                          |             &lt;td&gt; Green Bay, Wisconsin, London &lt;/td&gt;
+                          |             &lt;td&gt; $450.00 &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;div class="number-dot"&gt;
+                          |                   &lt;span class="f-w-700"&gt; 2 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span class="f-14 f-w-600"&gt; #846953 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; Moving &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; Venter loren &lt;/td&gt;
+                          |             &lt;td&gt; 21 September &lt;/td&gt;
+                          |             &lt;td&gt; Summerlin, Nevada, United kingdom &lt;/td&gt;
+                          |             &lt;td&gt; $136.00 &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;div class="number-dot"&gt;
+                          |                   &lt;span class="f-w-700"&gt; 3 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span class="f-14 f-w-600"&gt; #197568 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; Cancel &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; Fran loain &lt;/td&gt;
+                          |             &lt;td&gt; 06 March &lt;/td&gt;
+                          |             &lt;td&gt; Atlantic City, New Jersey, UK &lt;/td&gt;
+                          |             &lt;td&gt; $624.00 &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;div class="number-dot"&gt;
+                          |                   &lt;span class="f-w-700"&gt; 4 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span class="f-14 f-w-600"&gt; #647953 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; Pending &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; Loften Horen &lt;/td&gt;
+                          |             &lt;td&gt; 12 February &lt;/td&gt;
+                          |             &lt;td&gt; Fort Worth, Soun Di, Texas, USA &lt;/td&gt;
+                          |             &lt;td&gt; $48.00 &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |           &lt;tr&gt;
+                          |             &lt;td&gt;
+                          |               &lt;div class="d-flex"&gt;
+                          |                 &lt;div class="number-dot"&gt;
+                          |                   &lt;span class="f-w-700"&gt; 5 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |                 &lt;div class="flex-grow-1"&gt;
+                          |                   &lt;span class="f-14 f-w-600"&gt; #447495 &lt;/span&gt;
+                          |                 &lt;/div&gt;
+                          |               &lt;/div&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt;
+                          |               &lt;span&gt; Moving &lt;/span&gt;
+                          |             &lt;/td&gt;
+                          |             &lt;td&gt; Loie fenter &lt;/td&gt;
+                          |             &lt;td&gt; 12 February &lt;/td&gt;
+                          |             &lt;td&gt; Green Bay, Wisconsin, London &lt;/td&gt;
+                          |             &lt;td&gt; $258.00 &lt;/td&gt;
+                          |           &lt;/tr&gt;
+                          |         &lt;/tbody&gt;
+                          |       &lt;/table&gt;
+                          |     &lt;/div&gt;
+                          |   &lt;/div&gt;
+                          | &lt;/div&gt;
+          // Container-fluid Ends
+        include ../../components/footer        
+    include ../../components/footer-files

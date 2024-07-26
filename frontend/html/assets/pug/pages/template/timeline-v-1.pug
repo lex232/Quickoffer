@@ -1,0 +1,108 @@
+- var timeline_1            = true;
+- var animate               = true;
+- var modernizr             = true;
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3 Timeline 1
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Timeline
+                    li.breadcrumb-item.active Timeline 1
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Example
+                  .card-body
+                    // cd-timeline Start
+                    section#cd-timeline.cd-container
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-picture.bg-primary
+                          i.icon-pencil-alt
+                        .cd-timeline-content
+                          h4
+                            | 1. Start with this
+                          p.m-0
+                            | Make sure you pick out a good luck new job card to go with the words, and pop a beautiful bunch of flowers from our gift range in your basket, to make them feel super special.
+                          span.cd-date.f-w-600
+                            | Jan 
+                            span.counter  14
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-movie.bg-secondary
+                          i.icon-video-camera
+                        .cd-timeline-content
+                          h4
+                            | 2. Video Tutorial
+                          .ratio.ratio-21x9.m-t-20
+                            iframe(src='https://www.youtube.com/embed/wpmHZspl4EM', allowfullscreen='')
+                          span.cd-date.f-w-600
+                            | Jan 
+                            span.counter 18
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-picture.bg-success
+                          i.icon-image
+                        .cd-timeline-content
+                          h4
+                            | 3. Layout Drafts
+                          img.img-fluid.p-t-20(src='../assets/images/banner/1.jpg', alt='')
+                          span.cd-date.f-w-600
+                            | Jan 
+                            span.counter 24
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-location.bg-info
+                          i.icon-pulse
+                        .cd-timeline-content
+                          h4
+                            | 4. Audio Tutorial
+                          audio.m-t-20(controls='')
+                            source(src='../assets/audio/horse.ogg', type='audio/ogg')
+                            |                                                 Your browser does not support the audio element.
+                          span.cd-date.f-w-600
+                            | Feb 
+                            span.counter 14
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-location.bg-warning
+                          i.icon-image
+                        .cd-timeline-content
+                          h4
+                            | 5. Team Work
+                          img.img-fluid.p-t-20(src='../assets/images/banner/3.jpg', alt='')
+                          span.cd-date.f-w-600
+                            | Feb 
+                            span.counter 18
+                      .cd-timeline-block
+                        .cd-timeline-img.cd-movie.bg-danger
+                          i.icon-pencil-alt
+                        .cd-timeline-content
+                          h4 Final Testing
+                          p.m-0 Explain any new understanding or fresh insights about the problem. This is the content of the Final Testing.
+                          span.cd-date.f-w-600
+                            | Feb 
+                            span.counter 26
+                    // cd-timeline Ends
+                    // Container-fluid ends                    
+        include ../../components/footer
+    include ../../components/footer-files

@@ -1,0 +1,515 @@
+- var height_equal          = true;
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3 FAQ
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item FAQ
+                    li.breadcrumb-item.active FAQ
+          // Container-fluid starts
+          .container-fluid
+            .faq-wrap
+              .row
+                .col-xl-4.box-col-4
+                  .card.bg-primary.height-equal
+                    .card-body
+                      .d-flex.faq-widgets
+                        .flex-grow-1
+                          h4 Articles
+                          p.mb-0
+                            | How little experience or technical knowledge you currently have. The web is a very big place, and if you are the typical internet user, you probably visit several websites every day.
+                        i(data-feather='file-text')
+                .col-xl-4.col-md-6.box-col-4
+                  .card.bg-primary.height-equal
+                    .card-body
+                      .d-flex.faq-widgets
+                        .flex-grow-1
+                          h4 Knowledgebase
+                          p.mb-0
+                            | A Website Designing course enables learners to use essential designing and programming tools required to do the job. The curriculum is a blend of various themes.
+                        i(data-feather='book-open')
+                .col-xl-4.col-md-6.box-col-4
+                  .card.bg-primary.height-equal
+                    .card-body
+                      .d-flex.faq-widgets
+                        .flex-grow-1
+                          h4 Support
+                          p.mb-0
+                            | The customer support industry is renaissance. Customer support as a specialty is coming into its own, offering companies a competitive advantage that’s difficult to copy.
+                        i(data-feather='aperture')
+                .col-lg-12
+                  .header-faq
+                    h4.mb-0 Quick Questions are answered
+                  #accordionoc.row.default-according.style-1.faq-accordion
+                    .col-xl-8.xl-60.col-lg-6.col-md-7.box-col-60
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon', aria-expanded='false', aria-controls='collapseicon')
+                              i(data-feather='help-circle')
+                              | Integrating WordPress with Your Website?
+                        #collapseicon.collapse(aria-labelledby='collapseicon', data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 How you approach this process will depend on which web host you use. For example, a lot of hosting providers use cPanel, which includes an option to set up subdomains with just a few clicks.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon2', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | How do WordPress Site Maintenance ?
+                        #collapseicon2.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 We’ve just published a detailed on how to backup your WordPress website, however, if you’re in a hurry, here’s a quick solution.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon3', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Meta Tags in WordPress ?
+                        #collapseicon3.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 Manually adding meta tags in WordPress is relatively simple. For this demo, we’ll use the example from the WordPress Codex. Imagine you’re Harriet Smith, a veterinarian who blogs about their animal stories on WordPress.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon4', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | WordPress in Your Language ?
+                        #collapseicon4.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 As of version 4.0, you can have WordPress automatically install the language of your choice during the installation process.
+                      .faq-title
+                        h5 Intellectual Property
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon5', aria-expanded='false')
+                              i(data-feather='help-circle')
+                              | WordPress Site Maintenance ?
+                        #collapseicon5.collapse(aria-labelledby='collapseicon5', data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 We’ve just published a detailed on how to backup your WordPress website, however, if you’re in a hurry, here’s a quick solution.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon7', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | WordPress in Your Language ?
+                        #collapseicon7.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 As of version 4.0, you can have WordPress automatically install the language of your choice during the installation process.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon8', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Integrating WordPress with Your Website ?
+                        #collapseicon8.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 How you approach this process will depend on which web host you use. For example, a lot of hosting providers use cPanel, which includes an option to set up subdomains with just a few clicks.
+                      .faq-title
+                        h5 Selling And Buying
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon9', aria-expanded='false')
+                              i(data-feather='help-circle')
+                              | WordPress Site Maintenance ?
+                        #collapseicon9.collapse(aria-labelledby='collapseicon9', data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 We’ve just published a detailed on how to backup your WordPress website, however, if you’re in a hurry, here’s a quick solution.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon10', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Meta Tags in WordPress ?
+                        #collapseicon10.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 Manually adding meta tags in WordPress is relatively simple. For this demo, we’ll use the example from the WordPress Codex. Imagine you’re Harriet Smith, a veterinarian who blogs about their animal stories on WordPress.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon11', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Validating a Website ?
+                        #collapseicon11.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 Validating a website is the process of ensuring that the pages on the website conform to the norms or standards defined by various organizations.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon12', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Know Your Sources ?
+                        #collapseicon12.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 A book or set of books giving information on many subjects or on many aspects of one subject. Some are intended as an entry point into research for a general audience, some provide detailed information.
+                      .faq-title
+                        h5 User Accounts
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon13', aria-expanded='false')
+                              i(data-feather='help-circle')
+                              | Integrating WordPress with Your Website ?
+                        #collapseicon13.collapse(aria-labelledby='collapseicon13', data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 How you approach this process will depend on which web host you use. For example, a lot of hosting providers use cPanel, which includes an option to set up subdomains with just a few clicks.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon14', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | WordPress Site Maintenance ?
+                        #collapseicon14.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 We’ve just published a detailed on how to backup your WordPress website, however, if you’re in a hurry, here’s a quick solution.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon16', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              |  WordPress in Your Language ?
+                        #collapseicon16.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 As of version 4.0, you can have WordPress automatically install the language of your choice during the installation process.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon17', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Validating a Website ?
+                        #collapseicon17.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 Validating a website is the process of ensuring that the pages on the website conform to the norms or standards defined by various organizations.
+                      .card
+                        .card-header
+                          h5.mb-0
+                            button.btn.btn-link.collapsed(data-bs-toggle='collapse', data-bs-target='#collapseicon18', aria-expanded='false', aria-controls='collapseicon2')
+                              i(data-feather='help-circle')
+                              | Meta Tags in WordPress ?
+                        #collapseicon18.collapse(data-parent='#accordionoc')
+                          .card-body
+                            p.mb-0 Manually adding meta tags in WordPress is relatively simple. For this demo, we’ll use the example from the WordPress Codex. Imagine you’re Harriet Smith, a veterinarian who blogs about their animal stories on WordPress.
+                    .col-xl-4.xl-40.col-lg-6.col-md-5.box-col-40
+                      .row
+                        .col-lg-12
+                          .card.card-mb-faq.xs-mt-search
+                            .card-header.faq-header
+                              h4.ps-0 Search articles
+                              i(data-feather='help-circle')
+                            .card-body.faq-body
+                              .faq-form
+                                input.form-control(type='text', placeholder='Search..')
+                                i.search-icon(data-feather='search')
+                        .col-lg-12
+                          .card.card-mb-faq
+                            .card-header.faq-header
+                              h4.ps-0 Navigation
+                              i(data-feather='settings')
+                            .card-body.faq-body
+                              .navigation-btn
+                                a.btn.btn-primary(href='javascript:void(0)')
+                                  i.m-r-10(data-feather='message-square')
+                                  | Ask Question
+                              .navigation-option
+                                ul
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='edit')
+                                      | Tutorials
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='globe')
+                                      | Help center
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='book-open')
+                                      | Knowledgebase
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='file-text')
+                                      | Articles
+                                    span.badge.badge-primary.rounded-pill.pull-right 42
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='youtube')
+                                      | Video Tutorials
+                                    span.badge.badge-primary.rounded-pill.pull-right 648
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='message-circle')
+                                      | Ask our community
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='mail')
+                                      | Contact us                                         
+                                ul
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='message-circle')
+                                      | Ask our community
+                                  li
+                                    a(href='javascript:void(0)')
+                                      i(data-feather='mail')
+                                      | Contact us
+                        .col-lg-12
+                          .card
+                            .card-header.faq-header
+                              h4.d-inline-block.ps-0 Latest Updates
+                              span.pull-right.d-inline-block See All
+                            .card-body.faq-body
+                              .d-flex.updates-faq-main
+                                .updates-faq
+                                  i.font-primary(data-feather='rotate-cw')
+                                .flex-grow-1.updates-bottom-time
+                                  p
+                                    a(href='javascript:void(0)') David Linner 
+                                    | requested money back for a double debit card charge
+                                  p 10 minutes ago
+                              .d-flex.updates-faq-main
+                                .updates-faq
+                                  i.font-primary(data-feather='dollar-sign')
+                                .flex-grow-1.updates-bottom-time
+                                  p All sellers have received monthly payouts
+                                  p 2 hours ago
+                              .d-flex.updates-faq-main
+                                .updates-faq
+                                  i.font-primary(data-feather='link')
+                                .flex-grow-1.updates-bottom-time
+                                  p
+                                    | User Christopher 
+                                    a(href='javascript:void(0)') Wallace
+                                    |  is on hold and awaiting for staff reply
+                                  p 45 minutes ago
+                              .d-flex.updates-faq-main
+                                .updates-faq
+                                  i.font-primary(data-feather='check')
+                                .flex-grow-1.updates-bottom-time
+                                  p
+                                    | Ticket #43683 has been closed by 
+                                    a(href='javascript:void(0)') Victoria Wilson
+                                  p Dec 7, 11:48
+                .col-lg-12.featured-tutorial
+                  .header-faq
+                    h4.mb-0 Featured Tutorials
+                  .row
+                    .col-xl-3.col-sm-6.box-col-3
+                      .card.features-faq.product-box
+                        .faq-image.product-img
+                          img.img-fluid(src='../assets/images/faq/1.jpg', alt='')
+                          .product-hover
+                            ul
+                              li
+                                i.icon-link
+                              li
+                                i.icon-import
+                        .card-body
+                          a(href="learning-detailed.html")
+                            h6 Web Design
+                          p.mb-0
+                            | A Web Designing course belongs to the field of Computer It enables students to learn various techniques.
+                        .card-footer
+                          span Aug 15, 2022
+                          ul.rating.pull-right
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star-o.font-primary
+                    .col-xl-3.col-sm-6.box-col-3
+                      .card.features-faq.product-box
+                        .faq-image.product-img
+                          img.img-fluid(src='../assets/images/faq/2.jpg', alt='')
+                          .product-hover
+                            ul
+                              li
+                                i.icon-link
+                              li
+                                i.icon-import
+                        .card-body
+                          a(href="learning-detailed.html")
+                            h6 Web Development
+                          p.mb-0
+                            | A Web Development course belongs to the field of Computer It enables students to learn various techniques.
+                        .card-footer
+                          span June 20, 2022
+                          ul.rating.pull-right
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star-o.font-primary
+                            li
+                              i.fa.fa-star-o.font-primary
+                    .col-xl-3.col-sm-6.box-col-3
+                      .card.features-faq.product-box
+                        .faq-image.product-img
+                          img.img-fluid(src='../assets/images/faq/3.jpg', alt='')
+                          .product-hover
+                            ul
+                              li
+                                i.icon-link
+                              li
+                                i.icon-import
+                        .card-body
+                          a(href="learning-detailed.html")
+                            h6 UI Design
+                          p.mb-0
+                            | User interface design (UI) is the design for machines and software, such as mobile devices, computers.
+                        .card-footer
+                          span July 09, 2022
+                          ul.rating.pull-right
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star-half-o.font-primary
+                    .col-xl-3.col-sm-6.box-col-3
+                      .card.features-faq.product-box
+                        .faq-image.product-img
+                          img.img-fluid(src='../assets/images/faq/4.jpg', alt='')
+                          .product-hover
+                            ul
+                              li
+                                i.icon-link
+                              li
+                                i.icon-import
+                        .card-body
+                          a(href="learning-detailed.html")
+                            h6 UX Design
+                          p.mb-0
+                            | User Experience design (UX) is the design for machines and software, such as mobile devices, computers.
+                        .card-footer
+                          span July 04, 2022
+                          ul.rating.pull-right
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star.font-primary
+                            li
+                              i.fa.fa-star-half-o.font-primary
+                            li
+                              i.fa.fa-star-o.font-primary
+                .col-lg-12.faq-articles
+                  .header-faq
+                    h4.mb-0 Latest articles and videos
+                  .row
+                    .col-xl-4.col-md-6
+                      .row
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='codepen')
+                                .flex-grow-1
+                                  h6.f-w-600 Article Base Video
+                                  p The web is a very big place, and if you are the typical internet base user.
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='codepen')
+                                .flex-grow-1
+                                  h6.f-w-600 Knows your sources
+                                  p A book giving information on many subjects or on many aspects of one subject.
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='codepen')
+                                .flex-grow-1
+                                  h6.f-w-600  Sources credible/reliable
+                                  p Simple demos of frequently asked questions about using the information resources 
+                    .col-xl-4.col-md-6
+                      .row
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='file-text')
+                                .flex-grow-1
+                                  h6.f-w-600  Validate website
+                                  p  Website is the process of ensuring that the pages on the website conform. 
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='file-text')
+                                .flex-grow-1
+                                  h6.f-w-600  Tailwind Design
+                                  p  Tailwind is so low-level, it never encourages you to design the same site twice.
+                        .col-sm-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='file-text')
+                                .flex-grow-1
+                                  h6.f-w-600 Knows your sources 
+                                  p A book giving information on many subjects or on many aspects of one subject.
+                    .col-xl-4
+                      .row
+                        .col-xl-12.col-md-6
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='youtube')
+                                .flex-grow-1
+                                  h6.f-w-600  Sources Demos
+                                  p Simple demos of frequently asked questions about using the information resources
+                        .col-xl-12.col-md-6
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='youtube')
+                                .flex-grow-1
+                                  h6.f-w-600  Validate Html
+                                  p Website is the process of ensuring that the pages on the website conform.
+                        .col-xl-12
+                          .card
+                            .card-body
+                              .d-flex
+                                i.m-r-30(data-feather='youtube')
+                                .flex-grow-1
+                                  h6.f-w-600 Web Design
+                                  p Web is so high-level, it never encourages you to design the same site twice
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

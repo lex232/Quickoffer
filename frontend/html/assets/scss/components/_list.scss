@@ -1,0 +1,25 @@
+/**=====================
+     17. List CSS Start
+==========================**/
+.list-group-item.active {
+  background-color: var(--theme-deafult);
+  border-color: var(--theme-deafult);
+}
+.list-group {
+  .list-group-item{
+    .badge{
+      padding: 4px 6px 3px;
+    }
+  }
+  i {
+    margin-right: $list-group-margin;
+  }
+  img {
+    height: 36px;
+    width: 36px;
+    margin-right: $list-group-margin;
+  }
+}
+/**=====================
+     17. List CSS Ends
+==========================**/

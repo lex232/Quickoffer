@@ -1,0 +1,606 @@
+/**=====================
+    01. Update CSS Start
+==========================**/
+@import "utils/variables";
+// jsgrid css
+.jsgrid-filter-row {
+  select,
+  input {
+    padding: 6px 10px;
+    border: 1px solid $horizontal-border-color;
+    background: $white;
+  }
+}
+.jsgrid-grid-body{
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px $light-gray;
+  }
+  &::-webkit-scrollbar {
+    width: 2px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(68, 102, 242, 0.15);
+  }
+}
+.jsgrid {
+	.jsgrid-button {
+    width: 20px;
+		height: 20px;
+    &.jsgrid-search-button{
+      background-position: 0 -295px;
+    }
+    &.jsgrid-clear-filter-button{
+      background-position: 0 -39px;
+    }
+  }
+  .jsgrid-delete-button {
+    background-position: 0 -78px;
+    width: 22px;
+    height: 22px;
+  }
+  .jsgrid-edit-button {
+    background-position: -2px -122px;
+    width: 22px;
+    height: 22px;
+  }
+  .jsgrid-insert-mode-button {
+    background-position: -2px -160px;
+    width: 25px;
+    height: 25px;
+  }
+  .jsgrid-insert-button {
+    background-position: -3px -202px;
+    width: 16px;
+    height: 16px;
+  }
+}
+// popover
+.popover {
+  background-color: $white;
+  border: none;
+  box-shadow: 0 0 20px rgba($primary-color, 0.1);
+  .popover-header {
+    background-color: $theme-medium-color;
+    color: $primary-color;
+    border-bottom: none;
+  }
+  .popover-body {
+    color: rgba(43, 43, 43, 0.7);
+  }
+}
+// calendar
+.fc{
+  .fc-today-button.fc-button{
+    margin-left: 10px;
+  }
+}
+//typeahead page
+.twitter-typeahead {
+  display: block !important;
+}
+span.twitter-typeahead {
+  .league-name {
+    font-size: 16px;
+    padding: 6px 10px 0;
+  }
+  .tt-menu {
+    float: left;
+    width: 100%;
+    min-width: 10rem;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    text-align: left;
+    list-style: none;
+    background-color: $white;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
+    border: none;
+    padding: 0;
+    z-index: 1 !important;
+  }
+  .tt-suggestion {
+    color: $dark-editor-document;
+    opacity: 0.6;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-top: 1px solid $light-semi-gray;
+    background: $white;
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background-color: $white;
+    }
+    &.active,
+    &:active {
+      color: $white;
+      background-color: var(--theme-deafult);
+    }
+  }
+}
+// tooltip css start
+.tooltip {
+  &.bs-tooltip-top {
+    .tooltip-arrow {
+      &:before {
+        border-top-color: $theme-medium-color;
+      }
+    }
+  }
+  &.bs-tooltip-bottom {
+    .tooltip-arrow {
+      &:before {
+        border-bottom-color: $theme-medium-color;
+        border-top-color: transparent;
+      }
+    }
+  }
+  &.bs-tooltip-start {
+    .tooltip-arrow {
+      &:before {
+        border-left-color: $theme-medium-color;
+        border-top-color: transparent;
+      }
+    }
+  }
+  &.bs-tooltip-end {
+    .tooltip-arrow {
+      &:before {
+        border-right-color: $theme-medium-color;
+        border-top-color: transparent;
+      }
+    }
+  }
+  .tooltip-inner {
+    background-color: $theme-medium-color;
+    color: $primary-color;
+  }
+  .tooltip-arrow {
+    &:before {
+      border-top-color: $theme-medium-color;
+    }
+  }
+}
+// strater-kit index page
+.starter-kit-fix {
+  .starter-main {
+    > div {
+      &:last-child {
+        .card {
+          margin-bottom: 90px;
+        }
+      }
+    }
+  }
+}
+.starter-main {
+  .card-body {
+    .alert {
+      i {
+        display: flex;
+        align-items: center;
+      }
+      &:before {
+        top: 28px;
+      }
+    }
+  }
+}
+// dropdown css start
+.dropdown-basic {
+  .dropdown {
+    .dropdown-content {
+      a {
+        padding: 6px 16px;
+        color: $dark-editor-document;
+        opacity: 0.6;
+        font-size: 13px;
+        border-top: 1px solid $light-semi-gray;
+        background: $white;
+        &:hover {
+          background-color: $white;
+        }
+      }
+      .dropdown-header {
+        padding: 8px 16px;
+        font-weight: 400;
+        color: $dark-color;
+        font-size: 13px;
+      }
+    }
+  }
+  .dropup {
+    .dropup-content {
+      top: auto;
+    }
+  }
+  .dropend {
+    .dropend-content {
+      top: 0;
+      left: 100%;
+    }
+  }
+  .dropstart {
+    .dropstart-content {
+      top: 0;
+      left: unset;
+      right: 100%;
+    }
+  }
+}
+// tab-bootstrap css start
+.nav-tabs {
+  border-bottom-color: $light-semi-gray;
+  .nav-bottom {
+    .nav-item {
+      .nav-link.active {
+        border-color: $light-semi-gray;
+      }
+    }
+  }
+}
+.nav-tabs {
+  .nav-item {
+    &.show {
+      .nav-link {
+        font-weight: 500;
+      }
+    }
+  }
+  .nav-link {
+    color: $dark-color;
+    &.active {
+      font-weight: 500;
+      border-color: $light-gray $light-gray $white;
+    }
+    &.dropdown-toggle {
+      border-radius: 5px;
+      border-bottom: none;
+    }
+  }
+  &.nav-bottom {
+    .nav-item {
+      .nav-link {
+        &.active {
+          border-color: $light-gray $light-gray $white;
+        }
+      }
+    }
+  }
+}
+.dropdown-menu {
+  box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
+  border: none;
+  padding: 0;
+  .dropdown-item {
+    color: $theme-body-font-color;
+    opacity: 0.6;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-top: 1px solid $light-semi-gray;
+    background: $white;
+    &:hover {
+      background-color: $white;
+    }
+  }
+  .dropdown-divider {
+    margin: 0;
+    border-top: 1px solid $light-gray;
+  }
+}
+// tab-bootstrap css end
+.border-tab {
+  .nav-tabs {
+    .nav-item {
+      .nav-link {
+        &.active {
+          border-bottom: 2px solid $primary-color;
+        }
+        &.show {
+          border-bottom: 2px solid $primary-color;
+        }
+        &:focus {
+          border-bottom: 2px solid $primary-color;
+        }
+      }
+    }
+  }
+}
+.tabbed-card {
+  .nav-tabs {
+    .nav-item {
+      .nav-link {
+        top: 17px;
+      }
+    }
+  }
+}
+.timeliny {
+  .timeliny-dot::before {
+    font-size: $btn-lg-font-size;
+  }
+}
+.card-header.note-toolbar {
+  .note-color{
+    .dropdown-menu{
+      min-width: 100px;
+    }
+  }
+  .dropdown-menu.note-check {
+    a.dropdown-item {
+      i.note-icon-menu-check {
+        visibility: visible;
+        color: $primary-color;
+      }
+      ~ i.note-icon-menu-check {
+        visibility: hidden;
+      }
+    }
+  }
+}
+.card-body {
+  .note-editor {
+    .note-table {
+      .note-dimension-picker-mousecatcher {
+        background-color: $white;
+        border: 1px solid $light-gray;
+      }
+    }
+    &.fullscreen {
+      .note-toolbar-wrapper {
+        height: 0 !important;
+      }
+    }
+  }
+}
+.note-editor{
+  p{
+      color:$light-text;
+  }
+  &.note-frame {
+      border-color: $light-gray;
+  }
+  i{
+      color: $theme-body-font-color;
+  }
+  span{
+      color: $theme-body-font-color;
+  }
+
+}
+.note-editor{
+  &.note-frame {
+      border-color: $light-gray;
+  }
+}
+.component {
+  .input-group {
+    .btn {
+      line-height: 32px;
+      text-transform: capitalize;
+    }
+  }
+}
+.date-picker{
+  .theme-form{
+    .row{
+      align-items: center;
+    }
+  }
+}
+.login-card {
+  .login-main {
+    .theme-form {
+      label {
+        font-size: $body-font-size;
+      }
+      .show-hide {
+        top: 50%;
+      }
+    }
+  }
+}
+// learning list view page
+.learning-block {
+  .product-box.learning-box {
+    border-radius: 20px;
+  }
+}
+// simple - mde page
+#editor_container {
+  .CodeMirror-code {
+    .CodeMirror-line {
+      margin-top: 6px;
+      span {
+        font-size: 13px;
+      }
+    }
+  }
+}
+.editor_container {
+  .reader {
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+.page-wrapper {
+  .page-body-wrapper {
+    .page-body {
+      .mega-inline.border-style {
+        .card {
+          border-radius: 0 !important;
+        }
+      }
+    }
+  }
+}
+// faq css end
+.job-filter {
+  .faq-form {
+    .form-control {
+      font-size: 14px;
+    }
+    .search-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+.note-btn-group.btn-group{
+  &:hover{
+    > .dropdown-menu{
+      display: block !important;
+    }
+  }
+}
+// image cropper
+.img-cropper {
+  .docs-options {
+    .dropdown-menu {
+      z-index: 1;
+    }
+  }
+}
+// list group
+.list-group-item {
+  border-color: $light-gray;
+}
+// pagination
+.page-link {
+  border-color: $light-gray;
+}
+// gallery
+.img-thumbnail {
+  border-color: $light-gray;
+}
+.my-gallery.gallery-with-description {
+  border-color: $light-gray !important;
+}
+.gallery-with-description {
+  a {
+    > div {
+      border-color: $light-gray;
+    }
+  }
+}
+// bootstrap notify
+.m-portlet__body {
+  label {
+    font-weight: 500;
+  }
+}
+// basic card
+.basic-card {
+  .border-card {
+    border-bottom: 1px solid $white;
+  }
+  .border-bottom-light {
+    border-bottom: 1px solid $light-gray;
+  }
+}
+// tabbed page
+.tabbed-cardpage {
+  .card-body {
+    .tabbed-card {
+      ul.nav-pills:not(.border-tab) {
+        top: 24px;
+      }
+    }
+  }
+}
+// tilt animation
+.tilt-showcase {
+  .card.height-equal {
+    .card-body {
+      overflow: hidden;
+    }
+  }
+}
+.wow-title {
+  .badge {
+    padding-bottom: 6px;
+  }
+}
+// animation page
+.animation-modal {
+  .card-body {
+    .animate-widget {
+      img {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+    }
+  }
+}
+//box shadow page
+.box-shadow-title {
+  .card-body {
+    [class*="col-"] {
+      margin-bottom: 20px;
+      .shadow-showcase {
+        h5 {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+// editor
+.editor-toolbar,
+.editor-statusbar,
+.CodeMirror {
+  border-color: $light-gray;
+}
+// clockpicker
+.clockpicker {
+  input {
+    border-radius: 10px !important;
+  }
+}
+// progress
+.progress {
+  border-radius: 30px;
+}
+// modal
+.modal-header,
+.modal-footer,
+.modal-content {
+  .btn-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+  }
+}
+// datatable
+.live-dom-table {
+  tr {
+    th,
+    td {
+      min-width: 300px !important;
+    }
+  }
+}
+.dataTables_wrapper {
+  table {
+    &.column-selector {
+      tbody {
+        td,
+        th {
+          &.select-checkbox {
+            &:before {
+              left: 45px;
+            }
+            &:after {
+              left: 19px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/**=====================
+    01. Update CSS Ends
+==========================**/

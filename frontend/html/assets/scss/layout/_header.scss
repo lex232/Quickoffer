@@ -1,0 +1,429 @@
+/**=====================
+    05. Header CSS Start
+==========================**/
+/**======Main Header css Start ======**/
+.toggle-sidebar , .back-btn {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba($white, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: $header-wrapper-nav-icon-size;
+    height: $header-wrapper-nav-icon-size;
+    stroke: $white;
+  }
+  i {
+    font-size: $header-wrapper-nav-icon-size;
+  }
+  &:hover {
+    &:before {
+      height: 40px;
+      width: 40px;
+      transform: scale(1);
+      transition: all 0.3s ease;
+    }
+    > svg {
+      color: var(--theme-deafult) !important;
+      stroke: var(--theme-deafult) !important;
+    }
+  }
+}
+.onhover-dropdown {
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    .left-dropdown {
+      overflow: unset !important;
+    }
+    .onhover-show-div {
+      @extend %for-animated-hover-box;
+    }
+  }
+}
+.onhover-show-div {
+  top: 55px;
+  position: absolute;
+  z-index: 8;
+  background-color: $white;
+  transition: all linear 0.3s;
+  @extend %for-animated-hover;
+  li {
+    padding: 5px 30px;
+    &:before {
+      display: none;
+    }
+    a {
+      svg {
+        margin-top: 0 !important;
+        path,
+        line {
+          color: $theme-body-font-color !important;
+        }
+      }
+    }
+  }
+}
+/*=======Mega menu css start=======*/
+.right-header{
+  .input-group {
+    padding: 5px 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: $body-color;
+    .input-group-prepend {
+      .input-group-text {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        margin-right: 5px;
+          &:before{
+            position: absolute;
+            content: "";
+            width: 1px;
+            height: 15px;
+            background-color: rgba($theme-body-font-color, 0.2);
+            top: 18px;
+            left: 42px;
+          }
+        i {
+          color: $theme-body-font-color;
+        }
+      }
+    }
+    .form-control {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      font-size: 14px;
+      &:focus {
+        box-shadow: none;
+      }
+      &::placeholder {
+        font-weight: 300;
+        color: $theme-body-font-color;
+      }
+    }
+  }
+}
+.page-wrapper{
+  &.horizontal-wrapper{
+    .page-header{
+      .header-wrapper{
+        padding: 18px 20px 18px 30px;
+        .header-logo-wrapper{
+          .logo-header-main{
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  &.compact-wrapper{
+    .page-header{
+      .header-wrapper{
+        .header-logo-wrapper{
+          .logo-header-main{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+}  
+.left-header {
+  display: flex;
+  .left-menu-header {
+    ul.header-left {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      li {
+        padding: 0 25px;
+        position: relative;
+        a {
+          color: $theme-body-font-color;
+          font-weight: 500;
+          &:hover {
+            color: $secondary-color;
+          }
+        }
+        ul.onhover-show-div {
+          min-width: 190px;
+          padding: 20px 0;
+          li {
+            padding: 6px 25px;
+          }
+          li.flyout-right {
+            position: relative;
+            &:hover {
+              ul {
+                display: block;
+                transition: all 0.5s ease-in;
+              }
+            }
+            ul {
+              padding: 20px 0;
+              li {
+                padding: 6px 25px;
+              }
+              li.flyout-right {
+                position: relative;
+                &:hover {
+                  ul {
+                    display: block;
+                    transition: all 0.8s ease-in;
+                  }
+                }
+                ul {
+                  display: none;
+                }
+              }
+            }
+            ul {
+              position: absolute;
+              top: 0;
+              left: calc(100% + 3px);
+              min-width: 200px;
+              display: none;
+              background-color: $white;
+              border-radius: 5px;
+            }
+          }
+        }
+        &:hover{
+          span.f-w-600{
+            &::before{
+              width: 120px;
+              transition: all 0.5s ease-in;
+            }
+          }
+        }
+        span.f-w-600 {
+          position: relative;
+          color: $primary-color;
+          &:before {
+            position: absolute;
+            content: "";
+            top: -2px;
+            left: -9px;
+            width: 50px;
+            height: 24px;
+            background-color: rgba($primary-color , 0.2);
+            border-radius: 4px;
+            z-index: -1;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+        &:nth-child(n+2){
+          &::before {
+            position: absolute;
+            content: "";
+            top: 8px;
+            left: 0;
+            width: 1px;
+            height: 10px;
+            background-color: $theme-body-font-color;
+          }
+        }
+        span {
+          font-size: 14px;
+          line-height: 1.8;
+          color: $theme-body-font-color;
+          svg {
+            width: 14px;
+            height: auto;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .mega-menu-container {
+    min-width: 1100px;
+    position: absolute;
+    width: calc(100vw - 800px);
+    height: 0;
+    border-radius: 0px;
+    background-color: $white;
+    top: 59px;
+    left: -30px;
+    border-top: 1px solid $light-semi-gray;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    display: block !important;
+    transition: all 0.2s ease-in-out;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      height: 300px;
+    }
+    .link-section {
+      > div {
+        h6 {
+          margin-top: 20px;
+        }
+      }
+      li {
+        width: 100%;
+        padding: 7px 0 7px 15px;
+        a {
+          transition: all 0.3s ease;
+        }
+        &:hover {
+          a {
+            color: var(--theme-deafult);
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+    .mega-box {
+      & + .mega-box {
+        padding-left: 30px;
+        border-left: 1px solid $light-semi-gray;
+      }
+      .icon {
+        li {
+          position: relative;
+          &:hover {
+            &:before {
+              color: var(--theme-deafult);
+              transition: all 0.3s ease;
+            }
+          }
+          &:before {
+            content: "\f101";
+            font-family: fontawesome;
+            position: absolute;
+            top: 7px;
+            left: 0px;
+          }
+        }
+      }
+      .svg-icon {
+        & ~ div {
+          h6 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+          }
+        }
+        li {
+          padding-left: 0px;
+          &:hover {
+            &:before {
+              color: var(--theme-deafult);
+              transition: all 0.3s ease;
+            }
+          }
+          a {
+            svg {
+              width: 16px;
+              margin-right: 5px;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+    .submenu-title {
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+    .according-menu {
+      display: none;
+    }
+  }
+  .input-group {
+    padding: 5px 15px;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: $body-color;
+    .input-group-prepend {
+      .input-group-text {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: 40px;
+        width: 40px;
+        margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+          color: $primary-color;
+        }
+      }
+    }
+    .form-control {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      font-size: 14px;
+      &:focus {
+        box-shadow: none;
+      }
+      &::placeholder {
+        font-weight: 300;
+        color: $light-text;
+      }
+    }
+  }
+}
+.mega-menu {
+  .default-according {
+    .card {
+      .btn-link {
+        font-weight: 500;
+      }
+      .card-body {
+        font-size: 12px;
+      }
+    }
+  }
+  .onhover-show-div {
+    width: 1500px;
+  }
+  .card-body {
+    padding: 20px;
+  }
+  div {
+    > div {
+      a {
+        margin-bottom: 0px;
+        display: inline-block;
+        color: $theme-body-sub-title-color;
+      }
+    }
+  }
+  .list-unstyled {
+    div {
+      a {
+        padding: 8px 35px 8px 0;
+        transition: $sidebar-transition;
+
+        &:hover {
+          padding: 8px 35px 8px 10px;
+          transition: $sidebar-transition;
+        }
+      }
+    }
+  }
+}
+/**=====================
+    05. Header CSS Ends
+==========================**/

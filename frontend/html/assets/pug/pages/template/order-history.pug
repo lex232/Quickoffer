@@ -1,0 +1,395 @@
+- var theme_customizer      = true;
+- var datatable             = true;
+- var page_datatable        = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Order History
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ecommerce
+                    li.breadcrumb-item.active  Order History
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Order history
+                  .card-body
+                    .order-history.table-responsive.theme-scrollbar
+                      table#basic-1.table.table-bordernone.display
+                        thead
+                          tr
+                            th(scope='col') Prdouct
+                            th(scope='col') Prdouct name
+                            th(scope='col') Size
+                            th(scope='col') Color
+                            th(scope='col') Article number
+                            th(scope='col') Units
+                            th(scope='col') Price
+                            th(scope='col')
+                              i.fa.fa-angle-down
+                        tbody
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/1.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Party Wear Gown
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td M
+                            td Red
+                            td 4215738
+                            td 2
+                            td $21
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/13.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Fancy watch
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td Free Size
+                            td Brown
+                            td 5476182
+                            td 1
+                            td $10
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              img.img-fluid.img-30(src='../assets/images/product/4.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Man shoes
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td 8
+                            td Black & white
+                            td 1756457
+                            td 1
+                            td $18
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/10.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies side bag
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td Medium
+                            td Yellow
+                            td 7451725
+                            td 1
+                            td $13
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/12.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies Hills
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td 8
+                            td Pink
+                            td 4127421
+                            td 2
+                            td $10
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/3.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Fancy Ladies Jacket
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td XL
+                            td Red
+                            td 3581714
+                            td 2
+                            td $24
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/2.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies Handbag
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td Small
+                            td Brown
+                            td 6748142
+                            td 1
+                            td $15
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/15.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') I phone 13 mobile
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td Small
+                            td Blue
+                            td 5748214
+                            td 1
+                            td $250
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/14.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Smart Watch
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td Free Size
+                            td Black
+                            td 2471254
+                            td 2
+                            td $30 
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/11.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Slipper
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td 6
+                            td Brown
+                            td 8475112
+                            td 1
+                            td $6
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/2.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies Handbag
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td Small
+                            td Brown
+                            td 6748142
+                            td 2
+                            td $30
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/15.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') I phone 13 mobile
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td Small
+                            td Blue
+                            td 5748214
+                            td 1
+                            td $250
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/14.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Smart Watch
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td Free Size
+                            td Black
+                            td 2471254
+                            td 2
+                            td $30 
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/11.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Slipper
+                                .order-process
+                                  span.order-process-circle.cancel-order
+                                  | Cancelled
+                            td 6
+                            td Brown
+                            td 8475112
+                            td 1
+                            td $6
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/1.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Party Wear Gown
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td XL
+                            td Red
+                            td 4215738
+                            td 1
+                            td $21
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/13.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Fancy watch
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td Free Size
+                            td Brown
+                            td 5476182
+                            td 2
+                            td $10
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              img.img-fluid.img-30(src='../assets/images/product/4.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Man shoes
+                                .order-process
+                                  span.order-process-circle
+                                  | Processing
+                            td 8
+                            td Black & white
+                            td 1756457
+                            td 1
+                            td $18
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/10.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies side bag
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td Medium
+                            td Yellow
+                            td 7451725
+                            td 1
+                            td $13
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/12.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Ladies Hills
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td 8
+                            td Pink
+                            td 4127421
+                            td 2
+                            td $10
+                            td
+                              i(data-feather='more-vertical')
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img.img-fluid.img-30(src='../assets/images/product/3.png', alt='#')
+                            td
+                              .product-name
+                                a(href='product-page.html') Fancy Ladies Jacket
+                                .order-process
+                                  span.order-process-circle.shipped-order
+                                  | Shipped
+                            td XL
+                            td Red
+                            td 3581714
+                            td 2
+                            td $24
+                            td
+                              i(data-feather='more-vertical')
+          // Container-fluid Ends  
+        include ../../components/footer
+    include ../../components/footer-files

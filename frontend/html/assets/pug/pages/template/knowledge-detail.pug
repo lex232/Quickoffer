@@ -1,0 +1,156 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Knowledgebase Details
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Knowledgebase
+                    li.breadcrumb-item.active Knowledgebase-detail
+          // Container-fluid Starts
+          .container-fluid.knowledge-details
+            .row
+              .col-xl-3.xl-40.box-col-40
+                .md-sidebar.job-sidebar
+                  a.md-sidebar-toggle.btn.btn-primary(href="javascript:void(0)")
+                    | Knowledge filter
+                  .md-sidebar-aside.job-left-aside.custom-scrollbar.custom-scrollbar
+                    #accordionoc.default-according.style-1.faq-accordion.job-accordion
+                      .row
+                        .col-xl-12
+                          .card
+                            .card-header
+                              h5.mb-0.p-0
+                                button.btn.btn-link.ps-0(data-bs-toggle='collapse' aria-expanded='true' data-bs-target='#collapseicon1') Knowledge Categories
+                            #collapseicon1.collapse.show(aria-labelledby='collapseicon1' data-bs-parent='#accordion')
+                              .categories
+                                .learning-header
+                                  span.f-w-600 Design
+                                ul
+                                  li
+                                    a(href='#') UI Design 
+                                    span.badge.badge-primary.pull-right 28
+                                  li
+                                    a(href='#') UX Design 
+                                    span.badge.badge-primary.pull-right 35
+                                  li
+                                    a(href='#') Interface Design 
+                                    span.badge.badge-primary.pull-right 17
+                                  li
+                                    a(href='#') User Experience 
+                                    span.badge.badge-primary.pull-right 26
+                              .categories.pt-0
+                                .learning-header
+                                  span.f-w-600 Development
+                                ul
+                                  li
+                                    a(href='#') Frontend Development
+                                    span.badge.badge-primary.pull-right 48
+                                  li
+                                    a(href='#') Backend Development
+                                    span.badge.badge-primary.pull-right 19
+                        .col-xl-12
+                          .card
+                            .card-header
+                              h5.mb-0.p-0
+                                button.btn.btn-link.ps-0(data-bs-toggle='collapse' data-bs-target='#collapseicon2' aria-expanded='true' aria-controls='collapseicon2') Upcoming Courses
+                            #collapseicon2.collapse.show(aria-labelledby='collapseicon2' data-bs-parent='#accordion')
+                              .upcoming-course.card-body
+                                .d-flex
+                                  .flex-grow-1
+                                    span.f-w-600 UX Development
+                                    h6
+                                      | Course By 
+                                      a(href='#')   Development Team
+                                    ul.rating
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star-half-o.font-warning
+                                  div
+                                    h5.mb-0.p-0.font-primary 18
+                                    span.d-block Dec
+                                .d-flex
+                                  .flex-grow-1
+                                    span.f-w-600 Business Analyst
+                                    h6
+                                      | Course By 
+                                      a(href='#')  Analyst Team.
+                                    ul.rating
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                  div
+                                    h5.mb-0.p-0.font-primary 28
+                                    span.d-block Dec
+                                .d-flex
+                                  .flex-grow-1
+                                    span.f-w-600 Web Development
+                                    h6
+                                      | Course By 
+                                      a(href='#')  Designer
+                                    ul.rating
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star.font-warning
+                                      li
+                                        i.fa.fa-star-half-o.font-warning
+                                  div
+                                    h5.mb-0.p-0.font-primary 5
+                                    span.d-block Jan                         
+              .col-xl-9.xl-60.box-col-60
+                .blog-single
+                  .blog-box
+                    .card
+                      img.img-fluid.w-100(src='../assets/images/knowledgebase/1.jpg' , alt='blog-main')
+                    .card
+                      .card-body
+                        .blog-details                                   
+                          h4.mt-0
+                            | Why Choose Knowledge Course ?
+                          .single-blog-content-top
+                            p
+                              | Knowledge can be defined as awareness of facts or as practical skills, and may also refer to familiarity with objects or situations. Knowledge of facts, also called propositional knowledge, is often defined as true belief that is distinct from opinion or guesswork by virtue of justification. While there is wide agreement among philosophers that it is a form of true belief, many controversies in philosophy focus on justification: whether it is needed at all, how to understand it, and whether something else besides it is needed.
+                            p
+                              | Knowledge can be produced in many different ways. The most important source is perception, which refers to the usage of the five senses. Many theorists also include introspection as a source of knowledge, not of external physical objects, but of one's own mental states. Other sources often discussed include memory, rational intuition, inference, and testimony. According to foundationalism, some of these sources are basic in the sense that they can justify beliefs without depending on other mental states. This claim is rejected by coherentists.
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

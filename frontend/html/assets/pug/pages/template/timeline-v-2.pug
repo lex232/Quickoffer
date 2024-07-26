@@ -1,0 +1,51 @@
+- var timeline_2            = true;
+- var theme_customizer      = true;
+- var tooltip               = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Timeline 2
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Timeline
+                    li.breadcrumb-item.active Timeline 2
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Example
+                  .card-body
+                    #timeline-2
+                      div(data-year='2017') Start
+                      .active(data-year='2018')
+                        | Make sure you pick out a good luck new job card to go with the words, and pop a beautiful bunch of flowers from our gift range in your basket.
+                      div(data-year='2019') Next step is Video Tutorial.
+                      div(data-year='2020') Next step is Layout Draft.
+                      div(data-year='2021') Next step is Audio Tutorial.
+                      div(data-year='2022') Fresh insights about the problem. This is the content of the Final Testing.
+                      div(data-year='2023') End.
+          // Container-fluid ends
+        include ../../components/footer
+    include ../../components/footer-files

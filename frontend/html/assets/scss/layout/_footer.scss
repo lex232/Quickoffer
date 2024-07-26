@@ -1,0 +1,63 @@
+/**=====================
+     47. Footer CSS Start
+==========================**/
+.footer {
+  background-color: $footer_bg_color;
+  box-shadow: $footer_box_shadow;
+  padding: 20px 32px;
+  bottom: 0;
+  left: 0;
+  margin-left: 280px;
+  transition: 0.5s;
+  &.footer-dark {
+    background-color: $footer_dark_color;
+    p {
+      color: $white;
+    }
+  }
+  p {
+    font-size: 12px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+  }
+  .footer-right {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+.footer-page.card{
+  margin-bottom: 95px !important;
+}
+.footer-fix {
+  width: calc(100% - 280px);
+  position: fixed;
+}
+@media (max-width: 767px) {
+  .footer {
+    text-align: center;
+    .footer-left,
+    .footer-right {
+      justify-content: center;
+    }
+    .footer-right {
+      margin-top: 6px;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .footer {
+    p {
+      font-size: 12px;
+    }
+    .footer-right {
+      margin-top: 0;
+    }
+  }
+}
+/**=====================
+     47. Footer CSS Ends
+==========================**/

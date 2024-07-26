@@ -1,0 +1,153 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Input groups
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Form Controls
+                    li.breadcrumb-item.active  Input groups
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-6
+                .card
+                  .card-header.pb-0
+                    h4 Basic Input groups
+                  .card-body
+                    .row
+                      .col
+                        form
+                          .mb-3.m-form__group
+                            label.form-label Left Addon
+                            .input-group
+                              span.input-group-text @
+                              input.form-control(type='text', placeholder='Email')
+                          .mb-3
+                            label.form-label Right Addon
+                            .input-group
+                              input.form-control(type='text', placeholder="Recipient's username", aria-label="Recipient's username")
+                              span.input-group-text @example.com
+                          .mb-3
+                            label.form-label Joint Addon
+                            .input-group
+                              span.input-group-text 0.00
+                              input.form-control(type='number', aria-label='Amount (to the nearest dollar)')
+                          div
+                            label.form-label Left & Right Addon
+                            .input-group.mb-3.leftright-radius
+                              span.input-group-text 0.00  
+                              input.form-control(type='number', aria-label='Amount (to the nearest dollar)')
+                              span.input-group-text 0.00  
+                          .mb-3.input-group-solid
+                            label.form-label Solid style
+                            .input-group
+                              span.input-group-text @  
+                              input.form-control(type='text', placeholder='Email')
+                          .mb-3.input-group-square
+                            label.form-label Square style
+                            .input-group.left-radius
+                              span.input-group-text +
+                              input.form-control(type='text', placeholder='Email')
+                          .mb-3.input-group-square
+                            label.form-label Raise style
+                            .input-group.input-group-air.left-radius
+                              span.input-group-text #
+                              input.form-control(type='text', placeholder='Email')   
+                          .mb-3
+                            label.form-label Left & Right Addon
+                            .input-group.mb-3.leftright-radius
+                              span.input-group-text
+                                i.icofont.icofont-ui-zoom-out  
+                              input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
+                              span.input-group-text.rounded-0 0.00                    
+                  .card-footer
+                    button.btn.btn-primary(type='submit').m-r-15 Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-6
+                .card
+                  .card-header.pb-0
+                    h4 Basic Input groups
+                  .card-body
+                    .row
+                      .col
+                        form
+                          .mb-3.m-form__group
+                            label.form-label Left Addon
+                            .input-group
+                              span.input-group-text
+                                i.icofont.icofont-pencil-alt-5
+                              input.form-control(type='text', placeholder='Email')
+                          .mb-3
+                            label.form-label Right Addon
+                            .input-group
+                              input.form-control(type='text', placeholder="Recipient's username", aria-label="Recipient's username")
+                              span.input-group-text
+                                i.icofont.icofont-ui-user
+                          .mb-3
+                            label.form-label Joint Addon
+                            .input-group
+                              span.input-group-text
+                                i.icofont.icofont-unlink
+                              span.input-group-text.rounded-0 0.00  
+                              input.form-control(type='number', aria-label='Amount (to the nearest dollar)')
+                          .mb-3
+                            label.form-label Left & Right Addon
+                            .input-group.mb-3.leftright-radius
+                              span.input-group-text
+                                i.icofont.icofont-ui-zoom-out  
+                              input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
+                              span.input-group-text
+                                i.icofont.icofont-ui-zoom-in  
+                          .mb-3.input-group-solid
+                            label.form-label Solid style
+                            .input-group
+                              span.input-group-text
+                                i.icofont.icofont-users  
+                              input.form-control(type='text', placeholder='999999')
+                          .mb-3.input-group-square
+                            label.form-label Flat style
+                            .input-group.left-radius
+                              span.input-group-text
+                                i.icofont.icofont-credit-card  
+                              input.form-control(type='text', placeholder='')
+                          .mb-3.input-group-square
+                            label.form-label Raise style
+                            .input-group.left-radius
+                              span.input-group-text
+                                i.icofont.icofont-download  
+                              input.form-control.input-group-air(type='text', placeholder='https://www.example.com')
+                          div
+                            label.form-label Left & Right Addon
+                            .input-group.pill-input-group.leftright-radius
+                              span.input-group-text
+                                i.icofont.icofont-ui-copy  
+                              input.form-control(type='text', aria-label='Amount (to the nearest dollar)')
+                              span.input-group-text
+                                i.icofont.icofont-stock-search  
+                  .card-footer
+                    button.btn.btn-primary(type='submit').m-r-15 Submit
+                    button.btn.btn-light(type='submit') Cancel
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

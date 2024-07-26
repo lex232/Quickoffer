@@ -1,0 +1,63 @@
+- var theme_customizer      = true;
+- var counter               = true;
+- var popover_custom        = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Popover
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ui Kits
+                    li.breadcrumb-item.active Popover
+          // Container-fluid starts
+          .container-fluid
+            .row.popover-main
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Basic Examples
+                    span Different types of Events popover
+                  .card-body 
+                    .btn-showcase
+                      button.btn.btn-primary.example-popover(type='button', data-bs-toggle='popover', title='Popover title', data-bs-content="And here's some amazing content. It's very engaging. Right?") Click to toggle popover
+                      a.example-popover.btn.btn-primary(tabindex='0', role='button', data-bs-toggle='popover', data-bs-trigger='focus', title='Popover title', data-bs-content="And here's some amazing content. It's very engaging. Right?") Dismissible popover
+                      button.example-popover.btn.btn-primary(type='button', data-bs-trigger='hover', data-container='body', data-bs-toggle='popover', data-bs-placement='bottom', title='Popover title', data-offset='-20px -20px', data-bs-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.')
+                        | On Hover Tooltip
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Direction
+                    span Popover with directions.
+                  .card-body 
+                    .btn-showcase
+                      button.example-popover.btn.btn-primary(type='button', data-container='body', data-bs-toggle='popover', data-bs-placement='top', title='Popover title', data-bs-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.')
+                        | Popover on top
+                      button.example-popover.btn.btn-primary(type='button', data-container='body', data-bs-toggle='popover', data-bs-placement='right',title='Popover title', data-bs-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.')
+                        | Popover on right
+                      button.example-popover.btn.btn-primary(type='button', data-container='body', data-bs-toggle='popover', data-bs-placement='bottom',title='Popover title', data-bs-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.')
+                        | Popover on bottom
+                      button.example-popover.btn.btn-primary(type='button', data-container='body', data-bs-toggle='popover', data-bs-placement='left',title='Popover title', data-bs-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.')
+                        | Popover on left
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

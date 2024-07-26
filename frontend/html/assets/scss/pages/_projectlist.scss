@@ -1,0 +1,150 @@
+/**==========================
+  89. Project list css start
+=============================**/
+.project-create {
+  .card-body {
+    .theme-form {
+      label {
+        font-weight: 500;
+      }
+      .form-control {
+        &::-webkit-input-placeholder {
+          color: $dark-gray !important;
+          font-weight: 400 !important;
+        }
+      }
+    }
+  }
+}
+.project-list {
+  .row {
+    margin: 15px;
+  }
+  button:focus {
+    outline: none !important;
+  }
+  .theme-form {
+    .form-group {
+      margin-bottom: 15px;
+    }
+  }
+  .border-tab.nav-tabs {
+    .nav-item .nav-link {
+      border: 1px solid transparent;
+      padding: 8px 30px 8px 0;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+    }
+  }
+  .btn {
+    vertical-align: -12px;
+    float: right;
+    svg {
+      vertical-align: -3px;
+      height: 16px;
+    }
+  }
+  ul {
+    margin-bottom: 0 !important;
+    border-bottom: 0;
+    li {
+      svg {
+        height: 18px;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+.tab-content {
+  .row {
+    > div.col-xl-4 {
+      $show-numbers: true;
+      @if $show-numbers {
+        @for $i from 1 through 15 {
+          &:nth-child(#{$i}) {
+            animation-fill-mode: both;
+            animation: fadeIncustom 0.5s linear #{$i}00000ms;
+          }
+        }
+      }
+    }
+  }
+}
+.project-cards {
+  .tab-content {
+    margin-bottom: -30px;
+  }
+}
+.project-box {
+  border: 1px solid $light-gray;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  h6 {
+    font-weight: 600;
+  }
+  p {
+    color: $light-text;
+  }
+  .badge {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    padding: 4px 6px 4px;
+  }
+  .project-status {
+    p {
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+  }
+  .d-flex {
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  .details {
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 767px) {
+  .project-list {
+    .btn {
+      float: left;
+      margin-top: 5px;
+    }
+  }
+  .project-box {
+    padding: 20px;
+  }
+}
+@media (max-width: 420px) {
+  .project-box {
+    padding: 15px;
+    .badge {
+      font-size: 8px;
+      top: 8px;
+      right: 10px;
+    }
+  }
+  .project-list {
+    .border-tab {
+      &.nav-tabs {
+        display: flex;
+        .nav-item {
+          width: auto !important ;
+          .nav-link {
+            padding: 5px 15px 5px 0;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+/**==========================
+  89. Project list css Ends
+=============================**/

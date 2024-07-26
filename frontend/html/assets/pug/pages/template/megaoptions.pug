@@ -1,0 +1,397 @@
+- var theme_customizer      = true;
+- var tooltip               = true;
+- var height_equal          = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Mega options
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Form Controls
+                    li.breadcrumb-item.active Mega options
+          // Container-fluid starts
+          .container-fluid.mega-options
+            .row
+              .col-sm-12.col-xl-6.box-col-6
+                .card
+                  .card-header.pb-0
+                    h4 Default Style
+                    span This option is show by default you don't need to add any extra class
+                  .card-body.megaoptions-border-space-sm
+                    form.mega-inline
+                      .row
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio14(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio14')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio13(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio13')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12.col-xl-6.box-col-6
+                .card
+                  .card-header.pb-0
+                    h4 No Border
+                    span By adding .plain-style class to .mega-inline You can archive this style
+                  .card-body
+                    form.mega-inline.plain-style
+                      .row
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio11(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio11')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio12(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio12')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12.col-xl-6.box-col-6
+                .card
+                  .card-header.pb-0
+                    h4 Solid Border Style
+                    span By adding .border-style class to .mega-inline You can archive this style
+                  .card-body.megaoptions-border-space-sm
+                    form.mega-inline.border-style
+                      .row
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio15(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio15')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio16(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio16')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12.col-xl-6.box-col-6
+                .card
+                  .card-header.pb-0
+                    h4 Offer style Border
+                    span By adding .offer-style class to .mega-inline You can archive this style
+                  .card-body.megaoptions-border-space-sm
+                    form.mega-inline.offer-style
+                      .row
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio17(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio17')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio18(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio18')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Inline Style
+                    span
+                      | For Create inline megaoption add 
+                      code .mega-inline
+                      |  class in form tag
+                  .card-body.megaoptions-border-space-sm
+                    form.mega-inline
+                      .row
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio19(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio19')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 14-20 Day Shipping ( Duties end taxes may be due upon delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio20(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio20')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end taxes may be due upon delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio21(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio21')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Standard
+                                  span.badge.badge-secondary.pull-right.digits 80 INR
+                                p.mb-0 Estimated 3 Day Shipping ( Duties end taxes may be due upon delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio22(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio22')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Local 
+                                  span.badge.badge-primary.pull-right.digits Free
+                                p.mb-0 Estimated 15 Day Shipping ( Duties end taxes may be due upon delivery )
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12.col-xl-6.box-col-6
+                .card.height-equal
+                  .card-header.pb-0
+                    h4 Vertical Style
+                    span
+                      | For Create inline megaoption add 
+                      code .mega-vertical
+                      |  class in form tag
+                  .card-body
+                    form.mega-vertical
+                      .row
+                        .col-sm-12
+                          p.mega-title.mb-3 Delivery Option
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio23(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio23')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 10 to 15 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio24(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio24')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast 
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 10 to 12 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-success.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio25(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio25')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Standard 
+                                  span.badge.badge-success.pull-right.digits 80 INR
+                                p.mb-0 Estimated 3 to 5 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-info.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio5(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio5')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Local 
+                                  span.badge.badge-info.pull-right.digits Free
+                                p.mb-0 Estimated 3 to 5 Day Shipping ( Duties end taxes may be due upon delivery )
+                        .col-sm-12
+                          p.mega-title.mb-3 Buying Option
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-warning.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio26(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio26')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | XYZ Seller
+                                  span.badge.badge-warning.pull-right.digits 250 INR
+                                p.rating-star-wrapper.mb-0
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning.m-r-5
+                                  | rating
+                        .col-sm-6
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-danger.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio27(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio27')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | ABC Seller
+                                  span.badge.badge-danger.pull-right.digits 150 INR
+                                p.rating-star-wrapper.mb-0
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star.m-r-5
+                                  | rating
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+              .col-sm-12.col-xl-6.box-col-6
+                .card.height-equal
+                  .card-header.pb-0
+                    h4 Horizontal Style
+                    span
+                      | For Create inline megaoption add 
+                      code .mega-horizontal
+                      |  class in form tag
+                  .card-body
+                    form.mega-horizontal
+                      .row
+                        .col-sm-3
+                          p.mega-title.mb-3 Delivery Option
+                        .col-sm-9
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-primary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio30(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio30')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | COD
+                                  span.badge.badge-primary.pull-right.digits 50 INR
+                                p.mb-0 Estimated 5 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-9.offset-sm-3
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-secondary.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio31(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio31')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | Fast 
+                                  span.badge.badge-secondary.pull-right.digits 100 INR
+                                p.mb-0 Estimated 1 Day Shipping ( Duties end tax may be due delivery )
+                        .col-sm-3
+                          p.mega-title.mb-3 Buying Option
+                        .col-sm-9
+                          .card
+                            .d-flex.p-20
+                              .form-check.radio.radio-success.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio32(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio32')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | XYZ Seller
+                                  span.badge.badge-success.pull-right.digits 250 INR
+                                p.rating-star-wrapper.mb-0
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star.txt-warning.m-r-5
+                                  | rating
+                        .col-sm-9.offset-sm-3
+                          .card.mb-0
+                            .d-flex.p-20
+                              .form-check.radio.radio-info.me-xxl-3.me-xl-1.me-3
+                                input.form-check-input#radio33(type='radio', name='radio1', value='option1')
+                                label.form-check-label(for='radio33')
+                              .flex-grow-1
+                                h6.mt-0.mega-title-badge
+                                  | ABC Seller
+                                  span.badge.badge-info.pull-right.digits 150 INR
+                                p.rating-star-wrapper.mb-0
+                                  i.icofont.icofont-star.txt-warning
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star
+                                  i.icofont.icofont-star.m-r-5
+                                  | rating
+                  .card-footer.text-end
+                    button.btn.btn-primary.m-r-15(type='submit') Submit
+                    button.btn.btn-light(type='submit') Cancel
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

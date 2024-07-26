@@ -1,0 +1,356 @@
+- var theme_customizer      = true;
+- var page_datatable        = true;
+- var datatable             = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3 Wishlist
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ecommerce
+                    li.breadcrumb-item.active Wishlist
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Wishlist
+                  .card-body.whishlist-main
+                    .row
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/01.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Women's Top
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 220$
+                              .avaiabilty
+                                .text-success In stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/02.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Men's Jacket
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 250$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/03.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Women's T-shirt
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                              .price
+                                | Price
+                                span : 200$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/04.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Denim Jacket
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 300$
+                              .avaiabilty
+                                .text-success In stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/05.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Women's Dress
+                              ul.rating
+                                ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 150$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/06.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Women's Jacket
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                              .price
+                                | Price
+                                span : 250$
+                              .avaiabilty
+                                .text-success In stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/05.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                   h6 Women's Dress
+                              ul.rating
+                                ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 150$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/07.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Men's Shirt
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 210$
+                              .avaiabilty
+                                .text-success In stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/08.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Men's Shirt
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 150$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/01.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Women's Top
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-o
+                                li
+                                  i.fa.fa-star-o
+                              .price
+                                | Price
+                                span : 120$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/02.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6 Men's Jacket
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                              .price
+                                | Price
+                                span : 300$
+                              .avaiabilty
+                                .text-success In stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+                      .col-xl-2.col-md-4.col-sm-6.col-lg-3
+                        .prooduct-details-box                                  
+                          .d-block
+                            a(href="product-page.html")
+                              img.align-self-center.img-fluid(src='../assets/images/ecommerce/03.jpg', alt='')
+                            .flex-grow-1
+                              .product-name
+                                a(href="product-page.html")
+                                  h6  Women's T-shirt
+                              ul.rating
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star
+                                li
+                                  i.fa.fa-star-half-o
+                              .price
+                                | Price
+                                span : 150$
+                              .avaiabilty
+                                .text-danger Out of stock
+                              a.btn.btn-primary.btn-xs(href="cart.html") Move to Cart
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

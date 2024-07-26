@@ -1,0 +1,1624 @@
+/**=====================
+    53. Dashboard CSS Start
+==========================**/
+.apexcharts-tooltip.apexcharts-theme-light{
+  .apexcharts-tooltip-title{
+    color: $primary-color !important;
+    background: rgba($primary-color, 0.1) !important;
+  }
+}
+.dashboard-default, 
+.dashboard-2{
+  .card{
+    &:hover{
+      .card-header{
+        .d-flex{
+          .flex-grow-1{
+            p{
+              &::after{
+                width: 115%;
+                transition: all 0.5s ease-in;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.dashboard-default {
+  .card-header {
+    text-transform: capitalize;
+    .d-flex {
+      .badge-group {
+        display: flex;
+        align-items: flex-start;
+        .badge {
+          padding: 10px 12px;
+          display: flex;
+          align-items: center;
+          svg {
+            margin-left: 5px;
+            width: auto;
+            height: 12px;
+          }
+        }
+        .icon-box {
+          margin-left: 14px;
+        }
+      }
+    }
+  }
+  .onhover-show-div {
+    width: 200px;
+    left: unset;
+    right: 0;
+    top: 40px;
+    ul {
+      li {
+        padding: 8px 12px;
+        border-bottom: 1px solid rgba($light-text, 0.1);
+        font-size: 12px;
+        background: $white;
+        font-family: $font-roboto;
+        text-align: left;
+        &:last-child {
+          border: none;
+        }
+        a {
+          color: $light-font;
+        }
+        &:hover {
+          a {
+            color: var(--theme-deafult);
+          }
+        }
+      }
+    }
+  }
+  table {
+    tr {
+      &:first-child {
+        td,
+        th {
+          padding-top: 0 !important;
+        }
+      }
+      &:last-child {
+        td {
+          padding-bottom: 0 !important;
+        }
+      }
+      th,
+      td {
+        &:first-child {
+          padding-left: unset !important;
+        }
+        &:last-child {
+          padding-right: unset !important;
+        }
+      }
+    }
+  }
+  .icon-box {
+    width: 33px;
+    height: 33px;
+    background-color: $light-color;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+    }
+    svg {
+      width: 16px;
+    }
+  }
+  .apexcharts-tooltip {
+    z-index: 0;
+  }
+  @each $activity-dot-name, $activity-dot-color in (primary, $primary-color),
+    (secondary, $secondary-color), (success, $success-color),
+    (danger, $danger-color), (info, $info-color), (light, $light-color),
+    (dark, $dark-color), (warning, $warning-color)
+  {
+    .activity-dot-#{$activity-dot-name} {
+      width: 16px;
+      height: 16px;
+      background-color: $white;
+      border-radius: 100%;
+      border: 3px solid $activity-dot-color;
+      box-shadow: -3px -6px 15px 0px rgba($activity-dot-color, 0.25);
+      position: relative;
+      z-index: 1;
+      min-width: 16px;
+      min-height: 16px;
+    }
+  }
+  .profile-greeting {
+    background-image: url("../images/dashboard/default/bg-cover.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    .d-sm-flex {
+      .badge-group {
+        display: flex;
+        align-items: flex-start;
+        .badge.badge-light-primary {
+          padding: 10px 12px;
+          font-weight: 600;
+          i {
+            margin-right: 5px;
+          }
+        }
+        .badge {
+          display: flex;
+          align-items: center;
+          svg {
+            width: auto;
+            height: 12px;
+            margin-right: 6px;
+            padding-top: 0;
+          }
+        }
+        .icon-box {
+          margin-left: 14px;
+          background-color: rgba($primary-color, 0.1);
+          svg {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+    .weather {
+      .span.sun-bg {
+        background-color: rgba($primary-color, 0.1);
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i {
+          font-size: 20px;
+        }
+      }
+      h2 {
+        font-size: 36px;
+        margin-bottom: 4px;
+        margin-right: 15px;
+        padding-right: 15px;
+        position: relative;
+        &:after {
+          position: absolute;
+          content: "";
+          right: 0;
+          top: 15px;
+          width: 1px;
+          height: 10px;
+          background-color: rgba($primary-color, 0.2);
+        }
+        span {
+          sup {
+            i {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+    .greeting-user {
+      text-align: center;
+      margin: 12px 0 22px;
+      .profile-vector {
+        position: relative;
+        margin-bottom: 26px;
+        .dots-images {
+          li {
+            position: absolute;
+            border-radius: 100%;
+            &.dot-small {
+              width: 3px;
+              height: 3px;
+            }
+            &.dot-medium {
+              width: 5px;
+              height: 5px;
+            }
+            &.semi-medium {
+              width: 4px;
+              height: 4px;
+            }
+            &.dot-big {
+              width: 6px;
+              height: 6px;
+            }
+            &.dot-1 {
+              left: 40%;
+              top: 33%;
+              animation: displayTransition 1s infinite;
+            }
+            &.dot-2 {
+              left: 38%;
+              top: 21%;
+              animation: displayTransition 1.5s infinite;
+            }
+            &.dot-3 {
+              left: 37%;
+              top: -2%;
+              animation: displayTransition 0.8s infinite;
+            }
+            &.dot-4 {
+              left: 32%;
+              top: 11%;
+              animation: displayTransition 1.8s infinite;
+            }
+            &.dot-5 {
+              left: 34%;
+              top: 30%;
+              animation: displayTransition 1.7s infinite;
+            }
+            &.dot-6 {
+              left: 33%;
+              top: 44%;
+              animation: displayTransition 1.2s infinite;
+            }
+            &.dot-7 {
+              left: 28%;
+              top: 44%;
+              animation: displayTransition 1.9s infinite;
+            }
+            &.dot-8 {
+              left: 33%;
+              top: 58%;
+              animation: displayTransition 2s infinite;
+            }
+            &.dot-9 {
+              left: 35%;
+              top: 62%;
+              animation: displayTransition 2s infinite;
+            }
+          }
+        }
+      }
+      ul.vector-image {
+        li {
+          position: absolute;
+          overflow: hidden;
+          img {
+            width: auto;
+            height: 30px;
+          }
+          &:first-child {
+            top: 15%;
+            right: 4%;
+            animation: move2 1.2s infinite alternate;
+          }
+          &:nth-child(2) {
+            top: 55%;
+            left: 15%;
+            animation: move1 8s linear infinite;
+          }
+          &:nth-child(3) {
+            top: -60%;
+            left: 38%;
+            animation: move2 1.2s infinite alternate;
+          }
+          &:nth-child(4) {
+            top: -40%;
+            right: 25%;
+            animation: move1 8s linear infinite;
+          }
+          &:nth-child(5) {
+            top: 75%;
+            right: 15%;
+            animation: move2 1.2s infinite alternate;
+          }
+          &:nth-child(6) {
+            bottom: -65%;
+            right: 36%;
+            animation: move2 1.2s infinite alternate;
+          }
+        }
+      }
+      h4 {
+        a{
+          color: $theme-body-font-color;
+        }
+        margin-bottom: 15px;
+        span.right-circle {
+          i {
+            background-color: rgba($primary-color, 0.1);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            &:before {
+              display: flex;
+              height: 100%;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+      }
+      div {
+        font-size: 11px;
+        span.badge {
+          padding: 6px 10px;
+        }
+      }
+    }
+  }
+  .total-revenue {
+    .revenue-chart {
+      margin: 0 -10px -35px -12px;
+      .apexcharts-xaxistooltip {
+        background-color: rgba($primary-color, 0.1);
+        border-color: $primary-color;
+        &:before {
+          border-bottom-color: $primary-color;
+        }
+      }
+    }
+  }
+  .total-investment {
+    .bottom-progress {
+      margin-top: 39px;
+      .badge {
+        padding: 7px 10px 4px;
+      }
+    }
+    .progress {
+      .progress-colors {
+        background-color: $light-color;
+        display: flex;
+        .progress-1 {
+          width: 30%;
+        }
+        .progress-2 {
+          width: 40%;
+        }
+      }
+    }
+  }
+  .our-user {
+    .card-body {
+      ul {
+        display: flex;
+        margin-top: 40px;
+        li {
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+          position: relative;
+          + li {
+            &::before {
+              position: absolute;
+              content: "";
+              width: 1px;
+              height: 25px;
+              background-color: $theme-body-font-color;
+              opacity: 0.1;
+              top: 8px;
+              left: 0;
+            }
+          }
+          p {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+    .user-chart {
+      position: relative;
+      .icon-donut {
+        position: absolute;
+        top: 50%;
+        left: 47%;
+        width: 29px;
+        height: 29px;
+        transform: translateY(-50%);
+        svg {
+          color: $primary-color;
+          background-color: rgba($primary-color, 0.1);
+          border-radius: 50%;
+        }
+      }
+    }
+    .apexcharts-tooltip {
+      .apexcharts-tooltip-text-y-label {
+        display: none;
+      }
+    }
+  }
+  .our-earning {
+    .card-footer {
+      ul {
+        li {
+          position: relative;
+          + li {
+            &::before {
+              position: absolute;
+              content: "";
+              width: 1px;
+              height: 20px;
+              background-color: rgba($theme-body-font-color, 0.1);
+              top: 0px;
+              left: -6px;
+            }
+          }
+          p {
+            margin-bottom: 0;
+          }
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          span {
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+  .appointment-detail {
+    .card-body {
+      .table {
+        tr {
+          td {
+            border: 0;
+            vertical-align: middle;
+            &:nth-child(2) {
+              font-weight: 500;
+            }
+            &:nth-child(n + 2) {
+              color: rgba($theme-body-font-color, 0.5);
+            }
+            button {
+              font-size: 12px;
+              padding: 6px 12px;
+              border-radius: 5px;
+              background-color: $light-color;
+              font-weight: 600;
+              border: 0;
+              i {
+                margin-left: 8px;
+                font-size: 14px;
+              }
+            }
+            .active-icon {
+              position: relative;
+              .dot {
+                position: absolute;
+                top: -36px;
+                left: 35px;
+                background-color: $primary-color;
+                width: 8px;
+                height: 8px;
+                border: 2px solid $white;
+                border-radius: 50%;
+              }
+            }
+            .d-flex {
+              position: relative;
+              .active-status {
+                content: "";
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                border: 2px solid $white;
+                top: 4px;
+                left: 31px;
+                border-radius: 100%;
+              }
+              .active-online {
+                background-color: $success-color;
+              }
+              .active-busy {
+                background-color: $warning-color;
+              }
+              .active-offline {
+                background-color: $semi-dark;
+              }
+              span {
+                font-weight: 600;
+              }
+              a{
+                span{
+                  color: $theme-body-font-color;
+                  text-transform: capitalize;
+                }
+              }
+              .circle {
+                width: 42px;
+                height: 42px;
+                border-radius: 50%;
+                margin-right: 15px;
+              }
+            }
+          }
+          &:hover {
+            td {
+              &:nth-child(n + 2) {
+                color: $primary-color;
+              }
+              &:nth-child(1) {
+                p {
+                  color: $primary-color;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .use-country {
+    .jvector-map-height {
+      height: 306px;
+    }
+  }
+  .total-growth {
+    .growth-chart {
+      .apexcharts-xaxistooltip {
+        background-color: rgba($primary-color, 0.1);
+        border-color: $primary-color;
+        &:before {
+          border-bottom-color: $primary-color;
+        }
+      }
+    }
+  }
+  .user-chat {
+    .chat-box {
+      p {
+        font-size: 15px;
+        display: inline-block;
+        padding: 15px 30px;
+      }
+      .left-chat {
+        .sub-message {
+          p {
+            border-bottom-left-radius: 30px !important;
+            border-top-left-radius: 0 !important;
+          }
+        }
+        .message-main {
+          &:nth-child(n + 2) {
+            margin-top: 10px;
+          }
+          p {
+            background-color: $primary-color;
+            border-radius: 30px;
+            border-bottom-left-radius: 0;
+            color: $white;
+          }
+        }
+      }
+      .right-chat {
+        margin: 30px 0;
+        .message-main {
+          p {
+            background-color: $light-color;
+            border-radius: 30px 0 30px 30px;
+          }
+        }
+      }
+      .input-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 36px;
+        .send-msg {
+          width: 50px;
+          height: 50px;
+          background-color: rgba($primary-color, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50% !important;
+          transform: rotate(45deg);
+          svg {
+            color: $primary-color;
+            height: 20px;
+            width: auto;
+          }
+        }
+        input {
+          padding: 6px 12px;
+          border: 0;
+          border-left: 1px solid rgba($theme-body-font-color, 0.1);
+          &::-webkit-input-placeholder {
+            color: rgba($theme-body-font-color, 0.3);
+          }
+        }
+      }
+    }
+  }
+  .todo-timeline {
+    .d-flex {
+      align-items: flex-start;
+      &:hover{
+        .flex-grow-1{
+          .d-flex{
+            img{
+              animation: tada 1s ease-out infinite;
+            }
+          }
+        }
+      }
+      img {
+        padding: 10px;
+        background-color: rgba($primary-color, 0.23);
+        border-radius: 10px;
+      }
+      .flex-grow-1 {
+        .badge {
+          padding: 4px 8px 5px;
+        }
+        .todo-font {
+          color: $theme-font-color;
+          font-size: 12px;
+        }
+        .d-flex {
+          .flex-grow-1 {
+            margin-left: 15px;
+          }
+        }
+      }
+      .activity-line {
+        width: 2px;
+        left: 37px;
+        height: 53%;
+      }
+    }
+  }
+  .activity-timeline {
+    .d-flex {
+      .activity-line {
+        position: absolute;
+        top: 136px;
+        height: 58%;
+        width: 4px;
+        background-color: #f8f8f8;
+        margin: 0 auto;
+        left: 36px;
+        z-index: 1;
+      }
+      @each $circle-name, $circle-color in (primary, $primary-color),
+        (secondary, $secondary-color), (success, $success-color),
+        (danger, $danger-color), (info, $info-color), (light, $light-color),
+        (dark, $dark-color), (warning, $warning-color)
+      {
+        .circle-dot-#{$circle-name} {
+          background-color: rgba($circle-color, 0.25);
+          border-radius: 100%;
+          padding: 6px;
+          font-size: 5px;
+          color: $circle-color;
+        }
+      }
+      & + .d-flex {
+        margin-top: 38px;
+      }
+      .flex-grow-1 {
+        margin-left: 20px;
+        p {
+          color: rgba($theme-body-font-color, 0.7);
+          font-size: 11px;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+  .our-todolist {
+    .activity-timeline {
+      .d-flex {
+        &:nth-child(n + 2) {
+          margin-top: 32px;
+        }
+        .flex-grow-1 {
+          p {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1660px) and (min-width: 1200px) {
+  .dash-xl-100 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .dash-xl-50 {
+    max-width: 50%;
+    flex: 0 0 50%;
+  } 
+}
+@media screen and (max-width: 1780px){
+  .dashboard-default{
+    .appointment-detail {
+      .card-body {
+        .table {
+          tr {
+            &:first-child{
+              td{
+                &:nth-child(2){
+                  padding-top: 14px !important;
+                }
+              }
+            }
+            td {
+              padding-top: 10px;
+              padding-bottom: 10px;
+              &:first-child {
+                min-width: 172px;
+              }
+              &:nth-child(2) {
+                display: block;
+                width: 54px;
+                margin: 0 auto;
+                padding: 22px 0;
+                font-size: 12px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1770px) and (min-width: 1551px) {
+  .blog-box.blog-shadow{
+    height: 462px;
+  }
+  .dashboard-default {
+    .activity-timeline{
+      .d-flex{
+        .activity-line{
+          height: 56%;
+        }
+      }
+    }  
+    .user-chat{
+      .chat-box{
+        p{
+          padding: 15px 26px;
+        }
+      }
+    }
+    .our-todolist{
+      .activity-timeline{
+        .d-flex{
+          &:nth-child(n+2){
+            margin-top: 25px;
+          }
+        }
+      }
+    }
+    .activity-timeline{
+      .d-flex{
+        + .d-flex{
+          margin-top: 25px;
+        }
+      }
+    }
+    .our-earning{
+      .card-footer{
+        ul.d-block{
+          display: block !important;
+          li{
+            + li{
+              &:before{
+                background-color: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+    .use-country{
+      .jvector-map-height{
+        height: 330px;
+      }
+    }
+    .appointment-detail{
+      .card-body{
+        .table{
+          tr{
+            td{
+              padding: 14px 10px;
+              &:last-child{
+                padding: 14px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    .our-earning {
+      .card-footer {
+        ul {
+          li {
+            span {
+              margin-left: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1550px) and (min-width: 1200px) {
+  .dashboard-default{
+    .profile-greeting{
+      .greeting-user{
+        .profile-vector {
+          .dots-images {
+            li {
+              &.dot-1 {
+                left: 24%;
+              }
+              &.dot-2 {
+                left: 22%;
+              }
+              &.dot-5 {
+                left: 20%;
+                top: 8%;
+              }
+              &.dot-6 {
+                left: 15%;
+                top: 38%;
+              }
+              &.dot-7 {
+                left: 20%;
+                top: 50%;
+              }
+              &.dot-8 {
+                left: 255%;
+                top: 60%;
+              }
+              &.dot-9 {
+                left: 16%;
+                top: 64%;
+              }
+            }
+          }
+        }
+      }
+    }
+    .user-chat{
+      .chat-box{
+        .right-chat{
+          margin: 34px 0;
+        }
+      }
+    }  
+    .activity-timeline{
+      &.todo-timeline{
+        .d-flex{
+          .activity-line{
+            height: 58%;
+          }
+        }
+      }
+      .d-flex{
+        + .d-flex{
+          margin-top: 19px;
+        }
+        .flex-grow-1{
+          margin-left: 12px;
+        }
+      }
+    }
+    .our-earning{
+      .card-footer{
+        ul.d-block{
+          display: block !important;
+          li{
+            + li{
+              &:before{
+                background-color: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1770px) and (min-width: 1200px) {
+  .dash-30{
+    max-width: 35%;
+    flex: 0 0 35%;
+  }
+  .dash-45{
+    max-width: 40%;
+    flex: 0 0 40%;
+  }
+}
+@media screen and (max-width: 1400px) and (min-width: 1220px) {
+  .dashboard-default{
+    .activity-timeline{
+      .d-flex{
+        + .d-flex{
+          margin-top: 12px;
+        }
+      }
+    }
+    .appointment-detail{
+      .card-body{
+        .table{
+          tr{
+            td{
+              &:first-child{
+                padding-top: 14px;
+                padding-bottom: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .our-todolist{
+      .activity-timeline{
+        .d-flex{
+          &:nth-child(n+2){
+            margin-top: 22px;
+          }
+        }
+      }
+    }
+    .user-chat{
+      .chat-box{
+        .right-chat{
+          margin: 16px 0;
+        }
+      }
+    }
+  }   
+}
+@media screen and (max-width: 1440px) and (min-width: 1200px) {
+  .setting-list{
+    right: 16px;
+  }
+  .dashboard-default, .dashboard-2{
+    .card{
+      &:hover{
+        .card-header{
+          .d-flex{
+            .flex-grow-1{
+              p{
+                &:after{
+                  width: 113%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .dashboard-default{
+    .total-investment, .total-revenue{
+      .card-header{
+        padding: 30px 20px;
+      }
+    }
+    .total-investment{
+      .card-body{
+        padding: 30px 20px;
+      }
+    }
+    .our-earning{
+      .card-footer{
+        padding: 26px;
+      }
+    }
+    .appointment-detail{
+      .card-body{
+        .table{
+          tr{
+            td{
+              button{
+                padding: 6px 8px;
+                i{
+                  margin-left: 4px;
+                  font-size: 11px;
+                }
+              }
+              &:first-child{
+                padding-right: 8px;
+                min-width: 152px;
+              }
+              .d-flex{
+                .circle{
+                  margin-right: 14px;
+                  width: 36px;
+                  height: 36px;
+                }
+                p{
+                  font-weight: 400;
+                }
+                a{
+                  span{
+                    font-size: 13px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .profile-greeting{
+      .d-sm-flex{
+        .flex-grow-1{
+          p{
+            font-size: 12px;
+          }
+        }
+      }
+      .greeting-user{
+        ul.vector-image{
+          li{
+            &:first-child{
+              display: none;
+            }
+            &:nth-child(2){
+              left: 4%;
+            }
+            &:nth-child(3){
+              left: 53%;
+            }
+            &:nth-child(4){
+              right: 12%;
+            }
+            &:nth-child(5){
+              right: 5%;
+            }
+            &:nth-child(6){
+              bottom: -75%;
+            }
+          }
+        }
+      }
+    }
+    .activity-timeline{
+      &.todo-timeline{
+        .d-flex{
+          .activity-line{
+            height: 57%;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1365px) and (min-width: 1200px) {
+  .dashboard-default{
+    .appointment-detail{
+      .card-body{
+        padding: 24px;
+      }
+    }
+    .profile-greeting{
+      .greeting-user {
+        margin: 34px 0 24px;
+        .profile-vector{
+          margin-bottom: 35px;
+          img{
+            height: 180px;
+          }
+        }
+        h4{
+          font-size: 20px;
+        }
+      }
+    }
+    .total-investment{
+      .bottom-progress{
+        margin-top: 32px;
+      }
+    } 
+    .total-revenue{
+      .revenue-chart{
+        margin: 0 -10px -48px -12px;
+      }
+    }
+    .our-user{
+      .card-body{
+        padding: 20px 0 0;
+        ul{
+          padding: 0 20px 20px;
+        }
+      }
+    }
+    .user-chat{
+      .chat-box{
+        .right-chat{
+          margin: 30px 0;
+        }
+        p{
+          padding: 8px 16px;
+        }
+      }
+    }
+    .our-todolist{
+      .activity-timeline{
+        .d-flex{
+          &:nth-child(n+2){
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+    .activity-timeline{
+      .d-flex{
+        i.fa-circle{
+          padding: 4px;
+        }
+        .flex-grow-1{
+          p{
+            text-overflow:ellipsis;
+            overflow:hidden;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+          }
+        }
+      }
+      &.todo-timeline{
+        .d-flex{
+          .activity-line{
+            height: 56%;
+          }
+        }
+      }
+    }
+  }  
+}
+@media screen and (max-width: 1660px) {
+  .dashboard-default {
+    .activity-timeline{
+      .d-flex{
+        .activity-line{
+          height: 56%;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1199px) {
+  .dashboard-default {
+    .appointment-detail{
+      .card-body{
+        .table{
+          tr{
+            td{
+              &:first-child{
+                min-width: 180px;
+              }
+              &:nth-child(2){
+                width: unset;
+              }
+              &:nth-child(n+2){
+                min-width: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .our-user{
+      .user-chart{
+        .icon-donut{
+          left: 48%;
+        }
+      }
+    }
+    .use-country{
+      .jvector-map-height{
+        height: 310px;
+      }
+    }
+    .our-todolist{
+      .activity-timeline{
+        .d-flex{
+          &:nth-child(n+2){
+            margin-top: 22px;
+          }
+        }
+      }
+    }
+    .user-chat{
+      .chat-box{
+        .right-chat{
+          margin: 18px 0;
+        }
+      }
+    }
+    .activity-timeline {
+      .d-flex +.d-flex {
+        margin-top: 30px;
+      }
+    }
+    .proorder {
+      order: 1;
+    }
+    .activity-timeline {
+      .d-flex {
+        .activity-line {
+          top: 136px;
+          height: 58%;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 991px) {
+  .dashboard-default {
+    .total-growth{
+      .card-body{
+        .growth-chart{
+          margin-bottom: -18px;
+        }
+      }
+    }
+    .profile-greeting{
+      .greeting-user{
+        ul.vector-image{
+          li{
+            &:nth-child(3){
+              top: -50%;
+            }
+          }
+        }
+      }
+    }
+    .our-user{
+      .card-body{
+        ul{
+          margin-top: 24px;
+        }
+      }
+    }
+    .our-todolist{
+      .activity-timeline{
+        .d-flex{
+          &:nth-child(n+2){
+            margin-top: 22px;
+          }
+        }
+      }
+    }
+    .appointment-detail {
+      .card-body {
+        .table {
+          tr {
+            td {
+              padding: 12px 12px;
+            }
+          }
+        }
+      }
+    }
+    .user-chat {
+      .chat-box {
+        .right-chat {
+          margin: 22px 0;
+        }
+      }
+    }
+    .activity-timeline.todo-timeline {
+      .d-flex {
+        .activity-line {
+          top: 110px;
+          left: 26px;
+          height: 61%;
+        }
+      }
+    }
+    .activity-timeline {
+      .d-flex {
+        + .d-flex {
+          margin-top: 25px;
+        }
+        .activity-line {
+          top: 115px;
+          left: 26px;
+          height: 56%;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 800px) and (min-width: 768px){
+  .dashboard-default{
+    .activity-timeline{
+      .d-flex{
+        + .d-flex{
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .dashboard-default {
+    .activity-timeline{
+      .d-flex{
+        .activity-line{
+          height: 60%;
+        }
+      }
+    }
+    .proorder {
+      order: 0;
+    }
+    .our-user {
+      .user-chart {
+        .icon-donut {
+          left: 48%;
+        }
+      }
+    }
+    .profile-greeting {
+      .greeting-user {
+        ul.vector-image {
+          li {
+            &:nth-child(2) {
+              top: 80%;
+              left: 0;
+            }
+          }
+        }
+        .profile-vector {
+          img {
+            height: 170px;
+          }
+          .dots-images {
+            li.dot-1 {
+              left: 28%;
+              top: 24%;
+            }
+            li.dot-2 {
+              left: 40%;
+              top: 5%;
+            }
+            li.dot-9 {
+              left: 29%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 575px) {
+  .dashboard-default {
+    .profile-greeting {
+      .greeting-user {
+        ul.vector-image {
+          li {
+            &:nth-child(3) {
+              top: -85%;
+              left: 85%;
+            }
+          }
+        }
+      }
+    }
+    .activity-timeline{
+      .d-flex{
+        .flex-grow-1{
+          margin-left: 14px;
+        }
+      }
+    }
+    .user-chat {
+      .chat-box {
+        .input-group {
+          .send-msg {
+            width: 48px;
+            height: 48px;
+          }
+        }
+        .d-flex {
+          .flex-grow-1 {
+            p {
+              padding: 12px 20px;
+            }
+          }
+        }
+      }
+    }
+    .our-earning {
+      .card-footer {
+        ul {
+          li + li {
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .profile-greeting {
+      .d-sm-flex {
+        .badge-group {
+          margin-top: 12px;
+        }
+      }
+      .greeting-user {
+        .profile-vector {
+          .dots-images {
+            li.dot-5 {
+              left: 20%;
+              top: 18%;
+            }
+            li.dot-8 {
+              left: 18%;
+            }
+            li.dot-9 {
+              left: 24%;
+            }
+            li.dot-6 {
+              left: 20%;
+            }
+            li.dot-7 {
+              left: 24%;
+              top: 30%;
+            }
+          }
+        }
+      }
+    }
+    .total-growth {
+      .apexcharts-canvas {
+        svg {
+          .apexcharts-inner {
+            .apexcharts-point-annotations {
+              text {
+                font-size: 11px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .dashboard-default {
+    .total-growth{
+      .card-body{
+        .growth-chart{
+          margin: -5px -10px -24px -10px;
+        }
+      }
+    }
+    .activity-timeline{
+      .d-flex{
+        + .d-flex{
+          margin-top: 18px;
+        }
+      }
+    }
+    .appointment-detail{
+      .card-body{
+        .table{
+          tr{
+            td{
+              padding: 10px 10px;
+            }
+          }
+        }
+      }
+    }
+    .profile-greeting {
+      .greeting-user {
+        margin: 18px;
+        .profile-vector {
+          img {
+            height: 140px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 360px) {
+  .dashboard-default {
+    .activity-timeline.todo-timeline{
+      .d-flex{
+        .activity-line{
+          height: 64%;
+        }
+      }
+    }
+    .card-header {
+      p {
+        i {
+          margin-left: 6px;
+        }
+      }
+      .d-flex {
+        .flex-grow-1 {
+          .square-after {
+            &::after {
+              right: -6px;
+            }
+          }
+        }
+        .badge-group {
+          .badge {
+            padding: 10px 6px;
+            span {
+              font-size: 10px;
+            }
+          }
+          .icon-box {
+            margin-left: 6px;
+          }
+        }
+      }
+    }
+    .our-user {
+      .user-chart {
+        .icon-donut {
+          left: 45%;
+        }
+      }
+    }
+    .profile-greeting {
+      .greeting-user {
+        ul.vector-image {
+          li {
+            &:first-child {
+              top: 15%;
+              right: -8%;
+            }
+            &:nth-child(2) {
+              top: 94%;
+              left: -10%;
+            }
+            &:nth-child(5) {
+              top: 84%;
+              right: -5%;
+            }
+          }
+        }
+        .profile-vector {
+          .dots-images {
+            li.dot-1 {
+              left: 12%;
+              top: 24%;
+            }
+            li.dot-6 {
+              left: 6%;
+              top: 38%;
+            }
+            li.dot-7 {
+              left: 14%;
+              top: 36%;
+            }
+            li.dot-9 {
+              left: 8%;
+              top: 55%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/**=====================
+53. Dashboard CSS Ends
+==========================**/

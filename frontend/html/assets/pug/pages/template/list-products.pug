@@ -1,0 +1,200 @@
+- var theme_customizer      = true;
+- var owlcarousel           = true;
+- var rating                = true;
+- var datatable             = true;
+- var ecommerce             = true;
+- var product_list          = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Product list
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item ECommerce
+                    li.breadcrumb-item.active Product list
+          // Container-fluid starts
+          .container-fluid.list-products
+            .row
+              // Individual column searching (text inputs) Starts
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Individual column searching (text inputs) 
+                    span
+                      | The searching functionality provided by DataTables is useful for quickly search through the information in the table - however the search is global, and you may wish to present controls that search on specific columns.
+                  .card-body
+                    .table-responsive.theme-scrollbar.product-table
+                      table#basic-1.display
+                        thead
+                          tr
+                            th Image
+                            th Details
+                            th Amount
+                            th Stock
+                            th Start date
+                            th Action
+                        tbody
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-1.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6 Black Shirt
+                              span Vida Loca - Gray Checks Fit Men's Casual Shirt.
+                            td $12
+                            td.font-success In Stock
+                            td 2022/05/21
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-2.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6 Yellow T-shirt
+                              span Wild West - Yellow Cotton Blend Regular Fit Men's Formal T-Shirt.
+                            td $15
+                            td.font-primary Low Stock
+                            td 2022/08/15
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-3.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6 Blackish Top
+                              span aask - Black Polyester Blend Women's Fit & Flare T-shirt.
+                            td $20
+                            td.font-danger Out of stock
+                            td 2022/05/12
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-4.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6  Brown Casual Shirt
+                              span R L F - Brown Cotton Blend Men's A-Line Shirt.
+                            td $14
+                            td.font-primary Low Stock
+                            td 2022/12/16
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-5.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6  Black & white Dress
+                              span Women's Black & White Collection Dress.
+                            td $25
+                            td.font-success In Stock
+                            td 2022/01/15
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-6.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6  Red Blazer For Winter
+                              span Womens's Red Winter Season Collection Blazer.
+                            td $10
+                            td.font-primary Low Stock
+                            td 2022/08/10
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-1.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6 Yellow Plain T-shirt
+                              span Wild West - Yellow Cotton Blend Regular Fit Men's Formal T-Shirt.
+                            td $12
+                            td.font-success In Stock
+                            td 2022/05/21
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-2.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6 Blackish Top
+                              span aask - Black Polyester Blend Women's Fit & Flare T-shirt.
+                            td $15
+                            td.font-primary Low Stock
+                            td 2022/08/15
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-3.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6  Women's T-shirt
+                              span Women's Black T-shirt
+                            td $20
+                            td.font-danger Out of stock
+                            td 2022/05/12
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+                          tr
+                            td
+                              a(href="product-page.html")
+                                img(src='../assets/images/ecommerce/product-table-4.png', alt='')
+                            td
+                              a(href="product-page.html")
+                                h6  Brown Shirt
+                              span Men's Brown Shirt
+                            td $14
+                            td.font-primary Low Stock
+                            td 2022/12/16
+                            td
+                              button.btn.btn-danger.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Delete
+                              button.btn.btn-primary.btn-xs(type='button', data-original-title='btn btn-danger btn-xs', title='') Edit
+              // Individual column searching (text inputs) Ends
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

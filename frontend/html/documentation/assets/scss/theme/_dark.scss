@@ -1,0 +1,225 @@
+/**=====================
+     Dark CSS Start
+==========================**/
+body {
+    &.dark-only {
+        background-color: $dark-body-background;
+        color: $dark-all-font-color;
+        .navbar {
+            background-color: $dark-card-background;
+            border-bottom: 1px solid $dark-card-border;
+            .collapse {
+                border-right: 1px solid $dark-card-border;
+            }
+        }
+        .nav-link {
+            color: $dark-all-font-color;
+            &.active {
+                color: $primary-color;
+            }
+        }
+
+        :not(pre) > code[class*=language-], pre[class*=language-] {
+            background: $dark-body-background;
+        }
+        code[class*=language-], pre[class*=language-] {
+            text-shadow: unset;
+            color: $dark-all-font-color;
+        }
+        .code-box-copy__btn {
+            background-color: $dark-card-background;
+            border-color: $dark-card-border;
+            color: $dark-all-font-color;
+        }
+        .code-box-copy {
+            pre[class*="language-"] {
+                border: 1px solid $dark-card-border;
+            }
+        }
+        .nav-tabs {
+            border-bottom: 1px solid $dark-card-border;
+            .nav-link.active, .nav-item.show .nav-link {
+                background-color: $dark-card-background;
+                border-color: $dark-card-border $dark-card-border $dark-card-background;
+            }
+            .nav-link {
+                &:hover {
+                    border-color: $dark-card-border $dark-card-border $dark-card-background;
+                }
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: $dark-all-font-color;
+        }
+        .parent-title, .main-title {
+            color: $dark-all-font-color;
+        }
+
+        .navbar-toggler {
+            color: $dark-all-font-color;
+        }
+
+        .parent-title {
+            background-color: $dark-card-background;
+        }
+        .quick-links {
+            h5 {
+                background-color: $dark-card-background;
+            }
+        }
+
+        article {
+            .main-title {
+                color: $primary-color;
+            }
+        }
+        .direct{
+            .nav-link{
+                &.active{
+                    background-color: rgba($primary-color, 0.16);
+                }
+            }
+        }
+        .toggle_btn {
+            background: #323743;
+            color: $dark-all-font-color;
+        }
+
+        .toggle_body {
+            border: 1px solid $dark-card-border;
+            border-top: 0;
+            &.card-body {
+                border: none;
+            }
+        }
+
+        .change-log-content {
+            .log-version-info {
+                .log-version {
+                    background: $dark-body-background;
+                }
+                .log-line {
+                    background: $dark-card-background;
+                }
+            }
+        }
+
+        .doc_accordion {
+            .card-header {
+                button {
+                    background: #323743;
+                    color: $dark-all-font-color;
+                }
+            }
+        }
+
+
+        .token.entity, .token.operator, .token.url {
+            background-color: transparent;
+        }
+
+        .img-border {
+            border: 2px dashed $dark-card-border;
+        }
+
+        .framworks-list {
+            .box {
+                background-color: $dark-card-background;
+            }
+        }
+
+        .menu {
+            > .nav-item {
+                > .nav-link {
+                    color: $dark-all-font-color;
+                }
+                &.active {
+                    > .nav-link {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        .direct {
+            .nav-link {
+                background-color: $dark-card-background;
+                color: $dark-all-font-color;
+            }
+        }
+
+        .nav-sidebar {
+            > .nav-item {
+                .title {
+                    background-color: $dark-card-background;
+                    color: $dark-all-font-color;
+                }
+            }
+        }
+
+        .table {
+            border-color: $dark-card-border;
+            td, th {
+                color: $dark-all-font-color;
+            }
+            > :not(:last-child) > :last-child > * {
+                border-bottom-color: $dark-card-border;
+            }
+        }
+
+        .card {
+            background-color: $dark-card-background;
+            .card-header {
+                background-color: $dark-card-background;
+                border-bottom: 1px solid $dark-card-border;
+            }
+        }
+
+        .main-table-sec {
+            .table-wrapper {
+                .table-scroll {
+                    table {
+                        tr {
+                            &:first-child {
+                                border-bottom: 1px solid $dark-card-border;
+                                span {
+                                    color: $dark-all-font-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .page-footer {
+            .page-changes-summary {
+                border-top: 1px solid $dark-card-border;
+            }
+        }
+        @media (max-width: 991px) {
+            .menu, .navbar_fixed.menu_one  {
+                .nav-item, .menu .nav-item {
+                    border-bottom: 1px solid $dark-card-border;
+                }
+             }
+            .navbar {
+                .nav-right {
+                    .toggle-sidebar {
+                        color: $dark-all-font-color;
+                    }
+                }
+            }
+            .navbar-collapse {
+                background-color: $dark-card-background;
+            }
+            .left-sidebar {
+                background: $dark-body-background;
+                box-shadow: 0 0 2px $dark-card-border;
+            }
+        }
+    }
+}
+/**=====================
+     Dark CSS End
+==========================**/

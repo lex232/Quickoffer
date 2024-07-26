@@ -1,0 +1,54 @@
+- var sidebar               = false;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/loader
+    // login page start
+    .container-fluid.p-0
+      .row.m-0
+        .col-12.p-0     
+          .login-card
+            div
+              div
+                a.logo(href="index.html")
+                  img.img-fluid.for-light(src="../assets/images/logo/logo2.png" alt="looginpage")
+              .login-main 
+                form.theme-form
+                  h4.text-center Sign in to account
+                  p.text-center Enter your email & password to login
+                  .form-group
+                    label.col-form-label Email Address
+                    input.form-control(type='email', required='' placeholder='Test@gmail.com')
+                  .form-group
+                    label.col-form-label Password
+                    .form-input.position-relative
+                      input.form-control(type='password', name='login[password]', required='' placeholder="*********")
+                      .show-hide
+                        span.show                          
+                  .form-group.mb-0
+                    .checkbox.p-0
+                      input#checkbox1(type='checkbox')
+                      label.text-muted(for='checkbox1') Remember password
+                    a.link(href='forget-password.html') Forgot password?
+                    .text-end.mt-3
+                      button.btn.btn-primary.btn-block.w-100(type='submit') Sign in                 
+                  .login-social-title
+                    h6 Or Sign in with                 
+                  .form-group
+                    ul.login-social
+                      li
+                        a(href='https://www.linkedin.com' target='_blank')
+                          i(data-feather="linkedin")
+                      li
+                        a(href='https://twitter.com' target='_blank')
+                          i(data-feather="twitter")
+                      li
+                        a(href='https://www.facebook.com' target='_blank')
+                          i(data-feather="facebook")
+                      li
+                        a(href='https://www.instagram.com' target='_blank')
+                          i(data-feather="instagram")
+                  p.mt-4.mb-0.text-center Don't have account?
+                    a.ms-2(href="sign-up.html") Create Account
+      include ../../components/footer-files

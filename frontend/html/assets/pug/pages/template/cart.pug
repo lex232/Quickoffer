@@ -1,0 +1,114 @@
+- var theme_customizer      = true;
+- var touchspin             = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Cart
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ecommerce
+                    li.breadcrumb-item.active Cart
+
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .card
+                  .card-header.pb-0
+                    h4 Cart
+                  .card-body
+                    .row
+                      .order-history.table-responsive.theme-scrollbar.wishlist
+                        table.table.table-bordered
+                          thead
+                            tr
+                              th Prdouct
+                              th Prdouct Name
+                              th Price
+                              th Quantity
+                              th Action
+                              th Total
+                          tbody
+                            tr
+                              td
+                                img.img-fluid.img-40(src='../assets/images/product/1.png' alt='#')
+                              td
+                                .product-name
+                                  a(href='product-page.html') 
+                                    h6 Party Wear Gown
+                              td $21
+                              td
+                                fieldset.qty-box
+                                  .input-group
+                                    input.touchspin.text-center(type='text' value='5')
+                              td
+                                i(data-feather='x-circle')
+                              td $105
+                            tr
+                              td
+                                img.img-fluid.img-40(src='../assets/images/product/13.png' alt='#')
+                              td
+                                .product-name
+                                  a(href='product-page.html')
+                                    h6 Fancy watch
+                              td $50
+                              td
+                                fieldset.qty-box
+                                  .input-group
+                                    input.touchspin.text-center(type='text' value='5')
+                              td
+                                i(data-feather='x-circle')
+                              td $250
+                            tr
+                              td
+                                img.img-fluid.img-40(src='../assets/images/product/4.png' alt='#')
+                              td
+                                .product-name
+                                  a(href='product-page.html') 
+                                    h6 Man shoes
+                              td $12
+                              td
+                                fieldset.qty-box
+                                  .input-group
+                                    input.touchspin.text-center(type='text' value='5')
+                              td
+                                i(data-feather='x-circle')
+                              td $60
+                            tr
+                              td(colspan='4')                                            
+                                .input-group
+                                  input.form-control(type='text' placeholder='Enter coupan code')
+                                  a.btn.btn-primary(href='#') Apply
+                              td.total-amount
+                                h6.m-0.text-end
+                                  span.f-w-600 Total Price :
+                              td
+                                span $360.00 
+                            tr
+                              td.text-end(colspan='5')
+                                a.btn.btn-secondary.cart-btn-transform(href='product.html') continue shopping
+                              td
+                                a.btn.btn-success.cart-btn-transform(href="checkout.html") check out
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

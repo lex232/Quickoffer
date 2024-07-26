@@ -1,0 +1,356 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+- var height_equal          = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Knowledgebase
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Knowledgebase
+                    li.breadcrumb-item.active Knowledgebase
+          .container-fluid.faq-section
+            .row
+              .col-12
+                .knowledgebase-bg
+                  img.bg-img-cover.bg-center(src="../assets/images/knowledgebase/bg_1.jpg" alt="looginpage" )
+                .knowledgebase-search
+                  div
+                    h3 How Can I help you?
+                    form.form-inline(action="#" method="get")
+                      .form-group.w-100.mb-0
+                        i(data-feather='search')
+                        input.form-control-plaintext.w-100(type="text" placeholder="Type question here" title="")                                     
+              .col-xl-4.col-md-6.box-col-4
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Articles
+                        p.mb-0
+                          | How little experience or technical knowledge you currently have. The web is a very big place, and if you are the typical internet user, you probably visit several websites every day.
+                      i(data-feather='book-open')
+              .col-xl-4.col-md-6.box-col-4
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Knowledgebase
+                        p.mb-0
+                          | A Website Designing course enables learners to use essential designing and programming tools required to do the job. The curriculum is a blend of various themes.
+                      i(data-feather='aperture')
+              .col-xl-4.col-lg-12.box-col-4
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Support
+                        p.mb-0
+                          | The customer support industry is renaissance. Customer support as a specialty is coming into its own, offering companies a competitive advantage that’s difficult to copy.
+                      i(data-feather='file-text')
+              .col-sm-12
+                .header-faq
+                  h4.mb-0 Knowledge articles by category
+                .row.browse
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | Any other legal pages I should know about?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Policies have wide acceptance editors.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')  
+                              | Guidelines are sets of best practices supported.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Editors should attempt to follow guidelines. 
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | They are best treated with common sense.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')                                               
+                            i.me-1(data-feather='arrow-right')
+                            span See More (40)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        |  Does Moment have an API or automatic export?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | API allows search and download AP Images.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | API retrieve breaking news categories.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | API retrieves rules for fantasy league.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Resource API retrieves content produced business.
+                        li
+                          a.f-w-600.font-primary(href="knowledge-detail.html")
+                            i.me-1(data-feather='arrow-right')
+                            span  See More (90) 
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | How do WordPress Site Maintenance?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Make a backup of your WordPress website.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Run a Wordpress security Website check.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Monitor your search engine optimization.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Set a regular maintenance schedule.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')                                                
+                            i.me-1(data-feather='arrow-right')
+                            span See More (40)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | Can I change my plan later?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | When an unknown printer took a galley
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              span You can easily change plans at any time.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              span you’ll be charged a prorated cover that upgrade.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              span But also the leap into electronic typesetting,
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')                                               
+                            i.me-1(data-feather='arrow-right')
+                            span See More (90)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | How do I pay for the Premium Plan?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Premium plans are billed as a single yearly payment.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Monthly plan are bill every month of signup.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | You can set Monthly or Yearly for Premium plan.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | unknown printer took galley.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')                                               
+                            i.me-1(data-feather='arrow-right')
+                            span See More (50)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | What is your Shopping Policy
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Many new editors rely on policy interpretations.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Editor continually attempts to find a different policy.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Violation of maintaining a neutral point of view.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | You double check your sources.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')                                               
+                            i.me-1(data-feather='arrow-right')
+                            span See More (26)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | How can I change the component?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | You can modify some specific component settings.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Click Apply to validate the set preferences. 
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Following procedure apply the components
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | To modify those specific components settings.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')
+                            i.me-1(data-feather='arrow-right')
+                            span See More (10)
+                  .col-xl-4.col-md-6.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | How does it work?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | To get started with your account.  
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Compile your theme using gulp
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Users can browse by topic or use the visually.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | This works through various methods of site tracking
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')
+                            i.me-1(data-feather='arrow-right')
+                            span See More (21)
+                  .col-xl-4.box-col-33
+                    .browse-articles.browse-bottom.height-equal
+                      h6
+                        span
+                          i(data-feather='archive')
+                        | What is Lorem Ipsum?
+                      ul
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Language regular existing languages.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Lorem has been the industry standard dummy.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | Language is not real even ‘Lorem’ does't exist.
+                        li
+                          a(href="knowledge-detail.html")
+                            h5
+                              i(data-feather='file-text')
+                              | dummy text that is not meant anything.
+                        li
+                          a.f-w-600.font-primary(href='knowledge-detail.html')
+                            i.me-1(data-feather='arrow-right')
+                            span See More (34)
+
+          
+        include ../../components/footer
+    include ../../components/footer-files

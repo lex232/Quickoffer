@@ -1,0 +1,161 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Blog Single
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Blog
+                    li.breadcrumb-item.active Blog Single
+          // Container-fluid starts
+          .container-fluid
+            .row
+              .col-sm-12
+                .blog-single
+                  .blog-box.blog-details
+                    .banner-wrraper
+                      img.img-fluid.w-100.bg-img-cover(src='../assets/images/blog/blog-single.jpg', alt='blog-main')
+                    .card.rounded-top
+                      .card-body
+                        .blog-details
+                          ul.blog-social
+                            li 25 July 2022
+                            li
+                              i.icofont.icofont-user
+                              | Mark 
+                              span Jecno 
+                            li
+                              i.icofont.icofont-thumbs-up
+                              | 02
+                              span Hits
+                            li
+                              i.icofont.icofont-ui-chat
+                              | 150 Comments
+                          h4
+                            | The Harpeth rises in the westernmost part of Rutherford County, just to the east of the community of College Grove in eastern Williamson County.
+                          .single-blog-content-top
+                            p
+                              | From the east coast to the west, each river has its own beauty and character. Each river has its own story. Take a look at some America’s best rivers and some of the rivers we’re working to protect. And learn some facts about your favorite rivers. The Harpeth River and its tributaries are home to rich freshwater biodiversity, including more than 50 species of fish and 30 species of mussels
+                            p
+                              | The Harpeth River flows through the heart of downtown Franklin, the 14th fastest growing city in the United States, and traverses Williamson County, one of the fastest growing counties in Tennessee. This rapid development has already caused harm to the river from adding treated sewage, increasing stormwater runoff, and withdrawing water.The river’s impairment is caused by dangerously low levels of dissolved oxygen driven by high concentrations of nutrients – particularly phosphorus – that fuel oxygen-hungry algal blooms that can lead to toxic conditions.
+                  .card.comment-box
+                    .card-body
+                      h4 Comment                               
+                      ul
+                        li
+                          .d-md-flex.align-self-center
+                            img.align-self-center(src='../assets/images/blog/comment.jpg', alt='Generic placeholder image')
+                            .flex-grow-1
+                              .row
+                                .col-md-4
+                                  a(href="user-profile.html")
+                                    h6.mt-0
+                                      | Jolio Mark
+                                      span  ( Developer )
+                                .col-md-8
+                                  ul.comment-social
+                                    li
+                                      i.icofont.icofont-thumbs-up
+                                      | 02 Hits
+                                    li
+                                      i.icofont.icofont-ui-chat
+                                      | 598 Comments
+                              p
+                                | The best thing is location and drive through the forest. The resort is 35km from Ramnagar. The gardens are well kept and maintained. Its a good place for relaxation away from the city noise. The staff is very friendly and overall we had a really good & fun time, thanks to staff member - Bhairav, Rajat, Gunanand, Lokesh & everyone else. And also we went for an adventurous night safari and saw barking deers, tuskar elephant.
+                        li
+                          ul
+                            li
+                              .d-md-flex
+                                img.align-self-center(src='../assets/images/blog/9.jpg', alt='Generic placeholder image')
+                                .flex-grow-1
+                                  .row
+                                    .col-xl-12
+                                      a(href="user-profile.html")
+                                        h6.mt-0
+                                          | Mark Jolio
+                                          span  ( Developer )
+                                  p
+                                    | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+                        li
+                          .d-md-flex
+                            img.align-self-center(src='../assets/images/blog/4.jpg', alt='Generic placeholder image')
+                            .flex-grow-1
+                              .row
+                                .col-md-4
+                                  a(href="user-profile.html")
+                                    h6.mt-0
+                                      | Jhon Deo
+                                      span  ( Designer )
+                                .col-md-8
+                                  ul.comment-social
+                                    li
+                                      i.icofont.icofont-thumbs-up
+                                      | 02 Hits
+                                    li
+                                      i.icofont.icofont-ui-chat
+                                      | 426 Comments
+                              p
+                                | From the east coast to the west, each river has its own beauty and character. Each river has its own story. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+                        li
+                          .d-md-flex
+                            img.align-self-center(src='../assets/images/blog/12.png', alt='Generic placeholder image')
+                            .flex-grow-1
+                              .row
+                                .col-md-4
+                                  a(href="user-profile.html")
+                                    h6.mt-0
+                                      | Mark Ateer
+                                      span  ( Designer )
+                                .col-md-8
+                                  ul.comment-social
+                                    li
+                                      i.icofont.icofont-thumbs-up
+                                      | 02 Hits
+                                    li
+                                      i.icofont.icofont-ui-chat
+                                      | 456 Comments
+                              p
+                                | Clean resort with maintained garden but rooms are average Lack of communication between the staff members. Receptionsit full of attitude. Arrogant staff. Except good view there is nothing great in this property.Resort is 35 kms away from Ramnagar Town.
+                        li
+                          .d-md-flex
+                            img.align-self-center(src='../assets/images/blog/14.png', alt='Generic placeholder image')
+                            .flex-grow-1
+                              .row
+                                .col-md-4
+                                  a(href="user-profile.html")
+                                    h6.mt-0.text-start
+                                      | Greg Arias
+                                      span  ( Designer )
+                                .col-md-8
+                                  ul.comment-social
+                                    li
+                                      i.icofont.icofont-thumbs-up
+                                      | 02 Hits
+                                    li
+                                      i.icofont.icofont-ui-chat
+                                      | 123 Comments
+                              p
+                                | Harpeth rises in the westernmost part of Rutherford County, just to the east of the community of College Grove in eastern Williamson County.but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

@@ -1,0 +1,52 @@
+/**=====================
+    90. Calender CSS Start
+==========================**/
+.fc-daygrid-event{
+  padding: 5px 15px;
+  font-weight: 600;
+  background-color: $primary-color;
+  border: none;
+  .fc-event-title,.fc-event-time{
+    color: $white;
+  }
+}
+.fc-daygrid-event-dot{
+  border-color: $white;
+}
+.fc-daygrid-dot-event, .fc-daygrid-dot-event.fc-event-mirror{
+  &:hover{
+    background-color: $primary-color;
+  }
+}
+.fc .fc-button-primary{
+    background-color: $dark-color;
+    border-color: $dark-color;
+}
+
+
+@media (max-width: 768px){
+  .calendar-default{
+      margin-top: 75px;
+    }
+  .fc-toolbar-title{
+    position: absolute;
+    top: 0;
+    left: 15px;
+  }
+  .fc-header-toolbar{
+    .fc-toolbar-chunk{
+      &:nth-child(3){
+        .fc-button-group{
+          position: absolute;
+          left: 15px;
+          top: 35px;
+        }
+      }
+    }
+  }
+}
+
+
+/**=====================
+     90. Calender CSS End
+==========================**/

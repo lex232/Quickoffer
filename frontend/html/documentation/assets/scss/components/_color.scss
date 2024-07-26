@@ -1,0 +1,63 @@
+/**=====================
+     07. Color CSS Start
+==========================**/
+// background color
+$background-name: primary,
+secondary,
+success,
+danger,
+info,
+light,
+dark,
+warning;
+$background-color: $primary-color,
+$secondary-color,
+$success-color,
+$danger-color,
+$info-color,
+$light-color,
+$dark-color,
+$warning-color;
+
+@each $var in $background-name {
+  $i: index($background-name, $var);
+
+  .bg-#{$var} {
+    background-color: nth($background-color, $i) !important;
+    color: $white;
+  }
+
+  .bg-light-#{$var} {
+    background-color: rgba(nth($background-color, $i), 0.2) !important;
+    color: $white;
+  }
+}
+
+$b-name:primary,
+secondary,
+success,
+danger,
+info,
+light,
+dark,
+warning;
+$b-color: $primary-color,
+$secondary-color,
+$success-color,
+$danger-color,
+$info-color,
+$light-color,
+$dark-color,
+$warning-color;
+
+@each $var in $b-name {
+  $i: index($b-name, $var);
+  .b-l-#{$var} {
+    border-left: 1px solid nth($b-color, $i) !important;
+  }
+
+}
+
+/**=====================
+     07. Color CSS Ends
+==========================**/

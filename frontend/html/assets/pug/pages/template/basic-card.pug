@@ -1,0 +1,177 @@
+- var prism                 = true;
+- var clipboard             = true;
+- var customcard            = true;
+- var height_equal          = true;
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Basic Cards
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Bonus Ui
+                    li.breadcrumb-item.active Basic Cards
+          // Container-fluid starts
+          .container-fluid.basic-card
+            .row
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.pb-0
+                    h4 Basic Card
+                    span Example of sample card.
+                  .card-body
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
+                  .card-footer
+                    h6.mb-0 Card Footer
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.bg-primary.border-card
+                    h4.text-white Primary Card
+                  .card-body.bg-primary
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  .card-footer.bg-primary
+                    h6.mb-0 Card Footer
+              .col-sm-12.col-xl-4
+                .card
+                  .card-header.b-l-primary.border-bottom-light
+                    h4 Border left
+                  .card-body
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
+              .col-sm-12.col-xl-4
+                .card
+                  .card-header.b-t-success.border-bottom-light
+                    h4 Border top
+                  .card-body
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
+              .col-sm-12.col-xl-4
+                .card
+                  .card-header.b-r-secondary.border-bottom-light
+                    h4 Border right
+                  .card-body
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
+              .col-xl-4.box-col-12
+                .card.bg-primary.height-equal
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Articles
+                        p.mb-0
+                          | How little experience or technical knowledge you currently have. The web is a very big place, and if you are the typical internet user, you probably visit several websites every day.
+                      i(data-feather='file-text')
+              .col-xl-4.col-md-6.box-col-6
+                .card.bg-primary.height-equal
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Knowledgebase
+                        p.mb-0
+                          | A Website Designing course enables learners to use essential designing and programming tools required to do the job. The curriculum is a blend of various themes.
+                      i(data-feather='book-open')
+              .col-xl-4.col-md-6.box-col-6
+                .card.bg-primary.height-equal
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Support
+                        p.mb-0
+                          | The customer support industry is renaissance. Customer support as a specialty is coming into its own, offering companies a competitive advantage that’s difficult to copy.
+                      i(data-feather='aperture')
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header.bg-secondary
+                    h4.text-white Secondary Color Header
+                  .card-body
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.
+                  .card-footer
+                    h6.mb-0 Card Footer
+              .col-sm-12.col-xl-6
+                .card
+                  .card-header
+                    h4 Info Color Body
+                  .card-body.bg-info
+                    p.mb-0
+                      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the.
+                  .card-footer
+                    h6.mb-0 Card Footer
+              .col-xl-6.xl-100.col-lg-12.box-col-12
+                .card
+                  .card-header.border-bottom-light
+                    h4.pull-left Simple Tab
+                  .card-body
+                    .tabbed-card
+                      ul#pills-clrtab1.pull-right.nav.nav-pills.nav-primary(role='tablist')
+                        li.nav-item
+                          a#pills-clrhome-tab1.nav-link.active(data-bs-toggle='pill', href='#pills-clrhome1', role='tab', aria-controls='pills-clrhome1', aria-selected='true') Home
+                        li.nav-item
+                          a#pills-clrprofile-tab1.nav-link(data-bs-toggle='pill', href='#pills-clrprofile1', role='tab', aria-controls='pills-clrprofile1', aria-selected='false')
+                            | Profile
+                        li.nav-item
+                          a#pills-clrcontact-tab1.nav-link(data-bs-toggle='pill', href='#pills-clrcontact1', role='tab', aria-controls='pills-clrcontact1', aria-selected='false') Contact
+                      #pills-clrtabContent1.tab-content
+                        #pills-clrhome1.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-clrhome-tab1')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        #pills-clrprofile1.tab-pane.fade(role='tabpanel', aria-labelledby='pills-clrprofile-tab1')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        #pills-clrcontact1.tab-pane.fade(role='tabpanel', aria-labelledby='pills-clrcontact-tab1')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+              .col-xl-6.xl-100.col-lg-12.box-col-12
+                .card
+                  .card-header.border-bottom-light
+                    h4.pull-left Tab With Icon
+                  .card-body
+                    .tabbed-card
+                      ul#pills-clrtab.pull-right.nav.nav-pills.nav-secondary(role='tablist')
+                        li.nav-item
+                          a#pills-clrhome-tab.nav-link.active(data-bs-toggle='pill', href='#pills-clrhome', role='tab', aria-controls='pills-clrhome', aria-selected='true')
+                            i.icofont.icofont-ui-home
+                            | Home
+                        li.nav-item
+                          a#pills-clrprofile-tab.nav-link(data-bs-toggle='pill', href='#pills-clrprofile', role='tab', aria-controls='pills-clrprofile', aria-selected='false')
+                            i.icofont.icofont-man-in-glasses
+                            | Profile
+                        li.nav-item
+                          a#pills-clrcontact-tab.nav-link(data-bs-toggle='pill', href='#pills-clrcontact', role='tab', aria-controls='pills-clrcontact', aria-selected='false')
+                            i.icofont.icofont-contacts
+                            | Contact
+                      #pills-clrtabContent.tab-content
+                        #pills-clrhome.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-clrhome-tab')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        #pills-clrprofile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-clrprofile-tab')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                        #pills-clrcontact.tab-pane.fade(role='tabpanel', aria-labelledby='pills-clrcontact-tab')
+                          p.mb-0
+                            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

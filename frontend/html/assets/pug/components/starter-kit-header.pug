@@ -1,0 +1,229 @@
+// Page Header Start
+.page-header
+  .header-wrapper.row.m-0
+    form(action='#', method='get').form-inline.search-full.col
+      .form-group.w-100
+        .Typeahead.Typeahead--twitterUsers
+          .u-posRelative
+            input.demo-input.Typeahead-input.form-control-plaintext.w-100(type='text' placeholder='Search Tivo ..' name='q' title='' autofocus)
+            .spinner-border.Typeahead-spinner(role='status')
+              span.sr-only Loading...
+            i(data-feather='x').close-search
+          .Typeahead-menu
+    .header-logo-wrapper.col-auto.p-0
+      .toggle-sidebar
+        i.status_toggle.middle(data-feather='grid').sidebar-toggle 
+      .logo-header-main
+        a(href='index.html')
+          img.img-fluid.for-light.img-100(src='../assets/images/logo/logo2.png' alt='')
+          img.img-fluid.for-dark(src='../assets/images/logo/logo.png' alt='')
+    .left-header.col.horizontal-wrapper.ps-0
+      .left-menu-header
+        ul.app-list
+          li.onhover-dropdown
+            .app-menu 
+              i(data-feather="folder-plus")
+            ul.onhover-show-div.left-dropdown
+              li 
+                a(href="starter-kit/index.html") Layout Light
+              li 
+                a(href="starter-kit/layout-dark.html") Light Dark
+              li 
+                a(href="starter-kit/boxed.html")  Boxed
+              li 
+                a(href="starter-kit/layout-rtl.html")  RTL
+              li 
+                a(href="starter-kit/footer-light.html")  Footer
+        ul.header-left 
+          li.onhover-dropdown 
+            span.f-w-600 Starter-Kit
+            span
+              i.middle(data-feather="chevron-down")
+            ul.onhover-show-div.left-dropdown
+              li.flyout-right
+                a(href="javascript:void(0)") Color version
+                ul
+                  li 
+                    a(href="index.html") Layout Light
+                  li 
+                    a(href="layout-dark.html") Layout Dark
+              li.flyout-right
+                a(href="javascript:void(0)") Page Layout
+                ul
+                  li 
+                    a(href="boxed.html") Boxed
+                  li 
+                    a(href="layout-rtl.html") RTL
+              li.flyout-right
+                a(href="javascript:void(0)") Footers
+                ul
+                  li 
+                    a(href="footer-light.html") Footer Light
+                  li 
+                    a(href="footer-dark.html") Footer Dark 
+                  li 
+                    a(href="footer-fixed.html") Footer Fixed
+    .nav-right.col-6.pull-right.right-header.p-0
+      ul.nav-menus
+        li 
+          .right-header.ps-0
+            .input-group
+              .input-group-prepend
+                span.input-group-text.mobile-search
+                  i.fa.fa-search
+              input.form-control(type='text' placeholder='Search Here........' )
+        li.serchinput
+          .serchbox
+            i(data-feather='search')
+          
+          .form-group.search-form
+              input(type="text" placeholder="Search here...")
+        li
+          .mode
+            i.fa.fa-moon-o
+        li.onhover-dropdown
+          .notification-box
+            i(data-feather="bell")
+          ul.notification-dropdown.onhover-show-div
+            li
+              i(data-feather='bell')             
+              h6.f-18.mb-0 Notitications
+            li
+              .d-flex.align-items-center
+                .flex-shrink-0
+                  i(data-feather="truck")
+                .flex-grow-1
+                  p
+                    a(href="../template/order-history.html") Delivery processing 
+                    span.pull-right 6 hr
+            li
+              .d-flex.align-items-center
+                .flex-shrink-0
+                  i(data-feather="shopping-cart")
+                .flex-grow-1
+                  p
+                    a(href="../template/cart.html") Order Complete
+                    span.pull-right 3 hr
+            li
+              .d-flex.align-items-center
+                .flex-shrink-0
+                  i(data-feather="file-text")
+                .flex-grow-1
+                  p
+                    a(href="../template/invoice-template.html") Tickets Generated
+                    span.pull-right 1 hr
+            li
+              .d-flex.align-items-center
+                .flex-shrink-0
+                  i(data-feather="send")
+                .flex-grow-1
+                  p
+                    a(href="../template/email_inbox.html") Delivery Complete
+                    span.pull-right 45 min
+            li
+              a.btn.btn-primary(href="javascript:void(0)") Check all notification
+        li.onhover-dropdown
+          .message
+            i(data-feather='message-square')
+          ul.message-dropdown.onhover-show-div
+            li
+              i(data-feather='message-square')             
+              h6.f-18.mb-0 Messages
+            li
+              .d-flex.align-items-start
+                .message-img.bg-light-primary
+                  img(src="../assets/images/user/3.jpg" alt="")
+                .flex-grow-1
+                  h5.mb-0 
+                    a(href="../template/email_inbox.html") Emay Walter
+                  p Do you want to go see movie?
+                .notification-right
+                  i(data-feather="x")
+            li
+              .d-flex.align-items-start
+                .message-img.bg-light-primary
+                  img(src="../assets/images/user/6.jpg" alt="")
+                .flex-grow-1
+                  h5.mb-0 
+                    a(href="../template/email_inbox.html") Jason Borne
+                  p Thank you for rating us.
+                .notification-right
+                  i(data-feather="x")
+            li
+              .d-flex.align-items-start
+                .message-img.bg-light-primary
+                  img(src="../assets/images/user/10.jpg" alt="")
+                .flex-grow-1
+                  h5.mb-0 
+                    a(href="../template/email_inbox.html") Sarah Loren
+                  p What`s the project report update?
+                .notification-right
+                  i(data-feather="x")
+            li
+              a.btn.btn-primary(href="../template/email_inbox.html") Check Messages
+        li.maximize
+          a(href='#!' onclick='javascript:toggleFullScreen()')
+            i(data-feather='maximize-2')
+        li.language-nav
+          .translate_wrapper
+            .current_lang
+              .lang
+                i(data-feather='globe')
+            .more_lang
+              .lang.selected(data-value='en')
+                i.flag-icon.flag-icon-us
+                span.lang-txt
+                  | English
+                  span  (US)
+              .lang(data-value='de')
+                i.flag-icon.flag-icon-de
+                span.lang-txt Deutsch
+              .lang(data-value='es')
+                i.flag-icon.flag-icon-es
+                span.lang-txt Espa&ntilde;ol
+              .lang(data-value='fr')
+                i.flag-icon.flag-icon-fr
+                span.lang-txt Fran&ccedil;ais
+              .lang(data-value='pt')
+                i.flag-icon.flag-icon-pt
+                span.lang-txt
+                  | Portugu&ecirc;
+                  span  (BR)
+              .lang(data-value='cn')
+                i.flag-icon.flag-icon-cn
+                span.lang-txt &#x7B80;&#x4F53;&#x4E2D;&#x6587;
+              .lang(data-value='ae')
+                i.flag-icon.flag-icon-ae
+                span.lang-txt
+                  | &#x644;&#x639;&#x631;&#x628;&#x64A;&#x629; 
+                  span  (ae)
+        li.profile-nav.onhover-dropdown
+          .account-user
+            i(data-feather='user')
+          ul.profile-dropdown.onhover-show-div
+            li
+              a(href='../template/user-profile.html')
+                i(data-feather='user')
+                span Account
+            li
+              a(href='../template/email_inbox.html')
+                i(data-feather='mail')
+                span Inbox
+            li
+              a(href='../template/edit-profile.html')
+                i(data-feather='settings')
+                span Settings
+            li
+              a(href='../template/login.html')
+                i(data-feather='log-in') 
+                span Log in
+    script.result-template(type='text/x-handlebars-template').
+      <div class="ProfileCard u-cf">                        
+      <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
+      <div class="ProfileCard-details">
+      <div class="ProfileCard-realName">{{name}}</div>
+      </div>
+      </div>
+    script.empty-template(type='text/x-handlebars-template').
+      <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
+// Page Header Ends

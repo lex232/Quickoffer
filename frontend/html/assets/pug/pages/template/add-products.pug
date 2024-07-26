@@ -1,0 +1,138 @@
+- var theme_customizer      = true;
+- var tooltip               = true;
+- var dropzone              = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Add Product
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Ecommerce
+                    li.breadcrumb-item.active Add Product
+          // Container-fluid starts
+          .container-fluid.add-product
+            .row 
+                .col-xl-6
+                    .card
+                        .card-body
+                            .product-info
+                                h5 Description
+                                form
+                                    .product-group
+                                        .row 
+                                            .col-sm-12
+                                                .mb-3
+                                                    label.form-label Product Name
+                                                    input.form-control(placeholder="Enter Product Name" type="text")
+                                                    span.text-danger
+                                        .row 
+                                            .col-sm-12
+                                                .mb-3
+                                                    label.form-label Product Description
+                                                    input.form-control(placeholder="Enter Product Description" type="text")
+                                                    span.text-danger
+                                h5.mt-4 Categories
+                                form
+                                    .product-group
+                                        .row    
+                                            .col-sm-12   
+                                                .mb-3
+                                                    label.form-label Product Category
+                                                    select.form-select 
+                                                        option Select..
+                                                        option Man's Shirt
+                                                        option Man's Jeans
+                                                        option Women T-shirt
+                                                        option Women Skirt
+                                        .row    
+                                            .col-sm-6    
+                                                .mb-3
+                                                    label.form-label Brand Icons
+                                                    select.form-select 
+                                                        option Select..
+                                                        option Levi's
+                                                        option Hudson
+                                                        option Denizen
+                                                        option Spykar
+                                            .col-sm-6 
+                                                .mb-3
+                                                    label.form-label Color
+                                                    select.form-select 
+                                                        option Select..
+                                                        option Black
+                                                        option Red
+                                                        option Blue
+                                                        option White
+                                        .row    
+                                            .col-sm-12    
+                                                .mb-3
+                                                    label.form-label Quality
+                                                    select.form-select 
+                                                        option Brand New
+                                                        option Second Hand
+                                                        option Both Quality
+                .col-xl-6
+                    .card 
+                        .card-body
+                            .product-info
+                                h5 Product Image
+                                form#singleFileUpload.dropzone(action='/upload.php')
+                                    .dz-message.needsclick
+                                        i.icon-cloud-up
+                                        h6 Drop files here or click to upload.
+                                        span.note.needsclick
+                                        | (This is just a demo dropzone. Selected files are 
+                                        strong not
+                                        |  actually uploaded.)
+                                h5.mt-4 Select Size
+                                form
+                                    .product-group
+                                        .row 
+                                            .col-sm-6 
+                                                .mb-3   
+                                                    label.form-label Size
+                                                    select.form-select
+                                                        option S 
+                                                        option M 
+                                                        option L 
+                                                        option XL 
+                                                        option XXL
+                                            .col-sm-6 
+                                                .mb-3   
+                                                    label.form-label Date
+                                                    input.form-control(type="date")
+                                        .row 
+                                            .col-sm-12
+                                                .mb-3   
+                                                    label.form-label Price
+                                                    input.form-control(type="number")
+                            .mt-4
+                                .row 
+                                    .col-sm-12.text-end
+                                        a.btn.btn-primary.me-3(href="product.html") ADD 
+                                        a.btn.btn-secondary Cancel
+
+
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

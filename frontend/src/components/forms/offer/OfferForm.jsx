@@ -106,9 +106,8 @@ const OfferForm = ({
 
   useEffect(_ => {
     calculateFinalPrice()
-    console.log("LIST CHANGED OFFER", list)
-    console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
-    
+    //console.log("LIST CHANGED OFFER", list)
+    //console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
   }, [list])
 
   // onDragStart fires when an element

@@ -1,0 +1,276 @@
+- var theme_customizer      = true;
+- var tooltip               = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | User Cards
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Users
+                    li.breadcrumb-item.active User Cards
+          // Container-fluid starts
+          .container-fluid.user-card
+            .row
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/1.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/3.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Mark Jecno
+                    h6 Manager
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 9564
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 49
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 96
+                        | M
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/2.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/16.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Johan Deo
+                    h6 Designer
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 2578
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 26
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 96
+                        | M
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/3.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/11.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Dev John
+                    h6 Devloper
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 6545
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 91
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 21
+                        | M
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/7.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/16.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Johan Deo
+                    h6 Designer
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 2578
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 26
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 96
+                        | M
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/5.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/11.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Dev John
+                    h6 Devloper
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 6545
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 91
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 21
+                        | M
+              .col-lg-4.col-md-6.box-col-33
+                .card.custom-card
+                  .card-header
+                    img.img-fluid(src='../assets/images/user-card/6.jpg', alt='')
+                  .card-profile
+                    img.rounded-circle(src='../assets/images/avtar/3.jpg', alt='')
+                  .text-center.profile-details
+                    a(href="user-profile.html")
+                      h4 Mark Jecno
+                    h6 Manager
+                  ul.card-social
+                    li
+                      a(href='https://www.facebook.com/')
+                        i.fa.fa-facebook
+                    li
+                      a(href='https://accounts.google.com/')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='https://twitter.com/')
+                        i.fa.fa-twitter
+                    li
+                      a(href='https://www.instagram.com/')
+                        i.fa.fa-instagram
+                    li
+                      a(href='https://dashboard.rss.com/auth/sign-in/')
+                        i.fa.fa-rss
+                  .card-footer.row
+                    .col-4.col-sm-4
+                      h6 Follower
+                      h3.counter 9564
+                    .col-4.col-sm-4
+                      h6 Following
+                      h3
+                        span.counter 49
+                        | K
+                    .col-4.col-sm-4
+                      h6 Total Post
+                      h3
+                        span.counter 96
+                        | M
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files

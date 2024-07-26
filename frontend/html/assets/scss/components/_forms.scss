@@ -1,0 +1,218 @@
+/**=====================
+    26. Form CSS Start
+==========================**/
+.form-validate{
+  form{
+    label{
+      font-weight: 500;
+    }
+  }
+  .input-group{
+    &.left-radius{
+      .input-group-text{
+        border-radius: 4px 0 0 4px !important;
+      }
+      input{
+        border-radius: 0 4px 4px 0 !important;
+      }
+    }
+    .input-group-text{
+      border-radius: 4px 0 0 4px !important;
+    }
+    input{
+      border-radius: 0 4px 4px 0 !important;
+    }
+  }
+}
+.form-space {
+  margin-bottom: -10px;
+  > div {
+    margin-bottom: 10px;
+  }
+}
+form{
+  label{
+    font-weight: 500;
+  }
+}
+.form-control {
+  &::-webkit-input-placeholder {
+    color: $dark-gray !important;
+    font-weight: 400 !important;
+  }
+}
+.theme-form {
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-control {
+    :focus {
+      box-shadow: 0 0 0 0.2rem rgba(171, 140, 228, 0.05);
+    }
+  }
+  textarea {
+    border-color: $form-input-border-color;
+    &::-webkit-input-placeholder {
+      color: $form-placeholder-color;
+      font-size: $form-placeholder-font-size;
+      letter-spacing: $form-placeholder-letter-spacing;
+      font-weight: $form-placeholder-font-weight;
+    }
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="url"],
+  input[type="file"],
+  textarea,
+  select {
+    border-color: $form-input-border-color;
+    background-color: $form-input-bg-color;
+    font-size: $form-placeholder-font-size;
+    color: $form-placeholder-color;
+    box-shadow: none;
+    &::-webkit-input-placeholder {
+      color: $form-placeholder-color;
+      font-size: $form-placeholder-font-size;
+      letter-spacing: $form-placeholder-letter-spacing;
+      font-weight: $form-placeholder-font-weight;
+    }
+  }
+  input[type="file"] {
+    height: auto;
+  }
+  select.form-control:not([size]):not([multiple]) {
+    border-color: $form-input-border-color;
+    font-size: $form-placeholder-font-size;
+  }
+  .checkbox {
+    label {
+      padding-left: 10px;
+    }
+  }
+  .btn-fb,
+  .btn-twitter,
+  .btn-google,
+  .btn-linkedin {
+    color: $white;
+    width: 100%;
+  }
+  .btn-fb {
+    background-color: $fb;
+  }
+  .btn-twitter {
+    background-color: $twitter;
+  }
+  .btn-google {
+    background-color: $google-plus;
+  }
+  .btn-linkedin {
+    background-color: $linkedin;
+  }
+}
+.form-inline {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-bottom: 0;
+  .col-form-label {
+    margin-right: 5px;
+  }
+}
+.form-control,
+.form-select {
+  border-color: $light-gray;
+  font-size: 14px;
+  padding: 12px 15px;
+  &:focus {
+    box-shadow: none;
+    border-color: $light-gray;
+    outline: none;
+  }
+  &.left-radius {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  &.right-radius {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}
+input[type="file"] {
+  height: auto;
+  padding: 0.375rem 0.75rem !important;
+}
+.form-control-color {
+  max-width: 4rem;
+}
+.input-group-text {
+  border-radius: 10px;
+  border-color: $light-gray;
+}
+.input-group {
+  &.left-radius {
+    .input-group-text {
+      border-top-left-radius: 10px !important;
+      border-bottom-left-radius: 10px !important;
+    }
+    input {
+      border-top-right-radius: 10px !important;
+      border-bottom-right-radius: 10px !important;
+    }
+  }
+  &.right-radius {
+    .input-group-text {
+      border-top-right-radius: 30px !important;
+      border-bottom-right-radius: 30px !important;
+    }
+    input {
+      border-top-left-radius: 30px !important;
+      border-bottom-left-radius: 30px !important;
+    }
+  }
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.search-form {
+  input {
+    border: 1px solid $light-semi-gray;
+    padding: 10px 10px 10px 70px;
+    border-radius: 30px;
+    background-color: rgba($light-color, 0.3);
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+.radius-30 {
+  border-radius: 30px;
+}
+.form-control-sm{
+  padding: 0.25rem 0.5rem;
+}
+.form-label-align-right {
+  label {
+    text-align: right;
+    padding-top: 17px;
+    font-weight: 500;
+  }
+}
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  background-size: 18px !important;
+  background-position: 99% 30% !important;
+}
+/**=====================
+    26. Form CSS Ends
+==========================**/

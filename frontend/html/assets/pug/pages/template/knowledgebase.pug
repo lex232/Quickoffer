@@ -1,0 +1,316 @@
+- var theme_customizer      = true;
+- var sidebar               = true;
+- var scrollbar             = true;
+doctype html
+html(lang='en')
+  include ../../components/header-files
+  body
+    include ../../components/taptop
+    include ../../components/loader
+    // page-wrapper Start
+    #pageWrapper.page-wrapper.compact-wrapper
+      include ../../components/header
+      // Page Body Start
+      .page-body-wrapper
+        include ../../components/sidebar
+        .page-body
+          .container-fluid
+            .page-title
+              .row
+                .col-sm-6
+                  h3
+                    | Knowledgebase
+                .col-sm-6
+                  ol.breadcrumb
+                    li.breadcrumb-item
+                      a(href='index.html')
+                        i(data-feather="home")
+                    li.breadcrumb-item Knowledgebase
+                    li.breadcrumb-item.active Knowledgebase
+          // Container-fluid starts
+          .container-fluid.faq-section
+            .row
+              .col-12
+                .knowledgebase-bg
+                  img.bg-img-cover.bg-center(src="../assets/images/knowledgebase/bg_1.jpg" alt="looginpage" )
+                .knowledgebase-search
+                  div
+                    h3 How Can I help you?
+                    form.form-inline(action="#" method="get")
+                      .form-group.w-100.mb-0
+                        i(data-feather='search')
+                        input.form-control-plaintext.w-100(type="text" placeholder="Type question here" title="")                                     
+              .col-xl-4.col-md-6.box-col-33
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Articles
+                        p.mb-0
+                          | How little experience or technical knowledge you currently have. The web is a very big place, and if you are the typical internet user, you probably visit several websites every day.
+                      i(data-feather='book-open')
+              .col-xl-4.col-md-6.box-col-33
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Knowledgebase
+                        p.mb-0
+                          | A Website Designing course enables learners to use essential designing and programming tools required to do the job. The curriculum is a blend of various themes.
+                      i(data-feather='aperture')
+              .col-xl-4.col-lg-12.box-col-33
+                .card.bg-primary
+                  .card-body
+                    .d-flex.faq-widgets
+                      .flex-grow-1
+                        h4 Support
+                        p.mb-0
+                          | The customer support industry is renaissance. Customer support as a specialty is coming into its own, offering companies a competitive advantage that’s difficult to copy.
+                      i(data-feather='file-text')
+              .col-lg-12.featured-tutorial
+                .header-faq
+                  h4.mb-0 Featured Tutorials
+                .row
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/1.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6  Web Design
+                        p.mb-0
+                          | A Web Designing course belongs to the field of Computer Science and IT. It enables students to learn
+                      .card-footer
+                        span Jan 08, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/2.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 Web Development
+                        p.mb-0
+                          | This course is designed to start you on a path toward future studies in web development and design.
+                      .card-footer
+                        span Feb 18, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-o.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/3.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 UI Design
+                        p.mb-0
+                          | User interface design (UI) is the design for machines and software, such as mobile devices, computers.
+                      .card-footer
+                        span Aug 04, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-o.font-primary
+                          li
+                            i.fa.fa-star-o.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/4.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 UX Design
+                        p.mb-0
+                          | A Web Designing course belongs to the field of Computer Science and IT. It enables students to learn
+                      .card-footer
+                        span May 21, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary 
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-half-o.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/3.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 UI Design
+                        p.mb-0
+                          | User Experience design (UX) is the design for machines and software, such as mobile devices, computers.
+                      .card-footer
+                        span June 08, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/4.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 UX Design
+                        p.mb-0
+                          | This course is designed to start you on a path toward future studies in web development and design.
+                      .card-footer
+                        span Sept 19, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-half-o.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/1.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6  Web Design
+                        p.mb-0
+                          | Web designer is a craft where professionals create visual content to communicate though messages.
+                      .card-footer
+                        span Oct 25, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-half-o.font-primary
+                  .col-xxl-3.col-xl-4.col-sm-6.box-col-3
+                    .card.features-faq.product-box
+                      .faq-image.product-img
+                        img.img-fluid(src='../assets/images/faq/2.jpg' alt='')
+                        .product-hover
+                          ul
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-link
+                            li
+                              a(href="knowledge-detail.html")
+                                i.icon-import
+                      .card-body
+                        a(href="knowledge-detail.html")
+                          h6 Web Development
+                        p.mb-0
+                          | A content developer is typically professional who creates digital and physical content including blog posts,
+                      .card-footer
+                        span Dec 15, 2022
+                        ul.pull-right
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star.font-primary
+                          li
+                            i.fa.fa-star-o.font-primary
+          // Container-fluid Ends
+        include ../../components/footer
+    include ../../components/footer-files
