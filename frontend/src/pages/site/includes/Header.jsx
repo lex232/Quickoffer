@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../css/Headers.css';
 import logo from '../../../static/image/logo.png';
 import activeUrl from '../../../utils/activeUrl';

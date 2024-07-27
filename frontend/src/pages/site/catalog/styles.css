@@ -1,5 +1,10 @@
 .header-category{
-    color: white
+    color: white;
+    font-size: 20px;
+}
+
+.text-sidebar {
+    font-size: 14px;
 }
 
 .card-image {
@@ -64,10 +69,10 @@
     color: aliceblue;
 }
 
-.item-sidebar-custom {
+.item-sidebar-catalog {
     color: aliceblue !important;
     cursor: pointer;
-    padding-top: 10px;
+    padding-top: 2px;
 }
 
 .item-min-sidebar {

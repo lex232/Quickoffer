@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useLocation } from 'react-router-dom';
 import ClientForm from '../../../components/forms/clients/ClientForm';

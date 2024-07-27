@@ -7,6 +7,8 @@ import React, { useState, useEffect } from 'react';
 import { AuthContext, UserContext } from './contexts'
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import user_api from './api/user_api';
 
 /**
@@ -133,16 +135,13 @@ function App() {
       <UserContext.Provider value={user}>
       <div className="QuickOffer App">
         <BrowserRouter>
-
           <Routes>
             <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
             <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
             <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
             <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-
             <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />}/>
             <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />}/>
-
             <Route path="/profile" element={
               <RequireAuth loginstate={loggedIn}>
                 <ProfilePage
@@ -154,20 +153,16 @@ function App() {
               <Route path="clients/create" element={<ClientCreate />}/>
               <Route path="clients/list" element={<ClientDashboard />}/>
               <Route path='clients/edit' element={<ClientsEdit />}/>
-
               <Route path="items/list" element={<ItemsDashboard />}/>
               <Route path="items/create" element={<ItemsCreate />}/>
               <Route path='items/edit' element={<ItemsEdit />}/>
-              
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>
               <Route path="offer/create" element={<OfferCreate />}/>
               <Route path='offer/edit' element={<OfferEdit />}/>
-
               <Route path="my-organization/edit" element={<ProfileEdit />}/>
             </Route>
-
-            </Routes> 
+          </Routes> 
         </BrowserRouter>
       </div>
       </UserContext.Provider>

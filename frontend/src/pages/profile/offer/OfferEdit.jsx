@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import OfferForm from '../../../components/forms/offer/OfferForm';
 import offer_api from '../../../api/offer_api';

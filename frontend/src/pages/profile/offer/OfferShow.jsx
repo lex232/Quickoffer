@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import offer_api from '../../../api/offer_api';
 import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 

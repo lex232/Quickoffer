@@ -13,7 +13,6 @@
   }
 }
 
-
 /*
 ! Убирает стрелочки с формы input-number в chrome и firefox
 */
@@ -219,8 +218,8 @@ body {
   margin: 0;
   /* 1 */
   line-height: inherit;
-  font-family: 'Roboto-Regular';
-  /* 2 */
+  
+  /* 2 font-family: 'Roboto-Regular';*/
 }
 
 /*
@@ -422,6 +421,13 @@ footer {
   background-color: #f6f8fc;
 }
 
+@media only screen {
+  .profile-body {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+}
+
 .btn-primary {
   background-color: #5c61f2 !important;
   border-color: #5c61f2 !important;
@@ -441,4 +447,16 @@ footer {
 	padding-left: 20px;
 	padding-right: 20px;
 	position: relative;
+}
+
+.card-body {
+  padding: 30px;
+  background-color: rgba(0,0,0,0);
+}
+
+.btn-create {
+  padding: 0.6rem 1.75rem !important;
+  font-weight: 600;
+  border-radius: 30px !important;
+  float: right;
 }

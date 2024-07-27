@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ClientForm from '../../../components/forms/clients/ClientForm';
 

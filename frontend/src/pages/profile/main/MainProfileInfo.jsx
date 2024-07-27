@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
 import profile_page_api from '../../../api/profile_page_api';
 import './admincard.css';
 
-import { ReactComponent as UsersIco } from '../../../static/image/iconsadmin/address-card.svg'
-import { ReactComponent as FileIco } from '../../../static/image/iconsadmin/file.svg'
-import { ReactComponent as ItemIco } from '../../../static/image/iconsadmin/hdd.svg'
-import { Tool, Users, Book, Layers, Grid } from 'react-feather'
+import { Users, Book, Layers, Grid } from 'react-feather'
 
 const MainAdminInfo = () => {
     const [info, setInfo] = useState([]);
@@ -33,7 +29,7 @@ const MainAdminInfo = () => {
                     <div class="col">
                         <div class="card card-move h-100 text-center shadow">
                             <div class="card-body-move">
-                                <div class="display-4 text-primary mb-2">
+                                <div class="display-4 text-primary my-2">
                                     <Users size={42} className='me-2' />
                                 </div>
                                 <h2 class="card-title mb-3">{info.count_clients}</h2>
@@ -44,7 +40,7 @@ const MainAdminInfo = () => {
                 <div class="col">
                     <div class="card card-move h-100 text-center shadow">
                         <div class="card-body-move">
-                            <div class="display-4 text-success mb-2">
+                            <div class="display-4 text-success my-2">
                                 <Book size={42} className='me-2' />
                             </div>
                             <h2 class="card-title mb-3">{info.count_offers}</h2>
@@ -55,7 +51,7 @@ const MainAdminInfo = () => {
                 <div class="col">
                     <div class="card card-move h-100 text-center shadow">
                         <div class="card-body-move">
-                            <div class="display-4 text-warning mb-2">
+                            <div class="display-4 text-warning my-2">
                                 <Layers size={42} className='me-2' />
                             </div>
                             <h2 class="card-title mb-3">{info.count_items}</h2>
@@ -66,7 +62,7 @@ const MainAdminInfo = () => {
                 <div class="col">
                     <div class="card card-move h-100 text-center shadow">
                         <div class="card-body-move">
-                            <div class="display-4 text-danger mb-2">
+                            <div class="display-4 text-danger my-2">
                                 <Grid size={42} className='me-2' />
                             </div>
                             <h2 class="card-title mb-3"></h2>

@@ -3,10 +3,9 @@ import ReactPaginate from "react-paginate";
 
 import items_api from '../../../api/items_api';
 import './styles.css'
-import { ReactComponent as TrashIco } from '../../../static/image/icons/trash.svg'
 import AddNewLine from '../../../utils/text-operations/addNewLine';
 
-const ItemsArea = ({ category_id, loginstate }) => {
+const ItemsArea = ({ category_id, loginstate, title }) => {
     /**
     * Блок товаров в каталоге
     */
@@ -121,7 +120,9 @@ const ItemsArea = ({ category_id, loginstate }) => {
                     <span className="visually-hidden">Загрузка...</span>
                 </div>}
             </div>
+            
             <div className="container px-4 px-lg-5 mt-3">
+            <h4 className='text-start pb-2'>{title}</h4>
                 <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     {listItems.map((results) => {
                         return (
@@ -156,8 +157,6 @@ const ItemsArea = ({ category_id, loginstate }) => {
                         })}   
                 </div>
             </div>
-                
-
 
             <ReactPaginate
                 previousLabel={"предыдущая"}

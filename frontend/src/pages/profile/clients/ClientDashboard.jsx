@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactPaginate from "react-paginate";
 
 import clients_api from '../../../api/clients_api';

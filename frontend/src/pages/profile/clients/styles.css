@@ -25,12 +25,6 @@
     background-clip: border-box;
 }
 
-.btn-create {
-    padding: 0.6rem 1.75rem;
-    font-weight: 600;
-    border-radius: 30px;
-    float: right;
-}
 
 .project-list .row {
     margin: 15px;
@@ -71,11 +65,6 @@
     height: 20px;
     vertical-align: middle;
     margin-right: 5px;
-}
-
-.card-body {
-    padding: 30px;
-    background-color: rgba(0,0,0,0);
 }
 
 .table .button {

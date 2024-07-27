@@ -25,4 +25,4 @@ const BasePage = ({ loginstate, onSignOut, user }) => {
       );
     };
     
-    export default LoginPage;
+    export default BasePage;

@@ -99,7 +99,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                         <div id="features" className="flex-split">
                             <div className="container-s">
                                 <div className="align-center flex-intro">
-                                    <h2 className='section-title mt-2'>Считай быстро и эффективно</h2>
+                                    <h2 className='mt-2'>Считай быстро и эффективно</h2>
                                     <div className='line-divider'></div>
                                     <p className='mb-5'> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
                                 </div>

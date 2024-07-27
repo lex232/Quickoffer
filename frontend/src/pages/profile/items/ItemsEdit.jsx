@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ItemForm from '../../../components/forms/items/ItemsForm';
 import { useLocation } from 'react-router-dom';

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ProfileForm from '../../../components/forms/profile/ProfileForm';
 import user_api from '../../../api/user_api';
