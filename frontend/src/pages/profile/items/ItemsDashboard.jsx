@@ -9,7 +9,7 @@ import ReadItemType from '../../../utils/text-operations/replaceItemType';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { Target, ShoppingCart, Tool, PlusSquare } from 'react-feather'
+import { Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield } from 'react-feather'
 import './styles.css'
 
 
@@ -125,56 +125,53 @@ const ItemsDashboard = () => {
 
       <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="card-body"></div>
-
-            <div className="table-responsive product-table">
-              <table className="table table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Заголовок</th>
-                    <th scope="col">Дата публикации</th>
-                    <th scope="col">Бренд</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">Тип</th>
-                    <th scope="col">Группа</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((results) => {
-                    return (
-                      <tr key={results.id}>
-                        <td>{results.title}</td>
-                        <td>{getDate(results.pub_date)}</td>
-                        <td>{results.brand}</td>
-                        <td>{results.price_retail} руб</td>
-                        <td>{ReadItemType(results.item_type)}</td>
-                        <td>{results.group.map((res_groups) => {
-                          return (
-                            <div>
-                              {res_groups.title}
-                            </div>
+          <div className="mt-3">  
+            {items.map((results) => {
+              return (
+                <div class="row text-start my-2 mx-0" key={results.id}>
+                  <div class="col-10 my-0 mx-0">
+                    <div class="col-10 my-0 mx-0">
+                      <div class="row my-0 mx-0">
+                        <div class="col-md-4">
+                          <label>
+                            {results.item_type === 'product' ? <ShoppingCart size='16px'/> : <Tool size='16px'/> }
+                            <b><span className='ps-2'>{results.title}</span></b></label>
+                        </div>
+                        <div class="col-md-2">
+                          <label><CreditCard  size='16px' color='gray'/> {results.price_retail} Руб.</label>
+                        </div>
+                        <div class="col-md-3">
+                          {results.brand && <label><Shield size='16px' color='gray'/> {results.brand}</label>}
+                        </div>
+                        <div class="col-md-3">
+                          {results.group.map((res_groups) => {
+                            return (
+                              <div>
+                                {res_groups.title}
+                              </div>
                           )})}
-                        
-                        </td>
-                        <td><button onClick={(e) => HandleEditItem(
-                          results.id,
-                          results.title,
-                          results.brand,
-                          results.group,
-                          results.price_retail,
-                          results.item_type,
-                          results.quantity_type,
-                          results.description,
-                          results.image,
-                          e)}><PencilIco fill="orange"/></button></td>
-                        <td><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id}/></td>
-                      </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 my-0 mx-0">
+                    <button onClick={(e) => HandleEditItem(
+                            results.id,
+                            results.title,
+                            results.brand,
+                            results.group,
+                            results.price_retail,
+                            results.item_type,
+                            results.quantity_type,
+                            results.description,
+                            results.image,
+                            e)}><PencilIco fill="orange"/></button>
+                          <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id}/>
+                  </div>
+                  <hr className='mt-2'></hr>
+                </div>
+                );
+              })}
 
               <ReactPaginate
               previousLabel={"предыдущая"}

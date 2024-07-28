@@ -122,22 +122,26 @@ const ItemForm = ({
 }
 
   return (
+    <div class="content">
       <form>
-        <div className="form d-flex">
-          <span className='col-3'>Название:</span>
-          <div className='col-9'>
-            <input type="text" defaultValue={title} className="form-control my-1" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+       <div class="row mx-0 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+              <div class="form-group">
+                  <label>Наименование товара или услуги *</label>
+                  <input type="text" defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+              </div>
           </div>
-        </div>  
-        <div className="form d-flex">
-          <span className='col-3'>Тип:</span>
-          <div className='col-9'>
-            <select className='form-select my-1' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
-              <option value='product'>Товар</option>
-              <option value='service'>Услуга</option>
-            </select>
+          <div class="col-md-6 ps-0 pe-2">
+              <div class="form-group">
+                  <label>Товар или услуга *</label>
+                  <select className='form-select border-input' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
+                    <option value='product'>Товар</option>
+                    <option value='service'>Услуга</option>
+                  </select>
+              </div>
           </div>
-        </div>
+      </div>
+
         <div className="form d-flex">
           <span className='col-3'>Описание:</span>
           <div className='col-9'>
@@ -206,6 +210,7 @@ const ItemForm = ({
           </div>
           <button onClick={(e) => handlePostCLiсk(e)} className="w-50 btn btn-medium btn-primary mt-3">Опубликовать</button>
       </form>
+      </div>
   );
 };
 

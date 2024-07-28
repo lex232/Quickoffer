@@ -36,7 +36,7 @@ const ItemsEdit = () => {
             <div className="col-md-12 project-list">
                 <div className="card-header">
                     <div className="card-body">
-                        <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3"><ItemForm 
+                        <div className="col-lg-8 col-md-9 col-sm-11 text-start"><ItemForm 
                             id={id}
                             title={title}
                             brand={brand}
