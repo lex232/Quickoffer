@@ -8,14 +8,14 @@ import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { Target, UserCheck, Briefcase, Folder, PlusSquare } from 'react-feather'
+import { Target, UserCheck, Briefcase, Folder, PlusSquare, Home, Phone } from 'react-feather'
 import './styles.css'
 
 
 const ClientDashboard = () => {
   const navigate = useNavigate()
 
-  const [news, setNews] = useState([]);
+  const [clients, setClients] = useState([]);
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
 
@@ -41,7 +41,7 @@ const ClientDashboard = () => {
     })
     .then(res => {
       setpageCount(Math.ceil(res.count / 10));
-      setNews(res.results);
+      setClients(res.results);
     })
     .catch((e) => console.log(e))
 }
@@ -139,27 +139,21 @@ const ClientDashboard = () => {
 
       <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="card-body"></div>
-
-            <div className="table-responsive product-table">
-              <table className="table table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Тип клиента</th>
-                    <th scope="col">ИНН</th>
-                    <th scope="col">Редактировать</th>
-                    <th scope="col">Удалить</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {news.map((results) => {
+            <div className="mt-3">  
+                  {clients.map((results) => {
                     return (
-                      <tr key={results.id}>
-                        <td>{results.title}</td>
-                        <td>{ReadCompanyType(results.company_type)}</td>
-                        <td>{results.inn}</td>
-                        <td><button onClick={(e) => HandleEditClient(
+                      <div class="row text-start my-2 mx-2" key={results.id}>
+                        <div class="col-md-5">
+                          <label>{ReadCompanyType(results.company_type)}: <b>{results.title}</b></label>
+                        </div>
+                        <div class="col-md-3">
+                          <label><Home size='16px' color='gray'/> {results.address_reg}</label>
+                        </div>
+                        <div class="col-md-2">
+                          {results.phone_company && <label><Phone size='16px' color='gray'/> {results.phone_company}</label>}
+                        </div>
+                        <div class="col-md-2">
+                          <label><button onClick={(e) => HandleEditClient(
                           results.id,
                           results.title,
                           results.company_type,
@@ -173,15 +167,16 @@ const ClientDashboard = () => {
                           results.bank_name,
                           results.phone_company,
                           results.image,
-                          e)}><PencilIco fill="orange"/></button></td>
-                        <td>
-                        <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/>
-                        </td>
-                      </tr>
+                          e)}><PencilIco fill="orange"/></button>
+                          <label className='ps-4'><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/></label>
+                          </label>
+                        </div>
+                        <hr className='mt-2'></hr>
+                      </div>
                       );
                     })}
-                </tbody>
-              </table>
+             
+
 
               <ReactPaginate
               previousLabel={"предыдущая"}

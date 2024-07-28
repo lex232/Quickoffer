@@ -16,7 +16,7 @@ import './styles.css'
 const ItemsDashboard = () => {
   const navigate = useNavigate()
 
-  const [news, setNews] = useState([]);
+  const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
   
@@ -42,7 +42,7 @@ const ItemsDashboard = () => {
     })
     .then(res => {
       setpageCount(Math.ceil(res.count / 10));
-      setNews(res.results);
+      setItems(res.results);
     })
     .catch((e) => console.log(e))
   }
@@ -142,7 +142,7 @@ const ItemsDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {news.map((results) => {
+                  {items.map((results) => {
                     return (
                       <tr key={results.id}>
                         <td>{results.title}</td>

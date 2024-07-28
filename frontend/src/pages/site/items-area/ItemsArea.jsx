@@ -139,7 +139,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                             <div className='item-price'><b>{results.price_retail} руб.</b></div>
                                         </div>
                                     </div>
-                                    <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
+                                    {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
                                         {CheckCartItem(results.id) ?
                                             <div className="justify-content-start text-start col-8"><button className="btn btn-primary btn-sm">Добавлено в КП</button></div> : 
                                             <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в КП</button></div>}
@@ -150,7 +150,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                                 <button className="btn btn-primary btn-sm ms-2" onClick={(e) => CartRemoveItem(results.id, e)}>X</button>
                                             </span>}
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
                             </div>
                             );
