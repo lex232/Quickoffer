@@ -142,17 +142,21 @@ const ClientDashboard = () => {
             <div className="mt-3">  
                   {clients.map((results) => {
                     return (
-                      <div class="row text-start my-2 mx-2" key={results.id}>
-                        <div class="col-md-5">
-                          <label>{ReadCompanyType(results.company_type)}: <b>{results.title}</b></label>
+                      <div class="row text-start my-2 mx-0" key={results.id}>
+                        <div class="col-10 my-0 mx-0">
+                          <div class="row my-0 mx-0">
+                            <div class="col-md-4">
+                              <label>{ReadCompanyType(results.company_type)}: <b>{results.title}</b></label>
+                            </div>
+                            <div class="col-md-3">
+                              <label><Home size='16px' color='gray'/> {results.address_reg}</label>
+                            </div>
+                            <div class="col-md-2">
+                              {results.phone_company && <label><Phone size='16px' color='gray'/> {results.phone_company}</label>}
+                            </div>
+                          </div>
                         </div>
-                        <div class="col-md-3">
-                          <label><Home size='16px' color='gray'/> {results.address_reg}</label>
-                        </div>
-                        <div class="col-md-2">
-                          {results.phone_company && <label><Phone size='16px' color='gray'/> {results.phone_company}</label>}
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-2 my-0 mx-0">
                           <label><button onClick={(e) => HandleEditClient(
                           results.id,
                           results.title,
@@ -168,9 +172,11 @@ const ClientDashboard = () => {
                           results.phone_company,
                           results.image,
                           e)}><PencilIco fill="orange"/></button>
-                          <label className='ps-4'><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/></label>
+                          <label className=''><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/></label>
                           </label>
                         </div>
+
+
                         <hr className='mt-2'></hr>
                       </div>
                       );

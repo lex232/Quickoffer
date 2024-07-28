@@ -9,7 +9,7 @@ import DeletePopup from '../../../components/popup/DeletePopup';
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare } from 'react-feather'
+import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, Home, User } from 'react-feather'
 import './styles.css'
 
 const OfferDashboard = () => {
@@ -117,48 +117,42 @@ const OfferDashboard = () => {
         </div>
       </div>
 
+      <div className="d-flex">
+          {isLoadding && <div className="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+          </div>}
+      </div>
+
       <div class="col-md-12 project-list">
         <div class="card-header">
-          <div className="card-body">
-           
-            <div className="d-flex">
-              {isLoadding && <div className="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Загрузка...</span>
-              </div>}
-            </div>
-
-            <div className="table-responsive product-table">
-              <table className="table table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Заголовок</th>
-                    <th scope="col">Для клиента</th>
-                    <th scope="col">Дата создания</th>
-                    <th className='table_left' scope="col">Сумма</th>
-                    <th scope="col">Действия</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <div className="mt-3">
                   {news.map((results) => {
                     return (
-                      <tr key={results.id}>
-                        <td>{results.name_offer}</td>
-                        <td>{results.name_client}</td>
-                        <td>{getDate(results.created)}</td>
-                        <td className='table_left'>Итого: {results.final_price} руб 
-                            <br></br>Оборудование: {results.final_price_goods} руб
-                            <br></br>Работы: {results.final_price_work} руб
-                        </td>
-                        <td>
-                          <button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button>
+                      <div class="row text-start my-2 mx-0" key={results.id}>
+                        <div class="col-10 my-0 mx-0">
+                          <div class="row my-0 mx-0">
+                            <div class="col-md-4">
+                              <label><b>{results.name_offer}</b></label>
+                            </div>
+                            <div class="col-md-4">
+                              {results.name_client &&<label><User size='16px' color='gray'/> {results.name_client}</label>}
+                            </div>
+                            <div class="col-md-4">
+                              <label>Итого: {results.final_price} руб
+                              <br></br>Оборудование: {results.final_price_goods} руб
+                              <br></br>Работы: {results.final_price_work} руб</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-2 my-0 mx-0">
+                        <button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28}/></button>
                           <button onClick={(e) => HandleEditOffer(results.id, e)}><PencilIco fill="orange"/></button>
                           <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id}/>
-                        </td>
-                      </tr>
+                        </div>
+                        <hr className='mt-2'></hr>  
+                      </div>
                       );
                     })}
-                </tbody>
-              </table>
 
               <ReactPaginate
               previousLabel={"предыдущая"}
@@ -180,7 +174,6 @@ const OfferDashboard = () => {
               breakLinkClassName={"page-link"}
               activeClassName={"active"}
             />
-            </div>
 
           </div>
         </div>
