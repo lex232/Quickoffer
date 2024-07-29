@@ -42,7 +42,7 @@ const ProfileEdit = () => {
 
         <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="card-body">
+          <div className="card-body  pt-2">
            
             <div className="d-flex">
               {isLoadding && <div className="spinner-border text-primary" role="status">
@@ -50,14 +50,7 @@ const ProfileEdit = () => {
               </div>}
             </div>
 
-          <div className="d-flex">
-            {isLoadding && <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Загрузка...</span>
-            </div>}
-          </div>
-
-
-          <div className="col-lg-6 col-md-9 col-sm-12 text-start mx-3">
+          <div className="col-lg-8 col-md-9 col-sm-12 text-start mx-0">
             <ProfileForm
               id={currentProfileData.id}
               company_name={currentProfileData.company_name}

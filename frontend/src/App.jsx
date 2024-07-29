@@ -3,7 +3,7 @@
 * монтажников СКС, электриков и т.д.
 */
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AuthContext, UserContext } from './contexts'
 
 import './App.css';
@@ -41,6 +41,7 @@ import OfferShow from './pages/profile/offer/OfferShow';
 import OfferEdit from './pages/profile/offer/OfferEdit';
 
 import ProfileEdit from './pages/profile/profile/ProfileEdit';
+import SimplePopup from './components/popup/refPopup';
 
 
 function RequireAuth({ children, loginstate=false }) {
@@ -61,6 +62,10 @@ function App() {
 
   const [ loggedIn, setLoggedIn ] = useState(null)
   const [ user, setUser ] = useState({})
+  const [ loginErrors, setLoginErrors ] = useState(null)
+
+  const popupLoginRef = useRef();
+  const openLoginPopup = () => popupLoginRef.current.open();
 
   const authorization = (username, password) => {
     /**
@@ -86,7 +91,9 @@ function App() {
     .catch(err => {
       const errors = Object.values(err)
       if (errors) {
-        alert(errors.join(', '))
+        console.log('BAD SIGNIN', errors);
+        setLoginErrors(errors.join(', '))
+        openLoginPopup();
       }
       setLoggedIn(false)
     })
@@ -129,11 +136,12 @@ function App() {
   if (loggedIn === null) {
     return <div className="">Loading...</div>
   }
-
+  
   return (
     <AuthContext.Provider value={loggedIn}>
       <UserContext.Provider value={user}>
       <div className="QuickOffer App">
+        <SimplePopup refPopup={popupLoginRef} heading={'Не удалось авторизоваться'} text={loginErrors}/>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>

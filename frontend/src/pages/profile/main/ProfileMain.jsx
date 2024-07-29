@@ -16,7 +16,7 @@ const ProfileDashboard = () => {
       </div>
       <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="card-body">
+          <div className="card-body pt-0">
             <MainProfileInfo />
           </div>
         </div>

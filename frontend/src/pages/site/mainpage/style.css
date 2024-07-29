@@ -35,9 +35,9 @@
   color:  #2d405f;
 }
 
-.container-fluid {
+/* .container-fluid {
   --bs-gutter-x: 0rem !important;
-}
+} */
 
 #after-header {
   --bs-gutter-x: 1.5rem;

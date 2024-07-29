@@ -26,7 +26,6 @@ const ClientsEdit = () => {
 
     return (
         <main className="col-md-9 col-lg-10 px-md-4 profile-body">
-      
             <div className="container-fluid">
                 <div className="page-title">
                     <div className="row">
@@ -38,8 +37,8 @@ const ClientsEdit = () => {
             </div>    
             <div className="col-md-12 project-list">
           <     div className="card-header">
-                    <div className="card-body">           
-                        <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-3">
+                    <div className="card-body pt-2">           
+                        <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-0">
                             <ClientForm 
                                 id={id}
                                 title={title}

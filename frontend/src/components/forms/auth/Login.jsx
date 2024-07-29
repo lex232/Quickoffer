@@ -6,6 +6,7 @@ import './styles.css'
 const Login = ({ loginstate, onSignIn }) => {
     const [ login, setLogin ] = useState(null)
     const [ password, setPass ] = useState(null)
+
     let {state} = useLocation();
     let success = undefined
 
@@ -21,6 +22,7 @@ const Login = ({ loginstate, onSignIn }) => {
         state = undefined
         onSignIn(login, password)
     }
+
 
     if (loginstate === true) {
         return navigate("/profile")

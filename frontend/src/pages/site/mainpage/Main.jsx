@@ -37,7 +37,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                 <header className="container-fluid">
                     <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
                 </header>
-                <main className="container-fluid">
+                <main className="container-fluid px-0">
 
                     <section id="after-header">
                         <div class="container">
@@ -72,7 +72,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                         <img class="img-responsive center-block" src={Buy} alt=""></img>
                                     </div>
                                     <div class="col-xs-12 col-lg-6 align-items-start">
-                                        <ul>
+                                        <ul className='ps-0'>
                                             <li className='li-no-style text-start d-flex'>
                                                 <div class="circle col-auto"><DownloadCloud className='circle-ico' size='40'/></div>
                                                 <div className='my-auto'>Позволяет быстро посчитать прямо на объекте</div>

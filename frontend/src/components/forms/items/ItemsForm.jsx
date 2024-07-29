@@ -124,78 +124,82 @@ const ItemForm = ({
   return (
     <div class="content">
       <form>
-       <div class="row mx-0 justify-content-left">
+        <div class="row mx-0 justify-content-left">
           <div class="col-md-6 ps-0 pe-2">
-              <div class="form-group">
-                  <label>Наименование товара или услуги *</label>
-                  <input type="text" defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
-              </div>
+            <div class="form-group">
+                <label>Наименование товара или услуги *</label>
+                <input type="text" defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+            </div>
+        </div>
+        <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Товар или услуга *</label>
+                <select className='form-select border-input' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
+                  <option value='product'>Товар</option>
+                  <option value='service'>Услуга</option>
+                </select>
+            </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-              <div class="form-group">
-                  <label>Товар или услуга *</label>
-                  <select className='form-select border-input' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
-                    <option value='product'>Товар</option>
-                    <option value='service'>Услуга</option>
-                  </select>
-              </div>
-          </div>
-      </div>
+        </div>
 
-        <div className="form d-flex">
-          <span className='col-3'>Описание:</span>
-          <div className='col-9'>
-            <textarea rows='4' defaultValue={description} className="form-control my-1" id="Description" placeholder="Описание или характеристики" onChange={(e) => setDescription(e.target.value)} />
+        <div class="row mx-0 justify-content-left">
+          <div class="col-md-12 ps-0 pe-2">
+            <div class="form-group">
+                <label>Описание:</label>
+                <textarea rows='4' defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} /> 
+            </div>
           </div>
         </div>
-        <div className="form d-flex">
-          <span className='col-3'>Группа:</span>
-          <div className='col-9'>
-          {listGroups && <div className="form">
-             <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
-              <option value=''>---</option>
-              {listGroups.map((catList) => {
-                if (groupArea) {
-                  if (groupArea.id === catList.id) {setGroup(Number(catList.id))}
-                }
-                return (
-                groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option>
-              )
-              })}
-            </select>
-          </div>}
-          </div>
-        </div>
-        <div className="form d-flex">
-          <span className='col-3'>Бренд</span>
-          <div className='col-9'>
-          {listBrands && <div className="form">
-             <select name='selectSF' className='form-select my-1' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
-              <option value=''>---</option>
-              {listBrands.map((brandList) => {
-                if (brandArea === brandList.title) {setBrand(Number(brandList.id))}
-                return (
-                  brandArea === brandList.id ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
+
+        <div class="row mx-0 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+            <label>Группа:</label>
+            {listGroups && <div className="form">
+              <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
+                <option value=''>---</option>
+                {listGroups.map((catList) => {
+                  if (groupArea) {
+                    if (groupArea.id === catList.id) {setGroup(Number(catList.id))}
+                  }
+                  return (
+                  groupArea === catList.id ? <option selected value={catList.id}>{catList.title}</option> : <option value={catList.id}>{catList.title}</option>
                 )
-              })}
-            </select>
-          </div>}
+                })}
+              </select>
+            </div>}
+          </div>
+          <div class="col-md-6 ps-0 pe-2">
+            <label>Бренд</label>
+              {listBrands && <div className="form">
+              <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
+                <option value=''>---</option>
+                {listBrands.map((brandList) => {
+                  if (brandArea === brandList.title) {setBrand(Number(brandList.id))}
+                  return (
+                    brandArea === brandList.id ? <option selected value={brandList.id}>{brandList.title}</option> : <option value={brandList.id}>{brandList.title}</option>
+                  )
+                })}
+              </select>
+            </div>}
           </div>
         </div>
-        <div className="form d-flex">
-          <span className='col-3'>Цена розничная</span>
-          <div className='col-9'>
-          <input type="number" step="1" defaultValue={price_retail} className="form-control my-1" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
-          </div>
+
+        <div class="row mx-0 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Цена розничная (Руб.) *</label>
+                <input type="text" defaultValue={price_retail} className="form-control border-input" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} /> 
+            </div>
         </div>
-        <div className="form d-flex">
-          <span className='col-3'>Количестваенная характеристика</span>
-          <div className='col-9'>
-          <select className='form-select my-1' value={quantityTypeArea} aria-label="Количественный тип" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
-            <option selected value='pc'>шт.</option>
-            <option value='meters'>м.</option>
-            <option value='kms'>км.</option>
-          </select>
+        <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Количественная характеристика</label>
+                <select className='form-select border-input' value={quantityTypeArea} aria-label="Товар или услуга *" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
+                  <option selected value='pc'>шт.</option>
+                  <option value='meters'>м.</option>
+                  <option value='kms'>км.</option>
+                </select>
+            </div>
           </div>
         </div>
           <div className='d-flex pt-3'>

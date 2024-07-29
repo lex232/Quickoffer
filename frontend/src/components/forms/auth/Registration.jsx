@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import user_api from '../../../api/user_api';
+import SimplePopup from '../../popup/refPopup';
 
 const RegistrationForm = ({ loginstate }) => {
     const [ login, setLogin ] = useState(null)
@@ -9,15 +10,21 @@ const RegistrationForm = ({ loginstate }) => {
     const [ name, setName ] = useState(null)
     const [ password, setPass ] = useState(null)
     const [ repeatPassword, setRepeatPass ] = useState(null)
+    const [ regErrors, setRegErrors ] = useState(null)
     const navigate = useNavigate()
+
+    const popupRegRef = useRef();
+    const openRegPopup = () => popupRegRef.current.open();
 
     function handleRegistrationCLiсk(e) {
         // Обработать клик
-        if (password !== repeatPassword) {
-            return alert('Пароли не одинаковые!')
-        }
         e.preventDefault();
-        user_api.signup({ email: mail, password, username: login, first_name: name})
+        if (password !== repeatPassword) {
+            setRegErrors('Вы ввели не одинаковые пароли!')
+            openRegPopup();
+        }
+        
+        else {user_api.signup({ email: mail, password, username: login, first_name: name})
           .then(res => {
             if (res) {
                 return navigate("/login/", {state: {success: true}})
@@ -26,9 +33,11 @@ const RegistrationForm = ({ loginstate }) => {
           .catch(err => {
             const errors = Object.values(err)
             if (errors) {
-              alert('Регистрация не удалась(. Возможные ошибки:' + errors)
+                setRegErrors('Возможные ошибки: ' + errors.join(', '))
+                openRegPopup();
             }
           })
+        }
     }
 
     if (loginstate === true) {
@@ -37,6 +46,7 @@ const RegistrationForm = ({ loginstate }) => {
     
     return (
         <main className="form-signin w-100">
+            <SimplePopup refPopup={popupRegRef} heading={'Не удалось зарегистрироваться'} text={regErrors}/>
         <form>
             <h1 className="h3 mb-3 fw-normal mb-2">Регистрация</h1>
             <div className='text-center'>

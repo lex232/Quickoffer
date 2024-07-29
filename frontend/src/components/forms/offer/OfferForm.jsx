@@ -331,42 +331,45 @@ const OfferForm = ({
   }
 
   return (
-    
       <form>
-          <div className="form d-flex">
-            <span className='col-lg-2 col-sm-4'>Название КП* :</span>
-            <div className="col-lg-10 col-sm-8">
-              <input type="header" defaultValue={name_offer} className="form-control mb-1" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
+        <div class="row mx-0 my-1 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Название КП* :</label>
+                <input type="header" defaultValue={name_offer} className="form-control border-input" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
             </div>
           </div>
-          <div className="form d-flex">
-            <span className='col-lg-2 col-sm-4'>Статус КП:</span>
-            <div className='col-lg-10 col-sm-8'>
-              <select className='form-select my-1' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
-                <option value='in_edit'>на редактировании</option>
-                <option value='in_process'>КП отправлено</option>
-                <option value='in_prepayment'>получена предоплата</option>
-                <option value='in_install'>в работе</option>
-                <option value='in_payment'>получена оплата</option>
-                <option value='denied'>отказано</option>
-              </select>
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Статус КП:</label>
+                <select className='form-select border-input' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
+                  <option value='in_edit'>на редактировании</option>
+                  <option value='in_process'>КП отправлено</option>
+                  <option value='in_prepayment'>получена предоплата</option>
+                  <option value='in_install'>в работе</option>
+                  <option value='in_payment'>получена оплата</option>
+                  <option value='denied'>отказано</option>
+                </select>
             </div>
           </div>
-          <div className="form d-flex">
-              <span className='col-lg-2 col-sm-4'>Добавить клиента:</span>
-              <div className='col-lg-10 col-sm-8'>
-              <input className="form-control my-1" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
-                onChange={e => {
-                  const valueForClient = e.target.value
-                  setClientValue({
-                    title: valueForClient
-                  })
-                }}
-              onFocus={_ => {
-                setShowClients(true)
-              }}
-              value={clientValue.title} />
-              </div>
+        </div>
+
+        <div class="row mx-0 my-1 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+              <label>Добавить клиента:</label>
+                <input className="form-control my-1" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
+                    onChange={e => {
+                      const valueForClient = e.target.value
+                      setClientValue({
+                        title: valueForClient
+                      })
+                    }}
+                  onFocus={_ => {
+                    setShowClients(true)
+                  }}
+                  value={clientValue.title} />
+            </div>
           </div>
           <div>
             {showClients && clientList.length > 0 && <ClientsSearch
@@ -378,47 +381,47 @@ const OfferForm = ({
             }}/>
             }
           </div>
-          <div>
-            <div className="form d-flex">
-              <span className='col-lg-2 col-sm-4'>Добавить товар/ услугу:</span>
-              <div className='col-lg-10 col-sm-8'>
-                <input className="form-control mt-1" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
-                  onChange={e => {
-                    const valueForItem = e.target.value
-                    setItemValue({
-                      title: valueForItem
-                    })
+
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Добавить товар/ услугу:</label>
+                  <input className="form-control mt-1" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
+                    onChange={e => {
+                      const valueForItem = e.target.value
+                      setItemValue({
+                        title: valueForItem
+                      })
+                    }}
+                  onFocus={_ => {
+                    setShowItems(true)
                   }}
-                onFocus={_ => {
-                  setShowItems(true)
-                }}
-                value={itemValue.title} />
-              </div>
-              </div>
-              <div>
-              {showItems && itemList.length > 0 && <ItemSearch
-                items={itemList}
-                onClick={({ id, title, price_retail, image, description }) => {
-                  handleItemAutofill({ id, title, price_retail, image, description })
-                  setItemList([])
-                  setShowItems(false)
-              }} />
-              }
-              {itemValue.id && 
-                <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24} /><span className='ps-2'>Добавить позицию</span></button>
-              }
+                  value={itemValue.title} />
+                <div>
+                  {showItems && itemList.length > 0 && <ItemSearch
+                    items={itemList}
+                    onClick={({ id, title, price_retail, image, description }) => {
+                      handleItemAutofill({ id, title, price_retail, image, description })
+                      setItemList([])
+                      setShowItems(false)
+                  }} />
+                  }
+                  {itemValue.id && 
+                    <button onClick={(e) => handlePlusItem(e)}><PlusIco fill="green" transform='scale(1)' baseProfile='tiny' width={24} /><span className='ps-2'>Добавить позицию</span></button>
+                  }
 
-              {showError && <div className='mt-2'><SimpleDivMessage
-                text='Такой элемент уже есть в списке'
-              /></div>}
-
+                  {showError && <div className='mt-2'><SimpleDivMessage text='Такой элемент уже есть в списке'/>
+                </div>}
             </div>
-           <section className='itemsforoffer'>
+            </div>
+          </div>
+        </div>
 
+
+          <div>
+           <section className='itemsforoffer'>
               <table className='table table-sm offer'>
                 <thead>
                   <tr>
-                    <th className="col-1">Позиция</th>
                     <th className="col-4">Название</th>
                     <th className="col-1">Цена</th>
                     <th className="col-1">Закупочная цена</th>
@@ -440,7 +443,6 @@ const OfferForm = ({
                     onDragLeave={onDragLeave}
                     className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
                   >
-                  <td>{index+1}:</td>
                   <td className="col-4">{item.title}</td>
                   <td className="col-1"><input value={item.item_price_retail} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} /></td>
                   <td className="col-1"><input value={item.item_price_purchase} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} /></td>

@@ -18,7 +18,7 @@ const ClientCreate = () => {
 
         <div className="col-md-12 project-list">
           <div className="card-header">
-            <div className="card-body">
+            <div className="card-body pt-2">
               <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-3"><ClientForm /></div>
             </div>
           </div>

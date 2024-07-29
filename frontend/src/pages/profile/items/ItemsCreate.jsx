@@ -17,8 +17,8 @@ const ItemsCreate = () => {
       </div>
       <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="card-body">
-            <div className="col-lg-6 col-md-9 col-sm-11 text-start"><ItemForm /></div>
+          <div className="card-body pt-2">
+            <div className="col-lg-6 col-md-9 col-sm-11 text-start mx-0"><ItemForm /></div>
           </div>
         </div>
       </div> 
