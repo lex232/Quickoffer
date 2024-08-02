@@ -33,7 +33,9 @@ const RegistrationForm = ({ loginstate }) => {
           .catch(err => {
             const errors = Object.values(err)
             if (errors) {
-                setRegErrors('Возможные ошибки: ' + errors.join(', '))
+                let temp_errors = []
+                errors[0].forEach((element) => temp_errors.push(element))
+                setRegErrors('Возможные ошибки: \n' + temp_errors.join('\n'))
                 openRegPopup();
             }
           })

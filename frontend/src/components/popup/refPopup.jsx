@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/popup.css'
 
 const SimplePopup = ({ refPopup, heading, text }) => {
-
+    
     return (
         <div>
            <Popup ref={refPopup} contentStyle={{width: "350px", className: "modal"}}>
@@ -18,7 +18,7 @@ const SimplePopup = ({ refPopup, heading, text }) => {
                                 </div>
                                 <br></br>
                                 <div className="d-flex px-4">
-                                    <p className="fs-6 mx-auto">
+                                    <p className="fs-6 mx-auto no-white-space">
                                        {text}
                                     </p>
                                 </div>

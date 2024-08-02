@@ -4,6 +4,9 @@ import Footer from '../site/includes/Footer.jsx';
 import Login from '../../components/forms/auth/Login.jsx';
 
 const LoginPage = ({ loginstate, onSignIn }) => {
+    /**
+    * Страница логина
+    */
 
     return (
         <body>

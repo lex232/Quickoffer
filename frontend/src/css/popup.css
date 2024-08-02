@@ -2,6 +2,10 @@
     font-size: 14px;
     width: 30%; 
 }
+.no-white-space {
+    white-space: pre;
+    white-space: pre-wrap;
+}
 .modal > .header {   
     border-bottom: 1px solid gray;  
     font-size: 18px;  

@@ -1,6 +1,8 @@
 """API DRF serializers USERS"""
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from django.contrib.auth.password_validation import validate_password
+from django.core import exceptions as dajngo_exceptions
 
 from offer.models import Profile
 from utils.base64 import Base64ImageField
@@ -22,6 +24,15 @@ class UserPostSerializer(serializers.ModelSerializer):
                   'first_name',
                   'password')
         extra_kwargs = {'password': {'write_only': True}}
+
+    def validate(self, obj):
+        try:
+            validate_password(obj['password'])
+        except dajngo_exceptions.ValidationError as e:
+            raise serializers.ValidationError(
+                {'password': list(e.messages)}
+            )
+        return super().validate(obj)
 
     def create(self, validated_data):
         user = User(

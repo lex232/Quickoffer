@@ -2,10 +2,13 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 import ClientForm from '../../../components/forms/clients/ClientForm';
+import TitleSections from '../../../components/titles/titleSections';
 
 const ClientsEdit = () => {
-    // Страница редактирования клиента - передаем стейт
-    // выбранного клиента для изменения данных
+    /**
+    * Страница редактирования клиента - передаем стейт
+    * выбранного клиента для изменения данных
+    */
 
     const {state} = useLocation();
     const {
@@ -26,17 +29,9 @@ const ClientsEdit = () => {
 
     return (
         <main className="col-md-9 col-lg-10 px-md-4 profile-body">
-            <div className="container-fluid">
-                <div className="page-title">
-                    <div className="row">
-                        <div className="col-sm-6 my-3 text-start ps-4">
-                            <h3>Редактировать организацию/ клиента</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>    
+            <TitleSections title={'Редактировать клиента'}/>
             <div className="col-md-12 project-list">
-          <     div className="card-header">
+                <div className="card-header">
                     <div className="card-body pt-2">           
                         <div className="col-lg-7 col-md-9 col-sm-11 text-start mx-0">
                             <ClientForm 

@@ -1,20 +1,17 @@
 import React from 'react';
 
 import OfferForm from '../../../components/forms/offer/OfferForm';
+import TitleSections from '../../../components/titles/titleSections';
 
 const OfferCreate = () => {
+  /**
+  * Создание КП
+  */
+
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
       
-      <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col-sm-6 my-3 text-start ps-4">
-              <h3>Создать КП</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TitleSections title={'Создать КП'}/>
       <div class="col-md-12 project-list">
         <div class="card-header">
           <div className="card-body">

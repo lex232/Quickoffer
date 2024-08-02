@@ -13,6 +13,10 @@ import './styles.css'
 
 
 const ClientDashboard = () => {
+  /**
+  * Страница клиентов пользователя
+  */
+
   const navigate = useNavigate()
 
   const [clients, setClients] = useState([]);

@@ -7,7 +7,8 @@ import clients_api from '../../../api/clients_api';
 import offer_api from '../../../api/offer_api';
 
 import { ReactComponent as PlusIco } from '../../../static/image/icons/plus-square.svg'
-import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
+import { XCircle } from 'react-feather'
+
 import ItemSearch from '../../item-search';
 import ClientsSearch from '../../clients-search';
 import SimpleDivMessage from '../../messages';
@@ -19,6 +20,9 @@ const OfferForm = ({
   name_client,
   status_type
 }) => {
+  /**
+  * Форма КП с элементами
+  */
 
   const navigate = useNavigate()
   const [ nameArea, setName ] = useState(name_offer)
@@ -106,8 +110,8 @@ const OfferForm = ({
 
   useEffect(_ => {
     calculateFinalPrice()
-    //console.log("LIST CHANGED OFFER", list)
-    //console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
+    console.log("LIST CHANGED OFFER", list)
+    console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
   }, [list])
 
   // onDragStart fires when an element
@@ -313,7 +317,7 @@ const OfferForm = ({
     const data = {
       title: nameArea,
       client: clientValue.id,
-      status_type: 'in_edit',
+      status_type: statusOffer,
       items_for_offer: list,
     }
     if (id === undefined) {
@@ -332,20 +336,20 @@ const OfferForm = ({
 
   return (
       <form>
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Название КП* :</label>
                 <input type="header" defaultValue={name_offer} className="form-control border-input" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Статус КП:</label>
                 <select className='form-select border-input' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
                   <option value='in_edit'>на редактировании</option>
                   <option value='in_process'>КП отправлено</option>
-                  <option value='in_prepayment'>получена предоплата</option>
+                  <option value='in_prepayment'>Выставлен счет</option>
                   <option value='in_install'>в работе</option>
                   <option value='in_payment'>получена оплата</option>
                   <option value='denied'>отказано</option>
@@ -354,9 +358,9 @@ const OfferForm = ({
           </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Добавить клиента:</label>
                 <input className="form-control my-1" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
                     onChange={e => {
@@ -382,8 +386,8 @@ const OfferForm = ({
             }
           </div>
 
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Добавить товар/ услугу:</label>
                   <input className="form-control mt-1" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
                     onChange={e => {
@@ -418,52 +422,67 @@ const OfferForm = ({
 
 
           <div>
-           <section className='itemsforoffer'>
-              <table className='table table-sm offer'>
-                <thead>
-                  <tr>
-                    <th className="col-4">Название</th>
-                    <th className="col-1">Цена</th>
-                    <th className="col-1">Закупочная цена</th>
-                    <th className="col-1">Кол-во</th>
-                    <th className="col-1">Сумма</th>
-                    <th scope="col">Изображение</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
+           <section className='itemsforoffer mx-0 px-0'>
               {list.map((item, index) => {
                 return(
-                <tr
-                    key={index}
-                    data-position={index}
-                    draggable
-                    onDragStart={onDragStart}
-                    onDragOver={onDragOver}
-                    onDrop={onDrop}
-                    onDragLeave={onDragLeave}
-                    className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
+                  <div
+                      key={index}
+                      data-position={index}
+                      draggable
+                      onDragStart={onDragStart}
+                      onDragOver={onDragOver}
+                      onDrop={onDrop}
+                      onDragLeave={onDragLeave}
+                      className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea row d-flex justify-content-center px-0 mx-0" : "row d-flex justify-content-center px-0 mx-0"}
                   >
-                  <td className="col-4">{item.title}</td>
-                  <td className="col-1"><input value={item.item_price_retail} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} /></td>
-                  <td className="col-1"><input value={item.item_price_purchase} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} /></td>
-                  <td><input value={item.amount} className="form-control my-3" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} /></td>
-                  <td>{item.item_price_retail * item.amount}</td>
-                  <td><img src={item.image} height="100"></img></td>
-                  <td className="col-1"><button onClick={(e) => deleteItemOffer(index, e)}><DeleteIco fill="red"/></button></td>
-                  <i className="fas fa-arrows-alt-v"></i>
-                </tr>
+                    <div className="card rounded-3 mb-2">
+                      <div className="card-body p-0 mx-0">
+                        <div className="row  mb-0 ms-0 me-0">
+
+                          <div className="col-md-6 col-lg-6 col-xl-6 row m-0 p-0 d-flex align-items-center ">
+                            <div className="col-4">
+                              <img src={item.image} className="img-fluid offer-image-max rounded-3"></img>
+                            </div>
+                            <div className="col-8 d-flex align-items-center">
+                              <span className="fw-normal mb-2">{item.title}</span>
+                              {/* <p><span className="text-muted">Size: </span>M <span className="text-muted">Color: </span>Grey</p> */}
+                            </div>
+                          </div>  
+                          
+                          <div className="col-md-2 col-lg-2 col-xl-2 offer-text-min row m-0 p-0">
+                            <div className="col-6 col-lg-12">
+                              <label>Розничная цена</label>
+                              <input value={item.item_price_retail} className="form-control offer-min-form mb-1" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} />
+                            </div>
+                            <div className="col-6 col-lg-12 pb-2">
+                              <label>Закупочная цена</label>
+                              <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
+                            </div>
+                          </div>
+
+                          <div className="col-md-4 col-lg-4 col-xl-4 offer-text-min row m-0 p-0 pb-2">
+                            <div className="col-4">
+                              <label>Кол-во</label>
+                              <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
+                            </div>
+                            <div className="col-4">
+                              <label>Итого</label>
+                              <h5 className="mb-0">{item.item_price_retail * item.amount} Р</h5>
+                            </div>
+                            <div className="col-4 d-flex align-items-center">
+                            <button onClick={(e) => deleteItemOffer(index, e)}><XCircle strokeWidth={3} size={22} color="red" /></button>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )
               })}
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><b>Итого:</b></td>
-                <td><b>{finallyPrice} руб.</b></td>
-                <td></td>
-                <td></td>
-              </table>
-              
+              <div>
+                <b>Итого: </b>
+                <b>{finallyPrice} руб.</b>
+              </div>
            </section>
            </div>
            <div className="btn-toolbar d-flex align-items-end mb-4">

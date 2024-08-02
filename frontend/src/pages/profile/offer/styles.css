@@ -2,6 +2,15 @@
     text-align: left;
 }
 
+.item-row {
+    max-width: 120px;
+}
+
+.img-responsive-item {
+    max-width: 100px;
+    height: auto;
+}
+
 .card-header {
     margin-bottom: 30px;
     border: none;
@@ -24,6 +33,7 @@
     background-color: #fff;
     background-clip: border-box;
 }
+
 
 .project-list .row {
     margin: 15px;

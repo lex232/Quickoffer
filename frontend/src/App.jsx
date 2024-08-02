@@ -91,8 +91,9 @@ function App() {
     .catch(err => {
       const errors = Object.values(err)
       if (errors) {
-        console.log('BAD SIGNIN', errors);
-        setLoginErrors(errors.join(', '))
+        let temp_errors = []
+        errors.forEach((element) => temp_errors.push(element))
+        setLoginErrors('Возможные ошибки: \n' + temp_errors.join('\n'))
         openLoginPopup();
       }
       setLoggedIn(false)

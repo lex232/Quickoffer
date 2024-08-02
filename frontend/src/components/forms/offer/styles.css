@@ -9,8 +9,20 @@
     transition: box-shadow 100ms linear;
 }
 
+.offer-image-max {
+    max-height: 130px;
+}
+
+.offer-min-form {
+    height: 28px;
+}
+
 .itemsforoffer:hover {
     box-shadow: 4px 4px 50px rgba(#687bf7, 0.6);
+}
+
+.offer-text-min {
+    font-size: 12px;
 }
 
 .offer {

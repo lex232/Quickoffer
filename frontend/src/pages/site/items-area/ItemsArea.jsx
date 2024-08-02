@@ -114,19 +114,19 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     }
 
     return (
-        <div className="col-md-9">
+        <div className="col">
             <div className="d-flex">
                 {isLoaddingItems && <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Загрузка...</span>
                 </div>}
             </div>
             
-            <div className="container px-4 px-lg-5 mt-3">
+            <div className="container-fluid">
             <h4 className='text-start pb-2'>{title}</h4>
-                <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
+                <div className="row justify-content-start">
                     {listItems.map((results) => {
                         return (
-                            <div className="col mb-5">
+                            <div className="col-6 col-xl-3 col-xxl-2 mb-5">
                                 <div className="card h-100">
                                     <div className='area-img'>
                                         <img className="card-image" src={results.image} />

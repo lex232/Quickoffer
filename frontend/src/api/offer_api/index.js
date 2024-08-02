@@ -47,7 +47,6 @@ class ApiOffer {
           const filename_test = res.headers
           .get('content-disposition')
           .split('filename=')[1]
-          console.log(filename_test)
           const filename = 'offer'+ filename_test +'.doc'
 
           return res.blob().then(blob => {

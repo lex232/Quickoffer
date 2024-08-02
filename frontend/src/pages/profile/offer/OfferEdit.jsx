@@ -3,12 +3,13 @@ import { useLocation } from 'react-router-dom';
 
 import OfferForm from '../../../components/forms/offer/OfferForm';
 import offer_api from '../../../api/offer_api';
+import TitleSections from '../../../components/titles/titleSections';
 
 
-/**
-* Редактирование КП
-*/
 const OfferEdit = () => {
+  /**
+  * Редактирование КП
+  */
 
   const {state} = useLocation();
   const {id} = state;
@@ -44,7 +45,6 @@ const OfferEdit = () => {
     return <div className="">Loading...</div>
   }
 
-  console.log("ITEMS BEFORE", itemsOffer)
   let prepareToAddList = []
   for (const item of itemsOffer) {
     prepareToAddList.push({
@@ -61,21 +61,11 @@ const OfferEdit = () => {
     localStorage.setItem("items", JSON.stringify(prepareToAddList));
   }
   
-  console.log("ITEMS", prepareToAddList)
-  
 
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
       
-      <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col-sm-6 my-3 text-start ps-4">
-              <h3>Редактировать КП</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TitleSections title={'Редактировать КП'}/>
       <div class="col-md-12 project-list">
         <div class="card-header">
           <div className="card-body">
