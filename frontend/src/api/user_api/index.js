@@ -36,14 +36,14 @@ class UserApi {
     ).then(this.checkResponse)
   }
 
-  signup ({ email, password, username, first_name }) {
+  signup ({ email, password, username }) {
     return fetch(
       `/api/users/`,
       {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-          email, password, username, first_name
+          email, password, username
         })
       }
     ).then(this.checkResponse)

@@ -7,7 +7,6 @@ import SimplePopup from '../../popup/refPopup';
 const RegistrationForm = ({ loginstate }) => {
     const [ login, setLogin ] = useState(null)
     const [ mail, setMail ] = useState(null)
-    const [ name, setName ] = useState(null)
     const [ password, setPass ] = useState(null)
     const [ repeatPassword, setRepeatPass ] = useState(null)
     const [ regErrors, setRegErrors ] = useState(null)
@@ -17,14 +16,13 @@ const RegistrationForm = ({ loginstate }) => {
     const openRegPopup = () => popupRegRef.current.open();
 
     function handleRegistrationCLiсk(e) {
-        // Обработать клик
         e.preventDefault();
         if (password !== repeatPassword) {
             setRegErrors('Вы ввели не одинаковые пароли!')
             openRegPopup();
         }
         
-        else {user_api.signup({ email: mail, password, username: login, first_name: name})
+        else {user_api.signup({ email: mail, password, username: login})
           .then(res => {
             if (res) {
                 return navigate("/login/", {state: {success: true}})
@@ -55,16 +53,12 @@ const RegistrationForm = ({ loginstate }) => {
                 Уже зарегистрированы? <a href="/login">Авторизуйтесь!</a>
             </div>
             <div className="form-floating">
-                <input type="text" autoComplete="new-password" className="form-control my-3" id="floatingInput" placeholder="Login" onChange={(e) => setLogin(e.target.value)}/>
+                <input type="text" autoComplete="new-password" autocapitalize="off" className="form-control my-3" id="floatingInput" placeholder="Login" onChange={(e) => setLogin(e.target.value)}/>
                 <label for="floatingInput">Логин</label>
             </div>
             <div className="form-floating">
-                <input type="mail" className="form-control my-3" id="floatingMail" placeholder="example@example.com" onChange={(e) => setMail(e.target.value)}/>
+                <input type="mail" className="form-control my-3" autocapitalize="off" id="floatingMail" placeholder="example@example.com" onChange={(e) => setMail(e.target.value)}/>
                 <label for="floatingInput">Почта</label>
-            </div>
-            <div className="form-floating">
-                <input type="text" className="form-control my-3" id="floatingMail" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
-                <label for="floatingInput">Имя</label>
             </div>
             <div className="form-floating">
                 <input type="password" autoComplete="new-password" className="form-control my-3" id="floatingPassword" placeholder="Password" onChange={(e) => setPass(e.target.value)}/>
