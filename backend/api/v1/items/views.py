@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
+from itertools import chain
 
 from api.permissions import IsAdminOrReadOnly
 from offer.models import Item, ItemUser
@@ -44,12 +45,32 @@ class ItemUserViewSet(viewsets.ModelViewSet):
 class ItemViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для категорий товаров и услуг."""
 
-    queryset = Item.objects.all()
+    queryset = Item.objects.filter(private_type=False)
     serializer_class = ItemSerializer
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
     pagination_class = ItemsLimitPagination
     filterset_fields = ['group']
+
+
+class ItemViewSetAuth(viewsets.ModelViewSet):
+    """Апи вьюсет для категорий товаров и услуг с авторизацией"""
+
+    serializer_class = ItemSerializer
+    permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend,)
+    pagination_class = ItemsLimitPagination
+    filterset_fields = ['group']
+
+    def get_queryset(self):
+        """Показываем только товары авторизованного пользователя"""
+
+        user = self.request.user
+        queryset_general_items = Item.objects.filter(private_type=False)
+        queryset_auth_items = ItemUser.objects.filter(author=user)
+        all = list(chain(queryset_general_items, queryset_auth_items))
+        return queryset_general_items
+
 
 
 class ItemFinderViewSet(viewsets.ReadOnlyModelViewSet):

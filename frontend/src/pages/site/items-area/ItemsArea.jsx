@@ -26,8 +26,13 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     useEffect(() => {
         // Получить все товары при загрузке страницы
-        getItems(currentpage, category_id);
-        currentpage = 1;
+        if (loginstate === false) {
+            getItems(currentpage, category_id);
+            currentpage = 1;
+        } else {
+            getItemsAuth(currentpage, category_id);
+            currentpage = 1;
+        }
       }, [category_id])
       ;
 
@@ -36,7 +41,21 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         items_api.getItemsFilterCategoryPaginate({
             page: page,
             group: category_id
-    })
+        })
+        .then(res => {
+            setpageCount(Math.ceil(res.count / 10));
+            setListItems(res.results);
+        })
+        .catch((e) => console.log(e))
+        .finally(()=> setIsLoaddingItems(false))
+      }
+
+      const getItemsAuth = (page, category_id) => {
+        // Получить список категорий товаров
+        items_api.getItemsAuthFilterCategoryPaginate({
+            page: page,
+            group: category_id
+        })
         .then(res => {
             setpageCount(Math.ceil(res.count / 10));
             setListItems(res.results);

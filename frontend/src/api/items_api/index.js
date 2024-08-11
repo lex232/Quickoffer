@@ -171,6 +171,23 @@ class ApiItems {
     ).then(this.checkResponse)
   }
 
+  getItemsAuthFilterCategoryPaginate ({
+    page,
+    group
+  }) {
+    const token = localStorage.getItem('token')
+    return fetch(
+      `/api/itemsauth/?group=${group}&page=${page}`, 
+      {
+        method: 'GET',
+        headers: {
+          ...this._headers,
+          'authorization': `Token ${token}`
+        }
+      }
+    ).then(this.checkResponse)
+  }
+
   // Поиск по вхождению сначала
   findItem ({ item }) {
     const token = localStorage.getItem('token')

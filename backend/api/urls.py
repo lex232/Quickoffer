@@ -13,7 +13,8 @@ from api.v1.main_page.views import (
 from api.v1.items.views import (
     ItemViewSet,
     ItemFinderViewSet,
-    ItemUserViewSet
+    ItemUserViewSet,
+    ItemViewSetAuth
 )
 from api.v1.offer.views import (
     OfferViewSet
@@ -78,6 +79,12 @@ router_offer.register(
     'items',
     ItemViewSet,
     basename='items'
+)
+
+router_offer.register(
+    'itemsauth',
+    ItemViewSetAuth,
+    basename='itemsauth'
 )
 
 # Роутер товаров пользовательский
