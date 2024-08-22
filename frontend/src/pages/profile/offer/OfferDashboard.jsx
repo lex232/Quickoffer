@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 
 import offer_api from '../../../api/offer_api';
-import getDate from '../../../utils/getDate';
 import DeletePopup from '../../../components/popup/DeletePopup';
 
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, Home, User } from 'react-feather'
+import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, User } from 'react-feather'
 import './styles.css'
 
 const OfferDashboard = () => {

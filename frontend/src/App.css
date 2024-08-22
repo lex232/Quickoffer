@@ -460,3 +460,7 @@ footer {
   border-radius: 30px !important;
   float: right;
 }
+
+a:link {
+  text-decoration: none;
+}

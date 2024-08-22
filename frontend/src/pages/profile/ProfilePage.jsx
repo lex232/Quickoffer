@@ -32,7 +32,7 @@ const MainProfile = ({ loginstate, onSignOut, user }) => {
                 <div className="row">
                     <div className=''>
                         <button className='button-on-mobile pb-2 ps-2' onClick={(e) => handleMenu(e)}>    
-                            {style_visible === isCollapsed ? <AlignJustify /> : <XCircle />}
+                            {style_visible === isCollapsed ? <><AlignJustify /></> : <XCircle />}
                         </button>
                     </div>  
                     <ProfileSidebar styleCollapse={isCollapsed}/>

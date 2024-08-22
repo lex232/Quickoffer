@@ -6,6 +6,9 @@ import './styles.css'
 
 
 const ProfileEdit = () => {
+  /**
+  * Страница редактирования пользователя
+  */
 
   // const [currentUserData, setCurrentUserData] = useState([]);
   const [currentProfileData, setCurrentProfileData] = useState([]);

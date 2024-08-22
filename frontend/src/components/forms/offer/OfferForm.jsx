@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate, Link } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
 import clients_api from '../../../api/clients_api';
@@ -388,8 +388,8 @@ const OfferForm = ({
 
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
-                <label>Добавить товар/ услугу:</label>
-                  <input className="form-control mt-1" id="offerName" placeholder="Товар/ услуга. Начните вводить текст для поиска" 
+                <label>Добавить товар/ услугу через поиск</label>
+                  <input className="form-control mt-1" id="offerName" placeholder="Начните вводить название для поиска" 
                     onChange={e => {
                       const valueForItem = e.target.value
                       setItemValue({
@@ -415,6 +415,7 @@ const OfferForm = ({
 
                   {showError && <div className='mt-2'><SimpleDivMessage text='Такой элемент уже есть в списке'/>
                 </div>}
+                <div className='pt-2'>или перейдите в <Link to="/catalog"><button className="btn btn-primary btn-sm">каталог товаров</button></Link></div>
             </div>
             </div>
           </div>
@@ -465,11 +466,11 @@ const OfferForm = ({
                               <label>Кол-во</label>
                               <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
                             </div>
-                            <div className="col-4">
+                            <div className="col-6">
                               <label>Итого</label>
                               <h5 className="mb-0">{item.item_price_retail * item.amount} Р</h5>
                             </div>
-                            <div className="col-4 d-flex align-items-center">
+                            <div className="col-2 d-flex align-items-center">
                             <button onClick={(e) => deleteItemOffer(index, e)}><XCircle strokeWidth={3} size={22} color="red" /></button>
                           </div>
                           </div>

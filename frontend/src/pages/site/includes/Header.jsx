@@ -5,8 +5,6 @@ import '../../../css/Headers.css';
 import logo from '../../../static/image/logo.png';
 import activeUrl from '../../../utils/activeUrl';
 
-import { ReactComponent as UserIco } from '../../../static/image/iconsheader/user.svg'
-import { ReactComponent as ExitIco } from '../../../static/image/iconsheader/lock-closed.svg'
 import './styles.css'
 
 const Header = ({ loginstate, onSignOut, user }) => {
@@ -63,7 +61,6 @@ const Header = ({ loginstate, onSignOut, user }) => {
     let username = user.username
     return (
       <div className='nav'>
-        <li className="nav-item"><a href="/catalog" className={check_url_header.check_absolute_url("about")} aria-current="page">Каталог</a></li>
         <li className="nav-item py-2 position-relative me-3">
           {item_length > 0 && <div><Link to="/profile/offer/create" className='nav-item dark py-2 text-black text-decoration-none'>Корзина КП</Link>
             <div className='circle-number position-absolute top-0 start-100 translate-middle'>{item_length}</div>

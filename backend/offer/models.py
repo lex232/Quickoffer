@@ -146,6 +146,12 @@ class Group(MPTTModel):
         unique=True
         )
     description = models.TextField()
+    position = models.PositiveSmallIntegerField(
+        verbose_name='позиция',
+        null=True,
+        blank=True,
+        default=999
+    )
     cat_type = models.CharField(
         verbose_name='тип категории: товар или услуга',
         max_length=20,
@@ -155,7 +161,8 @@ class Group(MPTTModel):
     )
 
     class MPTTMeta:
-        order_insertion_by = ['title']
+        # order_insertion_by = ['title']
+        order_insertion_by = ['position']
 
     class Meta:
         unique_together = [['parent', 'slug']]

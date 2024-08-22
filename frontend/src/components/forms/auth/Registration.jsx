@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import user_api from '../../../api/user_api';
 import SimplePopup from '../../popup/refPopup';

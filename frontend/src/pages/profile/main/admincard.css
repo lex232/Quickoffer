@@ -47,3 +47,12 @@ a.text-primary:hover {
 .card-move:hover .card-body-move .display-4 {
     transform: scale(1.1);
 }
+
+.decoration-number {
+    font-style: normal;
+    font-size: calc(1.325rem + .9vw)
+}
+
+.decoration-color {
+    color: #e4612d;
+}

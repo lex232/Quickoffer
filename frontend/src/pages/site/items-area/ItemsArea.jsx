@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
+import { Link } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
 import './styles.css'
-import AddNewLine from '../../../utils/text-operations/addNewLine';
+import AddNewTable from '../../../utils/text-operations/addTable';
+import { ShoppingBag } from 'react-feather';
 
 const ItemsArea = ({ category_id, loginstate, title }) => {
     /**
@@ -26,8 +28,13 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     useEffect(() => {
         // Получить все товары при загрузке страницы
-        getItems(currentpage, category_id);
-        currentpage = 1;
+        if (loginstate === false) {
+            getItems(currentpage, category_id);
+            currentpage = 1;
+        } else {
+            getItemsAuth(currentpage, category_id);
+            currentpage = 1;
+        }
       }, [category_id])
       ;
 
@@ -36,7 +43,21 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         items_api.getItemsFilterCategoryPaginate({
             page: page,
             group: category_id
-    })
+        })
+        .then(res => {
+            setpageCount(Math.ceil(res.count / 10));
+            setListItems(res.results);
+        })
+        .catch((e) => console.log(e))
+        .finally(()=> setIsLoaddingItems(false))
+      }
+
+      const getItemsAuth = (page, category_id) => {
+        // Получить список категорий товаров
+        items_api.getItemsAuthFilterCategoryPaginate({
+            page: page,
+            group: category_id
+        })
         .then(res => {
             setpageCount(Math.ceil(res.count / 10));
             setListItems(res.results);
@@ -122,27 +143,27 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             </div>
             
             <div className="container-fluid">
-            <h4 className='text-start pb-2'>{title}</h4>
+            <h4 className='text-start pb-2 pt-2'>{title}</h4>
                 <div className="row justify-content-start">
                     {listItems.map((results) => {
                         return (
-                            <div className="col-6 col-xl-3 col-xxl-2 mb-5">
+                            <div className="col-12 col-lg-6 col-xl-4 col-xxl-3 mb-5">
                                 <div className="card h-100">
                                     <div className='area-img'>
                                         <img className="card-image" src={results.image} />
                                     </div>
-                                    <div className="card-body p-2">
+                                    <div className="card-body p-0">
                                         <div className="text-start">
-                                            <h6 className="fw-bolder">{results.title}</h6>
-                                            <div className='item-brand'>Производитель: <b>{results.brand}</b></div>
-                                            <div className='description-item py-1'>{AddNewLine(results.description)}</div>
-                                            <div className='item-price'><b>{results.price_retail} руб.</b></div>
+                                            <div className="ps-2">{results.title}</div>
+                                            <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>
+                                            <div className='description-item pt-1'>{AddNewTable(results.description)}</div>
+                                            <div className='item-price pe-2'>{results.price_retail} руб.</div>
                                         </div>
                                     </div>
                                     {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
                                         {CheckCartItem(results.id) ?
-                                            <div className="justify-content-start text-start col-8"><button className="btn btn-primary btn-sm">Добавлено в КП</button></div> : 
-                                            <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в КП</button></div>}
+                                            <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF'/></button></Link></div> : 
+                                            <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000'/></button></div>}
                                         <div className="justify-content-end text-end col-4">
                                             {CheckCartItem(results.id) && 
                                             <span>

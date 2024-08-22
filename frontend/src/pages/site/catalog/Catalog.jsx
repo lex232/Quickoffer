@@ -75,7 +75,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                 <div className="row">
                     <div>
                         <button className='button-on-mobile ps-3 pb-2' onClick={(e) => handleMenu(e)}>
-                            {style_visible === isCollapsed ? <AlignJustify /> : <XCircle />}
+                            {style_visible === isCollapsed ? <><AlignJustify /> показать категории</> : <><XCircle /> скрыть категории</>}
                         </button>
                     </div>
                     <nav id="sidebarMenu" className={isCollapsed}>
@@ -89,14 +89,14 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                                             <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
                                                 <span className='position-absolute end-0'></span>
                                                 <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                                    {results.id === choosenCategory ? <li className="nav-link active text-sidebar">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
+                                                    {results.id === choosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
                                                 </button> 
                                             </div>
                                             ||
                                             choosenTree === results.tree_id && results.level !== 0
                                             &&
                                             <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                            {results.id === choosenCategory ? <li className="nav-link active small-item"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
+                                            {results.id === choosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
                                         </button>
                                         );
                                     })}

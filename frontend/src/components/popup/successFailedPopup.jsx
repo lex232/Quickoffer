@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/popup.css'
 
 import { ReactComponent as DeleteIco } from '../../static/image/icons/delete.svg'

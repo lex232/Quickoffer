@@ -28,15 +28,10 @@ const ClientDashboard = () => {
   let currentpage = 1;
 
   useEffect(() => {
-    // Получить все новости при загрузке страницы
+    // Получить всех клиентов при загрузке страницы
     getClients(currentpage, type_company);
   }, [])
   ;
-
-  useEffect(() => {
-    // Получить все новости при загрузке страницы
-    getClients(currentpage, type_company);
-  }, [type_company]);
 
   const getClients = (page, type_company) => {
     clients_api.getClientsPaginate({

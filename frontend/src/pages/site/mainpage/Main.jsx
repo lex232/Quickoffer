@@ -8,7 +8,7 @@ import Footer from '../includes/Footer.jsx';
 import MyClients from '../../../static/image/mainpage/my_clients_min.png';
 import MyItem from '../../../static/image/mainpage/my_items_min.png';
 import MyOffers from '../../../static/image/mainpage/my_offers_min.jpg';
-import Note1000 from '../../../static/image/mainpage/note-800.png';
+import Note1000 from '../../../static/image/mainpage/note-800wobrand.png';
 import Buy from '../../../static/image/mainpage/buy.jpg';
 import { DownloadCloud, Clipboard, PieChart, BarChart } from 'react-feather';
 
