@@ -3,6 +3,11 @@
     font-size: 20px;
 }
 
+.button-mini {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
 .text-sidebar {
     font-size: 14px;
 }

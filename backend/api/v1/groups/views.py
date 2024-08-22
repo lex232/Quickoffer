@@ -18,6 +18,9 @@ class GroupItemsOfferViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для категорий разделов.
     Только товары (для раздела каталог на главной)!"""
 
+    # Ребилдит категории MPTT при смене ордеринга
+    # Group.objects.rebuild()
+
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (IsAdminOrReadOnly,)

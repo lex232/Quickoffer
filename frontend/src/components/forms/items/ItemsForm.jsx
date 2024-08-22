@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
@@ -193,7 +193,7 @@ const ItemForm = ({
         </div>
         <div class="col-md-6 ps-0 pe-2">
             <div class="form-group">
-                <label>Количественная характеристика</label>
+                <label>Единицы измерения</label>
                 <select className='form-select border-input' value={quantityTypeArea} aria-label="Товар или услуга *" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
                   <option selected value='pc'>шт.</option>
                   <option value='meters'>м.</option>

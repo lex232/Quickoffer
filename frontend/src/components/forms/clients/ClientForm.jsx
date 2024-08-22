@@ -1,6 +1,6 @@
 // Форма обработки полей создание клиента
 import React, { useEffect, useState, useRef } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import clients_api from '../../../api/clients_api';

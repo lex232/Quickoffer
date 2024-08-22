@@ -64,6 +64,8 @@ function App() {
   const [ user, setUser ] = useState({})
   const [ loginErrors, setLoginErrors ] = useState(null)
 
+  const [ editable, setEditable ] = useState(null)
+
   const popupLoginRef = useRef();
   const openLoginPopup = () => popupLoginRef.current.open();
 
@@ -101,6 +103,13 @@ function App() {
   }
 
   useEffect(_ => {
+    const editable = localStorage.getItem('editable')
+    if (editable) {
+      setEditable(true)
+    }
+  }, []);
+
+  useEffect(_ => {
     const token = localStorage.getItem('token')
     if (token) {
       user_api.getUserData()
@@ -124,6 +133,7 @@ function App() {
       .then(res => {
         localStorage.removeItem('token')
         localStorage.removeItem('items')
+        localStorage.removeItem('editable')
         setLoggedIn(false)
       })
       .catch(err => {
