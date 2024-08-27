@@ -45,7 +45,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             group: category_id
         })
         .then(res => {
-            setpageCount(Math.ceil(res.count / 10));
+            setpageCount(Math.ceil(res.count / 8));
             setListItems(res.results);
         })
         .catch((e) => console.log(e))
@@ -59,7 +59,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             group: category_id
         })
         .then(res => {
-            setpageCount(Math.ceil(res.count / 10));
+            setpageCount(Math.ceil(res.count / 8));
             setListItems(res.results);
         })
         .catch((e) => console.log(e))
