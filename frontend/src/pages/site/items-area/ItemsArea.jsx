@@ -59,7 +59,6 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             group: category_id
         })
         .then(res => {
-            console.log(Math.ceil(res.count / 8))
             setpageCount(Math.ceil(res.count / 8));
             setListItems(res.results);
         })
