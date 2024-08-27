@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 from offer.models import Item, Group, Brand
 
-temp_dir = 'razem_pitaniya-page1'
+temp_dir = 'modyl_sopryajeniya-page1'
 # Видеорегистраторы
 # Контроль доступа
 # Замки для домофонов
@@ -26,6 +26,7 @@ temp_dir = 'razem_pitaniya-page1'
 # CATS = ["Микрофоны"]
 # CATS = ["Домофоны", "Мониторы аналоговые"]
 # CATS = ["Домофоны", "Мониторы IP цифровые"]
+CATS = ["Домофоны", "Модуль сопряжения домофона"]
 # CATS = ["Блоки питания", "Адаптеры в пластиковом корпусе"]
 # CATS = ["Блоки питания", "Бесперебойное питание"]
 # CATS = ["Блоки питания", "Уличное исполнение БП"]
@@ -38,8 +39,9 @@ temp_dir = 'razem_pitaniya-page1'
 # CATS = ["Накопители информации", "Карты памяти"]
 # CATS = ["Коммутаторы", "POE - коммутаторы"]
 # CATS = ["Приемо-передатчики", "Пассивные приемо-передатчики"]
-CATS = ["Разъёмы", "Коннекторы для камер"]
+# CATS = ["Разъёмы", "Коннекторы для камер"]
 # CATS = ["Разъёмы", "Коннекторы сетевые RJ45"]
+# CATS = ["Разъёмы", "Коннекторы питания"]
 # CATS = ["Монтажные материалы", "Шкафы"]
 # CATS = ["Вызывные панели", "Аналоговые hd панели"]
 # CATS = ["Вызывные панели", "Цифровые IP панели"]
@@ -72,54 +74,57 @@ class Command(BaseCommand):
     """Заполняет БД данными из файлов словаря DATA_FILES"""
 
     def handle(self, *args, **kwargs):
-        for model, csv_f in DATA_FILES.items():
-            with open(
-                f'{settings.BASE_DIR}/demo/{csv_f}',
-                'r',
-                encoding='utf-8'
-            ) as csv_file:
-                reader = csv.reader(csv_file)
-                for data in reader:
-                    dict_for_record = {}
-                    for i in range(len(data)):
-                        if FIELDS.get(model)[i] == 'brand':
-                            print("TEST", data[i])
-                            temp_brand = Brand.objects.get(title=data[i])
-                            print('Полученный бренд', temp_brand)
-                            dict_for_record.setdefault(
-                                FIELDS.get(model)[i],
-                                temp_brand
+            for model, csv_f in DATA_FILES.items():
+                with open(
+                    f'{settings.BASE_DIR}/demo/{csv_f}',
+                    'r',
+                    encoding='utf-8'
+                ) as csv_file:
+                    reader = csv.reader(csv_file)
+                    for data in reader:
+                        dict_for_record = {}
+                        for i in range(len(data)):
+                            if FIELDS.get(model)[i] == 'brand':
+                                temp_brand = Brand.objects.get(title=data[i])
+                                print('Полученный бренд', temp_brand)
+                                dict_for_record.setdefault(
+                                    FIELDS.get(model)[i],
+                                    temp_brand
+                                )
+                            if FIELDS.get(model)[i] == 'group':
+                                temp_group = []
+                                for group in CATS:
+                                # obj = Group.objects.get(pk=int(data[i]))
+                                    obj = Group.objects.get(title=group)
+                                    temp_group.append(obj)
+                                print('Полученные группы ', temp_group)
+                                dict_for_record.setdefault(
+                                    FIELDS.get(model)[i],
+                                    temp_group
+                                )
+                            if FIELDS.get(model)[i] == 'image':
+                                image = f'media/item/image/{data[i]}'
+                                dict_for_record.setdefault(
+                                    FIELDS.get(model)[i],
+                                    image
+                                )
+                            else:
+                                dict_for_record.setdefault(
+                                    FIELDS.get(model)[i],
+                                    data[i]
+                                )
+                        try:
+                            temp_model = model.objects.create(
+                                title=dict_for_record.get('title'),
+                                brand=dict_for_record.get('brand'),
+                                price_retail=dict_for_record.get('price_retail'),
+                                description=dict_for_record.get('description'),
+                                quantity_type=dict_for_record.get('quantity_type'),
+                                item_type=dict_for_record.get('item_type'),
+                                image=dict_for_record.get('image')
                             )
-                        if FIELDS.get(model)[i] == 'group':
-                            temp_group = []
-                            for group in CATS:
-                            # obj = Group.objects.get(pk=int(data[i]))
-                                obj = Group.objects.get(title=group)
-                                temp_group.append(obj)
-                            print('Полученные группы ', temp_group)
-                            dict_for_record.setdefault(
-                                FIELDS.get(model)[i],
-                                temp_group
-                            )
-                        if FIELDS.get(model)[i] == 'image':
-                            image = f'media/item/image/{data[i]}'
-                            dict_for_record.setdefault(
-                                FIELDS.get(model)[i],
-                                image
-                            )
-                        else:
-                            dict_for_record.setdefault(
-                                FIELDS.get(model)[i],
-                                data[i]
-                            )
-                    temp_model = model.objects.create(
-                        title=dict_for_record.get('title'),
-                        brand=dict_for_record.get('brand'),
-                        price_retail=dict_for_record.get('price_retail'),
-                        description=dict_for_record.get('description'),
-                        quantity_type=dict_for_record.get('quantity_type'),
-                        item_type=dict_for_record.get('item_type'),
-                        image=dict_for_record.get('image')
-                    )
-                    temp_model.group.set(dict_for_record.get('group'))
-        self.stdout.write('Данные в БД успешно загружены')
+                            temp_model.group.set(dict_for_record.get('group'))
+                            print('Позиция записана', dict_for_record.get('title'))
+                        except Exception as e:
+                            print('Произошла ошибка при обработке позиции', e)
+            self.stdout.write('Обработка данных завершена')

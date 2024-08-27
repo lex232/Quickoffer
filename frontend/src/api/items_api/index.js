@@ -123,7 +123,7 @@ class ApiItems {
   deleteItem ({ item_id }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/items/${item_id}/`,
+      `/api/itemsuser/${item_id}/`,
       {
         method: 'DELETE',
         headers: {
