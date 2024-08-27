@@ -239,7 +239,7 @@ class Item(models.Model):
     )
     image = models.ImageField(
         verbose_name='изображение товара',
-        upload_to='media/item/image',
+        upload_to='media/item/image/%Y-%m-%d/',
         null=True,
         blank=True
     )
@@ -270,6 +270,11 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+
+def user_directory_path(instance, filename):
+    # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 
 class ItemUser(Item):
