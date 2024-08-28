@@ -1,5 +1,3 @@
-/plates/
-/pkg/
 /venv/
 .venv
 /__pycache__/
@@ -15,25 +13,6 @@ backups
 /backups/
 .backups
 .vscode
-
-
-/plates/
-/pkg/
-/venv/
-.venv
-/__pycache__/
-__pycache__
-.idea
-/.idea/
-settings
-settings.ini
-demo.py
-/test/
-/.test/
-.env
-
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -60,3 +39,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /frontend/package-lock.json
+package-lock.json
