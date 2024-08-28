@@ -239,7 +239,7 @@ class Item(models.Model):
     )
     image = models.ImageField(
         verbose_name='изображение товара',
-        upload_to='media/item/image/%Y-%m-%d/',
+        upload_to='media/item/imageuser/%Y-%m-%d/',
         null=True,
         blank=True
     )
