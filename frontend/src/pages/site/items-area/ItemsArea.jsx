@@ -15,6 +15,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
+    const [ orderingPrice, setOrderingPrice] = useState('price_retail');
 
     const [page, setPage] = useState(0);
     const [pageCount, setpageCount] = useState(0);
@@ -42,14 +43,15 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         setCurrentPageState(1)
         setPage(0)
         getItemsByAuth(currentpage, category_id);
-      }, [category_id])
+      }, [category_id, orderingPrice])
       ;
 
     const getItems = (page, category_id) => {
         // Получить список категорий товаров
         items_api.getItemsFilterCategoryPaginate({
             page: page,
-            group: category_id
+            group: category_id,
+            ordering_price: orderingPrice
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -63,7 +65,8 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         // Получить список категорий товаров
         items_api.getItemsAuthFilterCategoryPaginate({
             page: page,
-            group: category_id
+            group: category_id,
+            ordering_price: orderingPrice
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -151,6 +154,12 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             
             <div className="container-fluid">
             <h4 className='text-start pb-2 pt-2'>{title}</h4>
+                <div className='pb-4'>
+                    <select className="form-select" value={orderingPrice} aria-label="Выберите сортировку" onChange={(e) => setOrderingPrice(e.target.value)}>
+                        <option value="price_retail">Сортировать по цене по возрастанию</option>
+                        <option value="-price_retail">Сортировать по цене по убыванию</option>
+                    </select>
+                </div>
                 <div className="row justify-content-start">
                     {listItems.map((results) => {
                         return (
@@ -162,7 +171,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                     <div className="card-body p-0">
                                         <div className="text-start">
                                             <div className="ps-2">{results.title}</div>
-                                            <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>
+                                            {results.item_type === "product" && <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>}
                                             <div className='description-item pt-1'>{AddNewTable(results.description)}</div>
                                             <div className='item-price pe-2'>{results.price_retail} руб.</div>
                                         </div>

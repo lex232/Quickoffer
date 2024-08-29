@@ -29,7 +29,7 @@ const ProfileSidebar = ({ styleCollapse }) => {
         <div >
             <Link to="/catalog" className={check_url_main.check_absolute_url("/catalog")}><ShoppingBag /><span className='px-2'>Каталог</span><span className='position-absolute end-0'></span></Link>
         </div>
-        -------------
+        <br></br>
         <div >
             <Link to="/profile" className={check_url_main.check_absolute_url("/profile")}><Box /><span className='px-2'>Главный экран</span><span className='position-absolute end-0'></span></Link>
         </div>

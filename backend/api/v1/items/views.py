@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from itertools import chain
 
 from api.permissions import IsAdminOrReadOnly
@@ -48,9 +49,10 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.filter(private_type=False)
     serializer_class = ItemSerializer
     permission_classes = (IsAdminOrReadOnly,)
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
     filterset_fields = ['group']
+    ordering_fields = ['price_retail']
 
 
 class ItemViewSetAuth(viewsets.ModelViewSet):
@@ -58,17 +60,17 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
 
     serializer_class = ItemSerializer
     permission_classes = (IsAuthenticated,)
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
-    filterset_fields = ['group']
+    filterset_fields = ['group', 'price_retail']
+    ordering_fields = ['price_retail']
 
     def get_queryset(self):
         """Показываем только товары авторизованного пользователя"""
 
         user = self.request.user
         queryset_general_items = Item.objects.filter(private_type=False)
-        queryset_auth_items = ItemUser.objects.filter(author=user)
-        all = list(chain(queryset_general_items, queryset_auth_items))
+        # queryset_auth_items = ItemUser.objects.filter(author=user)
         return queryset_general_items
 
 
