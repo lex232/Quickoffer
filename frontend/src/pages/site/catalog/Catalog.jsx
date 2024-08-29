@@ -15,6 +15,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     */
 
     const [ listGroups, setListGroups ] = useState([])
+    const [ listService, setListService ] = useState([])
     const [ isLoaddingCat, setIsLoaddingCat ] = useState(true)
     const [ choosenCategory, setChoosenCategory ] = useState(undefined)
     const [ choosenTree, setChoosenTree ] = useState(undefined)
@@ -26,8 +27,9 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [ isCollapsed, setIsCollapsed] = useState(style_visible)
 
     useEffect(() => {
-        // Получить все новости при загрузке страницы
+        // Получить все группы при загрузке страницы
         getGroups();
+        getGroupService();
       }, [])
       ;
 
@@ -42,6 +44,16 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         .catch((e) => console.log(e))
         .finally(()=> setIsLoaddingCat(false))
       }
+
+    const getGroupService = () => {
+    // Получить список категорий услуг
+        group_api.getServiceGroup()
+        .then(res => {
+            setListService(res);
+        })
+        .catch((e) => console.log(e))
+        .finally(()=> setIsLoaddingCat(false))
+    }
 
     const handleChangeCategory = (e, id, tree_id, title) => {
     // Устанавливаем значение типа компании onChange
@@ -60,6 +72,30 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         else {setIsCollapsed(style_visible)}
     }
 
+    const CategoryView = ({ InputGroups }) => {
+        return (
+            <>
+                {InputGroups.map((results) => {
+                    return (
+                            results.level === 0 
+                            &&
+                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
+                                <span className='position-absolute end-0'></span>
+                                <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
+                                    {results.id === choosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
+                                </button> 
+                            </div>
+                            ||
+                            choosenTree === results.tree_id && results.level !== 0
+                            &&
+                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
+                            {results.id === choosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
+                        </button>
+                        );
+                    })}
+            </>
+        )
+    }
 
     return (
             <div>
@@ -82,24 +118,9 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                         <div className="position-sticky pt-3 sidebar-sticky mb-2">
                             <h3 className='header-category'><Menu /> Категории</h3>
                             <ul className="nav nav-pills flex-column gap-2">
-                                {listGroups.map((results) => {
-                                    return (
-                                            results.level === 0 
-                                            &&
-                                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
-                                                <span className='position-absolute end-0'></span>
-                                                <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                                    {results.id === choosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
-                                                </button> 
-                                            </div>
-                                            ||
-                                            choosenTree === results.tree_id && results.level !== 0
-                                            &&
-                                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                            {results.id === choosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
-                                        </button>
-                                        );
-                                    })}
+                                <CategoryView InputGroups={listGroups}/>
+                                <br></br>
+                                <CategoryView InputGroups={listService}/>
                             </ul>
                         </div>
                     </nav>

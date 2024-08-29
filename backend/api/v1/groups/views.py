@@ -33,6 +33,22 @@ class GroupItemsOfferViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class GroupServicesOfferViewSet(viewsets.ModelViewSet):
+    """Апи вьюсет для категорий услуг.
+    Только услуги (для раздела каталог на главной)!"""
+
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    pagination_class = None
+
+    def get_queryset(self):
+        """Показываем только группы с типом = услуга"""
+
+        queryset = Group.objects.filter(cat_type='service')
+        return queryset
+
+
 class GroupOnCreateViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для категорий разделов.
     Только товары и услуги без родительских категорий"""

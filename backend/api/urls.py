@@ -25,6 +25,7 @@ from api.v1.clients.views import (
 )
 from api.v1.groups.views import (
     GroupItemsOfferViewSet,
+    GroupServicesOfferViewSet,
     GroupOnCreateViewSet
 )
 from api.v1.brands.views import BrandViewSet
@@ -51,6 +52,13 @@ router_offer.register(
     'groupsitems',
     GroupItemsOfferViewSet,
     basename='groupsitems'
+)
+
+# Роутер группы услуг без товаров
+router_offer.register(
+    'groupservices',
+    GroupServicesOfferViewSet,
+    basename='groupservices'
 )
 
 # Роутер группы товаров при создании товара

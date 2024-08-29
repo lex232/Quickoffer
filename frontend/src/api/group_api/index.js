@@ -30,6 +30,15 @@ class ApiItemsGroup {
     ).then(this.checkResponse)
   }
 
+  getServiceGroup () {
+    return fetch(
+      `/api/groupservices/`,
+      {
+        method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
   getItemsGroupOnCreateUserItem () {
     const token = localStorage.getItem('token')
     return fetch(
