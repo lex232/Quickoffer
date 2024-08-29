@@ -11,13 +11,16 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     /**
     * Блок товаров в каталоге
     */
+    
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
+    const [ orderingPrice, setOrderingPrice] = useState('price_retail');
 
     const [page, setPage] = useState(0);
     const [pageCount, setpageCount] = useState(0);
-    let currentpage = 1;
+    const [currentpagestate, setCurrentPageState] = useState(1);
+    let currentpage = currentpagestate;
 
     let items = []
 
@@ -26,23 +29,29 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         items = JSON.parse(localStorage.getItem("items"));
     }
 
-    useEffect(() => {
-        // Получить все товары при загрузке страницы
+    const getItemsByAuth = (currentpage, category_id) => {
         if (loginstate === false) {
-            getItems(currentpage, category_id);
-            currentpage = 1;
+            getItems(currentpage, category_id);            
         } else {
             getItemsAuth(currentpage, category_id);
-            currentpage = 1;
         }
-      }, [category_id])
+    }
+
+    useEffect(() => {
+        // Получить все товары при смене категории, загружаем первую страницу
+        currentpage = 1;
+        setCurrentPageState(1)
+        setPage(0)
+        getItemsByAuth(currentpage, category_id);
+      }, [category_id, orderingPrice])
       ;
 
     const getItems = (page, category_id) => {
         // Получить список категорий товаров
         items_api.getItemsFilterCategoryPaginate({
             page: page,
-            group: category_id
+            group: category_id,
+            ordering_price: orderingPrice
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -56,7 +65,8 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         // Получить список категорий товаров
         items_api.getItemsAuthFilterCategoryPaginate({
             page: page,
-            group: category_id
+            group: category_id,
+            ordering_price: orderingPrice
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -66,14 +76,14 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         .finally(()=> setIsLoaddingItems(false))
       }
 
-
     /**
     * Обработать клик паджинатора
     */
     const handlePageClick = (data) => {
         setPage(data.selected + 1)
         currentpage = data.selected + 1;
-        getItems(currentpage, category_id);
+        setCurrentPageState(data.selected + 1)
+        getItemsByAuth(currentpage, category_id);
     };
 
     /**
@@ -118,7 +128,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             image: results.image
         })
         localStorage.setItem("items", JSON.stringify(prepareToAddList));
-        getItems(currentpage, category_id);
+        getItemsByAuth(currentpage, category_id);
         window.dispatchEvent(new Event("storage"));
     }
 
@@ -130,7 +140,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         var index = items.findIndex(p => p.id === id_item)
         prepareToDeleteList.splice(index, 1)
         localStorage.setItem("items", JSON.stringify(prepareToDeleteList));
-        getItems(currentpage, category_id);
+        getItemsByAuth(currentpage, category_id);
         window.dispatchEvent(new Event("storage"));
     }
 
@@ -144,18 +154,24 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             
             <div className="container-fluid">
             <h4 className='text-start pb-2 pt-2'>{title}</h4>
+                <div className='pb-4'>
+                    <select className="form-select" value={orderingPrice} aria-label="Выберите сортировку" onChange={(e) => setOrderingPrice(e.target.value)}>
+                        <option value="price_retail">Сортировать по цене по возрастанию</option>
+                        <option value="-price_retail">Сортировать по цене по убыванию</option>
+                    </select>
+                </div>
                 <div className="row justify-content-start">
                     {listItems.map((results) => {
                         return (
                             <div className="col-12 col-lg-6 col-xl-4 col-xxl-3 mb-5">
                                 <div className="card h-100">
                                     <div className='area-img'>
-                                        <img className="card-image" src={results.image} />
+                                        {results.image && <img className="card-image" src={results.image} />}
                                     </div>
                                     <div className="card-body p-0">
                                         <div className="text-start">
                                             <div className="ps-2">{results.title}</div>
-                                            <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>
+                                            {results.item_type === "product" && <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>}
                                             <div className='description-item pt-1'>{AddNewTable(results.description)}</div>
                                             <div className='item-price pe-2'>{results.price_retail} руб.</div>
                                         </div>
@@ -183,6 +199,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                 previousLabel={"предыдущая"}
                 nextLabel={"следующая"}
                 initialPage={page}
+                forcePage={currentpage-1}
                 breakLabel={"..."}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
