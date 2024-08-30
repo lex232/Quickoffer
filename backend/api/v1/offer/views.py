@@ -308,8 +308,96 @@ class OfferViewSet(viewsets.ModelViewSet):
             # Блок клиента
             try:
                 customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
-                context[
-                    'customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
+                context['customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
+            except:
+                pass
+
+            doc.render(context)
+            doc_io = io.BytesIO()
+            doc.save(doc_io)
+            doc_io.seek(0)
+
+            response = HttpResponse(doc_io)
+
+            # Content-Disposition header makes a file downloadable
+            response["Content-Disposition"] = "attachment; filename=offer_doc"
+
+            # Set the appropriate Content-Type for docx file
+            response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            return response
+
+
+    @action(detail=True,
+            methods=['get'],
+            permission_classes=(AllowAny,))
+    def download_doc(self, request, **kwargs):
+        """Скачивание КП в формате doc"""
+
+        if request.method == 'GET':
+            file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'offer_doc.docx')
+            doc = DocxTemplate(file)
+
+            # Дата сегодня
+            today = datetime.today().strftime('%d-%m-%Y')
+
+            # Блок данных
+            context = {}
+            offer_id = get_object_or_404(OfferForCustomer, id=kwargs['pk'])
+            items_all = OfferItems.objects.filter(
+                offer=offer_id
+            )
+            context['data_items'] = []
+            context['data_services'] = []
+            # Перебираем в табличку товары
+
+            count_items = 1
+            count_services = 1
+            for index, item in enumerate(items_all):
+                if item.item.item_type == 'product':
+                    context['data_items'].append({
+                        'num': count_items,
+                        'item': item.item,
+                        'count': item.amount,
+                        'price': item.item_price_retail,
+                        'summ': item.amount * item.item_price_retail
+                    })
+                    url_img = item.item.image
+                    if url_img:
+                        #image = Image(url_img, 0.8 * inch, 0.8 * inch)
+                        pass
+                        image = url_img
+                    else:
+                        image = None
+
+                    # context['data_items'].append(image)
+                    count_items += 1
+                if item.item.item_type == 'service':
+                    context['data_services'].append({
+                        'num': count_services,
+                        'item': item.item,
+                        'count': item.amount,
+                        'price': item.item_price_retail,
+                        'summ': item.amount * item.item_price_retail
+                    })
+                    count_services += 1
+
+            context['summ'] = offer_id.final_price
+            context['summ_devices'] = offer_id.final_price_goods
+            context['summ_services'] = offer_id.final_price_work
+            context['n_offer'] = f'{offer_id.id}'
+            context['propis'] = f'{get_string_by_number(offer_id.final_price_goods)}, НДС не облагается'
+            context['date'] = today
+
+            # Блок исполнитель
+            installer = get_object_or_404(Profile, user=offer_id.author)
+            context['company'] = f'{read_company_type(installer.company_type)} {installer.company_name}'
+            context['company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
+
+            # context['data'] = [{'num': 0, 'item': 'hello', 'count': 2, 'price': 8000, 'summ': 16000}, {'num': 1, 'item': 'hello1', 'count': 2, 'price': 4000, 'summ': 8000}]
+            # Блок клиента
+            try:
+                customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
+                context['customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
             except:
                 pass
 

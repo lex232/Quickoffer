@@ -53,6 +53,20 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
+  const DownloadOfferDoc = (e) => {
+    /**
+    * Скачать КП в pdf
+    */
+    e.preventDefault();
+    offer_api.downloadOfferDoc({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
+  }
+
   const DownloadBillWork = (e) => {
     /**
     * Скачать счет на работы
@@ -114,7 +128,8 @@ const OfferShow = () => {
           <div className="col">
             <button onClick={(e) => DownloadBillWork(e)} type="button-work" className="btn btn-sm btn-outline-secondary">Счет (работы)</button>
             <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары)</button>
-            <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Скачать PDF</button>
+            <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП DOC</button>
+            <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button>
           </div>
         </div>
         
