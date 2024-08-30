@@ -129,7 +129,7 @@ const OfferShow = () => {
             <button onClick={(e) => DownloadBillWork(e)} type="button-work" className="btn btn-sm btn-outline-secondary">Счет (работы)</button>
             <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары)</button>
             <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП DOC</button>
-            <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button>
+            {/* <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button> */}
           </div>
         </div>
         
