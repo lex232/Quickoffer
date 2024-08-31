@@ -171,6 +171,22 @@ downloadOfferDoc ({
   ).then(this.checkFileDownloadResponseWord)
 }
 
+downloadContractItemsDoc ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_contract_items/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
+}
+
 downloadBillWork ({
   id
 }) {

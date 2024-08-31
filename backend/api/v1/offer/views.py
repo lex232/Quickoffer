@@ -54,6 +54,65 @@ def read_company_type(company):
         return list_types.get(company)
     return None
 
+
+def generate_dict_info_items(id):
+
+    # Дата сегодня
+    today = datetime.today().strftime('%d-%m-%Y')
+
+    # Блок данных
+    context = {}
+    offer_id = get_object_or_404(OfferForCustomer, id=id)
+    items_all = OfferItems.objects.filter(
+        offer=offer_id
+    )
+    context['data_items'] = []
+    # Перебираем в табличку товары и услуги
+
+    count_items = 1
+    for index, item in enumerate(items_all):
+        if item.item.item_type == 'product':
+            context['data_items'].append({
+                'num': count_items,
+                'item': item.item,
+                'count': item.amount,
+                'quantity': item.item.quantity_type,
+                'price': "{:.2f}".format(item.item_price_retail),
+                'summ': "{:.2f}".format(item.amount * item.item_price_retail)
+            })
+            count_items += 1
+
+    context['summ'] = "{:.2f}".format(offer_id.final_price)
+    context['summ_devices'] = "{:.2f}".format(offer_id.final_price_goods)
+    context['summ_services'] = "{:.2f}".format(offer_id.final_price_work)
+    context['n_offer'] = f'{offer_id.id}'
+    context['propis'] = f'{get_string_by_number(offer_id.final_price)}, НДС не облагается'
+    context['date'] = today
+
+    # Блок исполнитель
+    installer = get_object_or_404(Profile, user=offer_id.author)
+    if installer.ruk: context['ruk'] = installer.ruk
+    context['company'] = f'{read_company_type(installer.company_type)} {installer.company_name}'
+    context['company_inn'] = installer.inn
+    context['company_ogrn'] = installer.ogrn
+    context['company_bik'] = installer.bik
+    context['company_bank'] = installer.bank_name
+    context['company_bill'] = installer.bill_num
+    context['company_corr_bill'] = installer.bill_corr_num
+    context['company_address'] = installer.address_reg
+    # context['company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
+
+    # Блок клиента
+    try:
+        customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
+        # context['customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
+        context['customer'] = f'{read_company_type(customer.company_type)} {customer.title}'
+        context['customer_inn'] = customer.inn
+        context['customer_address'] = customer.address_reg
+    except:
+        pass
+    return context
+
 def generate_offer_doc(id):
     """генерация КП в формате doc, на основе ID коммерческого"""
 
@@ -115,17 +174,29 @@ def generate_offer_doc(id):
     installer = get_object_or_404(Profile, user=offer_id.author)
     if installer.ruk: context['ruk'] = installer.ruk
     context['company'] = f'{read_company_type(installer.company_type)} {installer.company_name}'
-    context[
-        'company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
+    context['company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
 
-    # context['data'] = [{'num': 0, 'item': 'hello', 'count': 2, 'price': 8000, 'summ': 16000}, {'num': 1, 'item': 'hello1', 'count': 2, 'price': 4000, 'summ': 8000}]
     # Блок клиента
     try:
         customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
-        context[
-            'customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
+        context['customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
     except:
         pass
+
+    doc.render(context)
+    doc_io = io.BytesIO()
+    doc.save(doc_io)
+    doc_io.seek(0)
+
+    return doc_io
+
+
+def generate_contract_items_doc(id):
+    file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'contract_items.docx')
+    doc = DocxTemplate(file)
+
+    # Блок данных
+    context = generate_dict_info_items(id)
 
     doc.render(context)
     doc_io = io.BytesIO()
@@ -418,10 +489,20 @@ class OfferViewSet(viewsets.ModelViewSet):
 
             doc_io = generate_offer_doc(kwargs['pk'])
             response = HttpResponse(doc_io)
-
-            # Content-Disposition header makes a file downloadable
             response["Content-Disposition"] = "attachment; filename=generated_doc"
+            response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            return response
 
-            # Set the appropriate Content-Type for docx file
+    @action(detail=True,
+            methods=['get'],
+            permission_classes=(AllowAny,))
+    def download_contract_items(self, request, **kwargs):
+        """Скачивание КП в формате doc"""
+
+        if request.method == 'GET':
+
+            doc_io = generate_contract_items_doc(kwargs['pk'])
+            response = HttpResponse(doc_io)
+            response["Content-Disposition"] = "attachment; filename=contract_doc"
             response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             return response
