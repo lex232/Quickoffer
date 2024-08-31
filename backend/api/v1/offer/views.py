@@ -87,6 +87,7 @@ def generate_dict_info_items(id):
     context['summ_services'] = "{:.2f}".format(offer_id.final_price_work)
     context['n_offer'] = f'{offer_id.id}'
     context['propis'] = f'{get_string_by_number(offer_id.final_price)}, НДС не облагается'
+    context['propis_devices'] = f'{get_string_by_number(offer_id.final_price_goods)}, НДС не облагается'
     context['date'] = today
 
     # Блок исполнитель
@@ -96,6 +97,7 @@ def generate_dict_info_items(id):
     context['company_inn'] = installer.inn
     context['company_ogrn'] = installer.ogrn
     context['company_bik'] = installer.bik
+    context['company_kpp'] = installer.kpp
     context['company_bank'] = installer.bank_name
     context['company_bill'] = installer.bill_num
     context['company_corr_bill'] = installer.bill_corr_num
@@ -109,6 +111,12 @@ def generate_dict_info_items(id):
         context['customer'] = f'{read_company_type(customer.company_type)} {customer.title}'
         context['customer_inn'] = customer.inn
         context['customer_address'] = customer.address_reg
+        context['customer_ogrn'] = customer.ogrn
+        context['customer_kpp'] = customer.kpp
+        context['customer_bank'] = customer.bank_name
+        context['customer_bill'] = customer.bill_num
+        context['customer_corr_bill'] = customer.bill_corr_num
+        print('ASASA', customer.bank_name)
     except:
         pass
     return context
