@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import offer_api from '../../../api/offer_api';
 import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 import BackwardButton from '../../../components/buttons/backwardButton';
+import { FileText } from 'react-feather';
 
 
 const OfferShow = () => {
@@ -95,6 +96,20 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
+  const DownloadContractItemsDoc = (e) => {
+    /**
+    * Скачать договор на товары
+    */
+    e.preventDefault();
+    offer_api.downloadContractItemsDoc({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
+  }
+
   return (
     <main className="col-md-9 col-lg-10">
 
@@ -126,9 +141,10 @@ const OfferShow = () => {
 
       <div className="row mb-2 text-end pb-2">
           <div className="col">
-            <button onClick={(e) => DownloadBillWork(e)} type="button-work" className="btn btn-sm btn-outline-secondary">Счет (работы)</button>
-            <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары)</button>
-            <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП DOC</button>
+            <button onClick={(e) => DownloadBillWork(e)} type="button-work" className="btn btn-sm btn-outline-secondary">Счет (работы) <FileText color='#5c61f2' size={18}/></button>
+            <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары) <FileText color='#5c61f2' size={18}/></button>
+            <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП <FileText color='#5c61f2' size={18}/></button>
+            <button onClick={(e) => DownloadContractItemsDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (товары) <FileText color='#5c61f2' size={18}/></button>
             {/* <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button> */}
           </div>
         </div>
