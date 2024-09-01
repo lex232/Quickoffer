@@ -56,7 +56,7 @@ const OfferShow = () => {
 
   const DownloadOfferDoc = (e) => {
     /**
-    * Скачать КП в pdf
+    * Скачать КП в doc
     */
     e.preventDefault();
     offer_api.downloadOfferDoc({
@@ -70,7 +70,7 @@ const OfferShow = () => {
 
   const DownloadBillWork = (e) => {
     /**
-    * Скачать счет на работы
+    * Скачать счет на работы doc
     */
     e.preventDefault();
     offer_api.downloadBillWork({
@@ -84,7 +84,7 @@ const OfferShow = () => {
 
   const DownloadBillItems = (e) => {
     /**
-    * Скачать счет на товары
+    * Скачать счет на товары doc
     */
     e.preventDefault();
     offer_api.downloadBillItems({
@@ -98,10 +98,24 @@ const OfferShow = () => {
 
   const DownloadContractItemsDoc = (e) => {
     /**
-    * Скачать договор на товары
+    * Скачать договор на товары doc
     */
     e.preventDefault();
     offer_api.downloadContractItemsDoc({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
+  }
+
+  const DownloadContractServiceDoc = (e) => {
+    /**
+    * Скачать договор на услуги doc
+    */
+    e.preventDefault();
+    offer_api.downloadContractServiceDoc({
       id: id,
     })
     .then(res => {
@@ -145,6 +159,7 @@ const OfferShow = () => {
             <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары) <FileText color='#5c61f2' size={18}/></button>
             <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП <FileText color='#5c61f2' size={18}/></button>
             <button onClick={(e) => DownloadContractItemsDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (товары) <FileText color='#5c61f2' size={18}/></button>
+            <button onClick={(e) => DownloadContractServiceDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (услуги) <FileText color='#5c61f2' size={18}/></button>
             {/* <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button> */}
           </div>
         </div>
