@@ -1,3 +1,11 @@
+.general-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .quantity-items {
     width: 30px;
 }
@@ -13,4 +21,13 @@
 
 .item-price {
     text-align: right;
+}
+
+.item-center {
+    width: 100%;
+}
+
+.item-bottom {
+    margin-top: auto;
+    width: 100%;
 }

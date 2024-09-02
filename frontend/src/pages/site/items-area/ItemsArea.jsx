@@ -164,19 +164,22 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                     {listItems.map((results) => {
                         return (
                             <div className="col-12 col-lg-6 col-xl-4 col-xxl-3 mb-5">
-                                <div className="card h-100">
-                                    <div className='area-img'>
-                                        {results.image && <img className="card-image" src={results.image} />}
-                                    </div>
-                                    <div className="card-body p-0">
+                                <div className="card h-100 general-item">
+                                    
+                                    <div className="card-body p-0 item-center">
+                                        <div className='area-img'>
+                                            {results.image && <img className="card-image" src={results.image} />}
+                                        </div>
                                         <div className="text-start">
                                             <div className="ps-2">{results.title}</div>
                                             {results.item_type === "product" && <div className='item-brand ps-2'>Производитель: <b>{results.brand}</b></div>}
                                             <div className='description-item pt-1'>{AddNewTable(results.description)}</div>
-                                            <div className='item-price pe-2'>{results.price_retail} руб.</div>
+                                            
                                         </div>
                                     </div>
-                                    {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
+                                    <div className='item-bottom'>
+                                        <div className='item-price pe-2'>{results.price_retail} руб.</div>
+                                        {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
                                         {CheckCartItem(results.id) ?
                                             <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF'/></button></Link></div> : 
                                             <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000'/></button></div>}
@@ -188,6 +191,8 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                             </span>}
                                         </div>
                                     </div>}
+                                    </div>
+                                    
                                 </div>
                             </div>
                             );

@@ -59,6 +59,7 @@ const OfferEdit = () => {
   }
   if (prepareToAddList) {
     localStorage.setItem("items", JSON.stringify(prepareToAddList));
+    localStorage.setItem("nameoffer", nameOffer);
   }
   
 
