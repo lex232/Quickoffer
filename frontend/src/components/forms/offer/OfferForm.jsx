@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, Link } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
@@ -25,16 +24,30 @@ const OfferForm = ({
   */
 
   const navigate = useNavigate()
+
+  let nameFromLocal = name_offer
   const [ nameArea, setName ] = useState(name_offer)
   const [ clientArea, setClient ] = useState(name_client)
   const [ statusOffer, setStatusOffer] = useState(status_type);
 
+  const classValid = 'form-control border-input'
+  const classIsInvalid = 'form-control border-input is-invalid'
+  const [ classForNameArea, setClassForNameArea] = useState(classValid);
+
+
+
+
   // Самая главная переменная - итоговый список КП
   let items = []
 
-  // Сохраняем корзину в локальное хранилище
+  // Извлекаем из локального хранилища в корзину
   if (localStorage.getItem("items")) {
     items = JSON.parse(localStorage.getItem("items"));
+  }
+
+   //Извлекаем из локального хранилища имя КП
+   if (localStorage.getItem("nameoffer") && name_offer === undefined) {
+    nameFromLocal = localStorage.getItem("nameoffer")
   }
   
   // Итоговая стоимость КП
@@ -108,11 +121,28 @@ const OfferForm = ({
       })
   }, [clientValue.title])
 
+  // UseEffect для подсчета цены
   useEffect(_ => {
     calculateFinalPrice()
-    console.log("LIST CHANGED OFFER", list)
-    console.log("LOCALSTORAGE STATE", JSON.parse(localStorage.getItem("items")))
   }, [list])
+
+   // UseEffect для смены класса имени КП, подсветит красным, если не заполнено
+   useEffect(_ => {
+    if (nameArea === undefined || nameArea.length === 0) {
+      setClassForNameArea(classIsInvalid)
+    }
+    else if (nameArea !== undefined && nameArea.length === 0) {
+      setClassForNameArea(classIsInvalid)
+    }
+    else {
+      setClassForNameArea(classValid)
+    }
+  }, [nameArea])
+
+  useEffect(_ => {
+    setName(nameFromLocal)
+  }, [nameFromLocal])
+
 
   // onDragStart fires when an element
   // starts being dragged
@@ -289,11 +319,13 @@ const OfferForm = ({
     // Устанавливаем имя категории на событии onChange
     e.preventDefault();
     setName(e.target.value);
+    localStorage.setItem("nameoffer", e.target.value);
   }
 
   const ClearOffer = () => {
-    // Очищаем локал сторедж и состояние списка товаров
+    // Очищаем локал сторедж, имя КП и состояние списка товаров
     localStorage.removeItem("items")
+    localStorage.removeItem("nameoffer")
     items = []
     setList([])
   }
@@ -340,7 +372,9 @@ const OfferForm = ({
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Название КП* :</label>
-                <input type="header" defaultValue={name_offer} className="form-control border-input" id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
+                <input type="header" defaultValue={nameArea}
+                className={classForNameArea}
+                id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
             </div>
           </div>
           <div className="col-md-6 ps-0 pe-2">

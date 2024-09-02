@@ -1,11 +1,11 @@
 import React from 'react';
 
 import './styles.css'
-/**
-* Добавляет таблицу характеристик, если встречает символ ; и !
-*/
 
 const AddNewTable = (info) => {
+    /**
+    * Добавляет таблицу характеристик, если встречает символ ; и !
+    */
     if (info !== '') {
         let rows = info.split(';')
         return (
@@ -26,7 +26,6 @@ const AddNewTable = (info) => {
                                     </tr>
                                 )
                             })}
-                        
                     </tbody>
                 </table>}
             </>
