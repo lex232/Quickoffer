@@ -55,7 +55,18 @@ def read_company_type(company):
     return None
 
 
-def generate_dict_info_items(id):
+def read_quantity_type(quantity):
+    if quantity:
+        list_types = {
+            'pc': 'шт.',
+            'meters': 'м.',
+            'kms': 'км.',
+        }
+        return list_types.get(quantity)
+    return None
+
+
+def generate_dict_info_items(id, work=False):
 
     # Дата сегодня
     today = datetime.today().strftime('%d-%m-%Y')
@@ -69,9 +80,13 @@ def generate_dict_info_items(id):
     context['data_items'] = []
     # Перебираем в табличку товары и услуги
 
+
     count_items = 1
+    type = 'product'
     for index, item in enumerate(items_all):
-        if item.item.item_type == 'product':
+        if work:
+            type = 'service'
+        if item.item.item_type == type:
             context['data_items'].append({
                 'num': count_items,
                 'item': item.item,
@@ -88,6 +103,7 @@ def generate_dict_info_items(id):
     context['n_offer'] = f'{offer_id.id}'
     context['propis'] = f'{get_string_by_number(offer_id.final_price)}, НДС не облагается'
     context['propis_devices'] = f'{get_string_by_number(offer_id.final_price_goods)}, НДС не облагается'
+    context['propis_services'] = f'{get_string_by_number(offer_id.final_price_work)}, НДС не облагается'
     context['date'] = today
 
     # Блок исполнитель
@@ -116,12 +132,11 @@ def generate_dict_info_items(id):
         context['customer_bank'] = customer.bank_name
         context['customer_bill'] = customer.bill_num
         context['customer_corr_bill'] = customer.bill_corr_num
-        print('ASASA', customer.bank_name)
     except:
         pass
     return context
 
-def generate_offer_doc(id):
+def generate_offer_doc(id, description=False):
     """генерация КП в формате doc, на основе ID коммерческого"""
 
     file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'offer_doc.docx')
@@ -144,28 +159,35 @@ def generate_offer_doc(id):
     count_services = 1
     for index, item in enumerate(items_all):
         if item.item.item_type == 'product':
+            print(item.item.group.last())
             context['data_items'].append({
                 'num': count_items,
-                'item': item.item,
+                'item': str(item.item),
+                'brand': str(item.item.brand),
+                'category': str(item.item.group.last()),
                 'count': item.amount,
-                'quantity': item.item.quantity_type,
+                'quantity': read_quantity_type(str(item.item.quantity_type)),
                 'price': "{:.2f}".format(item.item_price_retail),
                 'summ': "{:.2f}".format(item.amount * item.item_price_retail)
             })
             url_img = item.item.image
             if url_img:
                 pass
-                image = InlineImage(doc, url_img, width=Mm(15))
+                image = InlineImage(doc, url_img, width=Mm(10))
             else:
                 image = None
             context['data_items'][index]['image'] = image
+            if description:
+                context['data_items'][index]['desc'] = str(item.item.description).replace('!', ': ').replace(';', '. ')
+                # Пример словаря характеристик для разбиения в таблице на будущее
+                # context['data_items'][index]['desc'] = [{'desc_name': 'Тип', 'desc_param': 'Уличный'}, {'desc_name': 'Питание', 'desc_param': '12В'}]
             count_items += 1
         if item.item.item_type == 'service':
             context['data_services'].append({
                 'num': count_services,
                 'item': item.item,
                 'count': item.amount,
-                'quantity': item.item.quantity_type,
+                'quantity': read_quantity_type(str(item.item.quantity_type)),
                 'price': "{:.2f}".format(item.item_price_retail),
                 'summ': "{:.2f}".format(item.amount * item.item_price_retail)
             })
@@ -212,6 +234,22 @@ def generate_contract_items_doc(id):
     doc_io.seek(0)
 
     return doc_io
+
+
+def generate_contract_service_doc(id):
+    file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'contract_work.docx')
+    doc = DocxTemplate(file)
+
+    # Блок данных
+    context = generate_dict_info_items(id, True)
+
+    doc.render(context)
+    doc_io = io.BytesIO()
+    doc.save(doc_io)
+    doc_io.seek(0)
+
+    return doc_io
+
 
 class OfferViewSet(viewsets.ModelViewSet):
     """Апи вьюсет для коммерческих предложений."""
@@ -504,12 +542,40 @@ class OfferViewSet(viewsets.ModelViewSet):
     @action(detail=True,
             methods=['get'],
             permission_classes=(AllowAny,))
+    def download_doc_with_description(self, request, **kwargs):
+        """Скачивание КП в формате doc с характеристиками"""
+
+        if request.method == 'GET':
+
+            doc_io = generate_offer_doc(kwargs['pk'], True)
+            response = HttpResponse(doc_io)
+            response["Content-Disposition"] = "attachment; filename=generated_doc"
+            response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            return response
+
+    @action(detail=True,
+            methods=['get'],
+            permission_classes=(AllowAny,))
     def download_contract_items(self, request, **kwargs):
-        """Скачивание КП в формате doc"""
+        """Скачивание договора на товары в формате doc"""
 
         if request.method == 'GET':
 
             doc_io = generate_contract_items_doc(kwargs['pk'])
+            response = HttpResponse(doc_io)
+            response["Content-Disposition"] = "attachment; filename=contract_doc"
+            response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            return response
+
+    @action(detail=True,
+            methods=['get'],
+            permission_classes=(AllowAny,))
+    def download_contract_service(self, request, **kwargs):
+        """Скачивание КП в формате doc"""
+
+        if request.method == 'GET':
+
+            doc_io = generate_contract_service_doc(kwargs['pk'])
             response = HttpResponse(doc_io)
             response["Content-Disposition"] = "attachment; filename=contract_doc"
             response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"

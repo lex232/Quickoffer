@@ -66,13 +66,12 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
     ordering_fields = ['price_retail']
 
     def get_queryset(self):
-        """Показываем только товары авторизованного пользователя"""
+        """Показываем только товары авторизованного пользователя + доступные"""
 
         user = self.request.user
         queryset_general_items = Item.objects.filter(private_type=False)
         # queryset_auth_items = ItemUser.objects.filter(author=user)
         return queryset_general_items
-
 
 
 class ItemFinderViewSet(viewsets.ReadOnlyModelViewSet):
