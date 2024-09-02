@@ -171,12 +171,44 @@ downloadOfferDoc ({
   ).then(this.checkFileDownloadResponseWord)
 }
 
+downloadOfferDocWithDescription ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_doc_with_description/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
+}
+
 downloadContractItemsDoc ({
   id
 }) {
   const token = localStorage.getItem('token')
   return fetch(
     `/api/offers/${id}/download_contract_items/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
+}
+
+downloadContractServiceDoc ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_contract_service/`,
     {
       method: 'GET',
       headers: {

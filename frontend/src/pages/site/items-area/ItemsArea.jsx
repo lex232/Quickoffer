@@ -31,7 +31,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     const getItemsByAuth = (currentpage, category_id) => {
         if (loginstate === false) {
-            getItems(currentpage, category_id);            
+            getItems(currentpage, category_id);
         } else {
             getItemsAuth(currentpage, category_id);
         }
