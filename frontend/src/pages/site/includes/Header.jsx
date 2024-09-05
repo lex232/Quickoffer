@@ -47,7 +47,11 @@ const Header = ({ loginstate, onSignOut, user }) => {
     onSignOut()
   }
   
-  const NonAuthUser = () => {  
+  const NonAuthUser = () => {
+    /**
+    * Меню не авторизованного пользователя
+    */
+    
     return (
       <div className='nav'>
         {/* <li className="nav-item"><a href="/" className={check_url_header.check_absolute_url("about")} aria-current="page">О проекте</a></li> */}
@@ -58,6 +62,10 @@ const Header = ({ loginstate, onSignOut, user }) => {
   }
 
   const AuthUser = () => {
+    /**
+    * Меню авторизованного пользователя
+    */
+
     let username = user.username
     return (
       <div className='nav'>
@@ -74,6 +82,9 @@ const Header = ({ loginstate, onSignOut, user }) => {
   }
 
   const HeaderAuthOption = () => {
+    /**
+    * Определяет авторизацию
+    */
     if (loginstate === false) {
       return (
         NonAuthUser()
@@ -88,7 +99,7 @@ const Header = ({ loginstate, onSignOut, user }) => {
   return (
     <div className="container-fluid px-3">
       <header className="d-flex flex-wrap justify-content-center py-3">
-        <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <a href={loginstate ? "/profile" : "/"} className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
           <img className="bi text-muted flex-shrink-0" width="200" src={logo} alt=""/>
         </a>
         <ul className="nav nav-pills">

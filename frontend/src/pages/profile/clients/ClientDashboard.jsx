@@ -33,6 +33,11 @@ const ClientDashboard = () => {
   }, [])
   ;
 
+  useEffect(() => {
+    // Получить всех клиентов при смене типа клиента
+    getClients(currentpage, type_company);
+  }, [type_company]);
+
   const getClients = (page, type_company) => {
     clients_api.getClientsPaginate({
       page: page,
@@ -122,8 +127,8 @@ const ClientDashboard = () => {
             <div className="row">
               <div className="col-md-9 p-0 d-flex">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setTypeCompany('')}><Target />Все</a></li>
-                  <li className="nav-item"><a className="nav-link" id="ip-items-tab" data-bs-toggle="tab" href="#top-ip" role="tab" aria-controls="top-ip" aria-selected="false" onClick={(e) => setTypeCompany('ip')}><Briefcase />ИП</a></li>
+                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => handleChangeCompanyType(e, '')}><Target />Все</a></li>
+                  <li className="nav-item"><a className="nav-link" id="ip-items-tab" data-bs-toggle="tab" href="#top-ip" role="tab" aria-controls="top-ip" aria-selected="false" onClick={(e) => handleChangeCompanyType(e, 'ip')}><Briefcase />ИП</a></li>
                   <li className="nav-item"><a className="nav-link" id="ooo-top-tab" data-bs-toggle="tab" href="#top-ooo" role="tab" aria-controls="top-ooo" aria-selected="false" onClick={(e) => setTypeCompany('ooo')}><Folder />ООО</a></li>
                   <li className="nav-item"><a className="nav-link" id="fiz-top-tab" data-bs-toggle="tab" href="#top-fiz" role="tab" aria-controls="top-fiz" aria-selected="false" onClick={(e) => setTypeCompany('fiz')}><UserCheck />Физическое лицо</a></li>
                 </ul>

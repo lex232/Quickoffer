@@ -4,11 +4,12 @@ import ReactPaginate from "react-paginate";
 
 import offer_api from '../../../api/offer_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
+import getDate from '../../../utils/getDate';
 
 import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, User } from 'react-feather'
+import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, User, Calendar } from 'react-feather'
 import './styles.css'
 
 const OfferDashboard = () => {
@@ -23,12 +24,12 @@ const OfferDashboard = () => {
   let currentpage = 1;
 
   useEffect(() => {
-    // Получить все новости при загрузке страницы
+    // Получить все КП при загрузке страницы
     getOffers(currentpage, status);
   }, []);
 
   useEffect(() => {
-    // Получить все новости при загрузке страницы
+    // Получить все КП при смене типа КП
     getOffers(currentpage, status);
   }, [status]);
 
@@ -109,7 +110,7 @@ const OfferDashboard = () => {
                 </ul>
               </div>
               <div class="col-md-3 p-0">                    
-                <div class="form-group mb-0 me-0"></div><button onClick={(e) => CreateOffer(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить КП</button>
+                <div class="form-group mb-0 me-0"></div><button onClick={(e) => CreateOffer(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>
               </div>
             </div>
           </div>
@@ -134,7 +135,8 @@ const OfferDashboard = () => {
                               <label><b>{results.name_offer}</b></label>
                             </div>
                             <div class="col-md-4">
-                              {results.name_client &&<label><User size='16px' color='gray'/> {results.name_client}</label>}
+                              {results.name_client && <><label><User size='16px' color='gray'/> {results.name_client}</label><br></br></>}
+                              {results.created && <label><Calendar size='16px' color='gray'/> {getDate(results.created)}</label>}
                             </div>
                             <div class="col-md-4">
                               <label>Итого: {results.final_price} руб

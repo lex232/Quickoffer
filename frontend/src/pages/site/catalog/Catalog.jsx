@@ -97,6 +97,16 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         )
     }
 
+    const MyItems = ({ }) => {
+        return (
+            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3">
+                <button onClick={(e) => handleChangeCategory(e, -1, 0, 'Мои товары')}>
+                    {-1 === choosenCategory ? <li className="nav-link active text-sidebar button-mini">Мои товары</li> : <li className="nav-item text-sidebar">Мои товары</li>}
+                </button>
+            </div>
+        )
+    }
+
     return (
             <div>
                 <div className="container-fluid">
@@ -121,11 +131,12 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                                 <CategoryView InputGroups={listGroups}/>
                                 <br></br>
                                 <CategoryView InputGroups={listService}/>
+                                <br></br>
+                                {loginstate && <MyItems />}
                             </ul>
                         </div>
                     </nav>
                     {choosenCategory && <ItemsArea category_id={choosenCategory} loginstate={loginstate} title={choosenTitle}/>}
-                
                 </div>
                 </div>
                 
