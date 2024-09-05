@@ -11,7 +11,6 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     /**
     * Блок товаров в каталоге
     */
-    
 
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
@@ -33,7 +32,11 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         if (loginstate === false) {
             getItems(currentpage, category_id);
         } else {
-            getItemsAuth(currentpage, category_id);
+            if (category_id === -1) {
+                getItemsOnlyUsers(currentpage)
+            } else {
+                getItemsAuth(currentpage, category_id);
+            }
         }
     }
 
@@ -45,6 +48,20 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         getItemsByAuth(currentpage, category_id);
       }, [category_id, orderingPrice])
       ;
+
+    const getItemsOnlyUsers = (page, category_id) => {
+        // Получить список категорий товаров
+        items_api.getItemsUserPaginate({
+            page: page,
+            status: '',
+          })
+        .then(res => {
+            setpageCount(Math.ceil(res.count / 8));
+            setListItems(res.results);
+        })
+        .catch((e) => console.log(e))
+        .finally(()=> setIsLoaddingItems(false))
+    }
 
     const getItems = (page, category_id) => {
         // Получить список категорий товаров
@@ -97,7 +114,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
           }
         }
         return false
-      }
+    }
 
     /**
     * Проверяем количество товара, если товар в корзине
@@ -117,10 +134,17 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         e.preventDefault();
 
         let prepareToAddList = items;
+        let title_temp = ''
+        if (results.brand) {
+            title_temp = results.title + ' ' + results.brand
+        }
+        else {
+            title_temp = results.title
+        }
 
         prepareToAddList.push({
             id: results.id,
-            title: results.title,
+            title: title_temp,
             item_price_retail: results.price_retail,
             item_price_purchase: results.price_retail,
             amount: "1",
@@ -186,7 +210,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                         <div className="justify-content-end text-end col-4">
                                             {CheckCartItem(results.id) && 
                                             <span>
-                                                {CheckCartQuantity(items, results.id)} Шт.
+                                                {/* {CheckCartQuantity(items, results.id)} Шт. */}
                                                 <button className="btn btn-primary btn-sm ms-2" onClick={(e) => CartRemoveItem(results.id, e)}>X</button>
                                             </span>}
                                         </div>

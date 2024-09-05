@@ -2,6 +2,9 @@ import React from 'react';
 import BackwardButton from '../buttons/backwardButton';
 
 const TitleSections = ({ title }) => {
+    /**
+     * Заголовок с кнопкой назад
+     */
 
     return (
         <div className="row my-2 align-items-center">

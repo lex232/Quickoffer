@@ -25,13 +25,13 @@ const ItemsDashboard = () => {
   let currentpage = 1;
 
   useEffect(() => {
-    // Получить все новости при загрузке страницы
+    // Получить все товары при загрузке страницы
     getItems(currentpage, status);
   }, [])
   ;
 
   useEffect(() => {
-    // Получить все новости при загрузке страницы
+    // Получить все товары при загрузке страницы
     getItems(currentpage, status);
   }, [status]);
 

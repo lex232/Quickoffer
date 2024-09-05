@@ -1,16 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import items_api from '../../../api/items_api';
-import clients_api from '../../../api/clients_api';
 import offer_api from '../../../api/offer_api';
-
-import { ReactComponent as PlusIco } from '../../../static/image/icons/plus-square.svg'
 import { XCircle } from 'react-feather'
 
-import ItemSearch from '../../item-search';
-import ClientsSearch from '../../clients-search';
-import SimpleDivMessage from '../../messages';
+import ChooseClientPopup from '../../popup/ChooseClientPopup';
+
 import './styles.css'
 
 const OfferForm = ({
@@ -27,15 +22,14 @@ const OfferForm = ({
 
   let nameFromLocal = name_offer
   const [ nameArea, setName ] = useState(name_offer)
-  const [ clientArea, setClient ] = useState(name_client)
-  const [ statusOffer, setStatusOffer] = useState(status_type);
+  //const [ clientArea, setClient ] = useState(name_client)
+  // const [ statusOffer, setStatusOffer] = useState(status_type);
+
+  const [ editable, setEditable ] = useState(null)
 
   const classValid = 'form-control border-input'
   const classIsInvalid = 'form-control border-input is-invalid'
   const [ classForNameArea, setClassForNameArea] = useState(classValid);
-
-
-
 
   // Самая главная переменная - итоговый список КП
   let items = []
@@ -52,36 +46,12 @@ const OfferForm = ({
   
   // Итоговая стоимость КП
   const [ finallyPrice, setFinallyPrice ] = useState(0)
-  
-  // Блок поиска для товаров
-  // itemList - полученный список товаров из бэкенда (поиска API)
-  const [ itemList, setItemList ] = useState()
-  // itemValue - в процессе поиска используем title,
-  // По завершению поиска - заполняем все поля
-  const [ itemValue, setItemValue ] = useState({
-    title: '',
-    price_retail: 0,
-    image: '',
-    description: '',
-    id: null
-  })
-  // Показывать ли div с результатами поиска?
-  const [ showItems, setShowItems ] = useState(false)
 
-  // Показывать ли div с ошибкой
-  const [ showError, setShowError ] = useState(false)
-
-  // Блок поиска для клиентов
-  // clientsList - полученный список клиентов из бэкенда (поиска API)
-  const [ clientList, setClientList ] = useState()
-  // clientValue - в процессе поиска используем title,
-  // По завершению поиска - заполняем все поля
+  // clientValue - выбранный клиент из Popup окна
   const [ clientValue, setClientValue ] = useState({
     title: '',
     id: null
   })
-  // Показывать ли div с результатами поиска клиентов?
-  const [ showClients, setShowClients ] = useState(false)
 
   // состояние DragNDrop
   const initialDnDState = {
@@ -96,30 +66,14 @@ const OfferForm = ({
   const [list, setList] = useState(items);
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
-  // UseEffect для динамического поиска товаров
-  useEffect(_ => {
-    if (itemValue.title === '') {
-      return setItemList([])
-    }
-    setShowError(false)
-    items_api
-      .findItem({ item: itemValue.title })
-      .then(inputitems => {
-        setItemList(inputitems)
-      })
-  }, [itemValue.title])
 
-  // UseEffect для динамического поиска клиентов
+  // UseEffect проверяет статус КП при загрузке страницы
   useEffect(_ => {
-    if (clientValue.title === '') {
-      return setClientList([])
+    const editable = localStorage.getItem('editable')
+    if (editable) {
+      setEditable(true)
     }
-    clients_api
-      .findClient({ client: clientValue.title })
-      .then(clientsitems => {
-        setClientList(clientsitems)
-      })
-  }, [clientValue.title])
+  }, []);
 
   // UseEffect для подсчета цены
   useEffect(_ => {
@@ -156,7 +110,6 @@ const OfferForm = ({
     isDragging: true,
     originalOrder: list
     });
-     
      
     // Для firefox. Это не используется, но без этого DnD не работает. 
     event.dataTransfer.setData("text/html", '');
@@ -237,36 +190,12 @@ const OfferForm = ({
     window.dispatchEvent(new Event("storage"));
   }
 
-  const handlePlusItem = (e) => {
-    // Добавляем элемент в список товаров/услуг
-    e.preventDefault();
-
-    let prepareToAddList = list;
-
-    if (CheckSameItem(itemValue.id)) {
-
-      prepareToAddList.push({
-        id: itemValue.id,
-        title: itemValue.title,
-        item_price_retail: itemValue.price_retail,
-        item_price_purchase: itemValue.price_retail,
-        amount: "1",
-        description: itemValue.description ,
-        image: itemValue.image,
-        // position: list.length + 1,
-      })
-      setList(prepareToAddList);
-      localStorage.setItem("items", JSON.stringify(list));
-
-      setDragAndDrop({
-        ...dragAndDrop,
-        draggedFrom: null,
-        draggedTo: null,
-        isDragging: false
-      });
-      calculateFinalPrice()
-    }
-    window.dispatchEvent(new Event("storage"));
+  const deleteCurrentClient = (e) => {
+    // Удаляем клиента
+    setClientValue({
+      title: '',
+      id: null
+    })
   }
 
   const calculateFinalPrice = () => {
@@ -279,7 +208,7 @@ const OfferForm = ({
   }
 
   const handleChangeValue = (index, key, e) => {
-    // Меняем в словаре значение
+    // Меняем в словаре значение количества
     e.preventDefault();
 
     let prepareToChangeList = list;
@@ -296,25 +225,6 @@ const OfferForm = ({
     calculateFinalPrice();
   }
 
-  const handleItemAutofill = ({ id, title, price_retail, image, description}) => {
-    // Заполнение параметров товара при добавлении
-    setItemValue({
-      id,
-      title,
-      price_retail,
-      image,
-      description
-    })
-  }
-
-  const handleClientAutofill = ({ id, title}) => {
-    // Заполнение параметров клиента при добавлении
-    setClientValue({
-      id,
-      title
-    })
-  }
-
   const handleChangeName = (e) => {
     // Устанавливаем имя категории на событии onChange
     e.preventDefault();
@@ -328,19 +238,10 @@ const OfferForm = ({
     localStorage.removeItem("nameoffer")
     items = []
     setList([])
+    window.dispatchEvent(new Event("storage"));
   }
 
-  const CheckSameItem = (id_add) => {
-    // Проверяем на одинаковый товар
-    var index
-    for (index = 0; index < list.length; ++index) {
-      if (id_add === list[index].id) {
-        setShowError(true)
-        return false
-      }
-    }
-    return true
-  }
+
 
   function handlePostCLiсk(e) {
     // Обработать клик публикации
@@ -349,7 +250,8 @@ const OfferForm = ({
     const data = {
       title: nameArea,
       client: clientValue.id,
-      status_type: statusOffer,
+      // status_type: statusOffer,
+      status_type: 'in_edit',
       items_for_offer: list,
     }
     if (id === undefined) {
@@ -377,7 +279,7 @@ const OfferForm = ({
                 id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
             </div>
           </div>
-          <div className="col-md-6 ps-0 pe-2">
+          {/* <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Статус КП:</label>
                 <select className='form-select border-input' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
@@ -389,41 +291,26 @@ const OfferForm = ({
                   <option value='denied'>отказано</option>
                 </select>
             </div>
+          </div> */}
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
+                <label>Выбранный клиент: </label>
+                {clientValue.title ? 
+                <b> {clientValue.title} <button className='' onClick={(e) => deleteCurrentClient(e)}><XCircle strokeWidth={3} size={18} color="red" /></button> </b> :
+                ' Клиент не выбран'} 
+                <div>
+                  {clientValue.title ? <ChooseClientPopup action={setClientValue} text='изменить клиента'/> : <ChooseClientPopup action={setClientValue} text='выбрать клиента'/>}
+                </div>
+            </div>
           </div>
         </div>
 
         <div className="row mx-0 my-1 justify-content-left">
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
-              <label>Добавить клиента:</label>
-                <input className="form-control my-1" id="clientName" placeholder="Клиент. Начните вводить текст для поиска" 
-                    onChange={e => {
-                      const valueForClient = e.target.value
-                      setClientValue({
-                        title: valueForClient
-                      })
-                    }}
-                  onFocus={_ => {
-                    setShowClients(true)
-                  }}
-                  value={clientValue.title} />
-            </div>
-          </div>
-          <div>
-            {showClients && clientList.length > 0 && <ClientsSearch
-              clients={clientList}
-              onClick={({ id, title }) => {
-                handleClientAutofill({ id, title })
-                setClientList([])
-                setShowClients(false)
-            }}/>
-            }
-          </div>
-
-          <div className="col-md-6 ps-0 pe-2">
-            <div className="form-group">
-                <label>Добавить товар/ услугу через поиск</label>
-                  <input className="form-control mt-1" id="offerName" placeholder="Начните вводить название для поиска" 
+                <label>Добавить товары в КП можно через</label>
+                <div className='pt-0'><Link to="/catalog"><button className="btn btn-primary btn">каталог товаров</button></Link></div>
+                  {/* <input className="form-control mt-1" id="offerName" placeholder="Начните вводить название для поиска"
                     onChange={e => {
                       const valueForItem = e.target.value
                       setItemValue({
@@ -449,8 +336,8 @@ const OfferForm = ({
 
                   {showError && <div className='mt-2'><SimpleDivMessage text='Такой элемент уже есть в списке'/>
                 </div>}
-                <div className='pt-2'>или перейдите в <Link to="/catalog"><button className="btn btn-primary btn-sm">каталог товаров</button></Link></div>
-            </div>
+                <div className='pt-2'>или перейдите в <Link to="/catalog"><button className="btn btn-primary btn">каталог товаров</button></Link></div>
+            </div> */}
             </div>
           </div>
         </div>
@@ -470,9 +357,9 @@ const OfferForm = ({
                       onDragLeave={onDragLeave}
                       className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea row d-flex justify-content-center px-0 mx-0" : "row d-flex justify-content-center px-0 mx-0"}
                   >
-                    <div className="card rounded-3 mb-2">
+                    <div className="card rounded-3 mb-0">
                       <div className="card-body p-0 mx-0">
-                        <div className="row  mb-0 ms-0 me-0">
+                        <div className="row mt-1 mb-0 ms-0 me-0">
 
                           <div className="col-md-6 col-lg-6 col-xl-6 row m-0 p-0 d-flex align-items-center ">
                             <div className="col-4">
@@ -480,7 +367,6 @@ const OfferForm = ({
                             </div>
                             <div className="col-8 d-flex align-items-center">
                               <span className="fw-normal mb-2">{item.title}</span>
-                              {/* <p><span className="text-muted">Size: </span>M <span className="text-muted">Color: </span>Grey</p> */}
                             </div>
                           </div>  
                           
@@ -491,14 +377,14 @@ const OfferForm = ({
                             </div>
                             <div className="col-6 col-lg-12 pb-2">
                               <label>Закупочная цена</label>
-                              <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
+                              <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена закупки*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
                             </div>
                           </div>
 
                           <div className="col-md-4 col-lg-4 col-xl-4 offer-text-min row m-0 p-0 pb-2">
                             <div className="col-4">
                               <label>Кол-во</label>
-                              <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
+                              <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
                             </div>
                             <div className="col-6">
                               <label>Итого</label>
@@ -522,10 +408,10 @@ const OfferForm = ({
            </div>
            <div className="btn-toolbar d-flex align-items-end mb-4">
             <div className='justify-content-start col-6'>
-              <button onClick={(e) => handlePostCLiсk(e)} className="btn btn-medium btn-primary mt-3 float-start">Опубликовать</button>         
+              <button onClick={(e) => handlePostCLiсk(e)} className="btn btn-primary mt-3 float-start">Опубликовать</button>         
             </div>
             <div className='justify-content-end col-6'>
-              <button onClick={(e) => ClearOffer()} type="button" className="btn btn-medium btn-outline-secondary float-end">Очистить КП</button>
+              <button onClick={(e) => ClearOffer()} type="button" className="btn btn-outline-secondary float-end">Очистить КП</button>
             </div>
           </div>
       </form>

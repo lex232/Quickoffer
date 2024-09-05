@@ -1,10 +1,12 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/popup.css'
 
 const InfoPopup = ({ text }) => {
+    /**
+     * Popup окно информационное
+     */
 
     return (
         <div>

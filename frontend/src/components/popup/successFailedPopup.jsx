@@ -1,7 +1,6 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/popup.css'
 
 import { ReactComponent as DeleteIco } from '../../static/image/icons/delete.svg'
@@ -9,6 +8,9 @@ import { ReactComponent as StatusOk} from '../../static/image/icons/tick.svg'
 
 
 const SuccessFailedPopup = ({open, title, result, link_redirect}) => {
+    /**
+     * Popup окно, отображает результат ответа API и делает редирект
+     */
 
     const handleRedirect = () => {
         window.location.href = link_redirect;

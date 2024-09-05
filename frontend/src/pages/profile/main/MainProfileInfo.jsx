@@ -32,7 +32,6 @@ const MainAdminInfo = () => {
                             <div class="display-4 decoration-color my-2">
                                 <Server size={42} className='me-2' />
                             </div>
-                            <h2 class="card-title mb-3"></h2>
                             <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Каталог товаров</div></p>
                         </div></Link>
                     </div>
@@ -43,8 +42,7 @@ const MainAdminInfo = () => {
                             <div class="display-4 text-primary my-2">
                                 <Users size={42} className='me-2' />
                             </div>
-                            <h2 class="card-title mb-3">{info.count_clients}</h2>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои клиенты:</div></p>
+                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои клиенты {info.count_clients}</div></p>
                         </div></Link>
                     </div>
                 </div>
@@ -54,8 +52,7 @@ const MainAdminInfo = () => {
                             <div class="display-4 text-success my-2">
                                 <Book size={42} className='me-2' />
                             </div>
-                            <h2 class="card-title mb-3">{info.count_offers}</h2>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Коммерческих предложений:</div></p>
+                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Коммерческих предложений {info.count_offers}</div></p>
                         </div></Link>
                     </div>
                 </div>   
@@ -65,8 +62,7 @@ const MainAdminInfo = () => {
                             <div class="display-4 text-warning my-2">
                                 <Layers size={42} className='me-2' />
                             </div>
-                            <h2 class="card-title mb-3">{info.count_items}</h2>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои товары/ услуги:</div></p>
+                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои товары/ услуги {info.count_items}</div></p>
                         </div></Link>
                     </div>
                 </div>  
@@ -76,7 +72,6 @@ const MainAdminInfo = () => {
                             <div class="display-4 text-danger my-2">
                                 <Grid size={42} className='me-2' />
                             </div>
-                            <h2 class="card-title mb-3"></h2>
                             <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои реквизиты:</div></p>
                         </div></Link>
                     </div>

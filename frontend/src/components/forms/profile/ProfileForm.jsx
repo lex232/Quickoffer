@@ -25,6 +25,10 @@ const ProfileForm = ({
   bik,
   ruk
 }) => {
+    /**
+   * Форма профиля
+   */
+  
   const navigate = useNavigate()
 
   // const [ idProfile, setIdProfile ] = useState(id)
@@ -238,14 +242,14 @@ return (
         <div class="row mx-0 my-1 justify-content-left">
           <div class="col-md-6 ps-0 pe-2">
             <div class="form-group">
-              <label>Адрес регистрации:</label>
+              <label>Адрес юридический:</label>
               <input type="header" defaultValue={address_reg} className="form-control border-input" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => handleChangeAddressReg(e)} />
           </div>
           </div>
           <div class="col-md-6 ps-0 pe-2">
             <div class="form-group">
-              <label>Адрес почтовый:</label>
-              <input type="header" defaultValue={address_post} className="form-control border-input" id="Address" placeholder="Адрес местанахождения" onChange={(e) => handleChangeAddressPost(e)} />
+              <label>Адрес местонахождения:</label>
+              <input type="header" defaultValue={address_post} className="form-control border-input" id="Address" placeholder="Адрес местонахождения" onChange={(e) => handleChangeAddressPost(e)} />
             </div>
           </div>
         </div>

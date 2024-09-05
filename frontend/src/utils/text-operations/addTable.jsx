@@ -6,7 +6,7 @@ const AddNewTable = (info) => {
     /**
     * Добавляет таблицу характеристик, если встречает символ ; и !
     */
-    if (info !== '') {
+    if (info !== null) {
         let rows = info.split(';')
         return (
             <>

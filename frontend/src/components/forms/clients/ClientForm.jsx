@@ -163,8 +163,8 @@ const ClientForm = ({
           </div>
           <div class="col-md-6 ps-0 pe-2">
             <div class="form-group">
-                <label>Адрес регистрации:</label>
-                <input type="text" defaultValue={address_reg} className="form-control border-input" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => setAddressReg(e.target.value)} />
+                <label>Адрес юридический:</label>
+                <input type="text" defaultValue={address_reg} className="form-control border-input" id="AddressReg" placeholder="Адрес юридический" onChange={(e) => setAddressReg(e.target.value)} />
             </div>
           </div>
         </div>
