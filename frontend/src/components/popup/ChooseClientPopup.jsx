@@ -35,11 +35,14 @@ const ChooseClientPopup = ({ action, text }) => {
 
     const handleChangeClient = ( id, title ) => {
         // Заполнение параметров клиента при выборе
-        console.log('PROCESSING', id, title)
         setClientArea({
           id,
           title
         })
+        localStorage.setItem("nameclient", JSON.stringify({
+            title: title,
+            id: id
+        }));
     }
 
     // UseEffect для динамического поиска клиентов

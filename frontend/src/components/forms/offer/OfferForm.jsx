@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import offer_api from '../../../api/offer_api';
@@ -11,8 +11,6 @@ import './styles.css'
 const OfferForm = ({
   id,
   name_offer,
-  name_client,
-  status_type
 }) => {
   /**
   * Форма КП с элементами
@@ -24,8 +22,6 @@ const OfferForm = ({
   const [ nameArea, setName ] = useState(name_offer)
   //const [ clientArea, setClient ] = useState(name_client)
   // const [ statusOffer, setStatusOffer] = useState(status_type);
-
-  const [ editable, setEditable ] = useState(null)
 
   const classValid = 'form-control border-input'
   const classIsInvalid = 'form-control border-input is-invalid'
@@ -39,11 +35,27 @@ const OfferForm = ({
     items = JSON.parse(localStorage.getItem("items"));
   }
 
-   //Извлекаем из локального хранилища имя КП
-   if (localStorage.getItem("nameoffer") && name_offer === undefined) {
+  //Извлекаем из локального хранилища имя КП
+  if (localStorage.getItem("nameoffer") && name_offer === undefined) {
     nameFromLocal = localStorage.getItem("nameoffer")
   }
+
+  // //Извлекаем из локального хранилища статус редактирования КП
+  // if (localStorage.getItem("editable")) {
+  //   editable_marker = localStorage.getItem("editable")
+  // }
   
+  // статус редактирования КП
+  const [ editable, setEditable ] = useState(id)
+
+  // UseEffect проверяет статус КП при загрузке страницы
+  useEffect(_ => {
+    let editable = localStorage.getItem('editable')
+    if (editable) {
+      setEditable(editable)
+    }
+  }, []);
+
   // Итоговая стоимость КП
   const [ finallyPrice, setFinallyPrice ] = useState(0)
 
@@ -52,6 +64,12 @@ const OfferForm = ({
     title: '',
     id: null
   })
+
+  // Извлекаем из локального хранилища в корзину
+  if (localStorage.getItem("nameclient") && clientValue.id === null) {
+    let client = JSON.parse(localStorage.getItem("nameclient"));
+    setClientValue(client)
+  }
 
   // состояние DragNDrop
   const initialDnDState = {
@@ -65,15 +83,6 @@ const OfferForm = ({
   // Состояние листа DragNDrop
   const [list, setList] = useState(items);
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
-
-
-  // UseEffect проверяет статус КП при загрузке страницы
-  useEffect(_ => {
-    const editable = localStorage.getItem('editable')
-    if (editable) {
-      setEditable(true)
-    }
-  }, []);
 
   // UseEffect для подсчета цены
   useEffect(_ => {
@@ -124,13 +133,10 @@ const OfferForm = ({
     event.preventDefault();
      
     let newList = dragAndDrop.originalOrder;
-  
     // index of the item being dragged
     const draggedFrom = dragAndDrop.draggedFrom; 
-  
     // index of the droppable area being hovered
     const draggedTo = Number(event.currentTarget.dataset.position); 
-  
     const itemDragged = newList[draggedFrom];
     const remainingItems = newList.filter((item, index) => index !== draggedFrom);
    
@@ -192,6 +198,7 @@ const OfferForm = ({
 
   const deleteCurrentClient = (e) => {
     // Удаляем клиента
+    localStorage.removeItem("nameclient")
     setClientValue({
       title: '',
       id: null
@@ -233,9 +240,15 @@ const OfferForm = ({
   }
 
   const ClearOffer = () => {
-    // Очищаем локал сторедж, имя КП и состояние списка товаров
+    // Очищаем локал сторедж, имя КП и состояние списка товаров, клиента
     localStorage.removeItem("items")
     localStorage.removeItem("nameoffer")
+    localStorage.removeItem("nameclient")
+    localStorage.removeItem("editable")
+    setClientValue({
+      title: '',
+      id: null
+    })
     items = []
     setList([])
     window.dispatchEvent(new Event("storage"));
@@ -243,7 +256,7 @@ const OfferForm = ({
 
 
 
-  function handlePostCLiсk(e) {
+  function handlePostCLiсk(edit, e) {
     // Обработать клик публикации
     e.preventDefault();
 
@@ -254,16 +267,17 @@ const OfferForm = ({
       status_type: 'in_edit',
       items_for_offer: list,
     }
-    if (id === undefined) {
-      // Если из состояния не пришел id, отправляем POST запрос
+    if (edit === false) {
+      // Если флаг edit is false
       offer_api.createOffer(data)
       // Чистим корзину
       ClearOffer()
       return navigate("/profile/offer/list")
-    } else {
+    } else if (edit === true) {
       // Иначе PATCH
-      data.cat_id = id
-      offer_api.createOffer(data)
+      data.id = editable
+      offer_api.updateOffer(data)
+      ClearOffer()
       return navigate("/profile/offer/list")
     }
   }
@@ -407,10 +421,13 @@ const OfferForm = ({
            </section>
            </div>
            <div className="btn-toolbar d-flex align-items-end mb-4">
-            <div className='justify-content-start col-6'>
-              <button onClick={(e) => handlePostCLiсk(e)} className="btn btn-primary mt-3 float-start">Опубликовать</button>         
+            <div className='justify-content-start col-12'>
+              {editable ? <div className=''><button onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 me-3 float-start">Сохранить как новое КП</button> 
+              <button onClick={(e) => handlePostCLiсk(true, e)} className="btn btn-primary mt-3 float-start">Перезаписать</button></div>
+              : 
+              <button onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 float-start">Опубликовать</button>}         
             </div>
-            <div className='justify-content-end col-6'>
+            <div className='justify-content-end col-12'>
               <button onClick={(e) => ClearOffer()} type="button" className="btn btn-outline-secondary float-end">Очистить КП</button>
             </div>
           </div>

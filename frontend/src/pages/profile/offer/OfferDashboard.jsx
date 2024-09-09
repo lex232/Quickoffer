@@ -13,9 +13,13 @@ import { Target, CheckCircle, PenTool, Mail, Loader, Table,  PlusSquare, User, C
 import './styles.css'
 
 const OfferDashboard = () => {
+  /**
+  * Страница со списком КП
+  */
+
   const navigate = useNavigate()
 
-  const [news, setNews] = useState([]);
+  const [offers, setOffers] = useState([]);
   const [isLoadding, setIsLoadding] = useState(true);
   const [status, setStatus] = useState('');
 
@@ -40,7 +44,7 @@ const OfferDashboard = () => {
     })
     .then(res => {
       setpageCount(Math.ceil(res.count / 10));
-      setNews(res.results);
+      setOffers(res.results);
     })
     .catch((e) => console.log(e))
     .finally(()=> setIsLoadding(false))
@@ -60,6 +64,11 @@ const OfferDashboard = () => {
 
   const CreateOffer = (e) => {
     e.preventDefault();
+    localStorage.removeItem("items")
+    localStorage.removeItem("nameoffer")
+    localStorage.removeItem("editable")
+    localStorage.removeItem("nameclient")
+    window.dispatchEvent(new Event("storage"));
     return navigate("/profile/offer/create/")
   }
 
@@ -68,11 +77,70 @@ const OfferDashboard = () => {
     return navigate("show", {state: {id: id}})
   }
 
+  /**
+  * Блок загрузки КП на редактирование
+  */
+
+  async function getCurrentOffer(id) {
+    const data_from_api = offer_api.getCurrentOffer({id})
+    let temp_res = await data_from_api
+    return temp_res
+  }
+
   const HandleEditOffer = async (id, e) => {
+    /**
+    * Редактирование КП - загрузка информации в локал сторейдж
+    */
+
+    if (id === undefined) {
+      return
+    }
+
     e.preventDefault();
     localStorage.removeItem('items')
-    return navigate("/profile/offer/edit", {state: {id: id}})
+    localStorage.removeItem("nameoffer")
+    localStorage.removeItem("editable")
+
+    let result_api = await getCurrentOffer(id);
+  
+    console.log('EDIT_api', result_api)
+    let prepareToAddList = []
+    for (const item of result_api.items_for_offer) {
+      prepareToAddList.push({
+            id: item.item_id,
+            title: item.item,
+            item_price_retail: item.item_price_retail,
+            item_price_purchase: item.item_price_purchase,
+            amount: item.amount,
+            description: item.description,
+            image: item.image,
+          })
+    }
+    console.log('EDIT', prepareToAddList)
+    if (prepareToAddList) {
+      localStorage.setItem("items", JSON.stringify(prepareToAddList));
+      localStorage.setItem("nameoffer", result_api.name_offer);
+      if (result_api.name_client) {
+        localStorage.setItem("nameclient", JSON.stringify({
+          title: result_api.name_client.title,
+          id: result_api.name_client.id
+        }));
+      }
+      localStorage.setItem("editable", id);
+      window.dispatchEvent(new Event("storage"));
+      return navigate("/profile/offer/create/")
+      // result_api.name_client.title
+    }
+   
   }
+
+
+
+
+
+
+
+
 
   const HandleDelOffer = async (id) => {
     await offer_api.deleteOffer({ offer_id: id, })
@@ -84,7 +152,7 @@ const OfferDashboard = () => {
 
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
-      
+
       <div class="container-fluid">
         <div class="page-title">
           <div class="row">
@@ -126,7 +194,7 @@ const OfferDashboard = () => {
       <div class="col-md-12 project-list">
         <div class="card-header">
           <div className="mt-3">
-                  {news.map((results) => {
+                  {offers.map((results) => {
                     return (
                       <div class="row text-start my-2 mx-0" key={results.id}>
                         <div class="col-10 my-0 mx-0">
@@ -154,7 +222,7 @@ const OfferDashboard = () => {
                       </div>
                       );
                     })}
-
+              
               <ReactPaginate
               previousLabel={"предыдущая"}
               nextLabel={"следующая"}
@@ -175,12 +243,9 @@ const OfferDashboard = () => {
               breakLinkClassName={"page-link"}
               activeClassName={"active"}
             />
-
           </div>
         </div>
       </div>
-
-
     </main>
   );
 };

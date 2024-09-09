@@ -194,6 +194,29 @@ class OfferPostSerializer(serializers.ModelSerializer):
         offer.save()
         return offer
 
+    def update(self, instance, validated_data):
+        """Обновление коммерческого предложения"""
+
+        instance.name_offer = validated_data.get('name_offer', instance.name_offer)
+        instance.name_client = validated_data.get('name_client', instance.name_client)
+
+        items_valid = validated_data.pop('items_for_offer')
+        items_current = instance.selected_offer.all()
+
+        for item_to_delete in items_current:
+            print("UPDATE SERIALIZER", item_to_delete)
+            item_to_delete.delete()
+
+
+        total_goods, total_work = self.processing_items(instance, items_valid)
+        print("TOTAL", total_goods, total_work)
+        instance.final_price_goods = total_goods
+        instance.final_price_work = total_work
+        instance.final_price = total_goods + total_work
+
+        instance.save()
+        return instance
+
     def to_representation(self, instance):
         """После создания отдаем корректный сериализатор
         коммерческого предложения"""
