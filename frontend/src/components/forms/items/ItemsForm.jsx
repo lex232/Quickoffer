@@ -146,7 +146,7 @@ const ItemForm = ({
           <div class="col-md-12 ps-0 pe-2">
             <div class="form-group">
                 <label>Описание:</label>
-                <textarea rows='4' defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} /> 
+                <textarea rows='4' defaultValue={description} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} /> 
             </div>
           </div>
         </div>
