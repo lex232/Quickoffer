@@ -267,7 +267,7 @@ class OfferViewSet(viewsets.ModelViewSet):
         return queryset
 
     def get_serializer_class(self):
-        """Определеям сериалайзер в зависимости от запроса"""
+        """Определяем сериалайзер в зависимости от запроса"""
 
         if self.action in 'list':
             return OfferSerializer
@@ -312,7 +312,6 @@ class OfferViewSet(viewsets.ModelViewSet):
                 else:
                     image = None
                 table_data[index + 1].append(image)
-            print("OFFER", offer_id.id)
             response = HttpResponse(content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="{offer_id.id}"'
             p = canvas.Canvas(response, pagesize=letter)

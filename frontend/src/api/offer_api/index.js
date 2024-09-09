@@ -92,6 +92,33 @@ createOffer ({
   ).then(this.checkResponse)
 }
 
+updateOffer ({
+  id,
+  title,
+  client,
+  status_type,
+  items_for_offer
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/`,
+    {
+      method: 'PATCH',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      },
+      body: JSON.stringify({
+        id: id,
+        name_offer: title,
+        name_client: client,
+        status_type: status_type,
+        items_for_offer
+      })
+    }
+  ).then(this.checkResponse)
+}
+
 deleteOffer ({ offer_id }) {
   const token = localStorage.getItem('token')
   return fetch(

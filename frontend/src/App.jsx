@@ -38,7 +38,6 @@ import ItemsEdit from './pages/profile/items/ItemsEdit';
 import OfferDashboard from './pages/profile/offer/OfferDashboard';
 import OfferCreate from './pages/profile/offer/OfferCreate';
 import OfferShow from './pages/profile/offer/OfferShow';
-import OfferEdit from './pages/profile/offer/OfferEdit';
 
 import ProfileEdit from './pages/profile/profile/ProfileEdit';
 import SimplePopup from './components/popup/refPopup';
@@ -170,7 +169,6 @@ function App() {
               <Route path="offer/list" element={<OfferDashboard />}/>
               <Route path='offer/list/show' element={<OfferShow />}/>
               <Route path="offer/create" element={<OfferCreate />}/>
-              <Route path='offer/edit' element={<OfferEdit />}/>
               <Route path="my-organization/edit" element={<ProfileEdit />}/>
             </Route>
           </Routes> 
