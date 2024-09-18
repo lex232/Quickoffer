@@ -17,7 +17,6 @@ const Header = ({ loginstate, onSignOut, user }) => {
   const active_url = "nav-link active text-black"
   const non_active_url = "nav-link text-black"
 
-
   let items = []
 
   // Сохраняем корзину в локальное хранилище
@@ -75,7 +74,7 @@ const Header = ({ loginstate, onSignOut, user }) => {
           </div>
           }
         </li>
-          <li className="nav-item "><Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none">{username}</div></Link></li>
+          <li className="nav-item "><Link to="/profile"><div className="nav-item dark py-2 text-black text-decoration-none">Личный кабинет</div></Link></li>
           <li className="nav-item"> <button onClick={(e) => handleLogoutCLiсk(e)} className="nav-link link-dark px-3">Выйти</button></li>
       </div>
     )

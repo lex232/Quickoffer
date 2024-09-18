@@ -162,10 +162,11 @@ class ApiItems {
   getItemsFilterCategoryPaginate ({
     page,
     group,
-    ordering_price
+    ordering_price,
+    brand
   }) {
     return fetch(
-      `/api/items/?group=${group}&page=${page}&ordering=${ordering_price}`, 
+      `/api/items/?group=${group}&page=${page}&ordering=${ordering_price}&brand=${brand}`, 
       {
         method: 'GET',
       }
@@ -175,11 +176,12 @@ class ApiItems {
   getItemsAuthFilterCategoryPaginate ({
     page,
     group,
-    ordering_price
+    ordering_price,
+    brand
   }) {
     const token = localStorage.getItem('token')
     return fetch(
-      `/api/itemsauth/?group=${group}&page=${page}&ordering=${ordering_price}`, 
+      `/api/itemsauth/?group=${group}&page=${page}&ordering=${ordering_price}&brand=${brand}`, 
       {
         method: 'GET',
         headers: {

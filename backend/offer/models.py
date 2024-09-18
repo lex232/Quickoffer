@@ -217,6 +217,7 @@ class Item(models.Model):
         Brand,
         verbose_name='брэнд товара',
         on_delete=models.SET_NULL,
+        related_name='brand_item',
         blank=True,
         null=True,
     )

@@ -44,6 +44,10 @@
   background: url('../../../static/image/background/back.jpg') no-repeat center top;
 }
 
+.center-important {
+  text-align: center !important;
+}
+
 .img-responsive {
   max-width: 100%;
   height: auto;
