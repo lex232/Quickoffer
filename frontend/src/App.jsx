@@ -159,7 +159,7 @@ function App() {
                   onSignOut={onSignOut}
                   user={user}/>
               </RequireAuth>}>
-              <Route path="" element={<ProfileDashboard/>}/>
+              <Route path="" element={<ProfileDashboard />}/>
               <Route path="clients/create" element={<ClientCreate />}/>
               <Route path="clients/list" element={<ClientDashboard />}/>
               <Route path='clients/edit' element={<ClientsEdit />}/>

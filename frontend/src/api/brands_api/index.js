@@ -42,6 +42,20 @@ class ApiBrands {
     ).then(this.checkResponse)
   }
 
+  /**
+  * Получаем список брендов в формате имени и ID по ID категории.
+  */
+  getBrandsOnCategory ({
+    category_id,
+  }) {
+    return fetch(
+      `/api/brands/${category_id}/brand_on_category/`,
+      {
+        method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
 }
 
 export default new ApiBrands(process.env.API_URL || 'http://localhost', { 'content-type': 'application/json' })

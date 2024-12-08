@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import { Link } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
+import brands_api from '../../../api/brands_api';
 import './styles.css'
 import AddNewTable from '../../../utils/text-operations/addTable';
 import { ShoppingBag } from 'react-feather';
@@ -15,6 +16,9 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     const [ listItems, setListItems ] = useState([])
     const [ isLoaddingItems, setIsLoaddingItems ] = useState(true);
     const [ orderingPrice, setOrderingPrice] = useState('price_retail');
+
+    const [ brandFilters, setBrandsFilters ] = useState([])
+    const [ isLoaddingBrandFilters, setIsLoaddingBrandFilters ] = useState(true);
 
     const [page, setPage] = useState(0);
     const [pageCount, setpageCount] = useState(0);
@@ -29,16 +33,50 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     }
 
     const getItemsByAuth = (currentpage, category_id) => {
+        // Получить товары, в зависимости от статуса авторизации пользователя
+        let brands_id = ''
+        brandFilters.forEach(object => {
+            if (object.checked) {
+                brands_id += String(object.id) + ','
+            }
+        });
+        brands_id = brands_id.substring(0, brands_id.length - 1);
         if (loginstate === false) {
-            getItems(currentpage, category_id);
+            getItems(currentpage, category_id, brands_id);
         } else {
             if (category_id === -1) {
                 getItemsOnlyUsers(currentpage)
             } else {
-                getItemsAuth(currentpage, category_id);
+                getItemsAuth(currentpage, category_id, brands_id);
             }
         }
     }
+
+    const getBrandsOnCategory = (category_id) => {
+        brands_api.getBrandsOnCategory({
+            category_id: category_id
+          })
+        .then(res => {
+            let new_res = res
+            new_res.forEach(object => {
+                object.checked = true;
+            });
+            setBrandsFilters(new_res);
+            setIsLoaddingBrandFilters(true)
+        })
+        .catch((e) => console.log(e))
+        //.finally(()=> setIsLoaddingItems(false))
+    }
+
+    useEffect(() => {
+        if (isLoaddingBrandFilters) {
+            getBrandsOnCategory(category_id)
+        }
+    }, [category_id])
+
+    useEffect(() => {
+        console.log("WOW!", brandFilters)
+    }, [brandFilters])
 
     useEffect(() => {
         // Получить все товары при смене категории, загружаем первую страницу
@@ -46,11 +84,11 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         setCurrentPageState(1)
         setPage(0)
         getItemsByAuth(currentpage, category_id);
-      }, [category_id, orderingPrice])
-      ;
+    }, [category_id, orderingPrice, brandFilters])
+    ;
 
     const getItemsOnlyUsers = (page, category_id) => {
-        // Получить список категорий товаров
+        // Получить список категорий товаров пользователя, созданные им
         items_api.getItemsUserPaginate({
             page: page,
             status: '',
@@ -63,12 +101,13 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         .finally(()=> setIsLoaddingItems(false))
     }
 
-    const getItems = (page, category_id) => {
-        // Получить список категорий товаров
+    const getItems = (page, category_id, brands_id) => {
+        // Получить список категорий товаров для всех
         items_api.getItemsFilterCategoryPaginate({
             page: page,
             group: category_id,
-            ordering_price: orderingPrice
+            ordering_price: orderingPrice,
+            brand: brands_id
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -78,12 +117,13 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         .finally(()=> setIsLoaddingItems(false))
       }
 
-      const getItemsAuth = (page, category_id) => {
-        // Получить список категорий товаров
+      const getItemsAuth = (page, category_id, brands_id) => {
+        // Получить список категорий товаров для авторизованного пользователя
         items_api.getItemsAuthFilterCategoryPaginate({
             page: page,
             group: category_id,
-            ordering_price: orderingPrice
+            ordering_price: orderingPrice,
+            brand: brands_id
         })
         .then(res => {
             setpageCount(Math.ceil(res.count / 8));
@@ -127,6 +167,20 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
           }
         }
         return 1
+    }
+
+    const HandleChangeCheckedBrandFilter = (e, id) => {
+    // Меняет свойство чекбокса на противоположное и записывает в стейт
+        e.preventDefault();
+        let brands = brandFilters
+        let current_brand = brands.find(brand => brand.id === id)
+        if (current_brand.checked === true) {current_brand.checked = false} else {current_brand.checked = true}
+
+        let currentToPush = [];
+        brands.forEach(object => {
+            currentToPush.push(object);
+        });
+        setBrandsFilters(currentToPush);
     }
 
     const CartPlusItem = ( results, e) => {
@@ -183,6 +237,21 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                         <option value="price_retail">Сортировать по цене по возрастанию</option>
                         <option value="-price_retail">Сортировать по цене по убыванию</option>
                     </select>
+                </div>
+                <div className='row pb-2'>
+                    {brandFilters && <span>
+                        {/* <div className='form-check checkbox-brands'>
+                            <input type='checkbox' className='form-check-input' checked={ results.checked ? true : false}  id={results.id} onClick={(e) => HandleChangeCheckedBrandFilter(e, results.id)}></input>
+                            <label className='form-check-label pe-2' for={results.id}>{results.title}</label>
+                        </div> */}
+                        {brandFilters.map((results) => {
+                            return (
+                                <div className='form-check checkbox-brands'>
+                                    <input type='checkbox' className='form-check-input' checked={ results.checked ? true : false}  id={results.id} onClick={(e) => HandleChangeCheckedBrandFilter(e, results.id)}></input>
+                                    <label className='form-check-label pe-2' for={results.id}>{results.title}</label>
+                                </div>
+                            )})}
+                    </span>}
                 </div>
                 <div className="row justify-content-start">
                     {listItems.map((results) => {

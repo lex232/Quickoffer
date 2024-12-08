@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -463,4 +463,20 @@ footer {
 
 a:link {
   text-decoration: none;
+}
+
+.form-check-input:checked {
+  background-color: #5c61f2 !important;
+  border-color: #5c61f2 !important;
+}
+
+.active > .page-link, .page-link.active {
+  z-index: 3;
+  color: white !important;
+  background-color: #5c61f2 !important;
+  border-color: #5c61f2 !important;
+}
+
+.page-link {
+  color: #5c61f2 !important;
 }

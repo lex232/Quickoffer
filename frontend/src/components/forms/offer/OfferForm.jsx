@@ -313,7 +313,7 @@ const OfferForm = ({
                 <b> {clientValue.title} <button className='' onClick={(e) => deleteCurrentClient(e)}><XCircle strokeWidth={3} size={18} color="red" /></button> </b> :
                 ' Клиент не выбран'} 
                 <div>
-                  {clientValue.title ? <ChooseClientPopup action={setClientValue} text='изменить клиента'/> : <ChooseClientPopup action={setClientValue} text='выбрать клиента'/>}
+                  {clientValue.title ? <ChooseClientPopup action={setClientValue} text='Изменить клиента'/> : <ChooseClientPopup action={setClientValue} text='Выбрать клиента'/>}
                 </div>
             </div>
           </div>

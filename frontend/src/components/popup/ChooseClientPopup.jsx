@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import '../../css/popup.css'
@@ -95,6 +96,9 @@ const ChooseClientPopup = ({ action, text }) => {
                             <div className="modal-content d-flex">
                                 <div className="modal-header border-bottom-0 ">
                                     <h1 className="modal-title fs-4 mx-auto">{text}</h1>
+                                </div>
+                                <div className="d-flex">
+                                    <p className="mx-auto mb-1 pb-1 pt-2 mt-2"><Link to="/profile/clients/create" className=''><span className='px-2'>Создайте нового</span><span className='position-absolute end-0'></span></Link>или</p>
                                 </div>
                                 <div className="d-flex">
                                     <p className="mx-auto">Выберите из выпадающего списка:</p>

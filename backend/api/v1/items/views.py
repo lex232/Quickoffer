@@ -51,7 +51,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
-    filterset_fields = ['group']
+    filterset_fields = ['group', 'brand']
     ordering_fields = ['price_retail']
 
 
@@ -62,14 +62,20 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
-    filterset_fields = ['group', 'price_retail']
+    filterset_fields = ['group']
     ordering_fields = ['price_retail']
 
     def get_queryset(self):
         """Показываем только товары авторизованного пользователя + доступные"""
 
         user = self.request.user
-        queryset_general_items = Item.objects.filter(private_type=False)
+        ids = self.request.GET.get('brand')  # u'2,3,4' <- this is unicode
+        try:
+            ids = list(map(int, ids.split(',')))
+            queryset_general_items = Item.objects.filter(private_type=False, brand__in=ids)
+        except:
+            queryset_general_items = Item.objects.filter(private_type=False, brand=None)
+        print("BRAND ID", ids)
         # queryset_auth_items = ItemUser.objects.filter(author=user)
         return queryset_general_items
 

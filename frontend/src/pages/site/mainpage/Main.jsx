@@ -40,10 +40,10 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                 <main className="container-fluid px-0">
 
                     <section id="after-header">
-                        <div class="container">
+                        <div class="container center-important">
                             <div className="row">
-                                <div className="position-relative overflow-hidden pt-5 mt-3 text-center">
-                                    <div className="col-md-6 mx-auto ">
+                                <div className="position-relative overflow-hidden pt-5 mt-3 text-center ">
+                                    <div className="col-md-6 mx-auto">
                                         <h1 className="display-6 fw-bold">Создай КП, которое продает!</h1>
                                         <h3 className="fw-normal text-muted mb-3">и автоматизирует весь пакет документов</h3>
                                         <div className="d-flex gap-3 justify-content-center lead fw-normal">
@@ -64,7 +64,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                     <section id="hello">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 center-important">
                                         <h2 className='section-title mt-2'>Сервис от практикующих
                                         <br></br>монтажников</h2>
                                     </div>
