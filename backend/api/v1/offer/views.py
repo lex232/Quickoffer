@@ -67,6 +67,7 @@ def read_quantity_type(quantity):
 
 
 def generate_dict_info_items(id, work=False):
+    """Генерирует словарь с общими данными."""
 
     # Дата сегодня
     today = datetime.today().strftime('%d-%m-%Y')
@@ -97,6 +98,7 @@ def generate_dict_info_items(id, work=False):
             })
             count_items += 1
 
+    context['count_items'] = count_items
     context['summ'] = "{:.2f}".format(offer_id.final_price)
     context['summ_devices'] = "{:.2f}".format(offer_id.final_price_goods)
     context['summ_services'] = "{:.2f}".format(offer_id.final_price_work)
@@ -222,6 +224,8 @@ def generate_offer_doc(id, description=False):
 
 
 def generate_contract_items_doc(id):
+    """Договор на товары."""
+
     file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'contract_items.docx')
     doc = DocxTemplate(file)
 
@@ -237,6 +241,8 @@ def generate_contract_items_doc(id):
 
 
 def generate_contract_service_doc(id):
+    """Договор на работы."""
+
     file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'contract_work.docx')
     doc = DocxTemplate(file)
 
@@ -453,7 +459,7 @@ class OfferViewSet(viewsets.ModelViewSet):
             methods=['get'],
             permission_classes=(AllowAny,))
     def download_bill_items(self, request, **kwargs):
-        """Скачивание счета на работы в формате doc"""
+        """Скачивание счета на товары в формате doc"""
 
         if request.method == 'GET':
             file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'bill_items_wo_buh.docx')
@@ -469,6 +475,7 @@ class OfferViewSet(viewsets.ModelViewSet):
                 offer=offer_id
             )
             context['data'] = []
+            count_items = 0
             # Перебираем в табличку товары
             for index, item in enumerate(items_all):
                 if item.item.item_type == 'product':
@@ -479,8 +486,9 @@ class OfferViewSet(viewsets.ModelViewSet):
                         'price': item.item_price_retail,
                         'summ': item.amount * item.item_price_retail
                     })
+                    count_items += 1
 
-
+            context['count_items'] = count_items
             context['summ'] = offer_id.final_price_goods
             context['n_invoice'] = f'{offer_id.id}-1'
             context['reason'] = f'Договор №{offer_id.id} от {today}'
