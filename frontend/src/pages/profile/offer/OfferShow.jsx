@@ -138,6 +138,20 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
+  const DownloadTorg12Doc = (e) => {
+    /**
+    * Скачать накладную doc
+    */
+    e.preventDefault();
+    offer_api.downloadTorg12Doc({
+      id: id,
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch((e) => console.log(e))
+  }
+
   return (
     <main className="col-md-9 col-lg-10">
 
@@ -175,6 +189,7 @@ const OfferShow = () => {
             <button onClick={(e) => DownloadOfferDocWithDescription(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП с характеристиками<FileText color='#5c61f2' size={18}/></button>
             <button onClick={(e) => DownloadContractItemsDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (товары) <FileText color='#5c61f2' size={18}/></button>
             <button onClick={(e) => DownloadContractServiceDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (услуги) <FileText color='#5c61f2' size={18}/></button>
+            <button onClick={(e) => DownloadTorg12Doc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Накладная (торг-12) <FileText color='#5c61f2' size={18}/></button>
             {/* <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button> */}
           </div>
         </div>
