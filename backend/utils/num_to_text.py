@@ -108,6 +108,27 @@ class NumberToStringHelper:
         )
         return string.capitalize()
 
+    def get_string_only_value(self):
+        """
+        Вовращает число прописью без валюты
+        :return: str
+        """
+
+        string_list_items = [
+            self._get_string_item(number, digit_item_number)
+            for digit_item_number, number in enumerate(self._item_generator())
+        ]
+
+        base = ' '.join(reversed(string_list_items)) or 'ноль'
+
+        pattern = (
+            '{base} '
+        )
+        string = pattern.format(
+            base=base,
+        )
+        return string
+
     def _item_generator(self):
         """
         Разбивает числа по 3 цифры
@@ -231,5 +252,17 @@ def get_string_by_number(number, currency_main=None, currency_additional=None):
         currency_main=currency_main,
         currency_additional=currency_additional,
     ).get_string()
+
+    return string
+
+
+def get_string_by_number_only(number):
+    """
+    Переводит число в строку словами
+    """
+
+    string = NumberToStringHelper(
+        number=number,
+    ).get_string_only_value()
 
     return string

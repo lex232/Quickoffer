@@ -246,6 +246,22 @@ downloadContractServiceDoc ({
   ).then(this.checkFileDownloadResponseWord)
 }
 
+downloadTorg12Doc ({
+  id
+}) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/download_torg12/`,
+    {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      }
+    }
+  ).then(this.checkFileDownloadResponseWord)
+}
+
 downloadBillWork ({
   id
 }) {
