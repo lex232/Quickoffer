@@ -1,7 +1,7 @@
 # Quickoffer
 Application for quickly creating commercial proposals <br>
 Приложение для создания коммерческих документов в сфере СКС и формирования документов к ним <br>
-Ссылка - https://offercreator.ru/
+Ссылка - https://offerguru.ru/
 
 ## Технологии
 
@@ -13,8 +13,6 @@ Application for quickly creating commercial proposals <br>
 [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat&logo=NGINX&logoColor=56C0C0&color=000000)](https://nginx.org/ru/)
 [![gunicorn](https://img.shields.io/badge/-gunicorn-464646?style=flat&logo=gunicorn&logoColor=56C0C0&color=65fa41)](https://gunicorn.org/)
 
-
-
 ## Возможности
 - Реализована регистрация и авторизация пользователей.
 - Создание клиентов индивидуальных для аккаунта.
@@ -22,4 +20,4 @@ Application for quickly creating commercial proposals <br>
 - Дополнительная информация в профиле (реквизиты).
 - Создание коммерческих предложений.
 - Реализован каталог популярных товаров.
-- Формирование документов (счет на работы, счет на товары, pdf предложение)
+- Формирование документов (счет на работы, счет на товары, коммерческое предложение + характеристики, торг-12, договора)
