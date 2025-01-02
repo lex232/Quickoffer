@@ -1,4 +1,4 @@
-"""API DRF OFFERS views"""
+"""API DRF OFFERS views - generate docs"""
 import os
 import io
 from datetime import datetime
@@ -10,23 +10,12 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
-from PIL import Image as ImagePIL
-
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
-from reportlab.lib import colors
-from reportlab.platypus import Table, Image
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.units import inch
-from reportlab.lib.utils import ImageReader
 
 from docxtpl import DocxTemplate
 from docxtpl import InlineImage
 from docx.shared import Mm
 from quickoffer.settings import BASE_DIR
 
-from api.permissions import IsAdminOrReadOnly
 from offer.models import (
     OfferForCustomer,
     OfferItems,
@@ -38,42 +27,30 @@ from api.v1.offer.serializers import (
     OfferPostSerializer,
     OfferFullSerializer
 )
-from utils.num_to_text import get_string_by_number
-from utils.newline import insert_newline
+from utils.num_to_text import get_string_by_number, get_string_by_number_only
+from utils.helpers.string_helpers import (
+    read_company_type,
+    read_month_ru,
+    read_okei_type,
+    read_quantity_type
+)
 
 User = get_user_model()
-
-
-def read_company_type(company):
-    if company:
-        list_types = {
-            'ooo': 'ООО',
-            'ip' : 'ИП',
-            'fiz': 'Физическое лицо'
-        }
-        return list_types.get(company)
-    return None
-
-
-def read_quantity_type(quantity):
-    if quantity:
-        list_types = {
-            'pc': 'шт.',
-            'meters': 'м.',
-            'kms': 'км.',
-        }
-        return list_types.get(quantity)
-    return None
 
 
 def generate_dict_info_items(id, work=False):
     """Генерирует словарь с общими данными."""
 
+    context = {}
+
     # Дата сегодня
     today = datetime.today().strftime('%d-%m-%Y')
+    context['date'] = today
+    context['now_day'] = datetime.today().strftime('%d')
+    context['now_month_ru'] = read_month_ru(int(datetime.today().strftime('%m')))
+    context['now_year'] = datetime.today().strftime('%Y')
 
     # Блок данных
-    context = {}
     offer_id = get_object_or_404(OfferForCustomer, id=id)
     items_all = OfferItems.objects.filter(
         offer=offer_id
@@ -81,8 +58,8 @@ def generate_dict_info_items(id, work=False):
     context['data_items'] = []
     # Перебираем в табличку товары и услуги
 
-
     count_items = 1
+    amount_items = 0
     type = 'product'
     for index, item in enumerate(items_all):
         if work:
@@ -92,13 +69,18 @@ def generate_dict_info_items(id, work=False):
                 'num': count_items,
                 'item': item.item,
                 'count': item.amount,
-                'quantity': item.item.quantity_type,
+                'quantity': read_quantity_type(str(item.item.quantity_type)),
+                'quantity_okei': read_okei_type(str(item.item.quantity_type)),
+                'category': str(item.item.group.last()),
                 'price': "{:.2f}".format(item.item_price_retail),
                 'summ': "{:.2f}".format(item.amount * item.item_price_retail)
             })
+            amount_items += item.amount
             count_items += 1
 
     context['count_items'] = count_items - 1
+    context['count_items_propis'] = get_string_by_number_only(count_items - 1)
+    context['amount_items'] = amount_items
     context['summ'] = "{:.2f}".format(offer_id.final_price)
     context['summ_devices'] = "{:.2f}".format(offer_id.final_price_goods)
     context['summ_services'] = "{:.2f}".format(offer_id.final_price_work)
@@ -106,35 +88,29 @@ def generate_dict_info_items(id, work=False):
     context['propis'] = f'{get_string_by_number(offer_id.final_price)}, НДС не облагается'
     context['propis_devices'] = f'{get_string_by_number(offer_id.final_price_goods)}, НДС не облагается'
     context['propis_services'] = f'{get_string_by_number(offer_id.final_price_work)}, НДС не облагается'
-    context['date'] = today
-
-    # Блок исполнитель
-    installer = get_object_or_404(Profile, user=offer_id.author)
-    if installer.ruk: context['ruk'] = installer.ruk
-    context['company'] = f'{read_company_type(installer.company_type)} {installer.company_name}'
-    context['company_inn'] = installer.inn
-    context['company_ogrn'] = installer.ogrn
-    context['company_bik'] = installer.bik
-    context['company_kpp'] = installer.kpp
-    context['company_bank'] = installer.bank_name
-    context['company_bill'] = installer.bill_num
-    context['company_corr_bill'] = installer.bill_corr_num
-    context['company_address'] = installer.address_reg
-    # context['company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
+    context['reason'] = f'Договор №{offer_id.id} от {today}'
 
     # Блок исполнитель
     try:
         installer = get_object_or_404(Profile, user=offer_id.author)
         if installer.ruk: context['ruk'] = installer.ruk
         context['company'] = f'{read_company_type(installer.company_type)} {installer.company_name}'
-        context[
-            'company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name} ИНН {installer.inn} Адрес регистрации: {installer.address_reg} Телефон:  {installer.phone}'
+        context['company_inn'] = installer.inn
+        context['company_ogrn'] = installer.ogrn
+        context['company_bik'] = installer.bik
+        context['company_kpp'] = installer.kpp
+        context['company_bank'] = installer.bank_name
+        context['company_bill'] = installer.bill_num
+        context['company_corr_bill'] = installer.bill_corr_num
+        context['company_address'] = installer.address_reg
+        context['company_full'] = f'{read_company_type(installer.company_type)} {installer.company_name}, ИНН {installer.inn}, Адрес регистрации: {installer.address_reg}, Телефон:  {installer.phone}'
+        context['company_bank_full'] = f'р/с {installer.bill_num} в банке "{installer.bank_name}", БИК {installer.bik}, к/с {installer.bill_corr_num}'
     except:
         pass
-    # Блок клиента
+
+    # Блок клиент
     try:
         customer = get_object_or_404(Client, title=offer_id.name_client, author=offer_id.author)
-        # context['customer'] = f'{read_company_type(customer.company_type)} {customer.title} ИНН {customer.inn} Адрес регистрации: {customer.address_reg}'
         context['customer'] = f'{read_company_type(customer.company_type)} {customer.title}'
         context['customer_inn'] = customer.inn
         context['customer_address'] = customer.address_reg
@@ -143,8 +119,12 @@ def generate_dict_info_items(id, work=False):
         context['customer_bank'] = customer.bank_name
         context['customer_bill'] = customer.bill_num
         context['customer_corr_bill'] = customer.bill_corr_num
+        context['customer_full'] = f'{read_company_type(customer.company_type)} {customer.title}, ИНН {customer.inn}, Адрес регистрации: {customer.address_reg}'
+        print("CUSTOMER", context['customer_full'])
+        context['customer_bank_full'] = f'р/с {customer.bill_num} в банке "{customer.bank_name}", БИК {customer.bik}, к/с {customer.bill_corr_num}'
+        print("CUSTOMER", context['customer_bank_full'])
     except:
-        pass
+        context['customer'] = 'Клиент не выбран'
     return context
 
 def generate_offer_doc(id, description=False):
@@ -152,12 +132,12 @@ def generate_offer_doc(id, description=False):
 
     file = os.path.join(BASE_DIR, 'utils', 'doc_templates', 'offer_doc.docx')
     doc = DocxTemplate(file)
+    context = {}
 
     # Дата сегодня
     today = datetime.today().strftime('%d-%m-%Y')
 
     # Блок данных
-    context = {}
     offer_id = get_object_or_404(OfferForCustomer, id=id)
     items_all = OfferItems.objects.filter(
         offer=offer_id
@@ -170,7 +150,6 @@ def generate_offer_doc(id, description=False):
     count_services = 1
     for index, item in enumerate(items_all):
         if item.item.item_type == 'product':
-            print(item.item.group.last())
             context['data_items'].append({
                 'num': count_items,
                 'item': str(item.item),
@@ -257,7 +236,6 @@ def generate_torg12(id):
 
     # Блок данных
     context = generate_dict_info_items(id)
-    print("TEST", context)
 
     doc.render(context)
     doc_io = io.BytesIO()
@@ -325,7 +303,7 @@ class OfferViewSet(viewsets.ModelViewSet):
             # Блок данных
             context = {}
             offer_id = get_object_or_404(OfferForCustomer, id=kwargs['pk'])
-            context['summ'] = offer_id.final_price_work
+            context['summ'] = "{:.2f}".format(offer_id.final_price_work)
             context['n_invoice'] = f'{offer_id.id}-2'
             context['reason'] = f'Договор №{offer_id.id} от {today}'
             context['propis'] = f'{get_string_by_number(offer_id.final_price_work)}, НДС не облагается'
@@ -395,13 +373,13 @@ class OfferViewSet(viewsets.ModelViewSet):
                         'num': index + 1,
                         'item': item.item,
                         'count': item.amount,
-                        'price': item.item_price_retail,
-                        'summ': item.amount * item.item_price_retail
+                        'price': "{:.2f}".format(item.item_price_retail),
+                        'summ': "{:.2f}".format(item.amount * item.item_price_retail)
                     })
                     count_items += 1
 
             context['count_items'] = count_items
-            context['summ'] = offer_id.final_price_goods
+            context['summ'] = "{:.2f}".format(offer_id.final_price_goods)
             context['n_invoice'] = f'{offer_id.id}-1'
             context['reason'] = f'Договор №{offer_id.id} от {today}'
             context['propis'] = f'{get_string_by_number(offer_id.final_price_goods)}, НДС не облагается'
