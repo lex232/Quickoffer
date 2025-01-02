@@ -39,18 +39,46 @@
   --bs-gutter-x: 0rem !important;
 } */
 
-#after-header {
-  --bs-gutter-x: 1.5rem;
+.after-header-style {
   background: url('../../../static/image/background/back.jpg') no-repeat center top;
+}
+
+@media only screen and (max-width: 768px) {
+  .after-header-style {
+    background: url('../../../static/image/background/back.jpg') no-repeat center top;
+    background-position: bottom 80px right 50%;
+  }
 }
 
 .center-important {
   text-align: center !important;
 }
 
+.header-text-main {
+  padding-top: 3rem !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .header-text-main {
+    padding-top: 1rem !important;
+  }
+}
+
 .img-responsive {
   max-width: 100%;
   height: auto;
+}
+
+.img-responsive-mac {
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .img-responsive-mac {
+      width: 120%;
+      height: auto;
+  }
 }
 
 .section-title{

@@ -39,10 +39,10 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                 </header>
                 <main className="container-fluid px-0">
 
-                    <section id="after-header">
+                    <section id="after-header" class='after-header-style'>
                         <div class="container center-important">
                             <div className="row">
-                                <div className="position-relative overflow-hidden pt-5 mt-3 text-center ">
+                                <div className="position-relative overflow-hidden header-text-main mt-3 text-center">
                                     <div className="col-md-6 mx-auto">
                                         <h1 className="display-6 fw-bold">Создай КП, которое продает!</h1>
                                         <h3 className="fw-normal text-muted mb-3">и автоматизирует весь пакет документов</h3>
@@ -55,7 +55,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                             
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
-                                <img class="img-responsive" src={Note1000} alt=""></img>
+                                <img class="img-responsive-mac" src={Note1000} alt=""></img>
                             </div>
                         </div>
                         </div>
