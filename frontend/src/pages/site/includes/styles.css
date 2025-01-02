@@ -19,3 +19,14 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.logo-customization {
+    width: 200px;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo-customization {
+        width: 120px;
+        padding-top: 1px;
+    }
+}
