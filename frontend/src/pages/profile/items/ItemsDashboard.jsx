@@ -5,7 +5,6 @@ import ReactPaginate from "react-paginate";
 import items_api from '../../../api/items_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
 
-
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
 import { Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield } from 'react-feather'
@@ -26,8 +25,7 @@ const ItemsDashboard = () => {
   useEffect(() => {
     // Получить все товары при загрузке страницы
     getItems(currentpage, status);
-  }, [])
-    ;
+  }, []);
 
   useEffect(() => {
     // Получить все товары при загрузке страницы

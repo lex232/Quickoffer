@@ -285,9 +285,9 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                     <div className='item-bottom'>
                                         <div className='item-price pe-2'>{results.price_retail} руб.</div>
                                         {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
-                                            {CheckCartItem(results.id) ?
-                                                <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div> :
-                                                <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
+                                            {CheckCartItem(results.id) 
+                                                ? <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div>
+                                                : <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
                                             <div className="justify-content-end text-end col-4">
                                                 {CheckCartItem(results.id) &&
                                                     <span>
