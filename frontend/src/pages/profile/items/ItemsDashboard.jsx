@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 
 import items_api from '../../../api/items_api';
-import getDate from '../../../utils/getDate';
 import DeletePopup from '../../../components/popup/DeletePopup';
-import ReadItemType from '../../../utils/text-operations/replaceItemType';
+
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
@@ -19,7 +18,7 @@ const ItemsDashboard = () => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
-  
+
   const [status, setStatus] = useState('');
 
   let currentpage = 1;
@@ -28,7 +27,7 @@ const ItemsDashboard = () => {
     // Получить все товары при загрузке страницы
     getItems(currentpage, status);
   }, [])
-  ;
+    ;
 
   useEffect(() => {
     // Получить все товары при загрузке страницы
@@ -40,11 +39,11 @@ const ItemsDashboard = () => {
       page: page,
       status: status,
     })
-    .then(res => {
-      setpageCount(Math.ceil(res.count / 10));
-      setItems(res.results);
-    })
-    .catch((e) => console.log(e))
+      .then(res => {
+        setpageCount(Math.ceil(res.count / 10));
+        setItems(res.results);
+      })
+      .catch((e) => console.log(e))
   }
 
   const handlePageClick = (data) => {
@@ -74,16 +73,19 @@ const ItemsDashboard = () => {
     image,
     e) => {
     e.preventDefault();
-    return navigate("/profile/items/edit", {state: {
-      id: id,
-      title: title,
-      brand: brand,
-      group: group,
-      price_retail: price_retail,
-      item_type: item_type,
-      quantity_type: quantity_type,
-      description: description,
-      image: image}})
+    return navigate("/profile/items/edit", {
+      state: {
+        id: id,
+        title: title,
+        brand: brand,
+        group: group,
+        price_retail: price_retail,
+        item_type: item_type,
+        quantity_type: quantity_type,
+        description: description,
+        image: image
+      }
+    })
   }
 
   const CreateItem = (e) => {
@@ -113,10 +115,10 @@ const ItemsDashboard = () => {
                   <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setStatus('')}><Target />Все</a></li>
                   <li className="nav-item"><a className="nav-link" id="top-items-tab" data-bs-toggle="tab" href="#top-items" role="tab" aria-controls="top-items" aria-selected="false" onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
                   <li className="nav-item"><a className="nav-link" id="service-top-tab" data-bs-toggle="tab" href="#top-service" role="tab" aria-controls="top-service" aria-selected="false" onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
-                  </ul>
+                </ul>
               </div>
-              <div className="col-md-3 p-0">                    
-                <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить позицию</button>
+              <div className="col-md-3 p-0">
+                <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
               </div>
             </div>
           </div>
@@ -125,7 +127,7 @@ const ItemsDashboard = () => {
 
       <div className="col-md-12 project-list">
         <div className="card-header">
-          <div className="mt-3">  
+          <div className="mt-3">
             {items.map((results) => {
               return (
                 <div class="row text-start my-2 mx-0" key={results.id}>
@@ -134,14 +136,14 @@ const ItemsDashboard = () => {
                       <div class="row my-0 mx-0">
                         <div class="col-md-4">
                           <label>
-                            {results.item_type === 'product' ? <ShoppingCart size='16px'/> : <Tool size='16px'/> }
+                            {results.item_type === 'product' ? <ShoppingCart size='16px' /> : <Tool size='16px' />}
                             <b><span className='ps-2'>{results.title}</span></b></label>
                         </div>
                         <div class="col-md-2">
-                          <label><CreditCard  size='16px' color='gray'/> {results.price_retail} Руб.</label>
+                          <label><CreditCard size='16px' color='gray' /> {results.price_retail} Руб.</label>
                         </div>
                         <div class="col-md-3">
-                          {results.brand && <label><Shield size='16px' color='gray'/> {results.brand}</label>}
+                          {results.brand && <label><Shield size='16px' color='gray' /> {results.brand}</label>}
                         </div>
                         <div class="col-md-3">
                           {results.group.map((res_groups) => {
@@ -149,31 +151,32 @@ const ItemsDashboard = () => {
                               <div>
                                 {res_groups.title}
                               </div>
-                          )})}
+                            )
+                          })}
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-2 my-0 mx-0">
                     <button onClick={(e) => HandleEditItem(
-                            results.id,
-                            results.title,
-                            results.brand,
-                            results.group,
-                            results.price_retail,
-                            results.item_type,
-                            results.quantity_type,
-                            results.description,
-                            results.image,
-                            e)}><PencilIco fill="orange"/></button>
-                          <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id}/>
+                      results.id,
+                      results.title,
+                      results.brand,
+                      results.group,
+                      results.price_retail,
+                      results.item_type,
+                      results.quantity_type,
+                      results.description,
+                      results.image,
+                      e)}><PencilIco fill="orange" /></button>
+                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id} />
                   </div>
                   <hr className='mt-2'></hr>
                 </div>
-                );
-              })}
+              );
+            })}
 
-              <ReactPaginate
+            <ReactPaginate
               previousLabel={"предыдущая"}
               nextLabel={"следующая"}
               initialPage={page}

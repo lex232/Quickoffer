@@ -461,6 +461,14 @@ footer {
   float: right;
 }
 
+.btn-create-small {
+  padding: 0.3rem 1.25rem !important;
+  font-weight: 500;
+  border-radius: 10px !important;
+  float: right;
+  margin-right: 0.8rem;
+}
+
 a:link {
   text-decoration: none;
 }
