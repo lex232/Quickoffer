@@ -16,10 +16,10 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
 
     const [ listGroups, setListGroups ] = useState([])
     const [ listService, setListService ] = useState([])
-    const [ isLoaddingCat, setIsLoaddingCat ] = useState(true)
-    const [ choosenCategory, setChoosenCategory ] = useState(undefined)
-    const [ choosenTree, setChoosenTree ] = useState(undefined)
-    const [ choosenTitle, setChoosenTitle ] = useState(undefined)
+    const [ isLoadingCat, setIsLoadingCat ] = useState(true)
+    const [ chosenCategory, setChosenCategory ] = useState(undefined)
+    const [ chosenTree, setChosenTree ] = useState(undefined)
+    const [ chosenTitle, setChosenTitle ] = useState(undefined)
 
     const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
     const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
@@ -38,11 +38,11 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         group_api.getItemsGroup()
         .then(res => {
           setListGroups(res);
-          setChoosenCategory(res[0].id)
-          setChoosenTitle(res[0].title)
+          setChosenCategory(res[0].id)
+          setChosenTitle(res[0].title)
         })
         .catch((e) => console.log(e))
-        .finally(()=> setIsLoaddingCat(false))
+        .finally(()=> setIsLoadingCat(false))
       }
 
     const getGroupService = () => {
@@ -52,15 +52,15 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
             setListService(res);
         })
         .catch((e) => console.log(e))
-        .finally(()=> setIsLoaddingCat(false))
+        .finally(()=> setIsLoadingCat(false))
     }
 
     const handleChangeCategory = (e, id, tree_id, title) => {
     // Устанавливаем значение типа компании onChange
         e.preventDefault();
-        setChoosenCategory(id);
-        setChoosenTree(tree_id);
-        setChoosenTitle(title)
+        setChosenCategory(id);
+        setChosenTree(tree_id);
+        setChosenTitle(title)
     }
 
     const handleMenu = (e) => {
@@ -82,14 +82,14 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
                                 <span className='position-absolute end-0'></span>
                                 <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                    {results.id === choosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
+                                    {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
                                 </button> 
                             </div>
                             ||
-                            choosenTree === results.tree_id && results.level !== 0
+                            chosenTree === results.tree_id && results.level !== 0
                             &&
                             <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                            {results.id === choosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
+                            {results.id === chosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
                         </button>
                         );
                     })}
@@ -101,7 +101,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         return (
             <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3">
                 <button onClick={(e) => handleChangeCategory(e, -1, 0, 'Мои товары')}>
-                    {-1 === choosenCategory ? <li className="nav-link active text-sidebar button-mini">Мои товары</li> : <li className="nav-item text-sidebar">Мои товары</li>}
+                    {-1 === chosenCategory ? <li className="nav-link active text-sidebar button-mini">Мои товары</li> : <li className="nav-item text-sidebar">Мои товары</li>}
                 </button>
             </div>
         )
@@ -113,7 +113,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                     <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
                 </div>
                 <div className="d-flex">
-                    {isLoaddingCat && <div className="spinner-border text-primary" role="status">
+                    {isLoadingCat && <div className="spinner-border text-primary" role="status">
                         <span class="visually-hidden">Загрузка...</span>
                     </div>}
                 </div>
@@ -136,7 +136,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             </ul>
                         </div>
                     </nav>
-                    {choosenCategory && <ItemsArea category_id={choosenCategory} loginstate={loginstate} title={choosenTitle}/>}
+                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle}/>}
                 </div>
                 </div>
                 
