@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 
 import items_api from '../../../api/items_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
 
+import CartPlusItem from '../../../utils/items/cartPlusItem';
+import CartRemoveItem from '../../../utils/items/cartRemoveItem';
+import CheckSameCartItem from '../../../utils/items/checkSameCartItem';
 
 import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
 import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield } from 'react-feather'
+import { Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield, ShoppingBag } from 'react-feather'
 import './styles.css'
 
 
@@ -23,11 +26,17 @@ const ItemsDashboard = () => {
 
   let currentpage = 1;
 
+  let items_in_cart = []
+
+  // Получаем корзину из локального хранилища
+  if (localStorage.getItem("items")) {
+    items_in_cart = JSON.parse(localStorage.getItem("items"));
+  }
+
   useEffect(() => {
     // Получить все товары при загрузке страницы
     getItems(currentpage, status);
-  }, [])
-    ;
+  }, []);
 
   useEffect(() => {
     // Получить все товары при загрузке страницы
@@ -93,6 +102,18 @@ const ItemsDashboard = () => {
     return navigate("/profile/items/create")
   }
 
+  const CartPlusItemWithRefresh = (results, items_input, e) => {
+    // Добавляем элемент в список товаров/услуг с рефрешем
+    CartPlusItem(results, items_input, e)
+    getItems(currentpage, status);
+  }
+
+  const CartRemoveItemWithRefresh = (id_item, items_input, e) => {
+    // Удаляем элемент из списка товаров/услуг по id товара
+    CartRemoveItem(id_item, items_input, e)
+    getItems(currentpage, status);
+  }
+
   return (
     <main className="col-md-9 col-lg-10 px-md-4 profile-body">
 
@@ -132,29 +153,42 @@ const ItemsDashboard = () => {
               return (
                 <div class="row text-start my-2 mx-0" key={results.id}>
                   <div class="col-10 my-0 mx-0">
-                    <div class="col-10 my-0 mx-0">
-                      <div class="row my-0 mx-0">
-                        <div class="col-md-4">
-                          <label>
-                            {results.item_type === 'product' ? <ShoppingCart size='16px' /> : <Tool size='16px' />}
-                            <b><span className='ps-2'>{results.title}</span></b></label>
-                        </div>
-                        <div class="col-md-2">
-                          <label><CreditCard size='16px' color='gray' /> {results.price_retail} Руб.</label>
-                        </div>
-                        <div class="col-md-3">
-                          {results.brand && <label><Shield size='16px' color='gray' /> {results.brand}</label>}
-                        </div>
-                        <div class="col-md-3">
-                          {results.group.map((res_groups) => {
-                            return (
-                              <div>
-                                {res_groups.title}
-                              </div>
-                            )
-                          })}
+
+                    <div class="row my-0 mx-0">
+                      <div class="col-md-4 mt-1">
+                        <label>
+                          {results.item_type === 'product' ? <ShoppingCart size='16px' /> : <Tool size='16px' />}
+                          <b><span className='ps-2'>{results.title}</span></b></label>
+                      </div>
+                      <div class="col-md-2 mt-1">
+                        <label><CreditCard size='16px' color='gray' /> {results.price_retail} Руб.</label>
+                      </div>
+                      <div class="col-md-2 mt-1">
+                        {results.brand && <label><Shield size='16px' color='gray' /> {results.brand}</label>}
+                      </div>
+                      <div class="col-md-2 mt-1">
+                        {results.group.map((res_groups) => {
+                          return (
+                            <div>
+                              {res_groups.title}
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <div class="col-md-2 px-0 mt-1">
+                        <div className="bg-transparent d-flex flex-row">
+                          {CheckSameCartItem(results.id, items_in_cart)
+                            ? <div><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div>
+                            : <div><button onClick={(e) => CartPlusItemWithRefresh(results, items_in_cart, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
+
+                          {CheckSameCartItem(results.id, items_in_cart) &&
+                            <span>
+                              <button className="btn btn-danger btn-sm ms-2 ms-2" onClick={(e) => CartRemoveItemWithRefresh(results.id, items_in_cart, e)}>X</button>
+                            </span>}
+
                         </div>
                       </div>
+
                     </div>
                   </div>
                   <div class="col-2 my-0 mx-0">

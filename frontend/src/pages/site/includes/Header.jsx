@@ -97,11 +97,11 @@ const Header = ({ loginstate, onSignOut, user }) => {
 
   return (
     <div className="container-fluid px-3">
-      <header className="d-flex flex-wrap justify-content-between py-3">
+      <header className="d-flex flex-wrap justify-content-between py-1">
         <a href={loginstate ? "/profile" : "/"} className="d-flex align-items-center mb-md-0 me-md-auto text-dark text-decoration-none">
-          <img className="bi text-muted flex-shrink-0 logo-customization" src={logo} alt=""/>
+          <img className="bi text-muted flex-shrink-0 logo-customization mt-2" src={logo} alt=""/>
         </a>
-        <ul className="nav nav-pills">
+        <ul className="nav nav-pills mt-2">
           <HeaderAuthOption />
         </ul>
       </header>
