@@ -39,6 +39,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         .then(res => {
           setListGroups(res);
           setChosenCategory(res[0].id)
+          setChosenTree(res[0].tree_id)
           setChosenTitle(res[0].title)
         })
         .catch((e) => console.log(e))
@@ -83,7 +84,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                                 <span className='position-absolute end-0'></span>
                                 <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
                                     {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
-                                </button> 
+                                </button>
                             </div>
                             ||
                             chosenTree === results.tree_id && results.level !== 0
