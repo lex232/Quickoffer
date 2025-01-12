@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import items_api from '../../../api/items_api';
 import brands_api from '../../../api/brands_api';
 import './styles.css'
 import AddNewTable from '../../../utils/text-operations/addTable';
+import CheckSameCartItem from '../../../utils/items/checkSameCartItem';
+import CartPlusItem from '../../../utils/items/cartPlusItem';
+import CartRemoveItem from '../../../utils/items/cartRemoveItem';
 import { ShoppingBag, PlusSquare } from 'react-feather';
 
 const ItemsArea = ({ category_id, loginstate, title }) => {
@@ -146,19 +148,6 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     };
 
     /**
-    * Проверяем на одинаковый товар
-    */
-    const CheckCartItem = (id_item) => {
-        var index
-        for (index = 0; index < items.length; ++index) {
-            if (id_item === items[index].id) {
-                return true
-            }
-        }
-        return false
-    }
-
-    /**
     * Проверяем количество товара, если товар в корзине
     */
     const CheckCartQuantity = (cart, id_item) => {
@@ -185,49 +174,22 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         setBrandsFilters(currentToPush);
     }
 
-    const CartPlusItem = (results, e) => {
-        // Добавляем элемент в список товаров/услуг
-        e.preventDefault();
-
-        let prepareToAddList = items;
-        let title_temp = ''
-        if (results.brand) {
-            title_temp = results.title + ' ' + results.brand
-        }
-        else {
-            title_temp = results.title
-        }
-
-        prepareToAddList.push({
-            id: results.id,
-            title: title_temp,
-            item_price_retail: results.price_retail,
-            item_price_purchase: results.price_retail,
-            amount: "1",
-            description: results.description,
-            image: results.image
-        })
-        localStorage.setItem("items", JSON.stringify(prepareToAddList));
+    const CartPlusItemWithRefresh = (results, items_input, e) => {
+        // Добавляем элемент в список товаров/услуг с рефрешем
+        CartPlusItem(results, items_input, e)
         getItemsByAuth(currentpage, category_id);
-        window.dispatchEvent(new Event("storage"));
     }
 
-    const CartRemoveItem = (id_item, e) => {
+    const CartRemoveItemWithRefresh = (id_item, items_input, e) => {
         // Удаляем элемент из списка товаров/услуг по id товара
-        e.preventDefault();
-
-        let prepareToDeleteList = items;
-        var index = items.findIndex(p => p.id === id_item)
-        prepareToDeleteList.splice(index, 1)
-        localStorage.setItem("items", JSON.stringify(prepareToDeleteList));
+        CartRemoveItem(id_item, items_input, e)
         getItemsByAuth(currentpage, category_id);
-        window.dispatchEvent(new Event("storage"));
     }
 
     const CreateItem = (e) => {
         e.preventDefault();
         return navigate("/profile/items/create")
-      }
+    }
 
     return (
         <div className="col">
@@ -259,7 +221,9 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                         {brandFilters.map((results) => {
                             return (
                                 <div className='form-check checkbox-brands'>
-                                    <input type='checkbox' className='form-check-input' checked={results.checked ? true : false} id={results.id} onClick={(e) => HandleChangeCheckedBrandFilter(e, results.id)}></input>
+                                    <input type='checkbox' className='form-check-input' checked={results.checked
+                                        ? true
+                                        : false} id={results.id} onClick={(e) => HandleChangeCheckedBrandFilter(e, results.id)}></input>
                                     <label className='form-check-label pe-2' for={results.id}>{results.title}</label>
                                 </div>
                             )
@@ -285,14 +249,14 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                                     <div className='item-bottom'>
                                         <div className='item-price pe-2'>{results.price_retail} руб.</div>
                                         {loginstate && <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
-                                            {CheckCartItem(results.id) ?
-                                                <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div> :
-                                                <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItem(results, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
+                                            {CheckSameCartItem(results.id, items)
+                                                ? <div className="justify-content-start text-start col-8"><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div>
+                                                : <div className="justify-content-start text-start col-8"><button onClick={(e) => CartPlusItemWithRefresh(results, items, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
                                             <div className="justify-content-end text-end col-4">
-                                                {CheckCartItem(results.id) &&
+                                                {CheckSameCartItem(results.id, items) &&
                                                     <span>
                                                         {/* {CheckCartQuantity(items, results.id)} Шт. */}
-                                                        <button className="btn btn-primary btn-sm ms-2" onClick={(e) => CartRemoveItem(results.id, e)}>X</button>
+                                                        <button className="btn btn-danger btn-sm ms-2" onClick={(e) => CartRemoveItemWithRefresh(results.id, items, e)}>X</button>
                                                     </span>}
                                             </div>
                                         </div>}
