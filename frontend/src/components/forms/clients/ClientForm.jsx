@@ -22,6 +22,8 @@ const ClientForm = ({
     bill_corr_num,
     bank_name,
     phone_company,
+    bik,
+    ruk,
     image
 }) => {
   const navigate = useNavigate()
@@ -36,6 +38,8 @@ const ClientForm = ({
   const [ bankNameArea, setBankName ] = useState(bank_name)
   const [ companyTypeArea, setCompanyType ] = useState(company_type)
   const [ phoneCompanyArea, setPhoneCompany ] = useState(phone_company)
+  const [ bikArea, setBik ] = useState(company_type)
+  const [ rukArea, setRuk ] = useState(ruk)
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
   // Ссылка на имя файла в форме
@@ -102,6 +106,8 @@ const ClientForm = ({
       bill_corr_num: billCorrNumArea,
       bank_name: bankNameArea,
       phone_company: phoneCompanyArea,
+      bik: bikArea,
+      ruk: rukArea,
       image: selectedImage,
     }
     if (id === undefined) {
@@ -204,6 +210,21 @@ const ClientForm = ({
             <div class="form-group">
                 <label>Телефон организации:</label>
                 <input type="text" defaultValue={phone_company} className="form-control border-input" id="PhoneCompany" placeholder="Телефон организации" onChange={(e) => setPhoneCompany(e.target.value)} />
+            </div>
+          </div>
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>БИК:</label>
+                <input type="text" defaultValue={bik} className="form-control border-input" id="BankBik" placeholder="БИК банка" onChange={(e) => setBik(e.target.value)} />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mx-0 justify-content-left">
+          <div class="col-md-6 ps-0 pe-2">
+            <div class="form-group">
+                <label>Руководитель (для подписи):</label>
+                <input type="text" defaultValue={ruk} className="form-control border-input" id="RukCompany" placeholder="Руководитель" onChange={(e) => setRuk(e.target.value)} />
             </div>
           </div>
         </div>

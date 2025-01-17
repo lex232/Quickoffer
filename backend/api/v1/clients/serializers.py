@@ -41,7 +41,9 @@ class ClientPostSerializer(serializers.ModelSerializer):
             'bill_corr_num',
             'bank_name',
             'image',
-            'phone_company'
+            'phone_company',
+            'bik',
+            'ruk'
         )
 
     def create(self, validated_data):
