@@ -46,6 +46,8 @@ class ApiClients {
     bill_corr_num,
     bank_name,
     phone_company,
+    bik,
+    ruk,
     image
   }) {
     const token = localStorage.getItem('token')
@@ -69,6 +71,8 @@ class ApiClients {
           bill_corr_num,
           bank_name,
           phone_company,
+          bik,
+          ruk,
           image
         })
       }
@@ -88,6 +92,8 @@ class ApiClients {
     bill_corr_num,
     bank_name,
     phone_company,
+    bik,
+    ruk,
     image
   }) {
     const token = localStorage.getItem('token')
@@ -112,6 +118,8 @@ class ApiClients {
           bill_corr_num,
           bank_name,
           phone_company,
+          bik,
+          ruk,
           image
         })
       }

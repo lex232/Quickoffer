@@ -24,6 +24,8 @@ const ClientsEdit = () => {
         bill_corr_num,
         bank_name,
         phone_company,
+        results_bik,
+        results_ruk,
         image,
     } = state;
 
@@ -47,6 +49,8 @@ const ClientsEdit = () => {
                                 bill_corr_num={bill_corr_num}
                                 bank_name={bank_name}
                                 phone_company={phone_company}
+                                bik = {results_bik}
+                                ruk = {results_ruk}
                                 image={image}/>
                         </div>
                     </div>

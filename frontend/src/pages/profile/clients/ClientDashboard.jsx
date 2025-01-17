@@ -83,6 +83,8 @@ const ClientDashboard = () => {
     bill_corr_num,
     bank_name,
     phone_company,
+    results_bik,
+    results_ruk,
     image,
     e) => {
       e.preventDefault();
@@ -99,6 +101,8 @@ const ClientDashboard = () => {
         bill_corr_num,
         bank_name,
         phone_company,
+        results_bik,
+        results_ruk,
         image
       }})
   }
@@ -174,6 +178,8 @@ const ClientDashboard = () => {
                           results.bill_corr_num,
                           results.bank_name,
                           results.phone_company,
+                          results.bik,
+                          results.ruk,
                           results.image,
                           e)}><PencilIco fill="orange"/></button>
                           <label className=''><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/></label>
