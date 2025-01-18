@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import offer_api from '../../../api/offer_api';
-import { XCircle } from 'react-feather'
+import { XCircle, MinusSquare, PlusSquare } from 'react-feather'
 
 import ChooseClientPopup from '../../popup/ChooseClientPopup';
 
@@ -228,7 +228,6 @@ const OfferForm = ({
       draggedTo: null,
       isDragging: false
     });
-
     calculateFinalPrice();
   }
 
@@ -396,11 +395,15 @@ const OfferForm = ({
                           </div>
 
                           <div className="col-md-4 col-lg-4 col-xl-4 offer-text-min row m-0 p-0 pb-2">
-                            <div className="col-4">
+                            <div className="col-5">
                               <label>Кол-во</label>
-                              <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
+                                <div className='d-flex'>
+                                  <button id={"button_minus" + index + 1} className='pe-1'><MinusSquare strokeWidth={2} size={24} color="#5c61f2"/></button>
+                                  <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
+                                  <button id={"button_minus" + index + 1} className='ps-1'><PlusSquare strokeWidth={2} size={24} color="#5c61f2"/></button>
+                                </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-5">
                               <label>Итого</label>
                               <h5 className="mb-0">{item.item_price_retail * item.amount} Р</h5>
                             </div>

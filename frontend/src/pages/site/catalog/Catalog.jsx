@@ -14,50 +14,50 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     * Страница каталога
     */
 
-    const [ listGroups, setListGroups ] = useState([])
-    const [ listService, setListService ] = useState([])
-    const [ isLoadingCat, setIsLoadingCat ] = useState(true)
-    const [ chosenCategory, setChosenCategory ] = useState(undefined)
-    const [ chosenTree, setChosenTree ] = useState(undefined)
-    const [ chosenTitle, setChosenTitle ] = useState(undefined)
+    const [listGroups, setListGroups] = useState([])
+    const [listService, setListService] = useState([])
+    const [isLoadingCat, setIsLoadingCat] = useState(true)
+    const [chosenCategory, setChosenCategory] = useState(undefined)
+    const [chosenTree, setChosenTree] = useState(undefined)
+    const [chosenTitle, setChosenTitle] = useState(undefined)
 
     const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
     const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
 
-    const [ isCollapsed, setIsCollapsed] = useState(style_visible)
+    const [isCollapsed, setIsCollapsed] = useState(style_visible)
 
     useEffect(() => {
         // Получить все группы при загрузке страницы
         getGroups();
         getGroupService();
-      }, [])
-      ;
+    }, [])
+        ;
 
     const getGroups = () => {
         // Получить список категорий товаров
         group_api.getItemsGroup()
-        .then(res => {
-          setListGroups(res);
-          setChosenCategory(res[0].id)
-          setChosenTree(res[0].tree_id)
-          setChosenTitle(res[0].title)
-        })
-        .catch((e) => console.log(e))
-        .finally(()=> setIsLoadingCat(false))
-      }
+            .then(res => {
+                setListGroups(res);
+                setChosenCategory(res[0].id)
+                setChosenTree(res[0].tree_id)
+                setChosenTitle(res[0].title)
+            })
+            .catch((e) => console.log(e))
+            .finally(() => setIsLoadingCat(false))
+    }
 
     const getGroupService = () => {
-    // Получить список категорий услуг
+        // Получить список категорий услуг
         group_api.getServiceGroup()
-        .then(res => {
-            setListService(res);
-        })
-        .catch((e) => console.log(e))
-        .finally(()=> setIsLoadingCat(false))
+            .then(res => {
+                setListService(res);
+            })
+            .catch((e) => console.log(e))
+            .finally(() => setIsLoadingCat(false))
     }
 
     const handleChangeCategory = (e, id, tree_id, title) => {
-    // Устанавливаем значение типа компании onChange
+        // Устанавливаем значение типа компании onChange
         e.preventDefault();
         setChosenCategory(id);
         setChosenTree(tree_id);
@@ -65,12 +65,12 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     }
 
     const handleMenu = (e) => {
-    // Прячет меню
+        // Прячет меню
         e.preventDefault();
         if (isCollapsed === style_visible) {
             setIsCollapsed(style_non_visible)
         }
-        else {setIsCollapsed(style_visible)}
+        else { setIsCollapsed(style_visible) }
     }
 
     const CategoryView = ({ InputGroups }) => {
@@ -78,22 +78,22 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
             <>
                 {InputGroups.map((results) => {
                     return (
-                            results.level === 0 
-                            &&
-                            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
-                                <span className='position-absolute end-0'></span>
-                                <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
-                                    {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
-                                </button>
-                            </div>
-                            ||
-                            chosenTree === results.tree_id && results.level !== 0
-                            &&
+                        results.level === 0
+                        &&
+                        <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
+                            <span className='position-absolute end-0'></span>
                             <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
+                                {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
+                            </button>
+                        </div>
+                        ||
+                        chosenTree === results.tree_id && results.level !== 0
+                        &&
+                        <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
                             {results.id === chosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
                         </button>
-                        );
-                    })}
+                    );
+                })}
             </>
         )
     }
@@ -109,16 +109,16 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     }
 
     return (
-            <div>
-                <div className="container-fluid">
-                    <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
-                </div>
-                <div className="d-flex">
-                    {isLoadingCat && <div className="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Загрузка...</span>
-                    </div>}
-                </div>
-                <div className="container-fluid">
+        <div>
+            <div className="container-fluid">
+                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
+            </div>
+            <div className="d-flex">
+                {isLoadingCat && <div className="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>}
+            </div>
+            <div className="container-fluid">
                 <div className="row">
                     <div>
                         <button className='button-on-mobile ps-3 pb-2' onClick={(e) => handleMenu(e)}>
@@ -129,24 +129,24 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                         <div className="position-sticky pt-3 sidebar-sticky mb-2">
                             <h3 className='header-category'><Menu /> Категории</h3>
                             <ul className="nav nav-pills flex-column gap-2">
-                                <CategoryView InputGroups={listGroups}/>
+                                <CategoryView InputGroups={listGroups} />
                                 <br></br>
-                                <CategoryView InputGroups={listService}/>
+                                <CategoryView InputGroups={listService} />
                                 <br></br>
                                 {loginstate && <MyItems />}
                             </ul>
                         </div>
                     </nav>
-                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle}/>}
+                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} />}
                 </div>
-                </div>
-                
-                <div className="container-fluid">
-                    <Footer/>
-                </div>
-                
             </div>
-      );
-    };
-    
-    export default CatalogPage;
+
+            <div className="container-fluid">
+                <Footer />
+            </div>
+
+        </div>
+    );
+};
+
+export default CatalogPage;
