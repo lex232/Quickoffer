@@ -23,6 +23,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     const [brandFilters, setBrandsFilters] = useState([])
     const [isLoaddingBrandFilters, setIsLoaddingBrandFilters] = useState(true);
+    const [checkedAllBrands, setCheckedAllBrands] = useState(true)
 
     const [page, setPage] = useState(0);
     const [pageCount, setpageCount] = useState(0);
@@ -57,6 +58,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
     }
 
     const getBrandsOnCategory = (category_id) => {
+        // Получить список брендов в выбранной категории
         brands_api.getBrandsOnCategory({
             category_id: category_id
         })
@@ -80,7 +82,7 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
 
     useEffect(() => {
 
-    }, [brandFilters])
+    }, [brandFilters, checkedAllBrands])
 
     useEffect(() => {
         // Получить все товары при смене категории, загружаем первую страницу
@@ -160,18 +162,47 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
         return 1
     }
 
+    const checkStatesCheckedInBrands = (brands_for_check) => {
+        // Проверка все ли бренды отмечены
+        let allChecked = true
+        brands_for_check.forEach(object => {
+            if (object.checked === false) {
+                allChecked = false
+            }
+        });
+        return allChecked
+    }
+
     const HandleChangeCheckedBrandFilter = (e, id) => {
         // Меняет свойство чекбокса на противоположное и записывает в стейт
         e.preventDefault();
         let brands = brandFilters
         let current_brand = brands.find(brand => brand.id === id)
         if (current_brand.checked === true) { current_brand.checked = false } else { current_brand.checked = true }
-
         let currentToPush = [];
         brands.forEach(object => {
             currentToPush.push(object);
         });
         setBrandsFilters(currentToPush);
+        setCheckedAllBrands(checkStatesCheckedInBrands(brands));
+    }
+
+    const HandleChangeBrandAllFilter = (e) => {
+        // Логика чек-бокса все бренды
+        e.preventDefault();
+        let brands = brandFilters
+        let allChecked = checkStatesCheckedInBrands(brands)
+        let new_value = true
+        if (allChecked) {
+            new_value = false
+        }
+        let currentToPush = [];
+        brands.forEach(object => {
+            object.checked = new_value
+            currentToPush.push(object);
+        });
+        setBrandsFilters(currentToPush);
+        setCheckedAllBrands(new_value);
     }
 
     const CartPlusItemWithRefresh = (results, items_input, e) => {
@@ -213,11 +244,11 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
                     </select>
                 </div>
                 <div className='row pb-2'>
-                    {brandFilters && <span>
-                        {/* <div className='form-check checkbox-brands'>
-                            <input type='checkbox' className='form-check-input' checked={ results.checked ? true : false}  id={results.id} onClick={(e) => HandleChangeCheckedBrandFilter(e, results.id)}></input>
-                            <label className='form-check-label pe-2' for={results.id}>{results.title}</label>
-                        </div> */}
+                    {brandFilters && brandFilters.length > 0 && <span>
+                        <div className='form-check checkbox-brands'>
+                            <input type='checkbox' className='form-check-input' id='all_brands' checked={checkStatesCheckedInBrands(brandFilters)} onClick={(e) => HandleChangeBrandAllFilter(e)}></input>
+                            <label className='form-check-label pe-2' for='all_brands'> Все бренды</label>
+                        </div>
                         {brandFilters.map((results) => {
                             return (
                                 <div className='form-check checkbox-brands'>
