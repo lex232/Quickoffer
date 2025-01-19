@@ -5,6 +5,7 @@ import offer_api from '../../../api/offer_api';
 import { XCircle, MinusSquare, PlusSquare } from 'react-feather'
 
 import ChooseClientPopup from '../../popup/ChooseClientPopup';
+import DiscountPopup from '../../popup/discountPopup';
 
 import './styles.css'
 
@@ -214,23 +215,32 @@ const OfferForm = ({
     setFinallyPrice(temp_final)
   }
 
-  const handleChangeValue = (index, key, e, action) => {
+  const detectActionsWithItems = (itemsList, index, key, e, action, value) => {
+    let temp_value = Number(itemsList[index][key])
+    if (action === 'minus') {
+      if (temp_value > 1) {
+        itemsList[index][key] = temp_value - 1
+      }
+    }
+    else if (action === 'plus') {
+      itemsList[index][key] = temp_value + 1
+    }
+    else if (action === 'purchase_discount') {
+      temp_value = Number(itemsList[index]['item_price_retail'])
+      itemsList[index][key] = temp_value - (temp_value * (value / 100))
+    }
+    else {
+      itemsList[index][key] = e.target.value
+    }
+    return itemsList
+  }
+
+  const handleChangeValue = (index, key, e, action, value) => {
     // Меняем в словаре значение количества
     // action - действие. Если null - берем значение из target.value
     e.preventDefault();
     let prepareToChangeList = list;
-    let temp_value = Number(prepareToChangeList[index][key])
-    if (action === 'minus') {
-      if (temp_value > 1) {
-        prepareToChangeList[index][key] = temp_value - 1
-      }
-    }
-    else if (action === 'plus') {
-      prepareToChangeList[index][key] = temp_value + 1
-    }
-    else {
-      prepareToChangeList[index][key] = e.target.value
-    }
+    prepareToChangeList = detectActionsWithItems(prepareToChangeList, index, key, e, action, value)
     setList(prepareToChangeList);
     localStorage.setItem("items", JSON.stringify(list));
     setDragAndDrop({
@@ -401,7 +411,10 @@ const OfferForm = ({
                             </div>
                             <div className="col-6 col-lg-12 pb-2">
                               <label>Закупочная цена</label>
-                              <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена закупки*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
+                              <div className='d-flex'>
+                                <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена закупки*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
+                                <DiscountPopup text='Пересчитать от розничной цены' action={handleChangeValue} index={index} key_change='item_price_purchase'/>
+                              </div>
                             </div>
                           </div>
 
@@ -409,9 +422,9 @@ const OfferForm = ({
                             <div className="col-5">
                               <label>Кол-во</label>
                                 <div className='d-flex'>
-                                  <div id={"button_minus" + index + 1} className='pe-1' onClick={(e) => handleChangeValue(index, 'amount', e, 'minus')}><MinusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
+                                  <div id={"button_minus" + index + 1} className='pe-1' role="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'minus')}><MinusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
                                   <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
-                                  <div id={"button_minus" + index + 1} className='ps-1' onClick={(e) => handleChangeValue(index, 'amount', e, 'plus')}><PlusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
+                                  <div id={"button_minus" + index + 1} className='ps-1' role="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'plus')}><PlusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
                                 </div>
                             </div>
                             <div className="col-5">
