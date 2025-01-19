@@ -59,6 +59,7 @@ const OfferForm = ({
 
   // Итоговая стоимость КП
   const [ finallyPrice, setFinallyPrice ] = useState(0)
+  const [ finallyPurchasePrice, setFinallyPurchasePrice ] = useState(0)
 
   // clientValue - выбранный клиент из Popup окна
   const [ clientValue, setClientValue ] = useState({
@@ -88,6 +89,7 @@ const OfferForm = ({
   // UseEffect для подсчета цены
   useEffect(_ => {
     calculateFinalPrice()
+    calculateFinalPurchasePrice()
   }, [list])
 
    // UseEffect для смены класса имени КП, подсветит красным, если не заполнено
@@ -194,6 +196,7 @@ const OfferForm = ({
       isDragging: false
     });
     calculateFinalPrice()
+    calculateFinalPurchasePrice()
     window.dispatchEvent(new Event("storage"));
   }
 
@@ -209,10 +212,19 @@ const OfferForm = ({
   const calculateFinalPrice = () => {
     // Подсчет итого
     let temp_final = 0
-    list.map((item, index) => {
+    list.map((item) => {
       temp_final += (item.item_price_retail * item.amount)
     })
     setFinallyPrice(temp_final)
+  }
+
+  const calculateFinalPurchasePrice = () => {
+    // Подсчет итого закупка
+    let temp_final_purchase = 0
+    list.map((item) => {
+      temp_final_purchase += (item.item_price_purchase * item.amount)
+    })
+    setFinallyPurchasePrice(temp_final_purchase)
   }
 
   const detectActionsWithItems = (itemsList, index, key, e, action, value) => {
@@ -227,7 +239,7 @@ const OfferForm = ({
     }
     else if (action === 'purchase_discount') {
       temp_value = Number(itemsList[index]['item_price_retail'])
-      itemsList[index][key] = temp_value - (temp_value * (value / 100))
+      itemsList[index][key] = Number(temp_value - (temp_value * (value / 100))).toFixed(2)
     }
     else {
       itemsList[index][key] = e.target.value
@@ -250,6 +262,7 @@ const OfferForm = ({
       isDragging: false
     });
     calculateFinalPrice();
+    calculateFinalPurchasePrice()
   }
 
   const handleChangeName = (e) => {
@@ -442,8 +455,10 @@ const OfferForm = ({
                 )
               })}
               <div>
-                <b>Итого: </b>
-                <b>{finallyPrice} руб.</b>
+                <div className='pt-1'><b>Итого:</b></div>
+                <div>Розница: <b>{finallyPrice} руб.</b></div>
+                <div>Закупка: <b>{finallyPurchasePrice} руб.</b></div>
+                <div className='pt-1'>Ваша прибыль: <b>{Number(finallyPrice-finallyPurchasePrice).toFixed(2)} руб.</b></div>
               </div>
            </section>
            </div>

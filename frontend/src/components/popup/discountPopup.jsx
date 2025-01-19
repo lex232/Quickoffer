@@ -10,7 +10,7 @@ const DiscountPopup = ({ text, action, index, key_change }) => {
      * Popup окно скидочное
      */
 
-    const valuesDiscount = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    const valuesDiscount = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 100]
 
     return (
         <div>
@@ -21,11 +21,10 @@ const DiscountPopup = ({ text, action, index, key_change }) => {
             >
                 <span> { text } </span>
                 <div className='btn-sm btn-block'>
-                    {valuesDiscount.map((item, ind) => {
+                    {valuesDiscount.map((item) => {
                         return(
                             <button type='button' className='col-6 btn btn-outline-secondary' onClick={(e) => {action(index, key_change, e, 'purchase_discount', item);}}>
                                 {item} %
-                                <Percent strokeWidth={2} size={22} color="#5c61f2"/>
                             </button>
                         )
                     })}
