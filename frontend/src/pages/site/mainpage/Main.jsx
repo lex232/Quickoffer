@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
+import { Helmet } from 'react-helmet-async';
 
 import main_page_api from '../../../api/main_page_api';
 import './style.css'
@@ -35,6 +36,10 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
 
     return (
         <body>
+            <Helmet>
+                <title>OfferGuru - создание коммерческих предложений быстро и просто</title>
+                <meta name="description" content="Онлайн приложение для быстрого создания коммерческих предложений в сфере СКС, электрики, видеонаблюдения и тд." />
+            </Helmet>
             <header className="container-fluid">
                 <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
             </header>

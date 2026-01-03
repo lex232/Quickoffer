@@ -5,6 +5,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import { AuthContext, UserContext } from './contexts'
+import { HelmetProvider } from 'react-helmet-async';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,7 +44,7 @@ import ProfileEdit from './pages/profile/profile/ProfileEdit';
 import SimplePopup from './components/popup/refPopup';
 
 
-function RequireAuth({ children, loginstate=false }) {
+function RequireAuth({ children, loginstate = false }) {
   /**
   * Проверка необходимости авторизации
   */
@@ -59,9 +60,9 @@ function App() {
   * Главный компонент приложения
   */
 
-  const [ loggedIn, setLoggedIn ] = useState(null)
-  const [ user, setUser ] = useState({})
-  const [ loginErrors, setLoginErrors ] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(null)
+  const [user, setUser] = useState({})
+  const [loginErrors, setLoginErrors] = useState(null)
 
   const popupLoginRef = useRef();
   const openLoginPopup = () => popupLoginRef.current.open();
@@ -87,16 +88,16 @@ function App() {
         setLoggedIn(false)
       }
     })
-    .catch(err => {
-      const errors = Object.values(err)
-      if (errors) {
-        let temp_errors = []
-        errors.forEach((element) => temp_errors.push(element))
-        setLoginErrors('Возможные ошибки: \n' + temp_errors.join('\n'))
-        openLoginPopup();
-      }
-      setLoggedIn(false)
-    })
+      .catch(err => {
+        const errors = Object.values(err)
+        if (errors) {
+          let temp_errors = []
+          errors.forEach((element) => temp_errors.push(element))
+          setLoginErrors('Возможные ошибки: \n' + temp_errors.join('\n'))
+          openLoginPopup();
+        }
+        setLoggedIn(false)
+      })
   }
 
   useEffect(_ => {
@@ -111,7 +112,7 @@ function App() {
           setLoggedIn(false);
         })
     } else {
-    setLoggedIn(false)
+      setLoggedIn(false)
     }
   }, []);
 
@@ -138,45 +139,47 @@ function App() {
   if (loggedIn === null) {
     return <div className="">Loading...</div>
   }
-  
+
   return (
     <AuthContext.Provider value={loggedIn}>
       <UserContext.Provider value={user}>
-      <div className="QuickOffer App">
-        <SimplePopup refPopup={popupLoginRef} heading={'Не удалось авторизоваться'} text={loginErrors}/>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-            <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-            <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-            <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user}/>}></Route>
-            <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />}/>
-            <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />}/>
-            <Route path="/profile" element={
-              <RequireAuth loginstate={loggedIn}>
-                <ProfilePage
-                  loginstate={loggedIn}
-                  onSignOut={onSignOut}
-                  user={user}/>
-              </RequireAuth>}>
-              <Route path="" element={<ProfileDashboard user={user}/>}/>
-              <Route path="clients/create" element={<ClientCreate />}/>
-              <Route path="clients/list" element={<ClientDashboard />}/>
-              <Route path='clients/edit' element={<ClientsEdit />}/>
-              <Route path="items/list" element={<ItemsDashboard />}/>
-              <Route path="items/create" element={<ItemsCreate />}/>
-              <Route path='items/edit' element={<ItemsEdit />}/>
-              <Route path="offer/list" element={<OfferDashboard />}/>
-              <Route path='offer/list/show' element={<OfferShow />}/>
-              <Route path="offer/create" element={<OfferCreate />}/>
-              <Route path="my-organization/edit" element={<ProfileEdit />}/>
-            </Route>
-          </Routes> 
-        </BrowserRouter>
-      </div>
+        <div className="QuickOffer App">
+          <SimplePopup refPopup={popupLoginRef} heading={'Не удалось авторизоваться'} text={loginErrors} />
+          <HelmetProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />} />
+                <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />} />
+                <Route path="/profile" element={
+                  <RequireAuth loginstate={loggedIn}>
+                    <ProfilePage
+                      loginstate={loggedIn}
+                      onSignOut={onSignOut}
+                      user={user} />
+                  </RequireAuth>}>
+                  <Route path="" element={<ProfileDashboard user={user} />} />
+                  <Route path="clients/create" element={<ClientCreate />} />
+                  <Route path="clients/list" element={<ClientDashboard />} />
+                  <Route path='clients/edit' element={<ClientsEdit />} />
+                  <Route path="items/list" element={<ItemsDashboard />} />
+                  <Route path="items/create" element={<ItemsCreate />} />
+                  <Route path='items/edit' element={<ItemsEdit />} />
+                  <Route path="offer/list" element={<OfferDashboard />} />
+                  <Route path='offer/list/show' element={<OfferShow />} />
+                  <Route path="offer/create" element={<OfferCreate />} />
+                  <Route path="my-organization/edit" element={<ProfileEdit />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </HelmetProvider>
+        </div>
       </UserContext.Provider>
     </AuthContext.Provider>
-    );
+  );
 }
 
 export default App;
