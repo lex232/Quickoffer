@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
@@ -76,6 +77,10 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const CategoryView = ({ InputGroups }) => {
         return (
             <>
+                <Helmet>
+                    <title>OfferGuru - каталог товаров</title>
+                    <meta name="description" content="Готовый каталог товаров, который можно использовать для быстрого создания КП, договора, торг-12 и других документов" />
+                </Helmet>
                 {InputGroups.map((results) => {
                     return (
                         results.level === 0

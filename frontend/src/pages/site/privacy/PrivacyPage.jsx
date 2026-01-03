@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
 import './style.css'
+import { Helmet } from 'react-helmet-async';
 
 
 const PrivacyPage = ({ loginstate, onSignOut, user }) => {
@@ -11,13 +12,17 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
 
     return (
         <body>
+            <Helmet>
+                <title>OfferGuru - Политика сбора персональных данных</title>
+                <meta name="description" content="Онлайн приложение для быстрого создания коммерческих предложений в сфере СКС, электрики, видеонаблюдения и тд." />
+            </Helmet>
             <header className="container-fluid">
-                <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
+                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
             </header>
             <main className="container px4">
-                    
+
                 <div class="row mb-3">
-                    <div class="col" style={{border: 'solid 2px #eee', padding: '20px'}}>
+                    <div class="col" style={{ border: 'solid 2px #eee', padding: '20px' }}>
                         <div id="inputResult">
                             <div class="row mb-4">
                                 <div class="col">
@@ -325,7 +330,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                 <div class="col">
                                     <h5>6. Цели обработки персональных данных</h5>
                                     <div class="ol">
-                                        <div id="purpose-table-template" style={{display: 'none;'}}>
+                                        <div id="purpose-table-template" style={{ display: 'none;' }}>
                                             <div class="li">
                                                 <table class="purpose-table">
                                                     <tr>
@@ -576,10 +581,10 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                 </div>
             </main>
             <footer className="container-fluid">
-                <Footer/>
+                <Footer />
             </footer>
         </body>
-      );
-    };
-    
-    export default PrivacyPage;
+    );
+};
+
+export default PrivacyPage;

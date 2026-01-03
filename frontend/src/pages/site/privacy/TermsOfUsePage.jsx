@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
 import './style.css'
+import { Helmet } from 'react-helmet-async';
 
 
 const TermsOfUsePage = ({ loginstate, onSignOut, user }) => {
@@ -11,13 +12,17 @@ const TermsOfUsePage = ({ loginstate, onSignOut, user }) => {
 
     return (
         <body>
+            <Helmet>
+                <title>OfferGuru - Пользовательское соглашение</title>
+                <meta name="description" content="Онлайн приложение для быстрого создания коммерческих предложений в сфере СКС, электрики, видеонаблюдения и тд." />
+            </Helmet>
             <header className="container-fluid">
-                <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
+                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
             </header>
             <main className="container px4">
-                    
+
                 <div class="row mb-3">
-                    <div class="col" style={{border: 'solid 2px #eee', padding: '20px'}}>
+                    <div class="col" style={{ border: 'solid 2px #eee', padding: '20px' }}>
                         <div id="inputResult">
                             <div class="row mb-4">
                                 <div class="col">
@@ -180,10 +185,10 @@ const TermsOfUsePage = ({ loginstate, onSignOut, user }) => {
                 </div>
             </main>
             <footer className="container-fluid">
-                <Footer/>
+                <Footer />
             </footer>
         </body>
-      );
-    };
-    
-    export default TermsOfUsePage;
+    );
+};
+
+export default TermsOfUsePage;
