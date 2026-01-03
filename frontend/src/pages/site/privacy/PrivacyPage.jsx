@@ -47,7 +47,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                             данных (далее &mdash; Политика) применяется ко всей информации,
                                             которую Оператор может получить о посетителях веб-сайта <span
                                                 class="link mark owner-site-url-field"
-                                                data-scroll-to="#owner-site-url-field">https://offercreator.ru</span>.
+                                                data-scroll-to="#owner-site-url-field">https://offerguru.ru</span>.
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                         <div class="li">
                                             2.3. Веб-сайт &mdash; совокупность графических и информационных
                                             материалов, а также программ для ЭВМ и баз данных, обеспечивающих
-                                            их доступность в сети интернет по сетевому адресу https://offercreator.ru.
+                                            их доступность в сети интернет по сетевому адресу https://offerguru.ru.
                                         </div>
                                         <div class="li">
                                             2.4. Информационная система персональных данных &mdash; совокупность
@@ -101,7 +101,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                         </div>
                                         <div class="li">2.8. Персональные данные &mdash; любая информация,
                                             относящаяся прямо или косвенно к определенному или определяемому
-                                            Пользователю веб-сайта https://offercreator.ru.
+                                            Пользователю веб-сайта https://offerguru.ru.
                                         </div>
                                         <div class="li">
                                             2.9. Персональные данные, разрешенные субъектом персональных данных для
@@ -113,7 +113,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                             разрешенные для распространения).
                                         </div>
                                         <div class="li">
-                                            2.10. Пользователь &mdash; любой посетитель веб-сайта https://offercreator.ru.
+                                            2.10. Пользователь &mdash; любой посетитель веб-сайта https://offerguru.ru.
                                         </div>
                                         <div class="li">
                                             2.11. Предоставление персональных данных &mdash; действия, направленные
@@ -566,7 +566,7 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                         </div>
                                         <div class="li">
                                             12.3. Актуальная версия Политики в свободном доступе расположена
-                                            в сети Интернет по адресу https://offercreator.ru/privacy/.
+                                            в сети Интернет по адресу https://offerguru.ru/privacy/.
                                         </div>
                                     </div>
                                 </div>

@@ -7,10 +7,11 @@ import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
 import MyClients from '../../../static/image/mainpage/my_clients_min.png';
 import MyItem from '../../../static/image/mainpage/my_items_min.png';
-import MyOffers from '../../../static/image/mainpage/my_offers_min.jpg';
+import MyOffers from '../../../static/image/mainpage/my_offers.png';
+import Catalog from '../../../static/image/mainpage/catalog.png';
 import Note1000 from '../../../static/image/mainpage/note-800wobrand.png';
 import Buy from '../../../static/image/mainpage/buy.jpg';
-import { DownloadCloud, Clipboard, PieChart, BarChart } from 'react-feather';
+import { DownloadCloud, Clipboard, PieChart, BarChart, Camera, Lock, Globe, Zap, List, Layers } from 'react-feather';
 
 const MainPage = ({ loginstate, onSignOut, user }) => {
     /**
@@ -20,134 +21,244 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
 
     const getAdmin = () => {
         main_page_api.getMainPageInfo()
-        .then(res => {
-          setInfo(res);
-        })
-        .catch((e) => console.log(e))
+            .then(res => {
+                setInfo(res);
+            })
+            .catch((e) => console.log(e))
     }
 
     useEffect(() => {
         // Получить данные из БД для главной страницы
         getAdmin();
-      }, [])
-      ;
+    }, [])
+        ;
 
     return (
-            <body>
-                <header className="container-fluid">
-                    <Header loginstate={loginstate} onSignOut={onSignOut} user={user}/>
-                </header>
-                <main className="container-fluid px-0">
+        <body>
+            <header className="container-fluid">
+                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
+            </header>
+            <main className="container-fluid px-0">
 
-                    <section id="after-header" class='after-header-style'>
-                        <div class="container center-important">
-                            <div className="row">
-                                <div className="position-relative overflow-hidden header-text-main mt-3 text-center">
-                                    <div className="col-md-6 mx-auto">
-                                        <h1 className="display-6 fw-bold">Создай КП, которое продает!</h1>
-                                        <h3 className="fw-normal text-muted mb-3">и автоматизирует весь пакет документов</h3>
-                                        <div className="d-flex gap-3 justify-content-center lead fw-normal">
-                                            {/* <a className="icon-link text-white text-decoration-none" href="#">узнать больше<NextIco fill="white" width="24px" height="24px" className="mx-auto"/></a> */}
-                                        </div>
+                <section id="after-header" class='after-header-style'>
+                    <div class="container center-important">
+                        <div className="row">
+                            <div className="position-relative overflow-hidden header-text-main mt-3 text-center">
+                                <div className="col-md-6 mx-auto">
+                                    <h1 className="display-6 fw-bold">Создай КП, которое продает!</h1>
+                                    <h3 className="fw-normal text-muted mb-3">и автоматизирует весь пакет документов</h3>
+                                    <div className="d-flex gap-3 justify-content-center lead fw-normal">
+                                        {/* <a className="icon-link text-white text-decoration-none" href="#">узнать больше<NextIco fill="white" width="24px" height="24px" className="mx-auto"/></a> */}
                                     </div>
                                 </div>
                             </div>
-                            
+                        </div>
+
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
                                 <img class="img-responsive-mac" src={Note1000} alt=""></img>
                             </div>
                         </div>
-                        </div>
-                    </section>
+                    </div>
+                </section>
 
-                    <section id="hello">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 center-important">
-                                        <h2 className='section-title mt-2'>Сервис от практикующих
-                                        <br></br>монтажников</h2>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-12 col-xs-offset-3 col-sm-offset-0 col-md-5 col-lg-6">
-                                        <img class="img-responsive center-block" src={Buy} alt=""></img>
-                                    </div>
-                                    <div class="col-xs-12 col-lg-6 align-items-start">
-                                        <ul className='ps-0'>
-                                            <li className='li-no-style text-start d-flex'>
-                                                <div class="circle col-auto"><DownloadCloud className='circle-ico' size='40'/></div>
-                                                <div className='my-auto'>Позволяет быстро посчитать прямо на объекте</div>
-                                            </li>
-                                            <li className='li-no-style text-start d-flex'>
-                                                <div class="circle col-auto"><Clipboard className='circle-ico' size='40'/><img src="" alt=""></img></div>
-                                                <div className='my-auto'>Сформирует основные типы документов</div>
-                                            </li>
-                                            <li className='li-no-style text-start d-flex'>
-                                                <div class="circle col-auto"><BarChart className='circle-ico' size='40'/><img src="" alt=""></img></div>
-                                                <div className='my-auto'>Подсчет прибыли с объекта</div>
-                                            </li>
-                                            <li className='li-no-style text-start d-flex'>
-                                                <div class="circle col-auto"><PieChart className='circle-ico' size='40'/><img src="" alt=""></img></div>
-                                                <div className='my-auto'>Статусы объектов для аналитики</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                <section id="hello">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 center-important">
+                                <h2 className='section-title mt-2'>Сервис от практикующих
+                                    <br></br>монтажников</h2>
+                                <div className='line-divider'></div>
+                                <p className='mb-5'>OfferGuru - сервис для быстрого создания коммерческого предложения. 
+                                    Можно сделать даже на объекте и не заставлять клиента ждать </p>
                             </div>
-                        </section>
-
-                    <section id="feautures" className="feautures pb-4">
-                        <div id="features" className="flex-split">
-                            <div className="container-s">
-                                <div className="align-center flex-intro">
-                                    <h2 className='mt-2'>Считай быстро и эффективно</h2>
-                                    <div className='line-divider'></div>
-                                    <p className='mb-5'> Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента.</p>
-                                </div>
-                                <div class="row content">
-                                    <div class="col-md-5" data-aos="fade-right">
-                                        <img src={MyClients} class="img-fluid" alt=""></img>
-                                    </div>
-                                    <div class="col-md-7 pt-5 flex-intro" data-aos="fade-left ">
-                                        <h3>Личная база клиентов.</h3>
-                                        <p class="f-text">
-                                            Создавай своих клиентов, чтобы привязывать к ним КП.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row content">
-                                    <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
-                                        <img src={MyItem} class="img-fluid" alt=""></img>
-                                    </div>
-                                    <div class="col-md-7 pt-5 order-2 order-md-1 flex-intro" data-aos="fade-right">
-                                        <h3>Нет товара в нашей базе?.</h3>
-                                        <p class="f-text">
-                                            Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row content">
-                                    <div class="col-md-5" data-aos="fade-right">
-                                        <img src={MyOffers} class="img-fluid" alt=""></img>
-                                    </div>
-                                    <div class="col-md-7 pt-5 flex-intro" data-aos="fade-left ">
-                                        <h3>Формируй документы.</h3>
-                                        <p class="f-text">
-                                            Скачай PDF счет или КП для отправки за пару кликов.
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="col-xs-6 col-sm-12 col-xs-offset-3 col-sm-offset-0 col-md-5 col-lg-6">
+                                <img class="img-responsive center-block" src={Buy} alt=""></img>
+                            </div>
+                            <div class="col-xs-12 col-lg-6 align-items-start">
+                                <ul className='ps-0'>
+                                    <li className='li-no-style text-start d-flex'>
+                                        <div class="circle col-auto"><DownloadCloud className='circle-ico' size='40' /></div>
+                                        <div className='my-auto'>Позволяет быстро посчитать прямо на объекте</div>
+                                    </li>
+                                    <li className='li-no-style text-start d-flex'>
+                                        <div class="circle col-auto"><Clipboard className='circle-ico' size='40' /></div>
+                                        <div className='my-auto'>Сформирует основные типы документов</div>
+                                    </li>
+                                    <li className='li-no-style text-start d-flex'>
+                                        <div class="circle col-auto"><BarChart className='circle-ico' size='40' /></div>
+                                        <div className='my-auto'>Подсчет прибыли с объекта</div>
+                                    </li>
+                                    <li className='li-no-style text-start d-flex'>
+                                        <div class="circle col-auto"><PieChart className='circle-ico' size='40' /></div>
+                                        <div className='my-auto'>Статусы объектов для аналитики</div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    <section id="counters" className="counters">
-                        <div className="yd-stats wow fadeIn">
-                            <div className="container-s">
-                                <div className="row text-center">
+                <section id="activity" class="section relative pb-4">
+                    <div className="container">
+                        <div class="row justify-between text-center lg:text-start">
+                            <div class="col-xs-12 center-important">
+                                <h2 className='section-title mt-2'>Для каких сфер применимо?</h2>
+                            </div>
+                        </div>
+                        <div class="key-feature-grid row justify-content-md-center gap-3 px-3">
+                            <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Электрика</h3>
+                                    <p>Розетки, кабели, автоматы, щиты</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Zap size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Видеонаблюдение</h3>
+                                    <p>Камеры, регистраторы DVR, разъемы</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Camera size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Контроль доступа</h3>
+                                    <p>СКУД контроллеры, считыватели, замки</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Lock size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">СКС</h3>
+                                    <p>Коммутаторы, стойки, оптика</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Globe size='20'/></div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="feautures" className="feautures pb-4">
+                    <div id="features" className="flex-split">
+                        <div className="container-m">
+                            <div className="align-center flex-intro">
+                                <h2 className='section-title mt-2'>Считай быстро и эффективно</h2>
+                                <div className='line-divider'></div>
+                                <p className='mb-5'>Большая база товаров с актуальными ценами позволит экономить много времени на просчет решений для клиента</p>
+                            </div>
+                            <div class="row content">
+                                <div class="col-md-6 px-5">
+                                    <img src={MyClients} class="img-fluid shadow-sm" alt=""></img>
+                                </div>
+                                <div class="col-md-6 pt-5 flex-intro" data-aos="fade-left ">
+                                    <h3>Личная база клиентов</h3>
+                                    <p class="f-text">
+                                        Создавай своих клиентов, чтобы привязывать к ним КП
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row content mt-1">
+                                <div class="col-md-6 order-1 order-md-2 px-5">
+                                    <img src={MyItem} class="img-fluid shadow-sm" alt=""></img>
+                                </div>
+                                <div class="col-md-6 pt-5 order-2 order-md-1 flex-intro" data-aos="fade-right">
+                                    <h3>Нет товара в нашей базе?</h3>
+                                    <p class="f-text">
+                                        Легко создать свой, и дополнить базу. Ваш товар не увидет никто другой
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row content mt-1">
+                                <div class="col-md-6 px-5">
+                                    <img src={Catalog} class="img-fluid shadow-sm" alt=""></img>
+                                </div>
+                                <div class="col-md-6 pt-5 flex-intro" data-aos="fade-left ">
+                                    <h3>Готовый каталог товаров</h3>
+                                    <p class="f-text">
+                                        Добавляй товары из готовой базы товаров. База актуализируется и обновляется
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row content mt-1">
+                                <div class="col-md-6 order-1 order-md-2 px-5">
+                                    <img src={MyOffers} class="img-fluid shadow-sm" alt=""></img>
+                                </div>
+                                <div class="col-md-6 pt-5 order-2 order-md-1 flex-intro" data-aos="fade-right">
+                                    <h3>Ваши КП всегда под рукой</h3>
+                                    <p class="f-text">
+                                        Созданные КП всегда перед вами. Можно легко их отредактировать и заново скачать документы
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="documents" class="section relative pb-4">
+                    <div className="container">
+                        <div class="row justify-between text-center lg:text-start">
+                            <div class="col-xs-12 center-important">
+                                <h2 className='section-title mt-2'>Какие документы можно сформировать?</h2>
+                            </div>
+                        </div>
+                        <div class="key-feature-grid row justify-content-md-center gap-3 px-3">
+                            <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">КП</h3>
+                                    <p>С подробным описанием и без</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><List size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Договор</h3>
+                                    <p>На услуги и работы</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Clipboard size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Торг-12</h3>
+                                    <p>Накладная по стандарту</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Layers size='20'/></div>
+                                </span>
+                            </div>
+                            <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
+                                <div>
+                                    <h3 class="h4 text-xl lg:text-2xl">Счет</h3>
+                                    <p>Предоплата и оплата</p>
+                                </div>
+                                <span class="mt-4">
+                                    <div><Globe size='20'/></div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="counters" className="counters">
+                    <div className="yd-stats wow fadeIn">
+                        <div className="container-s">
+                            <div className="row text-center">
                                 <div className="col-sm-12">
                                     <div className="intro">
-                                    <h2>Мы в цифрах</h2>
-                                    <p>Не забываем каждое КП и каждого пользователя.</p>
+                                        <h2>Мы в цифрах</h2>
+                                        <p>Не забываем каждое КП и каждого пользователя</p>
                                     </div>
                                 </div>
                                 <div className="col-sm-4">
@@ -155,38 +266,38 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                         <h3>
                                             <span className="counter"><CountUp end={info.count_clients} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span>
                                         </h3>
-                                    <div className="counter-text">
-                                        <h2>Пользователей</h2>
-                                    </div>
+                                        <div className="counter-text">
+                                            <h2>Пользователей</h2>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
                                         <h3><span className="counter"><CountUp end={info.count_items} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
-                                    <div className="counter-text">
-                                        <h2>Товаров в базе</h2>
-                                    </div>
+                                        <div className="counter-text">
+                                            <h2>Товаров в базе</h2>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-sm-4">
                                     <div className="counter-up">
                                         <h3><span className="counter"><CountUp end={info.count_offers} enableScrollSpy={true} scrollSpyOnce={true} separator=''></CountUp></span></h3>
-                                    <div className="counter-text">
-                                        <h2>Коммерческих предложений</h2>
+                                        <div className="counter-text">
+                                            <h2>Коммерческих предложений</h2>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                </main>
-                <footer classNameName="container-fluid">
-                    <Footer/>
-                </footer>
-            </body>
-      );
-    };
-    
-    export default MainPage;
+            </main>
+            <footer classNameName="container-fluid">
+                <Footer />
+            </footer>
+        </body>
+    );
+};
+
+export default MainPage;
