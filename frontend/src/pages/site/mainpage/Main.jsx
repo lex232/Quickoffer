@@ -62,6 +62,20 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                     </div>
                 </section>
 
+                <section id="CTA" class="py-5 bg-light">
+                    <div class="container">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-lg-8">
+                                <h2 class="section-title mb-4">Найдите нужный товар/услугу за пару кликов</h2>
+                                <p class="text-muted mb-4">
+                                    Большой каталог товаров: больше не придется создавать тысячи наименований для одного КП — всё в одном месте.
+                                </p>
+                                <a href="/catalog" class="btn btn-primary px-5">Посмотреть каталог</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <section id="hello">
                     <div class="container">
                         <div class="row">
@@ -69,7 +83,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                 <h2 className='section-title mt-2'>Сервис от практикующих
                                     <br></br>монтажников</h2>
                                 <div className='line-divider'></div>
-                                <p className='mb-5'>OfferGuru - сервис для быстрого создания коммерческого предложения. 
+                                <p className='mb-5'>OfferGuru - сервис для быстрого создания коммерческого предложения.
                                     Можно сделать даже на объекте и не заставлять клиента ждать </p>
                             </div>
                             <div class="col-xs-6 col-sm-12 col-xs-offset-3 col-sm-offset-0 col-md-5 col-lg-6">
@@ -113,7 +127,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>Розетки, кабели, автоматы, щиты</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Zap size='20'/></div>
+                                    <div><Zap size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -122,7 +136,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>Камеры, регистраторы DVR, разъемы</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Camera size='20'/></div>
+                                    <div><Camera size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -131,7 +145,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>СКУД контроллеры, считыватели, замки</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Lock size='20'/></div>
+                                    <div><Lock size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-5 col-md-5 justify-between rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -140,7 +154,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>Коммутаторы, стойки, оптика</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Globe size='20'/></div>
+                                    <div><Globe size='20' /></div>
                                 </span>
                             </div>
                         </div>
@@ -217,7 +231,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>С подробным описанием и без</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><List size='20'/></div>
+                                    <div><List size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -226,7 +240,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>На услуги и работы</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Clipboard size='20'/></div>
+                                    <div><Clipboard size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -235,7 +249,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>Накладная по стандарту</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Layers size='20'/></div>
+                                    <div><Layers size='20' /></div>
                                 </span>
                             </div>
                             <div class="col-lg-2 col-md-5 rounded-lg bg-white p-4 shadow-lg card-equal-height">
@@ -244,7 +258,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
                                     <p>Предоплата и оплата</p>
                                 </div>
                                 <span class="mt-4">
-                                    <div><Globe size='20'/></div>
+                                    <div><Globe size='20' /></div>
                                 </span>
                             </div>
                         </div>
