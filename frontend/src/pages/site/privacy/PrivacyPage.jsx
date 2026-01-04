@@ -54,6 +54,11 @@ const PrivacyPage = ({ loginstate, onSignOut, user }) => {
                                                 class="link mark owner-site-url-field"
                                                 data-scroll-to="#owner-site-url-field">https://offerguru.ru</span>.
                                         </div>
+                                        <div class="li">
+                                            1.3. Оператор уведомляет пользователей об использовании метрических 
+                                            систем «Яндекс.Метрика», которые используются для получения и обработки персональных 
+                                            данных пользователей сайта.
+                                        </div>
                                     </div>
                                 </div>
                             </div>

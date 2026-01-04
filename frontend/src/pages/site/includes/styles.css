@@ -13,11 +13,18 @@
 .footer-nav-right {
     margin-left: auto;
     margin-right: 0;
+    list-style: none;
+}
+
+.footer-nav-left {
+    list-style: none;
 }
 
 .footer-link-right {
     padding-top: 0;
     padding-bottom: 0;
+    text-align: right;
+    list-style: none;
 }
 
 .logo-customization {

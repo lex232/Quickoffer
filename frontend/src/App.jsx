@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import React, { useState, useEffect, useRef } from 'react';
 import { AuthContext, UserContext } from './contexts'
 import { HelmetProvider } from 'react-helmet-async';
+import CookieConsent from './components/cookie/CookieConsent';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -145,6 +146,7 @@ function App() {
       <UserContext.Provider value={user}>
         <div className="QuickOffer App">
           <SimplePopup refPopup={popupLoginRef} heading={'Не удалось авторизоваться'} text={loginErrors} />
+          <CookieConsent />
           <HelmetProvider>
             <BrowserRouter>
               <Routes>
