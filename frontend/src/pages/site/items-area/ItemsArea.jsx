@@ -11,7 +11,7 @@ import CartPlusItem from '../../../utils/items/cartPlusItem';
 import CartRemoveItem from '../../../utils/items/cartRemoveItem';
 import { ShoppingBag, PlusSquare } from 'react-feather';
 
-const ItemsArea = ({ category_id, loginstate, title }) => {
+const ItemsArea = ({ category_id, loginstate, title, description }) => {
     /**
     * Блок товаров в каталоге
     */
@@ -231,11 +231,14 @@ const ItemsArea = ({ category_id, loginstate, title }) => {
             </div>
 
             <div className="container-fluid">
-                <div className="row my-2">
+                <div className="row my-2 ps-2">
                     <h4 className="col-6 p-0">{title}</h4>
                     {category_id === -1 && <div className="col-6 p-0">
                         <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create-small' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
                     </div>}
+                </div>
+                <div className="row my-2 ps-2">
+                    <span className="p-0">{description}</span>
                 </div>
                 <div className='pb-4'>
                     <select className="form-select" value={orderingPrice} aria-label="Выберите сортировку" onChange={(e) => setOrderingPrice(e.target.value)}>
