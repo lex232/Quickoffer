@@ -21,6 +21,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [chosenCategory, setChosenCategory] = useState(undefined)
     const [chosenTree, setChosenTree] = useState(undefined)
     const [chosenTitle, setChosenTitle] = useState(undefined)
+    const [chosenDescription, setChosenDescription] = useState(undefined)
 
     const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
     const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
@@ -42,6 +43,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                 setChosenCategory(res[0].id)
                 setChosenTree(res[0].tree_id)
                 setChosenTitle(res[0].title)
+                setChosenDescription(res[0].description)
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoadingCat(false))
@@ -57,12 +59,13 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
             .finally(() => setIsLoadingCat(false))
     }
 
-    const handleChangeCategory = (e, id, tree_id, title) => {
+    const handleChangeCategory = (e, id, tree_id, title, description) => {
         // Устанавливаем значение типа компании onChange
         e.preventDefault();
         setChosenCategory(id);
         setChosenTree(tree_id);
         setChosenTitle(title)
+        setChosenDescription(description)
     }
 
     const handleMenu = (e) => {
@@ -77,24 +80,20 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const CategoryView = ({ InputGroups }) => {
         return (
             <>
-                <Helmet>
-                    <title>OfferGuru - каталог товаров</title>
-                    <meta name="description" content="Готовый каталог товаров, который можно использовать для быстрого создания КП, договора, торг-12 и других документов" />
-                </Helmet>
                 {InputGroups.map((results) => {
                     return (
                         results.level === 0
                         &&
                         <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
                             <span className='position-absolute end-0'></span>
-                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
+                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title, results.description)}>
                                 {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
                             </button>
                         </div>
                         ||
                         chosenTree === results.tree_id && results.level !== 0
                         &&
-                        <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title)}>
+                        <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title, results.description)}>
                             {results.id === chosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
                         </button>
                     );
@@ -123,6 +122,10 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                     <span class="visually-hidden">Загрузка...</span>
                 </div>}
             </div>
+            <Helmet>
+                <title>OfferGuru - каталог товаров</title>
+                <meta name="description" content="Готовый каталог товаров, который можно использовать для быстрого создания КП, договора, торг-12 и других документов" />
+            </Helmet>
             <div className="container-fluid">
                 <div className="row">
                     <div>
@@ -142,7 +145,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             </ul>
                         </div>
                     </nav>
-                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} />}
+                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} description={chosenDescription}/>}
                 </div>
             </div>
 
