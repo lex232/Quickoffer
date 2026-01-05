@@ -4,9 +4,21 @@ from django.contrib.auth import get_user_model
 
 from offer.models import Item, ItemUser, Group
 from api.v1.groups.serializers import GroupSerializer
+from api.v1.brands.serializers import BrandSerializer
 from utils.base64 import Base64ImageField
 
 User = get_user_model()
+
+
+class ItemSingleSerializer(serializers.ModelSerializer):
+    """Сериалайзер для единичной  модели товара"""
+
+    group = GroupSerializer(read_only=True, many=True)
+    brand = BrandSerializer(read_only=True)
+
+    class Meta:
+        model = Item
+        fields = '__all__'
 
 
 class ItemSerializer(serializers.ModelSerializer):

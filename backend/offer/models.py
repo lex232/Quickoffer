@@ -8,6 +8,8 @@ from django.contrib.auth import get_user_model
 from django.core import validators
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
+from django.utils.text import slugify
+from unidecode import unidecode
 
 User = get_user_model()
 ORGANIZATION_TYPE = [
@@ -225,6 +227,11 @@ class Item(models.Model):
         max_length=150,
         unique=True
     )
+    slug = models.SlugField(
+        verbose_name='слаг товара',
+        max_length=150,
+        blank=True,
+    )
     brand = models.ForeignKey(
         Brand,
         verbose_name='брэнд товара',
@@ -234,7 +241,12 @@ class Item(models.Model):
         null=True,
     )
     description = models.TextField(
-        verbose_name='описание',
+        verbose_name='описание техническое',
+        null=True,
+        blank=True
+    )
+    description_general = models.TextField(
+        verbose_name='описание обычное',
         null=True,
         blank=True
     )
@@ -275,6 +287,20 @@ class Item(models.Model):
         default=False,
         db_index=True,
     )
+    is_deleted = models.BooleanField(
+        verbose_name='Мягкое удаление',
+        default=False,
+        db_index=True
+    )
+
+    objects = models.Manager()
+
+    # Кастомный менеджер для "активных" (не удалённых) объектов
+    class ActiveManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(is_deleted=False)
+
+    active = ActiveManager()
 
     class Meta:
         verbose_name = 'товар/ услуга'
@@ -283,6 +309,17 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug_base = slugify(unidecode(self.title))
+            slug = slug_base
+            counter = 1
+            while Item.objects.filter(slug=slug).exists():
+                slug = f"{slug_base}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
 
 def user_directory_path(instance, filename):
