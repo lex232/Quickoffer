@@ -14,7 +14,8 @@ from api.v1.items.views import (
     ItemViewSet,
     ItemFinderViewSet,
     ItemUserViewSet,
-    ItemViewSetAuth
+    ItemViewSetAuth,
+    ItemDetailView
 )
 from api.v1.offer.views import (
     OfferViewSet
@@ -130,6 +131,7 @@ api_urlpatterns = [
     path('api/main-page/', MainPageView.as_view(), name="main-page"),
     path('api/', include(router_offer.urls)),
     path('api/auth/', include('djoser.urls.authtoken')),
+    path('api/itemdetail/<int:pk>/', ItemDetailView.as_view(), name='item-detail'),
     # API СХЕМА
     # path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name="docs"),

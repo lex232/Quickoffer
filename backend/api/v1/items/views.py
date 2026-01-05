@@ -1,21 +1,30 @@
 """API DRF Items views"""
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
-from itertools import chain
 
 from api.permissions import IsAdminOrReadOnly
 from offer.models import Item, ItemUser
 from api.v1.items.serializers import (
     ItemSerializer,
-    ItemPostSerializer
+    ItemPostSerializer,
+    ItemSingleSerializer
 )
 from api.filters import FilterForItems
 from api.pagination import ItemsLimitPagination
 
 User = get_user_model()
+
+
+class ItemDetailView(RetrieveAPIView):
+    """Получение одного публичного товара по ID"""
+    queryset = Item.objects.filter(private_type=False)
+    serializer_class = ItemSingleSerializer
+    permission_classes = (AllowAny,)
+    lookup_field = 'pk'
 
 
 class ItemUserViewSet(viewsets.ModelViewSet):
@@ -55,7 +64,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     ordering_fields = ['price_retail']
 
     def get_queryset(self):
-        """Показываем только товары авторизованного пользователя + доступные"""
+        """Выделяем бренды, переданные в запросе"""
 
         ids = self.request.GET.get('brand')
         try:
@@ -77,7 +86,7 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
     ordering_fields = ['price_retail']
 
     def get_queryset(self):
-        """Показываем только товары авторизованного пользователя + доступные"""
+        """Выделяем бренды, переданные в запросе"""
 
         user = self.request.user
         ids = self.request.GET.get('brand')

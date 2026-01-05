@@ -10,7 +10,7 @@ const Footer = () => {
     <div className="container-fluid">
       <footer className="d-flex flex-wrap mt-4">
         <ul className="col-6 footer-nav-left">
-          <li className="nav-item text-muted">&copy; {YearNow()} QuickOffer (с)</li>
+          <li className="nav-item text-muted">&copy; {YearNow()} OfferGuru (с)</li>
         </ul>
         <ul className="col-6 footer-nav-right text-end">
           <li className="nav-item">
