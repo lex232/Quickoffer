@@ -1,0 +1,39 @@
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.not-found-content {
+  text-align: center;
+  max-width: 600px;
+}
+
+.not-found-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.not-found-title {
+  font-size: 2.2rem;
+  color: #343a40;
+  margin-bottom: 1rem;
+}
+
+.not-found-text {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.not-found-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 8px;
+}

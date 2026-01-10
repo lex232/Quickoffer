@@ -3,7 +3,7 @@
 * монтажников СКС, электриков и т.д.
 */
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AuthContext, UserContext } from './contexts'
 import { HelmetProvider } from 'react-helmet-async';
 import CookieConsent from './components/cookie/CookieConsent';
@@ -22,6 +22,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
 import PrivacyPage from './pages/site/privacy/PrivacyPage';
 import TermsOfUsePage from './pages/site/privacy/TermsOfUsePage';
+import NotFoundPage from './pages/site/404/404';
 
 /**
 * Страницы для авторизованного пользователя
@@ -175,6 +176,7 @@ function App() {
                   <Route path="offer/create" element={<OfferCreate />} />
                   <Route path="my-organization/edit" element={<ProfileEdit />} />
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>
           </HelmetProvider>
