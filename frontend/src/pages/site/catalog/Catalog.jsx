@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Header from '../includes/Header.jsx';
 import Footer from '../includes/Footer.jsx';
 import ItemsArea from '../items-area/ItemsArea.jsx';
+import ItemCard from '../items-area/ItemCard.jsx';
 
 import group_api from '../../../api/group_api';
 import { AlignJustify, XCircle, Menu } from 'react-feather';
@@ -14,6 +16,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     /**
     * Страница каталога
     */
+    const { slug } = useParams();
 
     const [listGroups, setListGroups] = useState([])
     const [listService, setListService] = useState([])
@@ -22,11 +25,15 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [chosenTree, setChosenTree] = useState(undefined)
     const [chosenTitle, setChosenTitle] = useState(undefined)
     const [chosenDescription, setChosenDescription] = useState(undefined)
+    const [singleItem, setSingleItem] = useState(null);
+    const [itemError, setItemError] = useState(null);
+    const [loadingSingleItem, setLoadingSingleItem] = useState(false);
 
     const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
     const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
 
     const [isCollapsed, setIsCollapsed] = useState(style_visible)
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Получить все группы при загрузке страницы
@@ -35,19 +42,46 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     }, [])
         ;
 
+    // Если есть slug — загружаем товар
+    useEffect(() => {
+        if (slug) {
+            loadSingleItem(slug);
+        }
+    }, [slug]);
+
+    const loadSingleItem = async (itemSlug) => {
+        setLoadingSingleItem(true);
+        setItemError(null);
+        setSingleItem(null);
+
+        try {
+            const item = await group_api.getItemBySlug(itemSlug);
+            setSingleItem(item);
+            setItemError(null);
+        } catch (err) {
+            console.error('Ошибка загрузки товара:', err);
+            setSingleItem(null);
+            setItemError(err);
+        } finally {
+            setLoadingSingleItem(false);
+        }
+    };
+
     const getGroups = () => {
-        // Получить список категорий товаров
         group_api.getItemsGroup()
             .then(res => {
                 setListGroups(res);
-                setChosenCategory(res[0].id)
-                setChosenTree(res[0].tree_id)
-                setChosenTitle(res[0].title)
-                setChosenDescription(res[0].description)
+                // Устанавливаем первую категорию ТОЛЬКО если chosenCategory ещё не задан
+                if (res.length > 0 && chosenCategory == null) {
+                    setChosenCategory(res[0].id);
+                    setChosenTree(res[0].tree_id);
+                    setChosenTitle(res[0].title);
+                    setChosenDescription(res[0].description);
+                }
             })
-            .catch((e) => console.log(e))
-            .finally(() => setIsLoadingCat(false))
-    }
+            .catch(e => console.log(e))
+            .finally(() => setIsLoadingCat(false));
+    };
 
     const getGroupService = () => {
         // Получить список категорий услуг
@@ -66,6 +100,8 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         setChosenTree(tree_id);
         setChosenTitle(title)
         setChosenDescription(description)
+        setSingleItem(null);
+        navigate('/catalog');
     }
 
     const handleMenu = (e) => {
@@ -145,7 +181,23 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             </ul>
                         </div>
                     </nav>
-                    {chosenCategory && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} description={chosenDescription}/>}
+                    {slug && (
+                        <ItemCard
+                            item={singleItem}
+                            loading={loadingSingleItem}
+                            error={!!itemError}
+                            onBack={() => {
+                                setSingleItem(null);
+                                setItemError(null);
+                                if (chosenCategory == null) {
+                                    getGroups();
+                                    getGroupService();
+                                }
+                                navigate('/catalog');
+                            }}
+                        />
+                    )}
+                    {chosenCategory && !slug && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} description={chosenDescription} />}
                 </div>
             </div>
 

@@ -155,6 +155,7 @@ function App() {
                 <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path="/catalog/:slug" element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />} />
                 <Route path="/registration" element={<RegistrationPage loginstate={loggedIn} />} />
                 <Route path="/profile" element={

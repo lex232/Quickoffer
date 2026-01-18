@@ -36,3 +36,24 @@
     display: inline-block;
     text-align: left !important;
 }
+
+.btn-basket-mini {
+    display: inline-block;
+    color: #fff;
+    background-color: #5c61f2 !important;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-basket-mini:hover {
+    color: #fff;
+    background-color: #9295eb !important;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
