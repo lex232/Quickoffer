@@ -24,7 +24,7 @@ class ItemDetailView(RetrieveAPIView):
     queryset = Item.objects.filter(private_type=False)
     serializer_class = ItemSingleSerializer
     permission_classes = (AllowAny,)
-    lookup_field = 'pk'
+    lookup_field = 'slug'
 
 
 class ItemUserViewSet(viewsets.ModelViewSet):

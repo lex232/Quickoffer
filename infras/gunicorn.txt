@@ -1,0 +1,11 @@
+// ./etc/system.d/system/
+Description=gunicorn quickoffer daemon
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/var/www/*path*/backend/
+ExecStart=/var/www/*path*/backend/venv/bin/gunicorn --bind 0.0.0.0:8000 quickoffer.wsgi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,27 +1,27 @@
 class ApiItemsGroup {
-    constructor (url, headers, contentType) {
-      this._url = url
-      this._headers = headers
-      this._contentType = contentType
-    }
-  
-    // Проверка ответа
-    checkResponse (res) {
-      return new Promise((resolve, reject) => {
-        if (res.status === 204) {
-          return resolve(res)
-        }
-        const func = res.status < 400 ? resolve : reject
-        res.json().then(data => func(data))
-      })
-    }
+  constructor(url, headers, contentType) {
+    this._url = url
+    this._headers = headers
+    this._contentType = contentType
+  }
 
-/////////////////////////////////
-// API запросы с разделами и
-// категориями разделов
-/////////////////////////////////
+  // Проверка ответа
+  checkResponse(res) {
+    return new Promise((resolve, reject) => {
+      if (res.status === 204) {
+        return resolve(res)
+      }
+      const func = res.status < 400 ? resolve : reject
+      res.json().then(data => func(data))
+    })
+  }
 
-  getItemsGroup () {
+  /////////////////////////////////
+  // API запросы с разделами и
+  // категориями разделов
+  /////////////////////////////////
+
+  getItemsGroup() {
     return fetch(
       `/api/groupsitems/`,
       {
@@ -30,7 +30,7 @@ class ApiItemsGroup {
     ).then(this.checkResponse)
   }
 
-  getServiceGroup () {
+  getServiceGroup() {
     return fetch(
       `/api/groupservices/`,
       {
@@ -39,7 +39,7 @@ class ApiItemsGroup {
     ).then(this.checkResponse)
   }
 
-  getItemsGroupOnCreateUserItem () {
+  getItemsGroupOnCreateUserItem() {
     const token = localStorage.getItem('token')
     return fetch(
       `/api/groupsoncreate`,
@@ -52,6 +52,16 @@ class ApiItemsGroup {
       }
     ).then(this.checkResponse)
   }
+
+  getItemBySlug(slug) {
+    return fetch(
+      `/api/itemdetail/${slug}/`,
+      {
+        method: 'GET',
+      }
+    ).then(this.checkResponse)
+  }
+
 
 }
 

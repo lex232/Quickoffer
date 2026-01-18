@@ -230,6 +230,7 @@ class Item(models.Model):
     slug = models.SlugField(
         verbose_name='слаг товара',
         max_length=150,
+        unique=True,
         blank=True,
     )
     brand = models.ForeignKey(
