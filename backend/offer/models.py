@@ -1,6 +1,8 @@
 """
 Модели приложения offer
 """
+import os
+
 from PIL import Image
 
 from django.db import models
@@ -269,6 +271,13 @@ class Item(models.Model):
         null=True,
         blank=True
     )
+    image_min = models.ImageField(
+        verbose_name='миниатюра 150х150',
+        upload_to='media/item/imageuser_min/%Y-%m-%d/',
+        null=True,
+        blank=True,
+        editable=False
+    )
     quantity_type = models.CharField(
         verbose_name='количественная характеристика',
         max_length=20,
@@ -321,6 +330,43 @@ class Item(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
+
+        # Создаём миниатюру 150х150 если есть изображение
+        if self.image:
+            try:
+                img = Image.open(self.image.path)
+
+                # Создаём копию и изменяем размер до 150х150
+                img_copy = img.copy()
+                img_copy.thumbnail((300, 300), Image.Resampling.LANCZOS)
+
+                # Обрабатываем прозрачность: конвертируем в RGB с белым фоном
+                if img_copy.mode in ('RGBA', 'LA', 'P'):
+                    # Создаём белый фон
+                    background = Image.new('RGB', img_copy.size, (255, 255, 255))
+                    # Накладываем изображение на фон с учётом прозрачности
+                    if img_copy.mode == 'RGBA':
+                        background.paste(img_copy, mask=img_copy.split()[3])  # Альфа-канал
+                    elif img_copy.mode == 'LA':
+                        background.paste(img_copy, mask=img_copy.split()[1])
+                    elif img_copy.mode == 'P':
+                        img_copy = img_copy.convert('RGBA')
+                        background.paste(img_copy, mask=img_copy.split()[3])
+                    img_copy = background
+
+                # Формируем путь для миниатюры: та же папка, имя с суффиксом _min.jpg
+                name, _ = os.path.splitext(self.image.path)
+                min_path = f"{name}_min.jpg"
+
+                # Сохраняем как JPEG (стандарт для веб-миниатюр)
+                img_copy.save(min_path, 'JPEG', quality=100)
+
+                # Обновляем поле image_min
+                min_name, _ = os.path.splitext(self.image.name)
+                self.image_min = f"{min_name}_min.jpg"
+                super().save(update_fields=['image_min'])
+            except Exception as e:
+                print(f"Ошибка создания миниатюры: {e}")
 
 
 def user_directory_path(instance, filename):

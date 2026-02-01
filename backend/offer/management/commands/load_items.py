@@ -1,13 +1,15 @@
 """Скрипт загрузки категорий в БД"""
 import csv
 import os
+from datetime import datetime
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from offer.models import Item, Group, Brand
 
-temp_dir = 'besprovodnaya_ohrannaya_sistema-page1'
+# temp_dir = '../../../demo/modyl_sopryajeniya-page1'
+temp_dir = '/dovodchik_page=1'
 
 # CATS = ["Видеорегистраторы", "Регистраторы CVI формат 4Mpix"]
 # CATS = ["Камеры видеонаблюдения", "Камеры цифровые IP 2 Mpix"]
@@ -52,8 +54,8 @@ temp_dir = 'besprovodnaya_ohrannaya_sistema-page1'
 # CATS = ["Охранные системы", "Центральный модуль Dahua"]
 # CATS = ["Охранные системы", "Датчики Dahua"]
 # CATS = ["Охранные системы", "Комплекты Dahua"]
-CATS = ["Охранные системы", "IMOU охранные решения для дома"]
-
+# CATS = ["Охранные системы", "IMOU охранные решения для дома"]
+CATS = ["Камеры видеонаблюдения", "Камеры TVI 5 Mpix"]
 
 
 DATA_FILES = {
@@ -66,6 +68,7 @@ FIELDS = {
         'brand',
         'price_retail',
         'description',
+        'description_general',
         'group',
         'quantity_type',
         'item_type',
@@ -107,7 +110,8 @@ class Command(BaseCommand):
                                     temp_group
                                 )
                             if FIELDS.get(model)[i] == 'image':
-                                image = f'media/item/image/{data[i]}'
+                                today = datetime.now().strftime('%Y-%m-%d')
+                                image = f'media/item/image/{today}/{data[i]}'
                                 dict_for_record.setdefault(
                                     FIELDS.get(model)[i],
                                     image
@@ -123,6 +127,7 @@ class Command(BaseCommand):
                                 brand=dict_for_record.get('brand'),
                                 price_retail=dict_for_record.get('price_retail'),
                                 description=dict_for_record.get('description'),
+                                description_general=dict_for_record.get('description_general'),
                                 quantity_type=dict_for_record.get('quantity_type'),
                                 item_type=dict_for_record.get('item_type'),
                                 image=dict_for_record.get('image')
