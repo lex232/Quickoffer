@@ -12,6 +12,8 @@ demo.py
 backups
 /backups/
 .backups
+.opencode/
+
 .vscode
 
 # dependencies
