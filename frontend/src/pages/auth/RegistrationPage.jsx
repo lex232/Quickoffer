@@ -1,10 +1,15 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import Header from '../site/includes/Header.jsx';
 import Footer from '../site/includes/Footer.jsx';
 import RegistrationForm from '../../components/forms/auth/Registration.jsx';
 import { Helmet } from 'react-helmet-async';
 
 const RegistrationPage = ({ loginstate }) => {
+
+    if (loginstate) {
+        return <Navigate to="/profile" replace />;
+    }
 
     return (
         <body>
