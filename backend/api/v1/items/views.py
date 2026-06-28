@@ -66,12 +66,17 @@ class ItemViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Выделяем бренды, переданные в запросе"""
 
-        ids = self.request.GET.get('brand')
-        try:
-            ids = list(map(int, ids.split(',')))
-            queryset_general_items = Item.objects.filter(private_type=False, brand__in=ids)
-        except:
-            queryset_general_items = Item.objects.filter(private_type=False, brand=None)
+        queryset_general_items = Item.objects.filter(private_type=False)
+        if 'brand' in self.request.GET:
+            ids = self.request.GET.get('brand')
+            if not ids:
+                queryset_general_items = queryset_general_items.none()
+            else:
+                try:
+                    ids = list(map(int, ids.split(',')))
+                    queryset_general_items = queryset_general_items.filter(brand__in=ids)
+                except ValueError:
+                    pass
         return queryset_general_items
 
 
@@ -88,14 +93,17 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
     def get_queryset(self):
         """Выделяем бренды, переданные в запросе"""
 
-        user = self.request.user
-        ids = self.request.GET.get('brand')
-        try:
-            ids = list(map(int, ids.split(',')))
-            queryset_general_items = Item.objects.filter(private_type=False, brand__in=ids)
-        except:
-            queryset_general_items = Item.objects.filter(private_type=False, brand=None)
-        # queryset_auth_items = ItemUser.objects.filter(author=user)
+        queryset_general_items = Item.objects.filter(private_type=False)
+        if 'brand' in self.request.GET:
+            ids = self.request.GET.get('brand')
+            if not ids:
+                queryset_general_items = queryset_general_items.none()
+            else:
+                try:
+                    ids = list(map(int, ids.split(',')))
+                    queryset_general_items = queryset_general_items.filter(brand__in=ids)
+                except ValueError:
+                    pass
         return queryset_general_items
 
 

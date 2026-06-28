@@ -59,15 +59,14 @@ class ItemPostSerializer(serializers.ModelSerializer):
         """Создание товара пользователя"""
 
         author = self.context.get('request').user
-        if check_group := validated_data.get('group'):
-            maybe_group = validated_data.pop('group')
+        group_data = validated_data.pop('group', None)
         created_item = ItemUser.objects.create(
             **validated_data,
             private_type=True,
             author=author
         )
-        if check_group:
-            created_item.group.set(maybe_group)
+        if group_data:
+            created_item.group.set(group_data)
         return created_item
 
     def update(self, instance, validated_data):

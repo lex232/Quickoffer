@@ -21,3 +21,17 @@ Application for quickly creating commercial proposals <br>
 - Создание коммерческих предложений.
 - Реализован каталог популярных товаров.
 - Формирование документов (счет на работы, счет на товары, коммерческое предложение + характеристики, торг-12, договора)
+
+## Тестирование
+
+```bash
+# Запуск всех тестов бэкенда
+cd backend && python manage.py test offer.tests --verbosity=2
+
+# Запуск конкретного файла
+python manage.py test offer.tests.test_models
+python manage.py test offer.tests.test_api_offers
+
+# Запуск конкретного тест-кейса
+python manage.py test offer.tests.test_api_offers.OfferAPITests
+```
