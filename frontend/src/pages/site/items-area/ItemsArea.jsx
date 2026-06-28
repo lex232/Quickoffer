@@ -9,7 +9,7 @@ import AddNewTable from '../../../utils/text-operations/addTable';
 import CheckSameCartItem from '../../../utils/items/checkSameCartItem';
 import CartPlusItem from '../../../utils/items/cartPlusItem';
 import CartRemoveItem from '../../../utils/items/cartRemoveItem';
-import { ShoppingBag, PlusSquare } from 'react-feather';
+import { ShoppingBag, PlusSquare, MinusSquare } from 'react-feather';
 
 const ItemsArea = ({ category_id, loginstate, title, description }) => {
   const navigate = useNavigate();
@@ -24,6 +24,7 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
   const [currentpagestate, setCurrentPageState] = useState(1);
+  const [cartVersion, setCartVersion] = useState(0);
 
   let items = [];
   if (localStorage.getItem("items")) {
@@ -132,14 +133,47 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
     loadItemsWithFilters(currentpagestate, category_id, updatedBrands);
   };
 
+  const triggerCartUpdate = () => {
+    setCartVersion(v => v + 1);
+  };
+
   const CartPlusItemWithRefresh = (results, items_input, e) => {
     CartPlusItem(results, items_input, e);
-    loadItemsWithFilters(currentpagestate, category_id, brandFilters);
+    triggerCartUpdate();
   };
 
   const CartRemoveItemWithRefresh = (id_item, items_input, e) => {
     CartRemoveItem(id_item, items_input, e);
-    loadItemsWithFilters(currentpagestate, category_id, brandFilters);
+    triggerCartUpdate();
+  };
+
+  const handleQuantityChange = (id, action, e) => {
+    e.preventDefault();
+    let currentItems = JSON.parse(localStorage.getItem("items")) || [];
+    const index = currentItems.findIndex(item => item.id === id);
+    if (index === -1) return;
+    let amount = Number(currentItems[index].amount);
+    if (action === 'minus' && amount > 1) {
+      amount -= 1;
+    } else if (action === 'plus') {
+      amount += 1;
+    }
+    currentItems[index].amount = String(amount);
+    localStorage.setItem("items", JSON.stringify(currentItems));
+    window.dispatchEvent(new Event("storage"));
+    triggerCartUpdate();
+  };
+
+  const handleQuantityInput = (id, e) => {
+    let currentItems = JSON.parse(localStorage.getItem("items")) || [];
+    const index = currentItems.findIndex(item => item.id === id);
+    if (index === -1) return;
+    let val = e.target.value.replace(/\D/g, '');
+    if (val === '' || Number(val) < 1) val = '1';
+    currentItems[index].amount = val;
+    localStorage.setItem("items", JSON.stringify(currentItems));
+    window.dispatchEvent(new Event("storage"));
+    triggerCartUpdate();
   };
 
   const CreateItem = (e) => {
@@ -296,15 +330,36 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
                       {results.price_retail?.toLocaleString('ru-RU') || '—'} руб.
                     </div>
                     {loginstate && (
-                      <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent">
+                      <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent align-items-center">
                         {CheckSameCartItem(results.id, items) ? (
-                          <div className="justify-content-start text-start col-8">
-                            <Link to="/profile/offer/create">
-                              <button className="btn btn-basket-mini btn-sm">
-                                Перейти в <ShoppingBag size={16} color="#FFFFFF" />
+                          <>
+                            <div className="d-flex align-items-center col-8">
+                              <MinusSquare
+                                strokeWidth={2} size={24} color="#5c61f2"
+                                role="button"
+                                onClick={(e) => handleQuantityChange(results.id, 'minus', e)}
+                              />
+                              <input
+                                className="form-control form-control-sm text-center mx-1"
+                                style={{ width: '45px', minWidth: '40px' }}
+                                value={items.find(i => i.id === results.id)?.amount || 1}
+                                onChange={(e) => handleQuantityInput(results.id, e)}
+                              />
+                              <PlusSquare
+                                strokeWidth={2} size={24} color="#5c61f2"
+                                role="button"
+                                onClick={(e) => handleQuantityChange(results.id, 'plus', e)}
+                              />
+                            </div>
+                            <div className="col-4 d-flex justify-content-end align-items-center">
+                              <button
+                                className="btn btn-danger btn-sm"
+                                onClick={(e) => CartRemoveItemWithRefresh(results.id, items, e)}
+                              >
+                                X
                               </button>
-                            </Link>
-                          </div>
+                            </div>
+                          </>
                         ) : (
                           <div className="justify-content-start text-start col-8">
                             <button
@@ -315,16 +370,6 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
                             </button>
                           </div>
                         )}
-                        <div className="justify-content-end text-end col-4">
-                          {CheckSameCartItem(results.id, items) && (
-                            <button
-                              className="btn btn-danger btn-sm ms-2"
-                              onClick={(e) => CartRemoveItemWithRefresh(results.id, items, e)}
-                            >
-                              X
-                            </button>
-                          )}
-                        </div>
                       </div>
                     )}
                   </div>
