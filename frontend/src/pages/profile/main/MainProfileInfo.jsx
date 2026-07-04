@@ -6,77 +6,70 @@ import './admincard.css';
 
 import { Users, Book, Layers, Grid, Server } from 'react-feather'
 
-const MainAdminInfo = () => {
-    const [info, setInfo] = useState([]);
+const cards = [
+  {
+    to: '/catalog',
+    icon: Server,
+    label: 'Каталог товаров',
+    count: null,
+    color: 'violet',
+  },
+  {
+    to: 'clients/list',
+    icon: Users,
+    label: 'Мои клиенты',
+    countKey: 'count_clients',
+    color: 'blue',
+  },
+  {
+    to: 'offer/list',
+    icon: Book,
+    label: 'Коммерческих предложений',
+    countKey: 'count_offers',
+    color: 'green',
+  },
+  {
+    to: 'items/list',
+    icon: Layers,
+    label: 'Мои товары / услуги',
+    countKey: 'count_items',
+    color: 'orange',
+  },
+  {
+    to: 'my-organization/edit',
+    icon: Grid,
+    label: 'Мои реквизиты',
+    count: null,
+    color: 'red',
+  },
+];
 
-    const getAdmin = () => {
-        profile_page_api.getMainProfileInfo()
-        .then(res => {
-          setInfo(res);
-        })
-        .catch((e) => console.log(e))
-    }
+const MainAdminInfo = () => {
+    const [info, setInfo] = useState(null);
 
     useEffect(() => {
-        // Получить все данные для профиля при загрузке страницы
-        getAdmin();
-      }, [])
-      ;
+        profile_page_api.getMainProfileInfo()
+        .then(res => setInfo(res))
+        .catch(e => console.log(e))
+    }, []);
 
     return (
-        <div classNameName="container-fluid">
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <div class="col">
-                    <div class="card card-move h-100 text-center shadow">
-                        <Link to="/catalog"><div class="card-body-move">
-                            <div class="display-4 decoration-color my-2">
-                                <Server size={42} className='me-2' />
-                            </div>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Каталог товаров</div></p>
-                        </div></Link>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-move h-100 text-center shadow">
-                        <Link to="clients/list"><div class="card-body-move">
-                            <div class="display-4 text-primary my-2">
-                                <Users size={42} className='me-2' />
-                            </div>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои клиенты {info.count_clients}</div></p>
-                        </div></Link>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-move h-100 text-center shadow">
-                        <Link to="offer/list"><div class="card-body-move">
-                            <div class="display-4 text-success my-2">
-                                <Book size={42} className='me-2' />
-                            </div>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Коммерческих предложений {info.count_offers}</div></p>
-                        </div></Link>
-                    </div>
-                </div>   
-                <div class="col">
-                    <div class="card card-move h-100 text-center shadow">
-                        <Link to="items/list"><div class="card-body-move">
-                            <div class="display-4 text-warning my-2">
-                                <Layers size={42} className='me-2' />
-                            </div>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои товары/ услуги {info.count_items}</div></p>
-                        </div></Link>
-                    </div>
-                </div>  
-                <div class="col">
-                    <div class="card card-move h-100 text-center shadow">
-                        <Link to="my-organization/edit"><div class="card-body-move">
-                            <div class="display-4 text-danger my-2">
-                                <Grid size={42} className='me-2' />
-                            </div>
-                            <p class="card-text text-muted"><div className="font-weight-bold text-primary mb-3">Мои реквизиты:</div></p>
-                        </div></Link>
-                    </div>
-                </div>
-            </div>
+        <div className="dashboard-cards">
+            {cards.map(card => {
+                const Icon = card.icon;
+                const count = card.countKey ? info?.[card.countKey] : card.count;
+                return (
+                    <Link key={card.to} to={card.to} className={`dash-card dash-card--${card.color}`}>
+                        <div className="dash-card-icon">
+                            <Icon size={28} />
+                        </div>
+                        <div className="dash-card-body">
+                            {count !== null && <span className="dash-card-count">{count}</span>}
+                            <span className={`dash-card-label ${count !== null ? '' : 'dash-card-label--standalone'}`}>{card.label}</span>
+                        </div>
+                    </Link>
+                );
+            })}
         </div>
     );
 };

@@ -197,19 +197,19 @@ const OfferShow = () => {
       <div className="">
       {itemsOffer.map((results) => {
               return (
-                <div class="card mb-3">
-                    <div class="card-body px-0 py-0">
-                        <div class="row">
-                          <div class="col-md-8 row align-items-center">
-                            {results.image && <div class="col-4 item-row">
+                <div className="card mb-3">
+                    <div className="card-body px-0 py-0">
+                        <div className="row">
+                          <div className="col-md-8 row align-items-center">
+                            {results.image && <div className="col-4 item-row">
                                 <img className='img-responsive-item ms-1' src={results.image} alt="item_img"></img>
                             </div>}
-                            <div class="col-8 text-start">
+                            <div className="col-8 text-start">
                                 <h6 className='p-2 pb-0'>{results.item}</h6>
                             </div>
                           </div>
-                          <div class="col-md-4 text-end row align-items-center">
-                                <div className='col-12'><h6 class="mb-0 fs-6"><span className='fw-normal'>{results.amount}</span> х {results.item_price_retail} Р.</h6></div>
+                          <div className="col-md-4 text-end row align-items-center">
+                                <div className='col-12'><h6 className="mb-0 fs-6"><span className='fw-normal'>{results.amount}</span> х {results.item_price_retail} Р.</h6></div>
                           </div>
                         </div>
                     </div>
@@ -218,17 +218,17 @@ const OfferShow = () => {
         })}
       </div>
 
-      <div class="d-flex justify-content-between text-start">
-                      <p class="mb-2">Итого стоимость оборудования:</p>
-                      <p class="mb-1">{currentOffer.final_price_goods} Р.</p>
+      <div className="d-flex justify-content-between text-start">
+                      <p className="mb-2">Итого стоимость оборудования:</p>
+                      <p className="mb-1">{currentOffer.final_price_goods} Р.</p>
       </div>
-      <div class="d-flex justify-content-between mb-1 text-start">
-                      <p class="mb-2">Итого стоимость монтажных работ:</p>
-                      <p class="mb-1">{currentOffer.final_price_work} Р.</p>
+      <div className="d-flex justify-content-between mb-1 text-start">
+                      <p className="mb-2">Итого стоимость монтажных работ:</p>
+                      <p className="mb-1">{currentOffer.final_price_work} Р.</p>
       </div>
-      <div class="d-flex justify-content-between text-start">
-                      <p class="mb-2">Итого(без НДС)</p>
-                      <p class="mb-1 fs-4">{currentOffer.final_price} Р.</p>
+      <div className="d-flex justify-content-between text-start">
+                      <p className="mb-2">Итого(без НДС)</p>
+                      <p className="mb-1 fs-4">{currentOffer.final_price} Р.</p>
       </div>
     </main>
   );

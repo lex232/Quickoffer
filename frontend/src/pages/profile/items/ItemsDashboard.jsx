@@ -115,7 +115,7 @@ const ItemsDashboard = () => {
   }
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
 
       <div className="container-fluid">
         <div className="page-title">
@@ -151,22 +151,22 @@ const ItemsDashboard = () => {
           <div className="mt-3">
             {items.map((results) => {
               return (
-                <div class="row text-start my-2 mx-0" key={results.id}>
-                  <div class="col-10 my-0 mx-0">
+                <div className="row text-start my-2 mx-0" key={results.id}>
+                  <div className="col-10 my-0 mx-0">
 
-                    <div class="row my-0 mx-0">
-                      <div class="col-md-4 mt-1">
+                    <div className="row my-0 mx-0">
+                      <div className="col-md-4 mt-1">
                         <label>
                           {results.item_type === 'product' ? <ShoppingCart size='16px' /> : <Tool size='16px' />}
                           <b><span className='ps-2'>{results.title}</span></b></label>
                       </div>
-                      <div class="col-md-2 mt-1">
+                      <div className="col-md-2 mt-1">
                         <label><CreditCard size='16px' color='gray' /> {results.price_retail} Руб.</label>
                       </div>
-                      <div class="col-md-2 mt-1">
+                      <div className="col-md-2 mt-1">
                         {results.brand && <label><Shield size='16px' color='gray' /> {results.brand}</label>}
                       </div>
-                      <div class="col-md-2 mt-1">
+                      <div className="col-md-2 mt-1">
                         {results.group.map((res_groups) => {
                           return (
                             <div>
@@ -175,7 +175,7 @@ const ItemsDashboard = () => {
                           )
                         })}
                       </div>
-                      <div class="col-md-2 px-0 mt-1">
+                      <div className="col-md-2 px-0 mt-1">
                         <div className="bg-transparent d-flex flex-row">
                           {CheckSameCartItem(results.id, items_in_cart)
                             ? <div><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div>
@@ -191,7 +191,7 @@ const ItemsDashboard = () => {
 
                     </div>
                   </div>
-                  <div class="col-2 my-0 mx-0">
+                  <div className="col-2 my-0 mx-0">
                     <button onClick={(e) => HandleEditItem(
                       results.id,
                       results.title,

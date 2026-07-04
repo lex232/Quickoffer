@@ -1,9 +1,51 @@
-.button-on-mobile {
-    display: none;
+.profile-layout {
+  min-height: 100vh;
+  background: #f5f6fa;
 }
 
-@media only screen and (max-width: 768px) {
-    .button-on-mobile {
-        display: block;
-    }
+.profile-layout .header-wrap {
+  background: #fff;
+  border-bottom: 1px solid #e8ecf4;
+}
+
+.profile-body-wrap {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1050;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: #5c61f2;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.sidebar-toggle:hover {
+  background: #4a4fd8;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .profile-layout .header-wrap .container-fluid {
+    padding-left: 52px !important;
+  }
+
+  .profile-body-wrap {
+    flex-direction: column;
+  }
 }

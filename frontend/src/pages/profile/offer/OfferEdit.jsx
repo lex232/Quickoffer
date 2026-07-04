@@ -64,11 +64,11 @@ const OfferEdit = () => {
   
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
       
       <TitleSections title={'Редактировать КП'}/>
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body">
           <div className="col-lg-12 col-md-9 col-sm-11 text-start"><OfferForm id={id} name_offer={nameOffer} status_type={statusOffer}/></div>
           </div>

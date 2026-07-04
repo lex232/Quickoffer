@@ -122,17 +122,17 @@ const ItemForm = ({
 }
 
   return (
-    <div class="content">
+    <div className="content">
       <form>
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Наименование товара или услуги *</label>
                 <input type="text" defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
             </div>
         </div>
-        <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Товар или услуга *</label>
                 <select className='form-select border-input' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
                   <option value='product'>Товар</option>
@@ -142,17 +142,17 @@ const ItemForm = ({
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-12 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-12 ps-0 pe-2">
+            <div className="form-group">
                 <label>Описание:</label>
                 <textarea rows='4' defaultValue={description} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} /> 
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
             <label>Группа:</label>
             {listGroups && <div className="form">
               <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
@@ -168,7 +168,7 @@ const ItemForm = ({
               </select>
             </div>}
           </div>
-          <div class="col-md-6 ps-0 pe-2">
+          <div className="col-md-6 ps-0 pe-2">
             <label>Бренд</label>
               {listBrands && <div className="form">
               <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
@@ -184,15 +184,15 @@ const ItemForm = ({
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Цена розничная (Руб.) *</label>
                 <input type="text" defaultValue={price_retail} className="form-control border-input" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} /> 
             </div>
         </div>
-        <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Единицы измерения</label>
                 <select className='form-select border-input' value={quantityTypeArea} aria-label="Товар или услуга *" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
                   <option selected value='pc'>шт.</option>

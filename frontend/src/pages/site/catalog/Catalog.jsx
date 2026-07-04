@@ -155,7 +155,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
             </div>
             <div className="d-flex">
                 {isLoadingCat && <div className="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Загрузка...</span>
+                    <span className="visually-hidden">Загрузка...</span>
                 </div>}
             </div>
             <Helmet>
