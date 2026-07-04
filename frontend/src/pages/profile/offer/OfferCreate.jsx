@@ -20,11 +20,11 @@ const OfferCreate = () => {
   }, []);
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
       
       <TitleSections title={title_for_header}/>
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="card-body px-3">
             <div className="col-lg-12 col-md-9 col-sm-11 text-start px-0 my-0"><OfferForm /></div>
             </div>

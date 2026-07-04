@@ -1,66 +1,80 @@
-import React from 'react';
-import 'bootstrap/dist/js/bootstrap.min.js';
+import React, { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 
-import activeUrl from '../../../utils/activeUrl';
-
-import { Box, Book, Users, Layers, Grid, Minus, ChevronRight, ShoppingBag } from 'react-feather'
+import { Layout, Book, Layers, Users, Settings, ChevronRight, ShoppingBag } from 'react-feather'
 import './styles.css'
 
 
-const ProfileSidebar = ({ styleCollapse }) => {
+const ProfileSidebar = ({ isOpen, onClose }) => {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const active_url = "nav-link active text-white fw-bold"
-  const non_active_url = "nav-link text-white"
-  const active_url_main = "sidebar-heading d-flex align-items-center px-3 mt-1 mb-1 fw-bold text-muted item-sidebar-custom"
-  const non_active_url_main = "sidebar-heading d-flex align-items-center px-3 mt-1 mb-1 text-muted item-sidebar-custom"
 
-  // Подсветка активной ссылки (Создаем класс)
-  const check_url = new activeUrl(pathname, active_url, non_active_url)
-  const check_url_main = new activeUrl(pathname, active_url_main, non_active_url_main)
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
+  const isActive = (pattern) => {
+    if (pattern === '/profile') return pathname === '/profile';
+    return pathname.includes(pattern);
+  };
+
+  const navItems = [
+    { to: '/catalog', icon: ShoppingBag, label: 'Каталог', exact: false, match: '/catalog' },
+    { to: '/profile', icon: Layout, label: 'Главный экран', exact: true, match: '/profile' },
+    { to: '/profile/offer/list', icon: Book, label: 'Коммерческие предложения', match: 'offer/' },
+    { to: '/profile/items/list', icon: Layers, label: 'Товары и услуги', match: 'items/' },
+    { to: '/profile/clients/list', icon: Users, label: 'Клиенты', match: 'clients/' },
+  ];
 
   return (
-    <nav id="sidebarMenu" className={styleCollapse}>
-    
-      <div className="position-sticky sidebar-sticky pt-1 pb-3">
-        <div >
-            <Link to="/catalog" className={check_url_main.check_absolute_url("/catalog")}><ShoppingBag /><span className='px-2'>Каталог</span><span className='position-absolute end-0'></span></Link>
-        </div>
-        <br></br>
-        <div >
-            <Link to="/profile" className={check_url_main.check_absolute_url("/profile")}><Box /><span className='px-2'>Главный экран</span><span className='position-absolute end-0'></span></Link>
-        </div>
+    <>
+      {isOpen && <div className="sidebar-overlay" onClick={onClose} />}
 
-        <div >
-            <Link to="offer/list" className={check_url_main.check_active("offer/")}><Book /><span className='px-2'>КП</span><span className='position-absolute end-0'></span></Link>
-        </div>
-        
-        <div>
-            <Link to="items/list" className={check_url_main.check_active("items/")}><Layers /><span className='px-2'>Мои товары/ услуги</span><span className='position-absolute end-0'></span></Link>
-        </div>
+      <aside className={`profile-sidebar ${isOpen ? 'open' : ''}`}>
+        <div className="sidebar-inner">
+          <div className="sidebar-menu">
+            {navItems.map(item => {
+              const active = item.exact
+                ? isActive(item.match)
+                : isActive(item.match);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`sidebar-link ${active ? 'active' : ''}`}
+                  onClick={onClose}
+                >
+                  <item.icon size={20} />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
 
-        <div>
-            <Link to="clients/list" className={check_url_main.check_active("clients/")}><Users /><span className='px-2'>Клиенты</span><span className='position-absolute end-0'></span></Link>
-        </div>
-    
-        <div className="sidebar-heading d-flex align-items-center px-3 mt-2 mb-1 text-muted item-sidebar-custom" data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
-          <Grid /><span className='px-2'>Мой профиль</span><span className='position-absolute end-0'><ChevronRight className='right-chevron'/></span>
-        </div>
-        <div className="collapse" id="settings-collapse">
-            <ul className="nav flex-column mb-2 item-min-sidebar">
-                <li className="nav-item">
-                    <Link to="my-organization/edit" className={check_url.check_active("my-organization/edit")} aria-current="page"> 
-                        <span className="align-text-bottom"><Minus size={15}/> Реквизиты</span>
-                    </Link>
-                </li>
-            </ul>
-        </div>
+          <div className="sidebar-divider" />
 
-      </div>
-    </nav>
+          <div className="sidebar-section">
+            <button
+              className="sidebar-section-toggle"
+              onClick={() => setSettingsOpen(prev => !prev)}
+            >
+              <Settings size={20} />
+              <span>Мой профиль</span>
+              <ChevronRight size={16} className={`chevron ${settingsOpen ? 'rotated' : ''}`} />
+            </button>
+
+            <div className={`sidebar-submenu ${settingsOpen ? 'open' : ''}`}>
+              <Link
+                to="/profile/my-organization/edit"
+                className={`sidebar-sub-link ${isActive('my-organization/edit') ? 'active' : ''}`}
+                onClick={onClose}
+              >
+                Реквизиты
+              </Link>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </>
   );
 };
 

@@ -23,7 +23,7 @@ const ItemsEdit = () => {
         image,} = state;
 
     return (
-        <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+        <main className="profile-body">
             
             <TitleSections title={'Редактировать товар/ услугу'}/>
             <div className="col-md-12 project-list">

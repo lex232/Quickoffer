@@ -142,34 +142,34 @@ const OfferDashboard = () => {
   }
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
 
-      <div class="container-fluid">
-        <div class="page-title">
-          <div class="row">
-            <div class="col my-3 text-start ps-4">
+      <div className="container-fluid">
+        <div className="page-title">
+          <div className="row">
+            <div className="col my-3 text-start ps-4">
               <h3>Список коммерческих предложений</h3>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12 project-list">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-9 p-0 d-flex">
-                <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => handleChangeStatusType(e, '')}><Target />Все</a></li>
-                  <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_edit')}><PenTool />Редактирование</a></li>
-                  <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_process')}><Mail />Отправлено</a></li>
-                  <li class="nav-item"><a class="nav-link" id="bill-top-tab" data-bs-toggle="tab" href="#top-bill" role="tab" aria-controls="top-bill" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_prepayment')}><Table />Выставлен счет</a></li>
-                  <li class="nav-item"><a class="nav-link" id="work-top-tab" data-bs-toggle="tab" href="#top-work" role="tab" aria-controls="top-work" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_install')}><Loader />В работе</a></li>
-                  <li class="nav-item"><a class="nav-link" id="done-top-tab" data-bs-toggle="tab" href="#top-done" role="tab" aria-controls="top-done" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_payment')}><CheckCircle />Выполнен</a></li>
+      <div className="row">
+        <div className="col-md-12 project-list">
+          <div className="card-header">
+            <div className="row">
+              <div className="col-md-9 p-0 d-flex">
+                <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => handleChangeStatusType(e, '')}><Target />Все</a></li>
+                  <li className="nav-item"><a className="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_edit')}><PenTool />Редактирование</a></li>
+                  <li className="nav-item"><a className="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_process')}><Mail />Отправлено</a></li>
+                  <li className="nav-item"><a className="nav-link" id="bill-top-tab" data-bs-toggle="tab" href="#top-bill" role="tab" aria-controls="top-bill" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_prepayment')}><Table />Выставлен счет</a></li>
+                  <li className="nav-item"><a className="nav-link" id="work-top-tab" data-bs-toggle="tab" href="#top-work" role="tab" aria-controls="top-work" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_install')}><Loader />В работе</a></li>
+                  <li className="nav-item"><a className="nav-link" id="done-top-tab" data-bs-toggle="tab" href="#top-done" role="tab" aria-controls="top-done" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_payment')}><CheckCircle />Выполнен</a></li>
                 </ul>
               </div>
-              <div class="col-md-3 p-0">
-                <div class="form-group mb-0 me-0"></div>
+              <div className="col-md-3 p-0">
+                <div className="form-group mb-0 me-0"></div>
                 {(localStorage.getItem("items") && JSON.parse(localStorage.getItem("items")).length > 0) ? <CreateOfferPopup action={CreateOffer} />
                   : <button onClick={(e) => CreateOffer(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
               </div>
@@ -180,33 +180,33 @@ const OfferDashboard = () => {
 
       <div className="d-flex">
         {isLoadding && <div className="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Загрузка...</span>
+          <span className="visually-hidden">Загрузка...</span>
         </div>}
       </div>
 
-      <div class="col-md-12 project-list">
-        <div class="card-header">
+      <div className="col-md-12 project-list">
+        <div className="card-header">
           <div className="mt-3">
             {offers.map((results) => {
               return (
-                <div class="row text-start my-2 mx-0" key={results.id}>
-                  <div class="col-10 my-0 mx-0">
-                    <div class="row my-0 mx-0">
-                      <div class="col-md-4">
+                <div className="row text-start my-2 mx-0" key={results.id}>
+                  <div className="col-10 my-0 mx-0">
+                    <div className="row my-0 mx-0">
+                      <div className="col-md-4">
                         <label><b>{results.name_offer}</b></label>
                       </div>
-                      <div class="col-md-4">
+                      <div className="col-md-4">
                         {results.name_client && <><label><User size='16px' color='gray' /> {results.name_client}</label><br></br></>}
                         {results.created && <label><Calendar size='16px' color='gray' /> {getDate(results.created)}</label>}
                       </div>
-                      <div class="col-md-4">
+                      <div className="col-md-4">
                         <label>Итого: {results.final_price} руб
                           <br></br>Оборудование: {results.final_price_goods} руб
                           <br></br>Работы: {results.final_price_work} руб</label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-2 my-0 mx-0">
+                  <div className="col-2 my-0 mx-0">
                     <button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28} /></button>
                     <button onClick={(e) => HandleEditOffer(results.id, e)}><PencilIco fill="orange" /></button>
                     <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id} />

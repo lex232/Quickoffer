@@ -124,17 +124,17 @@ const ClientForm = ({
 
   return (
       
-    <div class="content">
+    <div className="content">
       <form>
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Наименование: *</label>
                 <input type="text" defaultValue={title} className="form-control border-input" id="Name" placeholder="Наименование ООО или ИП *" onChange={(e) => setTitle(e.target.value)} /> 
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Тип компании:</label>
               <select className='form-select border-input' value={companyTypeArea} aria-label="Товар или услуга *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
                 <option value='ip'>ИП</option>
@@ -145,84 +145,84 @@ const ClientForm = ({
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>ОГРН:</label>
                 <input type="text" defaultValue={ogrn} className="form-control border-input" id="Ogrn" placeholder="ОГРН" onChange={(e) => setOgrn(e.target.value)} />
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>ИНН:</label>
                 <input type="text" defaultValue={inn} className="form-control border-input" id="Inn" placeholder="ИНН" onChange={(e) => setInn(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>КПП:</label>
                 <input type="text" defaultValue={kpp} className="form-control border-input" id="Kpp" placeholder="КПП" onChange={(e) => setKpp(e.target.value)} />
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Адрес юридический:</label>
                 <input type="text" defaultValue={address_reg} className="form-control border-input" id="AddressReg" placeholder="Адрес юридический" onChange={(e) => setAddressReg(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Адрес местонахождения:</label>
                 <input type="text" defaultValue={address_post} className="form-control border-input" id="Address" placeholder="Адрес местонахождения" onChange={(e) => setAddressPost(e.target.value)} />
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Расчетный счет:</label>
                 <input type="text" defaultValue={bill_num} className="form-control border-input" id="Bill" placeholder="Расчетный счет" onChange={(e) => setBillNum(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Корреспондентский счет:</label>
                 <input type="text" defaultValue={bill_corr_num} className="form-control border-input" id="CorrBill" placeholder="Корреспондентский счет" onChange={(e) => setBillCorrNum(e.target.value)} />
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Наименование банка:</label>
                 <input type="text" defaultValue={bank_name} className="form-control border-input" id="BankName" placeholder="Наименование банка" onChange={(e) => setBankName(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Телефон организации:</label>
                 <input type="text" defaultValue={phone_company} className="form-control border-input" id="PhoneCompany" placeholder="Телефон организации" onChange={(e) => setPhoneCompany(e.target.value)} />
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>БИК:</label>
                 <input type="text" defaultValue={bik} className="form-control border-input" id="BankBik" placeholder="БИК банка" onChange={(e) => setBik(e.target.value)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Руководитель (для подписи):</label>
                 <input type="text" defaultValue={ruk} className="form-control border-input" id="RukCompany" placeholder="Руководитель" onChange={(e) => setRuk(e.target.value)} />
             </div>

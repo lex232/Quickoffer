@@ -31,7 +31,7 @@ const ProfileEdit = () => {
 }
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
       
         <div className="container-fluid">
           <div className="page-title">

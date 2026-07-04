@@ -113,7 +113,7 @@ const ClientDashboard = () => {
   }
 
   return (
-    <main className="col-md-9 col-lg-10 px-md-4 profile-body">
+    <main className="profile-body">
 
     <div className="container-fluid">
         <div className="page-title">
@@ -150,21 +150,21 @@ const ClientDashboard = () => {
             <div className="mt-3">  
                   {clients.map((results) => {
                     return (
-                      <div class="row text-start my-2 mx-0" key={results.id}>
-                        <div class="col-10 my-0 mx-0">
-                          <div class="row my-0 mx-0">
-                            <div class="col-md-4">
+                      <div className="row text-start my-2 mx-0" key={results.id}>
+                        <div className="col-10 my-0 mx-0">
+                          <div className="row my-0 mx-0">
+                            <div className="col-md-4">
                               <label>{ReadCompanyType(results.company_type)}: <b>{results.title}</b></label>
                             </div>
-                            <div class="col-md-3">
+                            <div className="col-md-3">
                               <label><Home size='16px' color='gray'/> {results.address_reg}</label>
                             </div>
-                            <div class="col-md-2">
+                            <div className="col-md-2">
                               {results.phone_company && <label><Phone size='16px' color='gray'/> {results.phone_company}</label>}
                             </div>
                           </div>
                         </div>
-                        <div class="col-2 my-0 mx-0">
+                        <div className="col-2 my-0 mx-0">
                           <label><button onClick={(e) => HandleEditClient(
                           results.id,
                           results.title,

@@ -189,26 +189,26 @@ const ProfileForm = ({
 }
 
 return (
-  <div class="content">
+  <div className="content">
       <form>
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Юридическое имя:</label>
                 <input type="header" defaultValue={company_name} className="form-control border-input" id="NameCompany" placeholder="Наименование ООО или ИП для документов *" onChange={(e) => handleChangeCompanyName(e)} /> 
             </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-              <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+              <div className="form-group">
                   <label>Название компании:</label>
                   <input type="header" defaultValue={company_name_for_docs} className="form-control border-input" id="NameCompanyForDocs" placeholder="Название компании в коммерческом предложении" onChange={(e) => handleChangeCompanyDocs(e)} /> 
               </div>
             </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>Форма собственности:</label>
                 <select className='form-select border-input' value={companyTypeArea} aria-label="Форма собственности *" id="CompanyType" onChange={(e) => handleChangeCompanyType(e)}>
                   <option value='ip'>ИП</option>
@@ -216,83 +216,83 @@ return (
                 </select>
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-              <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+              <div className="form-group">
                   <label>ОГРН:</label>
                   <input type="header" defaultValue={ogrn} className="form-control border-input" id="Ogrn" placeholder="ОГРН" onChange={(e) => handleChangeOgrn(e)} />
               </div>
             </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
                 <label>ИНН:</label>
                 <input type="header" defaultValue={inn} className="form-control border-input" id="Inn" placeholder="ИНН" onChange={(e) => handleChangeInn(e)} />
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-              <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+              <div className="form-group">
                   <label>КПП:</label>
                   <input type="header" defaultValue={kpp} className="form-control border-input" id="Kpp" placeholder="КПП" onChange={(e) => handleChangeKpp(e)} />
               </div>
             </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Адрес юридический:</label>
               <input type="header" defaultValue={address_reg} className="form-control border-input" id="AddressReg" placeholder="Адрес регистрации" onChange={(e) => handleChangeAddressReg(e)} />
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Адрес местонахождения:</label>
               <input type="header" defaultValue={address_post} className="form-control border-input" id="Address" placeholder="Адрес местонахождения" onChange={(e) => handleChangeAddressPost(e)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Счет расчетный:</label>
               <input type="header" defaultValue={bill_num} className="form-control border-input" id="Bill" placeholder="Расчетный счет" onChange={(e) => handleChangeBillNum(e)} />
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Счет корреспондентский:</label>
               <input type="header" defaultValue={bill_corr_num} className="form-control border-input" id="CorrBill" placeholder="Корреспондентский счет" onChange={(e) => handleChangeBillCorrNum(e)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>БИК:</label>
               <input type="header" defaultValue={bik} className="form-control border-input" id="CorrBill" placeholder="БИК" onChange={(e) => handleChangeBik(e)} />
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Название банка:</label>
               <input type="header" defaultValue={bank_name} className="form-control border-input" id="BankName" placeholder="Наименование банка" onChange={(e) => handleChangeBankName(e)} />
             </div>
           </div>
         </div>
 
-        <div class="row mx-0 my-1 justify-content-left">
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+        <div className="row mx-0 my-1 justify-content-left">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Телефон:</label>
               <input type="header" defaultValue={phone} className="form-control border-input" id="CorrBill" placeholder="Телефон" onChange={(e) => handleChangePhone(e)} />
           </div>
           </div>
-          <div class="col-md-6 ps-0 pe-2">
-            <div class="form-group">
+          <div className="col-md-6 ps-0 pe-2">
+            <div className="form-group">
               <label>Руководитель (для подписи):</label>
               <input type="header" defaultValue={ruk} className="form-control border-input" id="CorrBill" placeholder="Руководитель" onChange={(e) => handleChangeRuk(e)} />
             </div>
