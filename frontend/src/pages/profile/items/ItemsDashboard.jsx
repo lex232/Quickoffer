@@ -100,9 +100,12 @@ const ItemsDashboard = () => {
 
       <div className="container-fluid">
         <div className="page-title">
-          <div className="row">
-            <div className="col-sm-6 my-3 text-start ps-4">
+          <div className="row align-items-center">
+            <div className="col my-3 text-start ps-4">
               <h3>Список товаров и услуг</h3>
+            </div>
+            <div className="col-auto pe-4">
+              <button onClick={(e) => CreateItem(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
             </div>
           </div>
         </div>
@@ -112,15 +115,12 @@ const ItemsDashboard = () => {
         <div className="col-md-12 project-list">
           <div className="card-header">
             <div className="row">
-              <div className="col-md-9 p-0 d-flex">
+              <div className="col-12 p-0">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
                   <li className="nav-item"><a className={'nav-link' + (status === '' ? ' active' : '')} onClick={(e) => setStatus('')}><Target />Все</a></li>
                   <li className="nav-item"><a className={'nav-link' + (status === 'product' ? ' active' : '')} onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
                   <li className="nav-item"><a className={'nav-link' + (status === 'service' ? ' active' : '')} onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
                 </ul>
-              </div>
-              <div className="col-md-3 p-0">
-                <div className="form-group mb-0 me-0"></div><button onClick={(e) => CreateItem(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
               </div>
             </div>
           </div>

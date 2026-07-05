@@ -5,7 +5,7 @@ import 'reactjs-popup/dist/index.css';
 import { Percent } from 'react-feather'
 
 const DiscountPopup = ({ text, action, index, key_change }) => {
-    const valuesDiscount = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 100]
+    const valuesDiscount = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
 
     return (
         <Popup

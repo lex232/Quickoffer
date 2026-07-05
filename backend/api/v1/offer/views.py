@@ -9,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from docxtpl import DocxTemplate
@@ -22,10 +23,12 @@ from offer.models import (
     Profile,
     Client
 )
+from api.filters import FilterForOffers
 from api.v1.offer.serializers import (
     OfferSerializer,
     OfferPostSerializer,
-    OfferFullSerializer
+    OfferFullSerializer,
+    ChangeOfferStatusSerializer,
 )
 from utils.num_to_text import get_string_by_number, get_string_by_number_only
 from utils.helpers.string_helpers import (
@@ -268,7 +271,7 @@ class OfferViewSet(viewsets.ModelViewSet):
     serializer_class = OfferSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ['status_type']
+    filterset_class = FilterForOffers
 
     def get_queryset(self):
         """Показываем только КП авторизованного пользователя"""
@@ -491,3 +494,19 @@ class OfferViewSet(viewsets.ModelViewSet):
             response["Content-Disposition"] = "attachment; filename=contract_doc"
             response["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             return response
+
+    @action(detail=True,
+            methods=['patch'],
+            permission_classes=(IsAuthenticated,))
+    def change_status(self, request, **kwargs):
+        """Смена статуса КП."""
+
+        offer = self.get_object()
+        serializer = ChangeOfferStatusSerializer(
+            offer,
+            data=request.data,
+            partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(OfferSerializer(offer).data)

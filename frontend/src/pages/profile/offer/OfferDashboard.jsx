@@ -5,11 +5,12 @@ import 'reactjs-popup/dist/index.css';
 import ReactPaginate from "react-paginate";
 
 import offer_api from '../../../api/offer_api';
+import clients_api from '../../../api/clients_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
 import CreateOfferPopup from '../../../components/popup/CreateOfferPopup';
 import getDate from '../../../utils/getDate';
 
-import { AlertTriangle, Eye, Edit3, Trash2, Target, CheckCircle, PenTool, Mail, Loader, Table, PlusSquare, User, Calendar, X } from 'react-feather'
+import { AlertTriangle, Eye, Edit3, Trash2, Target, CheckCircle, PenTool, Mail, Loader, Table, PlusSquare, User, Calendar, X, Search, ChevronDown } from 'react-feather'
 import './styles.css'
 
 const OfferDashboard = () => {
@@ -26,7 +27,20 @@ const OfferDashboard = () => {
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
   const [pendingEditId, setPendingEditId] = useState(null);
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [clients, setClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState('');
+  const [clientSearchOpen, setClientSearchOpen] = useState(false);
+  const [clientSearchQuery, setClientSearchQuery] = useState('');
   let currentpage = 1;
+
+  useEffect(() => {
+    // Получить всех клиентов для фильтра
+    clients_api.getClients()
+      .then(res => setClients(res.results || res))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     // Получить все КП при загрузке страницы
@@ -34,14 +48,17 @@ const OfferDashboard = () => {
   }, []);
 
   useEffect(() => {
-    // Получить все КП при смене типа КП
+    // Получить все КП при смене типа КП, дат или клиента
     getOffers(currentpage, status);
-  }, [status]);
+  }, [status, dateFrom, dateTo, selectedClient]);
 
   const getOffers = (page, status) => {
     offer_api.getOfferPaginate({
       page: page,
       status: status,
+      date_from: dateFrom || undefined,
+      date_to: dateTo || undefined,
+      client: selectedClient || undefined,
     })
       .then(res => {
         setpageCount(Math.ceil(res.count / 10));
@@ -145,6 +162,25 @@ const OfferDashboard = () => {
 
   }
 
+  const STATUS_OPTIONS = [
+    { value: 'in_edit', label: 'на редактировании' },
+    { value: 'in_process', label: 'КП отправлено' },
+    { value: 'in_prepayment', label: 'получена предоплата' },
+    { value: 'in_install', label: 'в работе' },
+    { value: 'in_payment', label: 'получена оплата' },
+    { value: 'denied', label: 'отказано' },
+  ];
+
+  const HandleChangeStatus = async (id, newStatus, e) => {
+    e.preventDefault();
+    try {
+      await offer_api.changeOfferStatus({ id, status_type: newStatus });
+      getOffers(currentpage, status);
+    } catch (err) {
+      console.error('Ошибка смены статуса:', err);
+    }
+  };
+
   const HandleDelOffer = async (id) => {
     await offer_api.deleteOffer({ offer_id: id, })
       .then(res => {
@@ -158,9 +194,13 @@ const OfferDashboard = () => {
 
       <div className="container-fluid">
         <div className="page-title">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col my-3 text-start ps-4">
               <h3>Список коммерческих предложений</h3>
+            </div>
+            <div className="col-auto pe-4">
+              {(localStorage.getItem("items") && JSON.parse(localStorage.getItem("items")).length > 0) ? <CreateOfferPopup action={CreateOffer} />
+                : <button onClick={(e) => CreateOffer(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
             </div>
           </div>
         </div>
@@ -170,7 +210,7 @@ const OfferDashboard = () => {
         <div className="col-md-12 project-list">
           <div className="card-header">
             <div className="row">
-              <div className="col-md-9 p-0 d-flex">
+              <div className="col-12 p-0">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
                   <li className="nav-item"><a className={'nav-link' + (status === '' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, '')}><Target />Все</a></li>
                   <li className="nav-item"><a className={'nav-link' + (status === 'in_edit' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_edit')}><PenTool />Редактирование</a></li>
@@ -180,10 +220,48 @@ const OfferDashboard = () => {
                   <li className="nav-item"><a className={'nav-link' + (status === 'in_payment' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_payment')}><CheckCircle />Выполнен</a></li>
                 </ul>
               </div>
-              <div className="col-md-3 p-0">
-                <div className="form-group mb-0 me-0"></div>
-                {(localStorage.getItem("items") && JSON.parse(localStorage.getItem("items")).length > 0) ? <CreateOfferPopup action={CreateOffer} />
-                  : <button onClick={(e) => CreateOffer(e)} className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
+            </div>
+            <div className="row mt-2">
+              <div className="col-12 d-flex align-items-center gap-2 flex-wrap">
+                <div className="d-flex align-items-center gap-2">
+                  <label className="mb-0 fw-semibold" style={{ fontSize: 14, whiteSpace: 'nowrap' }}>Дата:</label>
+                  <input type="date" className="form-control form-control-sm" style={{ maxWidth: 160 }}
+                    value={dateFrom} onChange={e => { setDateFrom(e.target.value); setPage(0); }} />
+                  <span>—</span>
+                  <input type="date" className="form-control form-control-sm" style={{ maxWidth: 160 }}
+                    value={dateTo} onChange={e => { setDateTo(e.target.value); setPage(0); }} />
+                </div>
+                <div className="d-flex align-items-center gap-2 client-filter-wrap">
+                  <label className="mb-0 fw-semibold" style={{ fontSize: 14, whiteSpace: 'nowrap' }}>Клиент:</label>
+                  <div className="client-filter-dropdown">
+                    <button className="client-filter-trigger" onClick={() => setClientSearchOpen(!clientSearchOpen)}>
+                      <span>{selectedClient ? clients.find(c => c.id == selectedClient)?.title || 'Все клиенты' : 'Все клиенты'}</span>
+                      <ChevronDown size={14} />
+                    </button>
+                    {clientSearchOpen && <>
+                      <div className="client-filter-overlay" onClick={() => { setClientSearchOpen(false); setClientSearchQuery(''); }} />
+                      <div className="client-filter-menu">
+                        <div className="client-filter-search-wrap">
+                          <Search size={14} />
+                          <input type="text" placeholder="Поиск клиента..." autoFocus
+                            value={clientSearchQuery} onChange={e => setClientSearchQuery(e.target.value)} />
+                        </div>
+                        <div className="client-filter-list">
+                          <div className={'client-filter-item' + (!selectedClient ? ' active' : '')}
+                            onClick={() => { setSelectedClient(''); setClientSearchOpen(false); setClientSearchQuery(''); setPage(0); }}>
+                            Все клиенты
+                          </div>
+                          {clients.filter(c => c.title.toLowerCase().includes(clientSearchQuery.toLowerCase())).map(c => (
+                            <div key={c.id} className={'client-filter-item' + (selectedClient == c.id ? ' active' : '')}
+                              onClick={() => { setSelectedClient(c.id); setClientSearchOpen(false); setClientSearchQuery(''); setPage(0); }}>
+                              {c.title}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -199,34 +277,38 @@ const OfferDashboard = () => {
       <div className="col-md-12 project-list">
         <div className="card-header">
           <div className="mt-3">
-            {offers.map((results) => {
-              return (
-                <div className="row text-start my-2 mx-0" key={results.id}>
-                  <div className="col-10 my-0 mx-0">
-                    <div className="row my-0 mx-0">
-                      <div className="col-md-4">
-                        <label><b>{results.name_offer}</b></label>
-                      </div>
-                      <div className="col-md-4">
-                        {results.name_client && <><label><User size='16px' color='gray' /> {results.name_client}</label><br></br></>}
-                        {results.created && <label><Calendar size='16px' color='gray' /> {getDate(results.created)}</label>}
-                      </div>
-                      <div className="col-md-4">
-                        <label>Итого: {results.final_price} руб
-                          <br></br>Оборудование: {results.final_price_goods} руб
-                          <br></br>Работы: {results.final_price_work} руб</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-2 my-0 mx-0 d-flex gap-1 justify-content-end">
+            {offers.map((results) => (
+              <div className="row text-start my-2 mx-0" key={results.id}>
+                <div className="col-md-4">
+                  <label><b>{results.name_offer}</b></label>
+                </div>
+                <div className="col-md-3">
+                  {results.name_client && <><label><User size='16px' color='gray' /> {results.name_client}</label><br /></>}
+                  {results.created && <label><Calendar size='16px' color='gray' /> {getDate(results.created)}</label>}
+                </div>
+                <div className="col-md-3">
+                  <label>Итого: {results.final_price} руб
+                    <br />Оборудование: {results.final_price_goods} руб
+                    <br />Работы: {results.final_price_work} руб</label>
+                </div>
+                <div className="col-md-2 d-flex flex-md-column align-items-md-end gap-1 offer-actions-col">
+                  {!status && (
+                    <select className="offer-status-select" value={results.status_type}
+                      onChange={(e) => HandleChangeStatus(results.id, e.target.value, e)}>
+                      {STATUS_OPTIONS.map(opt => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                  )}
+                  <div className="d-flex gap-1">
                     <button className="action-btn" onClick={(e) => HandleShowOffer(results.id, e)}><Eye size={18} color="#3b82f6" /></button>
                     <button className="action-btn" onClick={(e) => HandleEditOffer(results.id, e)}><Edit3 size={18} color="#f59e0b" /></button>
                     <DeletePopup InputIcon={Trash2} color="#e53e3e" name={results.name_offer} action={HandleDelOffer} id={results.id} />
                   </div>
-                  <hr className='mt-2'></hr>
                 </div>
-              );
-            })}
+                <hr className='mt-2' />
+              </div>
+            ))}
 
             <ReactPaginate
               previousLabel={"предыдущая"}

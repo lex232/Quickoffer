@@ -6,7 +6,7 @@ import { AlertTriangle, PlusSquare } from 'react-feather'
 const CreateOfferPopup = ({ action }) => {
     return (
         <Popup
-            trigger={<button className='btn btn-primary btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
+            trigger={<button className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
             modal
             nested
             contentStyle={{ width: 'auto', maxWidth: 380, padding: 0, border: 'none', borderRadius: 16 }}
