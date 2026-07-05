@@ -5,7 +5,7 @@ const ItemCard = ({ item, loading, error, onBack }) => {
   // Состояние загрузки
   if (loading) {
     return (
-      <div className="col d-flex align-items-center justify-content-center">
+      <div className="d-flex align-items-center justify-content-center p-4">
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Загрузка...</span>
         </div>
@@ -16,9 +16,9 @@ const ItemCard = ({ item, loading, error, onBack }) => {
   // Ошибка: товар не найден
   if (error || !item) {
     return (
-      <div className="col d-flex align-items-center justify-content-center">
+      <div className="d-flex align-items-center justify-content-center p-4">
         <div className="text-center">
-          <h3>❌ Товар не найден</h3>
+          <h3>Товар не найден</h3>
           <p className="text-muted">Проверьте ссылку или вернитесь в каталог.</p>
           <button
             className="btn btn-outline-primary mt-2"
@@ -37,7 +37,7 @@ const ItemCard = ({ item, loading, error, onBack }) => {
   const brandTitle = item.brand?.title || '—';
 
   return (
-    <div className="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <div>
       <Helmet>
         <title>{item.title} — {brandTitle} - {categoryTitle} | OfferGuru</title>
         <meta

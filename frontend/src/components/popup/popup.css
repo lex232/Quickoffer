@@ -1,0 +1,145 @@
+.delete-popup {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 28px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.delete-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #8b8fa3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.delete-popup-close:hover {
+  background: #f5f6fa;
+  color: #333;
+}
+
+.delete-popup-icon {
+  margin-bottom: 12px;
+}
+
+.delete-popup-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1d2e;
+  margin: 0 0 8px;
+}
+
+.delete-popup-text {
+  font-size: 14px;
+  color: #5a5e72;
+  margin: 0 0 4px;
+}
+
+.delete-popup-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1d2e;
+  margin: 0 0 24px;
+}
+
+.delete-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.delete-popup-btn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.delete-popup-btn--danger {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.delete-popup-btn--danger:hover {
+  background: #c53030;
+}
+
+.delete-popup-btn--cancel {
+  background: #f5f6fa;
+  color: #333;
+}
+
+.delete-popup-btn--cancel:hover {
+  background: #e8ecf4;
+}
+
+/* discount popup */
+
+.discount-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: none;
+  color: #5c61f2;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.discount-trigger:hover {
+  border-color: #5c61f2;
+  background: #f0f0ff;
+}
+
+.discount-popup {
+  padding: 16px;
+}
+
+.discount-popup-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.discount-popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+.discount-popup-btn {
+  height: 36px;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.discount-popup-btn:hover {
+  border-color: #5c61f2;
+  color: #5c61f2;
+  background: #f8f8ff;
+}

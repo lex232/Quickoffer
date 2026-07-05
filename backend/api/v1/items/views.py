@@ -60,7 +60,7 @@ class ItemViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
-    filterset_fields = ['group']
+    filterset_fields = ['group', 'item_type']
     ordering_fields = ['price_retail']
 
     def get_queryset(self):
@@ -87,7 +87,7 @@ class ItemViewSetAuth(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     pagination_class = ItemsLimitPagination
-    filterset_fields = ['group']
+    filterset_fields = ['group', 'item_type']
     ordering_fields = ['price_retail']
 
     def get_queryset(self):

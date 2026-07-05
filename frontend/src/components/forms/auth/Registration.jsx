@@ -1,46 +1,48 @@
-import React, { useState, useRef } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { User, Mail, Lock } from 'react-feather';
 import user_api from '../../../api/user_api';
-import SimplePopup from '../../popup/refPopup';
 
 const RegistrationForm = ({ loginstate }) => {
-    const [login, setLogin] = useState(null)
-    const [mail, setMail] = useState(null)
-    const [password, setPass] = useState(null)
-    const [repeatPassword, setRepeatPass] = useState(null)
+    const [login, setLogin] = useState('')
+    const [mail, setMail] = useState('')
+    const [password, setPass] = useState('')
+    const [repeatPassword, setRepeatPass] = useState('')
     const [regErrors, setRegErrors] = useState(null)
     const [isChecked, setIsChecked] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
-    const popupRegRef = useRef();
-    const openRegPopup = () => popupRegRef.current.open();
-
-    function handleRegistrationCLiсk(e) {
+    async function handleRegistrationClick(e) {
         e.preventDefault();
+        setRegErrors(null);
+
         if (password !== repeatPassword) {
             setRegErrors('Вы ввели не одинаковые пароли!')
-            openRegPopup();
-        }
-        else if (!isChecked) {
             return
         }
-        else {
-            user_api.signup({ email: mail, password, username: login })
-                .then(res => {
-                    if (res) {
-                        return navigate("/login/", { state: { success: true } })
-                    }
-                })
-                .catch(err => {
-                    const errors = Object.values(err)
-                    if (errors) {
-                        let temp_errors = []
-                        errors[0].forEach((element) => temp_errors.push(element))
-                        setRegErrors('Возможные ошибки: \n' + temp_errors.join('\n'))
-                        openRegPopup();
-                    }
-                })
+
+        if (!login || !mail || !password) {
+            setRegErrors('Заполните все поля')
+            return
+        }
+
+        setLoading(true);
+
+        try {
+            const res = await user_api.signup({ email: mail, password, username: login })
+            if (res) {
+                return navigate("/login/", { state: { success: true } })
+            }
+        } catch (err) {
+            const errors = Object.values(err)
+            if (errors && errors[0]) {
+                setRegErrors(errors[0].join('\n'))
+            } else {
+                setRegErrors('Произошла ошибка. Попробуйте снова.')
+            }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -49,35 +51,68 @@ const RegistrationForm = ({ loginstate }) => {
     }
 
     return (
-        <main className="form-signin w-100">
-            <SimplePopup refPopup={popupRegRef} heading={'Не удалось зарегистрироваться'} text={regErrors} />
-            <form>
-                <h1 className="h3 mb-3 fw-normal mb-2">Регистрация</h1>
-                <div className='text-center'>
-                    Уже зарегистрированы? <a href="/login">Авторизуйтесь!</a>
+        <div className="auth-card">
+            <h1>Регистрация</h1>
+            <p className="auth-subtitle">
+                Уже зарегистрированы? <a href="/login">Авторизуйтесь!</a>
+            </p>
+            <form onSubmit={handleRegistrationClick}>
+                {regErrors && <div className="auth-error">{regErrors}</div>}
+
+                <div className="auth-input-wrap">
+                    <User size={18} className="auth-input-icon" />
+                    <input
+                        type="text"
+                        autoComplete="username"
+                        autoCapitalize="off"
+                        placeholder="Логин"
+                        onChange={(e) => setLogin(e.target.value)}
+                    />
                 </div>
-                <div className="form-floating">
-                    <input type="text" autoComplete="new-password" autocapitalize="off" className="form-control my-3" id="floatingInput" placeholder="Login" onChange={(e) => setLogin(e.target.value)} />
-                    <label for="floatingInput">Логин</label>
+                <div className="auth-input-wrap">
+                    <Mail size={18} className="auth-input-icon" />
+                    <input
+                        type="email"
+                        autoCapitalize="off"
+                        placeholder="Почта"
+                        onChange={(e) => setMail(e.target.value)}
+                    />
                 </div>
-                <div className="form-floating">
-                    <input type="mail" className="form-control my-3" autocapitalize="off" id="floatingMail" placeholder="example@example.com" onChange={(e) => setMail(e.target.value)} />
-                    <label for="floatingInput">Почта</label>
+                <div className="auth-input-wrap">
+                    <Lock size={18} className="auth-input-icon" />
+                    <input
+                        type="password"
+                        autoComplete="new-password"
+                        placeholder="Пароль"
+                        onChange={(e) => setPass(e.target.value)}
+                    />
                 </div>
-                <div className="form-floating">
-                    <input type="password" autoComplete="new-password" className="form-control my-3" id="floatingPassword" placeholder="Password" onChange={(e) => setPass(e.target.value)} />
-                    <label for="floatingPassword">Пароль</label>
+                <div className="auth-input-wrap">
+                    <Lock size={18} className="auth-input-icon" />
+                    <input
+                        type="password"
+                        autoComplete="new-password"
+                        placeholder="Повторите пароль"
+                        onChange={(e) => setRepeatPass(e.target.value)}
+                    />
                 </div>
-                <div className="form-floating">
-                    <input type="password" autoComplete="new-password" className="form-control my-3" id="floatingPasswordRepeat" placeholder="Password" onChange={(e) => setRepeatPass(e.target.value)} />
-                    <label for="floatingPassword">Повторите пароль</label>
+                <div className="auth-checkbox">
+                    <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={(e) => setIsChecked(e.target.checked)}
+                    />
+                    <span>
+                        Я прочитал и подтверждаю свое согласие с{' '}
+                        <a href="/terms">пользовательским соглашением</a> и{' '}
+                        <a href="/privacy">политикой конфиденциальности</a>
+                    </span>
                 </div>
-                <button onClick={(e) => handleRegistrationCLiсk(e)} className="w-100 btn btn-lg btn-primary mb-3" type="submit" disabled={!isChecked}>Продолжить</button>
-                <div className='text-center'>
-                    <input type="checkbox" className='form-check-input pull-left' value="approve" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}/> Я прочитал и подтверждаю свое согласие с <a href="/terms">пользовательским соглашением</a> и <a href="/privacy">политикой конфиденциальности</a>
-                </div>
+                <button type="submit" className="auth-btn" disabled={!isChecked || loading}>
+                    {loading ? 'Загрузка...' : 'Продолжить'}
+                </button>
             </form>
-        </main>
+        </div>
     );
 };
 

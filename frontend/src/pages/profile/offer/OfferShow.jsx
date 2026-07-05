@@ -153,7 +153,7 @@ const OfferShow = () => {
   }
 
   return (
-    <main className="col-md-9 col-lg-10">
+      <div className="offer-show">
 
       <div className="row my-2 align-items-center">
           <div className="col-2 text-start py-0 col-height">
@@ -230,7 +230,7 @@ const OfferShow = () => {
                       <p className="mb-2">Итого(без НДС)</p>
                       <p className="mb-1 fs-4">{currentOffer.final_price} Р.</p>
       </div>
-    </main>
+      </div>
   );
 };
 

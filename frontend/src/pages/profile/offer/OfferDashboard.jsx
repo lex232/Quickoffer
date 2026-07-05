@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import ReactPaginate from "react-paginate";
 
 import offer_api from '../../../api/offer_api';
@@ -7,10 +9,7 @@ import DeletePopup from '../../../components/popup/DeletePopup';
 import CreateOfferPopup from '../../../components/popup/CreateOfferPopup';
 import getDate from '../../../utils/getDate';
 
-import { ReactComponent as EyeIco } from '../../../static/image/icons/eye_icon.svg'
-import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { Target, CheckCircle, PenTool, Mail, Loader, Table, PlusSquare, User, Calendar } from 'react-feather'
+import { AlertTriangle, Eye, Edit3, Trash2, Target, CheckCircle, PenTool, Mail, Loader, Table, PlusSquare, User, Calendar, X } from 'react-feather'
 import './styles.css'
 
 const OfferDashboard = () => {
@@ -26,6 +25,7 @@ const OfferDashboard = () => {
 
   const [page, setPage] = useState(0);
   const [pageCount, setpageCount] = useState(0);
+  const [pendingEditId, setPendingEditId] = useState(null);
   let currentpage = 1;
 
   useEffect(() => {
@@ -98,6 +98,18 @@ const OfferDashboard = () => {
     }
 
     e.preventDefault();
+
+    const hasDraft = localStorage.getItem("items") && JSON.parse(localStorage.getItem("items")).length > 0;
+    if (hasDraft) {
+      setPendingEditId(id);
+      return;
+    }
+
+    proceedEditOffer(id);
+  }
+
+  const proceedEditOffer = async (id) => {
+    setPendingEditId(null);
     localStorage.removeItem('items')
     localStorage.removeItem("nameoffer")
     localStorage.removeItem("editable")
@@ -160,12 +172,12 @@ const OfferDashboard = () => {
             <div className="row">
               <div className="col-md-9 p-0 d-flex">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => handleChangeStatusType(e, '')}><Target />Все</a></li>
-                  <li className="nav-item"><a className="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_edit')}><PenTool />Редактирование</a></li>
-                  <li className="nav-item"><a className="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_process')}><Mail />Отправлено</a></li>
-                  <li className="nav-item"><a className="nav-link" id="bill-top-tab" data-bs-toggle="tab" href="#top-bill" role="tab" aria-controls="top-bill" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_prepayment')}><Table />Выставлен счет</a></li>
-                  <li className="nav-item"><a className="nav-link" id="work-top-tab" data-bs-toggle="tab" href="#top-work" role="tab" aria-controls="top-work" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_install')}><Loader />В работе</a></li>
-                  <li className="nav-item"><a className="nav-link" id="done-top-tab" data-bs-toggle="tab" href="#top-done" role="tab" aria-controls="top-done" aria-selected="false" onClick={(e) => handleChangeStatusType(e, 'in_payment')}><CheckCircle />Выполнен</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === '' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, '')}><Target />Все</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'in_edit' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_edit')}><PenTool />Редактирование</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'in_process' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_process')}><Mail />Отправлено</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'in_prepayment' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_prepayment')}><Table />Выставлен счет</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'in_install' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_install')}><Loader />В работе</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'in_payment' ? ' active' : '')} onClick={(e) => handleChangeStatusType(e, 'in_payment')}><CheckCircle />Выполнен</a></li>
                 </ul>
               </div>
               <div className="col-md-3 p-0">
@@ -206,10 +218,10 @@ const OfferDashboard = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-2 my-0 mx-0">
-                    <button onClick={(e) => HandleShowOffer(results.id, e)}><EyeIco fill="blue" transform='scale(1)' baseProfile='tiny' width={28} height={28} /></button>
-                    <button onClick={(e) => HandleEditOffer(results.id, e)}><PencilIco fill="orange" /></button>
-                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.name_offer} action={HandleDelOffer} id={results.id} />
+                  <div className="col-2 my-0 mx-0 d-flex gap-1 justify-content-end">
+                    <button className="action-btn" onClick={(e) => HandleShowOffer(results.id, e)}><Eye size={18} color="#3b82f6" /></button>
+                    <button className="action-btn" onClick={(e) => HandleEditOffer(results.id, e)}><Edit3 size={18} color="#f59e0b" /></button>
+                    <DeletePopup InputIcon={Trash2} color="#e53e3e" name={results.name_offer} action={HandleDelOffer} id={results.id} />
                   </div>
                   <hr className='mt-2'></hr>
                 </div>
@@ -239,6 +251,31 @@ const OfferDashboard = () => {
           </div>
         </div>
       </div>
+
+      <Popup
+        open={!!pendingEditId}
+        modal
+        closeOnDocumentClick
+        onClose={() => setPendingEditId(null)}
+        contentStyle={{ width: 'auto', maxWidth: 380, padding: 0, border: 'none', borderRadius: 16 }}
+      >
+        <div className="delete-popup">
+          <button className="delete-popup-close" onClick={() => setPendingEditId(null)}><X size={18} /></button>
+          <div className="delete-popup-icon">
+            <AlertTriangle size={32} color="#e53e3e" />
+          </div>
+          <h3 className="delete-popup-title">Черновик будет удалён</h3>
+          <p className="delete-popup-text">Вы уже редактируете другое КП. Загрузка нового удалит текущий черновик.</p>
+          <div className="delete-popup-actions">
+            <button className="delete-popup-btn delete-popup-btn--danger" onClick={() => proceedEditOffer(pendingEditId)}>
+              Загрузить
+            </button>
+            <button className="delete-popup-btn delete-popup-btn--cancel" onClick={() => setPendingEditId(null)}>
+              Отмена
+            </button>
+          </div>
+        </div>
+      </Popup>
     </main>
   );
 };

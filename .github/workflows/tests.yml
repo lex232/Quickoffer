@@ -1,0 +1,65 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: quickoffer_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: Run migrations
+        working-directory: backend
+        env:
+          POSTGRES_DB: quickoffer_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          SECRET_KEY: test-key-not-for-production
+          DEBUG_MODE: 'False'
+          ALLOWED_HOSTS: '*'
+        run: python manage.py migrate
+
+      - name: Run tests
+        working-directory: backend
+        env:
+          POSTGRES_DB: quickoffer_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          SECRET_KEY: test-key-not-for-production
+          DEBUG_MODE: 'False'
+          ALLOWED_HOSTS: '*'
+        run: python manage.py test

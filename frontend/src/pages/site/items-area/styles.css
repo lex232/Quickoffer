@@ -57,3 +57,46 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
+.btn-qty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #5c61f2;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 0;
+}
+
+.btn-qty:hover {
+    background: #f0f0ff;
+    border-color: #5c61f2;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 0;
+}
+
+.btn-icon--danger {
+    background: transparent;
+    color: #999;
+}
+
+.btn-icon--danger:hover {
+    background: #fee;
+    color: #e53e3e;
+}
