@@ -22,6 +22,8 @@ import LoginPage from './pages/auth/LoginPage';
 import RegistrationPage from './pages/auth/RegistrationPage';
 import PrivacyPage from './pages/site/privacy/PrivacyPage';
 import TermsOfUsePage from './pages/site/privacy/TermsOfUsePage';
+import DisclaimerPage from './pages/site/privacy/DisclaimerPage';
+import CookiesPage from './pages/site/privacy/CookiesPage';
 import NotFoundPage from './pages/site/404/404';
 
 /**
@@ -154,6 +156,8 @@ function App() {
                 <Route path="/" element={<MainPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path='/privacy' element={<PrivacyPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path='/terms' element={<TermsOfUsePage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path='/disclaimer' element={<DisclaimerPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
+                <Route path='/cookies' element={<CookiesPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path='/catalog' element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path="/catalog/:slug" element={<CatalogPage loginstate={loggedIn} onSignOut={onSignOut} user={user} />}></Route>
                 <Route path="/login" element={<LoginPage loginstate={loggedIn} onSignIn={authorization} />} />

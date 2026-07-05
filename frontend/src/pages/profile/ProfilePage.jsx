@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import Header from '../site/includes/Header.jsx';
+import Footer from '../site/includes/Footer.jsx';
 import ProfileSidebar from './sidebar/ProfileSidebar.jsx';
 
 import { Outlet } from 'react-router-dom';
@@ -34,6 +35,7 @@ const MainProfile = ({ loginstate, onSignOut, user }) => {
           <Outlet />
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
