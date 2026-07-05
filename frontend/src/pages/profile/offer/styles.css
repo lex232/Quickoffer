@@ -80,3 +80,154 @@
     padding: 2px 12px;
     font-size: 14px;
 }
+
+.client-filter-dropdown {
+  position: relative;
+}
+
+.client-filter-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 220px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e2e6ee;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1d2e;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.client-filter-trigger:hover {
+  border-color: #5c61f2;
+}
+
+.client-filter-trigger span {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.client-filter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.client-filter-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border: 1px solid #e2e6ee;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.client-filter-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f1f5;
+  color: #999;
+}
+
+.client-filter-search-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.client-filter-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.client-filter-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.client-filter-item:hover {
+  background: #f5f6fa;
+}
+
+.client-filter-item.active {
+  background: #5c61f2;
+  color: #fff;
+}
+
+@media (max-width: 767.98px) {
+  .client-filter-trigger {
+    width: 100%;
+    min-width: 180px;
+  }
+
+  .client-filter-menu {
+    position: fixed;
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-height: 60vh;
+    border-radius: 14px;
+  }
+}
+
+.offer-actions-col {
+  overflow: hidden;
+}
+
+.offer-status-select {
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1d2e;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+  min-width: 130px;
+}
+
+.offer-status-select:hover,
+.offer-status-select:focus {
+  border-color: #5c61f2;
+}
+
+@media (max-width: 991.98px) and (min-width: 768px) {
+  .offer-status-select {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .offer-actions-col {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .offer-status-select {
+    min-width: 140px;
+    font-size: 12px;
+    height: 44px;
+  }
+}

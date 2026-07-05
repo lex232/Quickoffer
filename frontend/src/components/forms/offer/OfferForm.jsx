@@ -351,47 +351,30 @@ const OfferForm = ({
 
   return (
       <form>
-        <div className="row mx-0 my-1 justify-content-left">
-          <div className="col-md-6 ps-0 pe-2">
-            <div className="form-group">
-                <label>Название КП* :</label>
-                <input type="text" value={nameArea || ''}
-                className={'form-control border-input' + (touched.name && !nameArea?.trim() ? ' is-invalid' : '')}
-                id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
-            </div>
+        <div className="offer-top-row">
+          <div className="offer-field">
+            <label className="offer-label">Название КП *</label>
+            <input type="text" value={nameArea || ''}
+              className={'offer-input' + (touched.name && !nameArea?.trim() ? ' is-invalid' : '')}
+              id="offerName" placeholder="Введите название" onChange={(e) => handleChangeName(e)} />
           </div>
-          {/* <div className="col-md-6 ps-0 pe-2">
-            <div className="form-group">
-                <label>Статус КП:</label>
-                <select className='form-select border-input' value={statusOffer} aria-label="Товар или услуга *" id="StatusType" onChange={(e) => setStatusOffer(e.target.value)}>
-                  <option value='in_edit'>на редактировании</option>
-                  <option value='in_process'>КП отправлено</option>
-                  <option value='in_prepayment'>Выставлен счет</option>
-                  <option value='in_install'>в работе</option>
-                  <option value='in_payment'>получена оплата</option>
-                  <option value='denied'>отказано</option>
-                </select>
-            </div>
-          </div> */}
-          <div className="col-md-6 ps-0 pe-2">
-            <div className="form-group">
-                <label>Выбранный клиент: </label>
-                {clientValue.title ? 
-                <b> {clientValue.title} <button className='action-btn action-btn--danger' onClick={(e) => deleteCurrentClient(e)} title="Удалить"><Trash2 size={14} /></button> </b> :
-                ' Клиент не выбран'} 
-                <div>
-                  {clientValue.title ? <ChooseClientPopup action={setClientValue} text='Изменить клиента'/> : <ChooseClientPopup action={setClientValue} text='Выбрать клиента'/>}
+          <div className="offer-field">
+            <label className="offer-label">Клиент</label>
+            {clientValue.title ? (
+              <div className="offer-client-row">
+                <div className="offer-client-selected">
+                  <span className="offer-client-name">{clientValue.title}</span>
+                  <button className='offer-client-remove' onClick={(e) => deleteCurrentClient(e)} title="Удалить"><Trash2 size={14} /></button>
                 </div>
-            </div>
+                <ChooseClientPopup action={setClientValue} text='Изменить' className='offer-client-change-btn'/>
+              </div>
+            ) : (
+              <ChooseClientPopup action={setClientValue} text='Выбрать клиента' className='offer-client-change-btn'/>
+            )}
           </div>
         </div>
 
-        <div className="row mx-0 my-1 justify-content-left">
-          <div className="col-md-6 ps-0 pe-2">
-            <div className="form-group">
-                <label>Добавить товары в КП можно через</label>
-                <div className='pt-0'><Link to="/catalog"><button className="btn btn-primary btn">каталог товаров</button></Link></div>
-                  {/* <input className="form-control mt-1" id="offerName" placeholder="Начните вводить название для поиска"
+        {/* <input className="form-control mt-1" id="offerName" placeholder="Начните вводить название для поиска"
                     onChange={e => {
                       const valueForItem = e.target.value
                       setItemValue({
@@ -419,10 +402,6 @@ const OfferForm = ({
                 </div>}
                 <div className='pt-2'>или перейдите в <Link to="/catalog"><button className="btn btn-primary btn">каталог товаров</button></Link></div>
             </div> */}
-            </div>
-          </div>
-        </div>
-
 
           <div>
            <section className='itemsforoffer mx-0 px-0'>

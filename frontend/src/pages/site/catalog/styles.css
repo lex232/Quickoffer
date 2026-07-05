@@ -172,7 +172,7 @@
 
     .catalog-sidebar-inner {
         padding-top: 60px;
-        height: 100vh;
+        height: 100dvh;
     }
 
     .catalog-toggle {

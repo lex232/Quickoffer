@@ -10,7 +10,7 @@ import './styles.css'
 
 const MainProfile = ({ loginstate, onSignOut, user }) => {
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.matchMedia('(min-width: 768px)').matches);
 
   return (
     <div className="profile-layout">

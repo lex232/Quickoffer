@@ -119,6 +119,23 @@ updateOffer ({
   ).then(this.checkResponse)
 }
 
+changeOfferStatus ({ id, status_type }) {
+  const token = localStorage.getItem('token')
+  return fetch(
+    `/api/offers/${id}/change_status/`,
+    {
+      method: 'PATCH',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
+      },
+      body: JSON.stringify({
+        status_type: status_type
+      })
+    }
+  ).then(this.checkResponse)
+}
+
 deleteOffer ({ offer_id }) {
   const token = localStorage.getItem('token')
   return fetch(
@@ -135,11 +152,19 @@ deleteOffer ({ offer_id }) {
 
 getOfferPaginate ({
   page,
-  status
+  status,
+  date_from,
+  date_to,
+  client
 }) {
   const token = localStorage.getItem('token')
+  const params = new URLSearchParams({ page })
+  if (status) params.append('status_type', status)
+  if (date_from) params.append('date_from', date_from)
+  if (date_to) params.append('date_to', date_to)
+  if (client) params.append('client', client)
   return fetch(
-    `/api/offers/?page=${page}&status_type=${status}`,
+    `/api/offers/?${params}`,
     {
       method: 'GET',
       headers: {

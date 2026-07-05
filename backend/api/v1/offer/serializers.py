@@ -231,6 +231,7 @@ class OfferPostSerializer(serializers.ModelSerializer):
 
         instance.name_offer = validated_data.get('name_offer', instance.name_offer)
         instance.name_client = validated_data.get('name_client', instance.name_client)
+        instance.status_type = validated_data.get('status_type', instance.status_type)
 
         items_valid = validated_data.pop('items_for_offer')
         items_current = instance.selected_offer.all()
@@ -254,3 +255,17 @@ class OfferPostSerializer(serializers.ModelSerializer):
         коммерческого предложения"""
 
         return OfferSerializer(instance, context=self.context).data
+
+
+class ChangeOfferStatusSerializer(serializers.Serializer):
+    """Сериалайзер для смены статуса КП."""
+
+    status_type = serializers.ChoiceField(choices=[
+        'in_edit', 'in_process', 'in_prepayment',
+        'in_install', 'in_payment', 'denied'
+    ])
+
+    def update(self, instance, validated_data):
+        instance.status_type = validated_data.get('status_type')
+        instance.save()
+        return instance
