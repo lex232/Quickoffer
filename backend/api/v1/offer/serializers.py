@@ -95,6 +95,8 @@ class ItemOfferCreateSerializer(serializers.ModelSerializer):
     создания коммерческого предложения."""
 
     id = serializers.IntegerField()
+    item_price_retail = serializers.CharField(allow_blank=True)
+    item_price_purchase = serializers.CharField(allow_blank=True)
 
     class Meta:
         model = OfferItems
@@ -105,6 +107,26 @@ class ItemOfferCreateSerializer(serializers.ModelSerializer):
             'item_price_purchase',
             'amount'
         )
+
+    def validate_item_price_retail(self, value):
+        if value is None or value == '':
+            raise serializers.ValidationError('Укажите розничную цену')
+        try:
+            if float(value) <= 0:
+                raise serializers.ValidationError('Цена должна быть больше 0')
+        except (TypeError, ValueError):
+            raise serializers.ValidationError('Укажите розничную цену')
+        return value
+
+    def validate_item_price_purchase(self, value):
+        if value is None or value == '':
+            raise serializers.ValidationError('Укажите закупочную цену')
+        try:
+            if float(value) <= 0:
+                raise serializers.ValidationError('Цена должна быть больше 0')
+        except (TypeError, ValueError):
+            raise serializers.ValidationError('Укажите закупочную цену')
+        return value
 
 
 class OfferPostSerializer(serializers.ModelSerializer):
@@ -158,6 +180,16 @@ class OfferPostSerializer(serializers.ModelSerializer):
     def validate(self, data):
         """Проверка на одинаковые товары
         На количество товара"""
+
+        name_offer = data.get('name_offer')
+        author = self.context.get('request').user
+        qs = OfferForCustomer.objects.filter(author=author, name_offer=name_offer)
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise serializers.ValidationError(
+                {'name_offer': 'КП с таким именем уже есть!'}
+            )
 
         item_list = []
         items_get = data.get('items_for_offer')

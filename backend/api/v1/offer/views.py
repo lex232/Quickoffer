@@ -148,7 +148,7 @@ def generate_offer_doc(id, description=False):
 
     count_items = 1
     count_services = 1
-    for index, item in enumerate(items_all):
+    for item in items_all:
         if item.item.item_type == 'product':
             context['data_items'].append({
                 'num': count_items,
@@ -166,11 +166,11 @@ def generate_offer_doc(id, description=False):
                 image = InlineImage(doc, url_img, width=Mm(10))
             else:
                 image = None
-            context['data_items'][index]['image'] = image
+            context['data_items'][-1]['image'] = image
             if description:
-                context['data_items'][index]['desc'] = str(item.item.description).replace('!', ': ').replace(';', '. ')
+                context['data_items'][-1]['desc'] = str(item.item.description).replace('!', ': ').replace(';', '. ')
                 # Пример словаря характеристик для разбиения в таблице на будущее
-                # context['data_items'][index]['desc'] = [{'desc_name': 'Тип', 'desc_param': 'Уличный'}, {'desc_name': 'Питание', 'desc_param': '12В'}]
+                # context['data_items'][-1]['desc'] = [{'desc_name': 'Тип', 'desc_param': 'Уличный'}, {'desc_name': 'Параметр', 'desc_param': '12В'}]
             count_items += 1
         if item.item.item_type == 'service':
             context['data_services'].append({

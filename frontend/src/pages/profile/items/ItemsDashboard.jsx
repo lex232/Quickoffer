@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 
 import items_api from '../../../api/items_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
 
-import CartPlusItem from '../../../utils/items/cartPlusItem';
-import CartRemoveItem from '../../../utils/items/cartRemoveItem';
-import CheckSameCartItem from '../../../utils/items/checkSameCartItem';
+import AddToCartButton from '../../../components/cart/AddToCartButton';
 
-import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield, ShoppingBag } from 'react-feather'
+import { Edit3, Trash2, Target, ShoppingCart, Tool, PlusSquare, CreditCard, Shield } from 'react-feather'
 import './styles.css'
 
 
@@ -25,13 +21,6 @@ const ItemsDashboard = () => {
   const [status, setStatus] = useState('');
 
   let currentpage = 1;
-
-  let items_in_cart = []
-
-  // Получаем корзину из локального хранилища
-  if (localStorage.getItem("items")) {
-    items_in_cart = JSON.parse(localStorage.getItem("items"));
-  }
 
   useEffect(() => {
     // Получить все товары при загрузке страницы
@@ -102,15 +91,7 @@ const ItemsDashboard = () => {
     return navigate("/profile/items/create")
   }
 
-  const CartPlusItemWithRefresh = (results, items_input, e) => {
-    // Добавляем элемент в список товаров/услуг с рефрешем
-    CartPlusItem(results, items_input, e)
-    getItems(currentpage, status);
-  }
-
-  const CartRemoveItemWithRefresh = (id_item, items_input, e) => {
-    // Удаляем элемент из списка товаров/услуг по id товара
-    CartRemoveItem(id_item, items_input, e)
+  const handleCartChange = () => {
     getItems(currentpage, status);
   }
 
@@ -133,9 +114,9 @@ const ItemsDashboard = () => {
             <div className="row">
               <div className="col-md-9 p-0 d-flex">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => setStatus('')}><Target />Все</a></li>
-                  <li className="nav-item"><a className="nav-link" id="top-items-tab" data-bs-toggle="tab" href="#top-items" role="tab" aria-controls="top-items" aria-selected="false" onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
-                  <li className="nav-item"><a className="nav-link" id="service-top-tab" data-bs-toggle="tab" href="#top-service" role="tab" aria-controls="top-service" aria-selected="false" onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === '' ? ' active' : '')} onClick={(e) => setStatus('')}><Target />Все</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'product' ? ' active' : '')} onClick={(e) => setStatus('product')}><ShoppingCart />Товары</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (status === 'service' ? ' active' : '')} onClick={(e) => setStatus('service')}><Tool />Услуги</a></li>
                 </ul>
               </div>
               <div className="col-md-3 p-0">
@@ -176,23 +157,13 @@ const ItemsDashboard = () => {
                         })}
                       </div>
                       <div className="col-md-2 px-0 mt-1">
-                        <div className="bg-transparent d-flex flex-row">
-                          {CheckSameCartItem(results.id, items_in_cart)
-                            ? <div><Link to="/profile/offer/create"><button className="btn btn-primary btn-sm">Перейти в <ShoppingBag size={16} color='#FFFFFF' /></button></Link></div>
-                            : <div><button onClick={(e) => CartPlusItemWithRefresh(results, items_in_cart, e)} className="btn btn-light btn-sm">Добавить в <ShoppingBag size={16} color='#000000' /></button></div>}
-
-                          {CheckSameCartItem(results.id, items_in_cart) &&
-                            <span>
-                              <button className="btn btn-danger btn-sm ms-2 ms-2" onClick={(e) => CartRemoveItemWithRefresh(results.id, items_in_cart, e)}>X</button>
-                            </span>}
-
-                        </div>
+                        <AddToCartButton results={results} onCartChange={handleCartChange} />
                       </div>
 
                     </div>
                   </div>
-                  <div className="col-2 my-0 mx-0">
-                    <button onClick={(e) => HandleEditItem(
+                  <div className="col-2 my-0 mx-0 d-flex gap-1 justify-content-end">
+                    <button className="action-btn" onClick={(e) => HandleEditItem(
                       results.id,
                       results.title,
                       results.brand,
@@ -202,8 +173,8 @@ const ItemsDashboard = () => {
                       results.quantity_type,
                       results.description,
                       results.image,
-                      e)}><PencilIco fill="orange" /></button>
-                    <DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelItem} id={results.id} />
+                      e)}><Edit3 size={18} color="#f59e0b" /></button>
+                    <DeletePopup InputIcon={Trash2} color="#e53e3e" name={results.title} action={HandleDelItem} id={results.id} />
                   </div>
                   <hr className='mt-2'></hr>
                 </div>

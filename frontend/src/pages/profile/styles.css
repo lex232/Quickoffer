@@ -39,13 +39,80 @@
 @media (max-width: 767.98px) {
   .sidebar-toggle {
     display: flex;
+    top: 6px;
   }
 
-  .profile-layout .header-wrap .container-fluid {
+  .header-inner {
     padding-left: 52px !important;
+  }
+
+  .profile-layout .header-wrap {
+    background: none;
+    border-bottom: none;
   }
 
   .profile-body-wrap {
     flex-direction: column;
   }
+}
+
+/* action buttons */
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.action-btn:hover {
+  background: #f5f6fa;
+}
+
+.action-btn--danger {
+  color: #e53e3e;
+}
+
+.action-btn--danger:hover {
+  background: #fee;
+}
+
+.action-btn svg {
+  vertical-align: middle;
+}
+
+/* smaller font in tables */
+
+.project-list {
+  font-size: 14px;
+}
+
+.project-list .border-tab.nav-tabs .nav-item .nav-link {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.project-list b,
+.project-list strong {
+  font-size: 14px;
+}
+
+.project-list label {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.project-list .btn-create {
+  font-size: 14px;
+}
+
+.project-list h3 {
+  font-size: 20px;
 }

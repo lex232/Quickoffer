@@ -163,33 +163,35 @@ class ApiItems {
     page,
     group,
     ordering_price,
-    brand
+    brand,
+    item_type,
   }) {
-    return fetch(
-      `/api/items/?group=${group}&page=${page}&ordering=${ordering_price}&brand=${brand}`, 
-      {
-        method: 'GET',
-      }
-    ).then(this.checkResponse)
+    let url = `/api/items/?group=${group}&page=${page}&ordering=${ordering_price}`
+    if (brand !== undefined && brand !== null) url += `&brand=${brand}`
+    if (item_type) url += `&item_type=${item_type}`
+    return fetch(url, {
+      method: 'GET',
+    }).then(this.checkResponse)
   }
 
   getItemsAuthFilterCategoryPaginate ({
     page,
     group,
     ordering_price,
-    brand
+    brand,
+    item_type,
   }) {
     const token = localStorage.getItem('token')
-    return fetch(
-      `/api/itemsauth/?group=${group}&page=${page}&ordering=${ordering_price}&brand=${brand}`, 
-      {
-        method: 'GET',
-        headers: {
-          ...this._headers,
-          'authorization': `Token ${token}`
-        }
+    let url = `/api/itemsauth/?group=${group}&page=${page}&ordering=${ordering_price}`
+    if (brand !== undefined && brand !== null) url += `&brand=${brand}`
+    if (item_type) url += `&item_type=${item_type}`
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        'authorization': `Token ${token}`
       }
-    ).then(this.checkResponse)
+    }).then(this.checkResponse)
   }
 
   // Поиск по вхождению сначала

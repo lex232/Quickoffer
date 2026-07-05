@@ -6,9 +6,7 @@ import clients_api from '../../../api/clients_api';
 import DeletePopup from '../../../components/popup/DeletePopup';
 import ReadCompanyType from '../../../utils/text-operations/replaceClientType';
 
-import { ReactComponent as PencilIco } from '../../../static/image/icons/pencil.svg'
-import { ReactComponent as DeleteIco } from '../../../static/image/icons/delete.svg'
-import { Target, UserCheck, Briefcase, Folder, PlusSquare, Home, Phone } from 'react-feather'
+import { Edit3, Trash2, Target, UserCheck, Briefcase, Folder, PlusSquare, Home, PhoneCall } from 'react-feather'
 import './styles.css'
 
 
@@ -131,10 +129,10 @@ const ClientDashboard = () => {
             <div className="row">
               <div className="col-md-9 p-0 d-flex">
                 <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                  <li className="nav-item"><a className="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true" onClick={(e) => handleChangeCompanyType(e, '')}><Target />Все</a></li>
-                  <li className="nav-item"><a className="nav-link" id="ip-items-tab" data-bs-toggle="tab" href="#top-ip" role="tab" aria-controls="top-ip" aria-selected="false" onClick={(e) => handleChangeCompanyType(e, 'ip')}><Briefcase />ИП</a></li>
-                  <li className="nav-item"><a className="nav-link" id="ooo-top-tab" data-bs-toggle="tab" href="#top-ooo" role="tab" aria-controls="top-ooo" aria-selected="false" onClick={(e) => setTypeCompany('ooo')}><Folder />ООО</a></li>
-                  <li className="nav-item"><a className="nav-link" id="fiz-top-tab" data-bs-toggle="tab" href="#top-fiz" role="tab" aria-controls="top-fiz" aria-selected="false" onClick={(e) => setTypeCompany('fiz')}><UserCheck />Физическое лицо</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (type_company === '' ? ' active' : '')} onClick={(e) => handleChangeCompanyType(e, '')}><Target />Все</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (type_company === 'ip' ? ' active' : '')} onClick={(e) => handleChangeCompanyType(e, 'ip')}><Briefcase />ИП</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (type_company === 'ooo' ? ' active' : '')} onClick={(e) => setTypeCompany('ooo')}><Folder />ООО</a></li>
+                  <li className="nav-item"><a className={'nav-link' + (type_company === 'fiz' ? ' active' : '')} onClick={(e) => setTypeCompany('fiz')}><UserCheck />Физическое лицо</a></li>
                 </ul>
               </div>
               <div className="col-md-3 p-0">                    
@@ -160,30 +158,31 @@ const ClientDashboard = () => {
                               <label><Home size='16px' color='gray'/> {results.address_reg}</label>
                             </div>
                             <div className="col-md-2">
-                              {results.phone_company && <label><Phone size='16px' color='gray'/> {results.phone_company}</label>}
+                              {results.phone_company && <label className="text-nowrap"><PhoneCall size='16px' color='gray' className="me-1"/> {results.phone_company}</label>}
                             </div>
                           </div>
                         </div>
                         <div className="col-2 my-0 mx-0">
-                          <label><button onClick={(e) => HandleEditClient(
-                          results.id,
-                          results.title,
-                          results.company_type,
-                          results.ogrn,
-                          results.inn,
-                          results.kpp,
-                          results.address_reg,
-                          results.address_post,
-                          results.bill_num,
-                          results.bill_corr_num,
-                          results.bank_name,
-                          results.phone_company,
-                          results.bik,
-                          results.ruk,
-                          results.image,
-                          e)}><PencilIco fill="orange"/></button>
-                          <label className=''><DeletePopup InputIcon={DeleteIco} color="red" name={results.title} action={HandleDelClient} id={results.id}/></label>
-                          </label>
+                          <div className="d-flex gap-1 justify-content-end">
+                            <button className="action-btn" onClick={(e) => HandleEditClient(
+                            results.id,
+                            results.title,
+                            results.company_type,
+                            results.ogrn,
+                            results.inn,
+                            results.kpp,
+                            results.address_reg,
+                            results.address_post,
+                            results.bill_num,
+                            results.bill_corr_num,
+                            results.bank_name,
+                            results.phone_company,
+                            results.bik,
+                            results.ruk,
+                            results.image,
+                            e)}><Edit3 size={18} color="#f59e0b"/></button>
+                            <DeletePopup InputIcon={Trash2} color="#e53e3e" name={results.title} action={HandleDelClient} id={results.id}/>
+                          </div>
                         </div>
 
 

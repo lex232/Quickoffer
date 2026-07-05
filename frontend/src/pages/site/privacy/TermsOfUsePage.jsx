@@ -11,18 +11,16 @@ const TermsOfUsePage = ({ loginstate, onSignOut, user }) => {
     */
 
     return (
-        <body>
+        <div className="privacy-page">
             <Helmet>
                 <title>OfferGuru - Пользовательское соглашение</title>
                 <meta name="description" content="Онлайн приложение для быстрого создания коммерческих предложений в сфере СКС, электрики, видеонаблюдения и тд." />
             </Helmet>
-            <header className="container-fluid">
-                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
-            </header>
-            <main className="container px4">
+            <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
+            <main>
 
                 <div className="row mb-3">
-                    <div className="col" style={{ border: 'solid 2px #eee', padding: '20px' }}>
+                    <div className="col privacy-content">
                         <div id="inputResult">
                             <div className="row mb-4">
                                 <div className="col">
@@ -184,10 +182,8 @@ const TermsOfUsePage = ({ loginstate, onSignOut, user }) => {
                     </div>
                 </div>
             </main>
-            <footer className="container-fluid">
-                <Footer />
-            </footer>
-        </body>
+            <Footer />
+        </div>
     );
 };
 

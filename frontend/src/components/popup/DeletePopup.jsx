@@ -1,61 +1,45 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import '../../css/popup.css'
+import { AlertTriangle, X } from 'react-feather';
+import './popup.css'
 
 const DeletePopup = ({ InputIcon, color, name, action, id }) => {
-    /**
-     * Popup окно удаления элемента по id
-     */
-
     return (
-        <div>
-            <Popup  
-                trigger={<button className="button"><InputIcon fill={color}/></button>}
-                modal
-                contentStyle={{width: "350px", className: "modal"}}
-                nested
-            >
-                {close => (
-                    <div className="modal-dialog">
-                        <div className="modal-dialog">
-                            <div className="modal-content d-flex">
-                                <div className="modal-header border-bottom-0 ">
-                                    <h1 className="modal-title fs-4 mx-auto">Удаление записи</h1>
-                                    <button onClick={close} type="button btn-primary" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="d-flex pt-2">
-                                    <p className="mx-auto">Вы действительно хотите удалить?</p>
-                                </div>
-                                <div className="d-flex px-4">
-                                    <p className="fs-6 mx-auto">{name}</p>
-                                </div>
-                                <div className="modal-footer flex-column border-top-0">
-                                    <div className="actions">
-                                        <button 
-                                            type="button"
-                                            className="btn btn-lg btn-primary w-100 mx-0 mb-2"
-                                                onClick={() => {
-                                                    action(id);
-                                                }}> Да
-                                            </button>
-                                        <button
-                                            className="btn btn-lg btn-light w-100 mx-0 mt-2 mb-4"
-                                            onClick={() => {
-                                                close();
-                                            }}>
-                                                Отмена
-                                        </button>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>
+        <Popup
+            trigger={<button className="action-btn action-btn--danger"><InputIcon color={color} size={18} /></button>}
+            modal
+            nested
+            closeOnDocumentClick
+            contentStyle={{ width: 'auto', maxWidth: 380, padding: 0, border: 'none', borderRadius: 16 }}
+        >
+            {close => (
+                <div className="delete-popup">
+                    <button className="delete-popup-close" onClick={close}><X size={18} /></button>
+                    <div className="delete-popup-icon">
+                        <AlertTriangle size={32} color="#e53e3e" />
                     </div>
-                )}
-            </Popup>
-        </div>
+                    <h3 className="delete-popup-title">Удаление записи</h3>
+                    <p className="delete-popup-text">Вы действительно хотите удалить?</p>
+                    <p className="delete-popup-name">{name}</p>
+                    <div className="delete-popup-actions">
+                        <button
+                            className="delete-popup-btn delete-popup-btn--danger"
+                            onClick={() => { action(id); close(); }}
+                        >
+                            Удалить
+                        </button>
+                        <button
+                            className="delete-popup-btn delete-popup-btn--cancel"
+                            onClick={close}
+                        >
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            )}
+        </Popup>
     );
 };
 
 export default DeletePopup;
-

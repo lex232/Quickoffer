@@ -336,9 +336,7 @@ const MainPage = ({ loginstate, onSignOut, user }) => {
 
       </main>
 
-      <footer className="container-fluid px-0">
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 };

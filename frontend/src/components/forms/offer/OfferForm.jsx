@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 import offer_api from '../../../api/offer_api';
-import { XCircle, MinusSquare, PlusSquare } from 'react-feather'
+import { Trash2, Minus, Plus, AlertTriangle, X } from 'react-feather'
 
 import ChooseClientPopup from '../../popup/ChooseClientPopup';
 import DiscountPopup from '../../popup/discountPopup';
@@ -24,9 +26,8 @@ const OfferForm = ({
   //const [ clientArea, setClient ] = useState(name_client)
   // const [ statusOffer, setStatusOffer] = useState(status_type);
 
-  const classValid = 'form-control border-input'
-  const classIsInvalid = 'form-control border-input is-invalid'
-  const [ classForNameArea, setClassForNameArea] = useState(classValid);
+  const [ fieldErrors, setFieldErrors ] = useState({})
+  const [ touched, setTouched ] = useState({})
 
   // Самая главная переменная - итоговый список КП
   let items = []
@@ -56,6 +57,11 @@ const OfferForm = ({
       setEditable(editable)
     }
   }, []);
+
+  const [ saving, setSaving ] = useState(false)
+  const [ confirmDeleteIndex, setConfirmDeleteIndex ] = useState(null)
+  const [ confirmClear, setConfirmClear ] = useState(false)
+  const [ errorData, setErrorData ] = useState(null)
 
   // Итоговая стоимость КП
   const [ finallyPrice, setFinallyPrice ] = useState(0)
@@ -92,18 +98,7 @@ const OfferForm = ({
     calculateFinalPurchasePrice()
   }, [list])
 
-   // UseEffect для смены класса имени КП, подсветит красным, если не заполнено
-   useEffect(_ => {
-    if (nameArea === undefined || nameArea.length === 0) {
-      setClassForNameArea(classIsInvalid)
-    }
-    else if (nameArea !== undefined && nameArea.length === 0) {
-      setClassForNameArea(classIsInvalid)
-    }
-    else {
-      setClassForNameArea(classValid)
-    }
-  }, [nameArea])
+
 
   useEffect(_ => {
     setName(nameFromLocal)
@@ -180,11 +175,14 @@ const OfferForm = ({
   }
 
   const deleteItemOffer = (index, e) => {
-    // Удаляем элемент из списка товаров/услуг по индексу
     e.preventDefault();
+    setConfirmDeleteIndex(index);
+  }
 
+  const confirmDelete = () => {
+    if (confirmDeleteIndex === null) return;
     let prepareToDeleteList = list;
-    prepareToDeleteList.splice(index, 1)
+    prepareToDeleteList.splice(confirmDeleteIndex, 1)
     setList(prepareToDeleteList);
     localStorage.setItem("items", JSON.stringify(list));
 
@@ -198,6 +196,7 @@ const OfferForm = ({
     calculateFinalPrice()
     calculateFinalPurchasePrice()
     window.dispatchEvent(new Event("storage"));
+    setConfirmDeleteIndex(null);
   }
 
   const deleteCurrentClient = (e) => {
@@ -215,7 +214,13 @@ const OfferForm = ({
     list.map((item) => {
       temp_final += (item.item_price_retail * item.amount)
     })
-    setFinallyPrice(temp_final)
+    setFinallyPrice(Number(temp_final.toFixed(2)))
+  }
+
+  const isFieldInvalid = (key, value) => {
+    if (!touched[key]) return false;
+    if (key === 'amount') return !value || Number(value) < 1;
+    return !value || Number(value) <= 0;
   }
 
   const calculateFinalPurchasePrice = () => {
@@ -224,7 +229,7 @@ const OfferForm = ({
     list.map((item) => {
       temp_final_purchase += (item.item_price_purchase * item.amount)
     })
-    setFinallyPurchasePrice(temp_final_purchase)
+    setFinallyPurchasePrice(Number(temp_final_purchase.toFixed(2)))
   }
 
   const detectActionsWithItems = (itemsList, index, key, e, action, value) => {
@@ -242,7 +247,10 @@ const OfferForm = ({
       itemsList[index][key] = Number(temp_value - (temp_value * (value / 100))).toFixed(2)
     }
     else {
-      itemsList[index][key] = e.target.value
+      let val = String(e.target.value).replace(/[^\d.]/g, '');
+      val = val.replace(/(\..*)\./g, '$1');
+      val = val.replace(/^(\d+\.\d{2}).*$/, '$1');
+      itemsList[index][key] = val;
     }
     return itemsList
   }
@@ -263,13 +271,17 @@ const OfferForm = ({
     });
     calculateFinalPrice();
     calculateFinalPurchasePrice()
+    setTouched(prev => ({ ...prev, [index + '_' + key]: true }));
   }
 
   const handleChangeName = (e) => {
-    // Устанавливаем имя категории на событии onChange
-    e.preventDefault();
     setName(e.target.value);
-    localStorage.setItem("nameoffer", e.target.value);
+    setTouched(prev => ({ ...prev, name: true }));
+    if (e.target.value.trim()) {
+      localStorage.setItem("nameoffer", e.target.value);
+    } else {
+      localStorage.removeItem("nameoffer");
+    }
   }
 
   const ClearOffer = () => {
@@ -289,29 +301,51 @@ const OfferForm = ({
 
 
 
-  function handlePostCLiсk(edit, e) {
-    // Обработать клик публикации
+  async function handlePostCLiсk(edit, e) {
     e.preventDefault();
 
     const data = {
       title: nameArea,
       client: clientValue.id,
-      // status_type: statusOffer,
       status_type: 'in_edit',
       items_for_offer: list,
     }
-    if (edit === false) {
-      // Если флаг edit is false
-      offer_api.createOffer(data)
-      // Чистим корзину
+    const errors = [];
+    list.forEach((item, i) => {
+      if (!item.item_price_retail || Number(item.item_price_retail) <= 0)
+        errors.push({ index: i, field: 'item_price_retail', msg: `Позиция ${i+1}: укажите розничную цену` });
+      if (!item.item_price_purchase || Number(item.item_price_purchase) <= 0)
+        errors.push({ index: i, field: 'item_price_purchase', msg: `Позиция ${i+1}: укажите закупочную цену` });
+      if (!item.amount || Number(item.amount) < 1)
+        errors.push({ index: i, field: 'amount', msg: `Позиция ${i+1}: количество должно быть не менее 1` });
+    });
+    if (errors.length) {
+      const allTouched = {};
+      list.forEach((_, i) => {
+        allTouched[i + '_item_price_retail'] = true;
+        allTouched[i + '_item_price_purchase'] = true;
+        allTouched[i + '_amount'] = true;
+      });
+      allTouched.name = true;
+      setTouched(allTouched);
+      setErrorData({ validation: errors.map(e => e.msg) });
+      return;
+    }
+
+    setSaving(true)
+    try {
+      if (edit === false) {
+        await offer_api.createOffer(data)
+      } else if (edit === true) {
+        data.id = editable
+        await offer_api.updateOffer(data)
+      }
       ClearOffer()
-      return navigate("/profile/offer/list")
-    } else if (edit === true) {
-      // Иначе PATCH
-      data.id = editable
-      offer_api.updateOffer(data)
-      ClearOffer()
-      return navigate("/profile/offer/list")
+      navigate("/profile/offer/list")
+    } catch (err) {
+      setErrorData(typeof err === 'object' ? err : { detail: 'Ошибка соединения' });
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -321,8 +355,8 @@ const OfferForm = ({
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Название КП* :</label>
-                <input type="header" defaultValue={nameArea}
-                className={classForNameArea}
+                <input type="text" value={nameArea || ''}
+                className={'form-control border-input' + (touched.name && !nameArea?.trim() ? ' is-invalid' : '')}
                 id="offerName" placeholder="Название КП *" onChange={(e) => handleChangeName(e)} /> 
             </div>
           </div>
@@ -343,7 +377,7 @@ const OfferForm = ({
             <div className="form-group">
                 <label>Выбранный клиент: </label>
                 {clientValue.title ? 
-                <b> {clientValue.title} <button className='' onClick={(e) => deleteCurrentClient(e)}><XCircle strokeWidth={3} size={18} color="red" /></button> </b> :
+                <b> {clientValue.title} <button className='action-btn action-btn--danger' onClick={(e) => deleteCurrentClient(e)} title="Удалить"><Trash2 size={14} /></button> </b> :
                 ' Клиент не выбран'} 
                 <div>
                   {clientValue.title ? <ChooseClientPopup action={setClientValue} text='Изменить клиента'/> : <ChooseClientPopup action={setClientValue} text='Выбрать клиента'/>}
@@ -420,12 +454,12 @@ const OfferForm = ({
                           <div className="col-md-2 col-lg-2 col-xl-2 offer-text-min row m-0 p-0">
                             <div className="col-6 col-lg-12">
                               <label>Розничная цена</label>
-                              <input value={item.item_price_retail} className="form-control offer-min-form mb-1" id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} />
+                              <input value={item.item_price_retail} className={'form-control offer-min-form mb-1' + (isFieldInvalid(index + '_item_price_retail', item.item_price_retail) ? ' is-invalid' : '')} id={index+1} placeholder="Цена*" onChange={(e) => handleChangeValue(index, 'item_price_retail', e)} />
                             </div>
                             <div className="col-6 col-lg-12 pb-2">
                               <label>Закупочная цена</label>
                               <div className='d-flex'>
-                                <input value={item.item_price_purchase} className="form-control offer-min-form" id={index+1} placeholder="Цена закупки*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
+                                <input value={item.item_price_purchase} className={'form-control offer-min-form' + (isFieldInvalid(index + '_item_price_purchase', item.item_price_purchase) ? ' is-invalid' : '')} id={index+1} placeholder="Цена закупки*" onChange={(e) => handleChangeValue(index, 'item_price_purchase', e)} />
                                 <DiscountPopup text='Пересчитать от розничной цены' action={handleChangeValue} index={index} key_change='item_price_purchase'/>
                               </div>
                             </div>
@@ -434,18 +468,18 @@ const OfferForm = ({
                           <div className="col-md-4 col-lg-4 col-xl-4 offer-text-min row m-0 p-0 pb-2">
                             <div className="col-5">
                               <label>Кол-во</label>
-                                <div className='d-flex'>
-                                  <div id={"button_minus" + index + 1} className='pe-1' role="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'minus')}><MinusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
-                                  <input value={item.amount} className="form-control offer-min-form" id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
-                                  <div id={"button_minus" + index + 1} className='ps-1' role="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'plus')}><PlusSquare strokeWidth={2} size={24} color="#5c61f2"/></div>
+                                <div className='offer-qty'>
+                                  <button className="cart-qty-btn" type="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'minus')}><Minus size={13} /></button>
+                                  <input value={item.amount} className={'form-control offer-min-form' + (isFieldInvalid(index + '_amount', item.amount) ? ' is-invalid' : '')} id={index+1} placeholder="Кол-во*" onChange={(e) => handleChangeValue(index, 'amount', e)} />
+                                  <button className="cart-qty-btn" type="button" onClick={(e) => handleChangeValue(index, 'amount', e, 'plus')}><Plus size={13} /></button>
                                 </div>
                             </div>
                             <div className="col-5">
                               <label>Итого</label>
-                              <h5 className="mb-0">{item.item_price_retail * item.amount} Р</h5>
+                              <h5 className="mb-0 offer-total">{(item.item_price_retail * item.amount).toFixed(2)} Р</h5>
                             </div>
                             <div className="col-2 d-flex align-items-center">
-                            <button onClick={(e) => deleteItemOffer(index, e)}><XCircle strokeWidth={3} size={22} color="red" /></button>
+                            <button className="action-btn action-btn--danger" onClick={(e) => deleteItemOffer(index, e)} title="Удалить"><Trash2 size={16} /></button>
                           </div>
                           </div>
                         </div>
@@ -453,24 +487,118 @@ const OfferForm = ({
                     </div>
                   </div>
                 )
-              })}
+               })}
+              <Popup
+                open={confirmDeleteIndex !== null}
+                onClose={() => setConfirmDeleteIndex(null)}
+                modal
+                nested
+                contentStyle={{ width: 400, padding: 0, border: 'none', borderRadius: 16 }}
+              >
+                <div className="delete-popup">
+                  <button className="delete-popup-close" onClick={() => setConfirmDeleteIndex(null)}><X size={18} /></button>
+                  <div className="delete-popup-icon">
+                    <AlertTriangle size={32} color="#e53e3e" />
+                  </div>
+                  <h3 className="delete-popup-title">Удаление записи</h3>
+                  <p className="delete-popup-text">Убрать из КП?</p>
+                  <p className="delete-popup-name">{confirmDeleteIndex !== null ? list[confirmDeleteIndex]?.title : ''}</p>
+                  <div className="delete-popup-actions">
+                    <button
+                      className="delete-popup-btn delete-popup-btn--danger"
+                      onClick={confirmDelete}
+                    >
+                      Удалить
+                    </button>
+                    <button
+                      className="delete-popup-btn delete-popup-btn--cancel"
+                      onClick={() => setConfirmDeleteIndex(null)}
+                    >
+                      Отмена
+                    </button>
+                  </div>
+                </div>
+              </Popup>
+
+              <Popup
+                open={errorData !== null}
+                onClose={() => setErrorData(null)}
+                modal
+                nested
+                contentStyle={{ width: 400, padding: 0, border: 'none', borderRadius: 16 }}
+              >
+                <div className="delete-popup">
+                  <button className="delete-popup-close" onClick={() => setErrorData(null)}><X size={18} /></button>
+                  <div className="delete-popup-icon">
+                    <AlertTriangle size={32} color="#e53e3e" />
+                  </div>
+                  <h3 className="delete-popup-title">Ошибка сохранения</h3>
+                  <div className="delete-popup-text" style={{ textAlign: 'left', marginBottom: 16 }}>
+                    {(() => {
+                      try {
+                        if (!errorData || typeof errorData !== 'object') return <div>Ошибка сохранения</div>;
+                        const msgs = [];
+                        const extract = (obj) => {
+                          if (typeof obj === 'string' && obj) msgs.push(obj);
+                          else if (Array.isArray(obj)) obj.forEach(extract);
+                          else if (obj && typeof obj === 'object') Object.values(obj).forEach(extract);
+                        };
+                        extract(errorData);
+                        return msgs.length ? msgs.map((m, i) => <div key={i}>{m}</div>) : <div>Ошибка сохранения</div>;
+                      } catch {
+                        return <div>Ошибка сохранения</div>;
+                      }
+                    })()}
+                  </div>
+                  <div className="delete-popup-actions">
+                    <button className="delete-popup-btn delete-popup-btn--cancel" onClick={() => setErrorData(null)}>
+                      Закрыть
+                    </button>
+                  </div>
+                </div>
+              </Popup>
+
+              <Popup
+                open={confirmClear}
+                onClose={() => setConfirmClear(false)}
+                modal
+                nested
+                contentStyle={{ width: 'auto', maxWidth: 380, padding: 0, border: 'none', borderRadius: 16 }}
+              >
+                <div className="delete-popup">
+                  <div className="delete-popup-icon">
+                    <AlertTriangle size={32} color="#e53e3e" />
+                  </div>
+                  <h3 className="delete-popup-title">Очистить КП</h3>
+                  <p className="delete-popup-text">Все добавленные позиции будут удалены. Продолжить?</p>
+                  <div className="delete-popup-actions">
+                    <button className="delete-popup-btn delete-popup-btn--danger" onClick={() => { ClearOffer(); setConfirmClear(false); }}>
+                      Очистить
+                    </button>
+                    <button className="delete-popup-btn delete-popup-btn--cancel" onClick={() => setConfirmClear(false)}>
+                      Отмена
+                    </button>
+                  </div>
+                </div>
+              </Popup>
+
               <div>
                 <div className='pt-1'><b>Итого:</b></div>
-                <div>Розница: <b>{finallyPrice} руб.</b></div>
-                <div>Закупка: <b>{finallyPurchasePrice} руб.</b></div>
+                <div>Розница: <b>{finallyPrice.toFixed(2)} руб.</b></div>
+                <div>Закупка: <b>{finallyPurchasePrice.toFixed(2)} руб.</b></div>
                 <div className='pt-1'>Ваша прибыль: <b>{Number(finallyPrice-finallyPurchasePrice).toFixed(2)} руб.</b></div>
               </div>
            </section>
            </div>
            <div className="btn-toolbar d-flex align-items-end mb-4">
             <div className='justify-content-start col-12'>
-              {editable ? <div className=''><button onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 me-3 float-start">Сохранить как новое КП</button> 
-              <button onClick={(e) => handlePostCLiсk(true, e)} className="btn btn-primary mt-3 float-start">Перезаписать</button></div>
+              {editable ? <div className=''><button disabled={saving} onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 me-3 float-start">{saving ? 'Сохранение...' : 'Сохранить как новое КП'}</button> 
+              <button disabled={saving} onClick={(e) => handlePostCLiсk(true, e)} className="btn btn-primary mt-3 float-start">{saving ? 'Сохранение...' : 'Перезаписать'}</button></div>
               : 
-              <button onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 float-start">Опубликовать</button>}         
+              <button disabled={saving} onClick={(e) => handlePostCLiсk(false, e)} className="btn btn-primary mt-3 float-start">{saving ? 'Сохранение...' : 'Опубликовать'}</button>}         
             </div>
             <div className='justify-content-end col-12 mt-2 pe-3'>
-              <button onClick={(e) => ClearOffer()} type="button" className="btn btn-outline-secondary float-end">Очистить КП</button>
+              <button onClick={() => setConfirmClear(true)} type="button" className="btn btn-outline-secondary float-end">Очистить КП</button>
             </div>
           </div>
       </form>

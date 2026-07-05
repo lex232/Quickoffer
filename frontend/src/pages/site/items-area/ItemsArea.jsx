@@ -6,12 +6,11 @@ import items_api from '../../../api/items_api';
 import brands_api from '../../../api/brands_api';
 import './styles.css';
 import AddNewTable from '../../../utils/text-operations/addTable';
-import CheckSameCartItem from '../../../utils/items/checkSameCartItem';
-import CartPlusItem from '../../../utils/items/cartPlusItem';
-import CartRemoveItem from '../../../utils/items/cartRemoveItem';
-import { ShoppingBag, PlusSquare, MinusSquare } from 'react-feather';
 
-const ItemsArea = ({ category_id, loginstate, title, description }) => {
+import { Plus } from 'react-feather';
+import AddToCartButton from '../../../components/cart/AddToCartButton';
+
+const ItemsArea = ({ category_id, loginstate, title, description, item_type }) => {
   const navigate = useNavigate();
 
   const [listItems, setListItems] = useState([]);
@@ -26,16 +25,6 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
   const [currentpagestate, setCurrentPageState] = useState(1);
   const [cartVersion, setCartVersion] = useState(0);
 
-  let items = [];
-  if (localStorage.getItem("items")) {
-    try {
-      items = JSON.parse(localStorage.getItem("items"));
-    } catch (e) {
-      console.warn('Invalid cart data in localStorage');
-      localStorage.removeItem("items");
-    }
-  }
-
   // === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
 
   const checkStatesCheckedInBrands = (brands_for_check) => {
@@ -44,7 +33,7 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
 
   const loadItemsWithFilters = (page, categoryId, brandsList) => {
     setIsLoaddingItems(true);
-    
+
     let brands_id = '';
     brandsList.forEach(object => {
       if (object.checked) {
@@ -53,13 +42,17 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
     });
     brands_id = brands_id ? brands_id.slice(0, -1) : '';
 
+    // brandsList пуст (нет брендов в категории) → не фильтруем
+    // brandsList не пуст, но все сняты → brands_id='' → покажем ничего
+    const noBrands = brandsList.length === 0;
+
     if (loginstate === false) {
-      getItems(page, categoryId, brands_id);
+      getItems(page, categoryId, noBrands ? undefined : brands_id);
     } else {
       if (categoryId === -1) {
         getItemsOnlyUsers(page);
       } else {
-        getItemsAuth(page, categoryId, brands_id);
+        getItemsAuth(page, categoryId, noBrands ? undefined : brands_id);
       }
     }
   };
@@ -81,7 +74,8 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
       page,
       group: category_id,
       ordering_price: orderingPrice,
-      brand: brands_id
+      brand: brands_id,
+      item_type,
     })
       .then(res => {
         setpageCount(Math.ceil(res.count / 8));
@@ -96,7 +90,8 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
       page,
       group: category_id,
       ordering_price: orderingPrice,
-      brand: brands_id
+      brand: brands_id,
+      item_type,
     })
       .then(res => {
         setpageCount(Math.ceil(res.count / 8));
@@ -135,45 +130,6 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
 
   const triggerCartUpdate = () => {
     setCartVersion(v => v + 1);
-  };
-
-  const CartPlusItemWithRefresh = (results, items_input, e) => {
-    CartPlusItem(results, items_input, e);
-    triggerCartUpdate();
-  };
-
-  const CartRemoveItemWithRefresh = (id_item, items_input, e) => {
-    CartRemoveItem(id_item, items_input, e);
-    triggerCartUpdate();
-  };
-
-  const handleQuantityChange = (id, action, e) => {
-    e.preventDefault();
-    let currentItems = JSON.parse(localStorage.getItem("items")) || [];
-    const index = currentItems.findIndex(item => item.id === id);
-    if (index === -1) return;
-    let amount = Number(currentItems[index].amount);
-    if (action === 'minus' && amount > 1) {
-      amount -= 1;
-    } else if (action === 'plus') {
-      amount += 1;
-    }
-    currentItems[index].amount = String(amount);
-    localStorage.setItem("items", JSON.stringify(currentItems));
-    window.dispatchEvent(new Event("storage"));
-    triggerCartUpdate();
-  };
-
-  const handleQuantityInput = (id, e) => {
-    let currentItems = JSON.parse(localStorage.getItem("items")) || [];
-    const index = currentItems.findIndex(item => item.id === id);
-    if (index === -1) return;
-    let val = e.target.value.replace(/\D/g, '');
-    if (val === '' || Number(val) < 1) val = '1';
-    currentItems[index].amount = val;
-    localStorage.setItem("items", JSON.stringify(currentItems));
-    window.dispatchEvent(new Event("storage"));
-    triggerCartUpdate();
   };
 
   const CreateItem = (e) => {
@@ -232,7 +188,7 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
                 className="btn btn-primary btn-create-small"
                 type="button"
               >
-                <PlusSquare size={16} className="me-2" />
+                <Plus size={16} className="me-2" />
                 Добавить
               </button>
             </div>
@@ -331,45 +287,7 @@ const ItemsArea = ({ category_id, loginstate, title, description }) => {
                     </div>
                     {loginstate && (
                       <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent align-items-center">
-                        {CheckSameCartItem(results.id, items) ? (
-                          <>
-                            <div className="d-flex align-items-center col-8">
-                              <MinusSquare
-                                strokeWidth={2} size={24} color="#5c61f2"
-                                role="button"
-                                onClick={(e) => handleQuantityChange(results.id, 'minus', e)}
-                              />
-                              <input
-                                className="form-control form-control-sm text-center mx-1"
-                                style={{ width: '45px', minWidth: '40px' }}
-                                value={items.find(i => i.id === results.id)?.amount || 1}
-                                onChange={(e) => handleQuantityInput(results.id, e)}
-                              />
-                              <PlusSquare
-                                strokeWidth={2} size={24} color="#5c61f2"
-                                role="button"
-                                onClick={(e) => handleQuantityChange(results.id, 'plus', e)}
-                              />
-                            </div>
-                            <div className="col-4 d-flex justify-content-end align-items-center">
-                              <button
-                                className="btn btn-danger btn-sm"
-                                onClick={(e) => CartRemoveItemWithRefresh(results.id, items, e)}
-                              >
-                                X
-                              </button>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="justify-content-start text-start col-8">
-                            <button
-                              onClick={(e) => CartPlusItemWithRefresh(results, items, e)}
-                              className="btn btn-light btn-sm"
-                            >
-                              Добавить в <ShoppingBag size={16} color="#000000" />
-                            </button>
-                          </div>
-                        )}
+                        <AddToCartButton results={results} onCartChange={triggerCartUpdate} />
                       </div>
                     )}
                   </div>

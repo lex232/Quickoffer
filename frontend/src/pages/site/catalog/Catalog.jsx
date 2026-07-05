@@ -8,14 +8,11 @@ import ItemsArea from '../items-area/ItemsArea.jsx';
 import ItemCard from '../items-area/ItemCard.jsx';
 
 import group_api from '../../../api/group_api';
-import { AlignJustify, XCircle, Menu } from 'react-feather';
+import { AlignJustify, X, Menu } from 'react-feather';
 import './styles.css'
 
 
 const CatalogPage = ({ loginstate, onSignOut, user }) => {
-    /**
-    * Страница каталога
-    */
     const { slug } = useParams();
 
     const [listGroups, setListGroups] = useState([])
@@ -25,24 +22,19 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     const [chosenTree, setChosenTree] = useState(undefined)
     const [chosenTitle, setChosenTitle] = useState(undefined)
     const [chosenDescription, setChosenDescription] = useState(undefined)
+    const [chosenType, setChosenType] = useState(undefined)
     const [singleItem, setSingleItem] = useState(null);
     const [itemError, setItemError] = useState(null);
     const [loadingSingleItem, setLoadingSingleItem] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768);
 
-    const style_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom collapse"
-    const style_non_visible = "col-md-3 col-lg-2 d-md-block sidebar sidebar-custom"
-
-    const [isCollapsed, setIsCollapsed] = useState(style_visible)
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Получить все группы при загрузке страницы
         getGroups();
         getGroupService();
-    }, [])
-        ;
+    }, []);
 
-    // Если есть slug — загружаем товар
     useEffect(() => {
         if (slug) {
             loadSingleItem(slug);
@@ -71,12 +63,12 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         group_api.getItemsGroup()
             .then(res => {
                 setListGroups(res);
-                // Устанавливаем первую категорию ТОЛЬКО если chosenCategory ещё не задан
                 if (res.length > 0 && chosenCategory == null) {
                     setChosenCategory(res[0].id);
                     setChosenTree(res[0].tree_id);
                     setChosenTitle(res[0].title);
                     setChosenDescription(res[0].description);
+                    setChosenType('product');
                 }
             })
             .catch(e => console.log(e))
@@ -84,7 +76,6 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     };
 
     const getGroupService = () => {
-        // Получить список категорий услуг
         group_api.getServiceGroup()
             .then(res => {
                 setListService(res);
@@ -94,93 +85,102 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
     }
 
     const handleChangeCategory = (e, id, tree_id, title, description) => {
-        // Устанавливаем значение типа компании onChange
         e.preventDefault();
         setChosenCategory(id);
         setChosenTree(tree_id);
         setChosenTitle(title)
         setChosenDescription(description)
         setSingleItem(null);
+        const foundInService = listService.some(g => g.id === id);
+        setChosenType(foundInService ? 'service' : 'product');
         navigate('/catalog');
     }
 
-    const handleMenu = (e) => {
-        // Прячет меню
+    const renderTree = (items, prefix) => {
+        if (!items || items.length === 0) return null;
+
+        return items.map(item => {
+            if (item.level === 0) {
+                return (
+                    <button
+                        key={`${prefix}-${item.id}`}
+                        className={`catalog-link ${item.id === chosenCategory ? 'active' : ''}`}
+                        onClick={(e) => handleChangeCategory(e, item.id, item.tree_id, item.title, item.description)}
+                    >
+                        <span>{item.title}</span>
+                    </button>
+                );
+            }
+            if (chosenTree === item.tree_id) {
+                return (
+                    <button
+                        key={`${prefix}-${item.id}`}
+                        className={`catalog-link catalog-link--child ${item.id === chosenCategory ? 'active' : ''}`}
+                        onClick={(e) => handleChangeCategory(e, item.id, item.tree_id, item.title, item.description)}
+                    >
+                        {item.title}
+                    </button>
+                );
+            }
+            return null;
+        });
+    };
+
+    const selectMyItems = (e) => {
         e.preventDefault();
-        if (isCollapsed === style_visible) {
-            setIsCollapsed(style_non_visible)
-        }
-        else { setIsCollapsed(style_visible) }
-    }
-
-    const CategoryView = ({ InputGroups }) => {
-        return (
-            <>
-                {InputGroups.map((results) => {
-                    return (
-                        results.level === 0
-                        &&
-                        <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3" data-bs-toggle="collapse" data-bs-target="#general-collapse" aria-expanded="false">
-                            <span className='position-absolute end-0'></span>
-                            <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title, results.description)}>
-                                {results.id === chosenCategory ? <li className="nav-link active text-sidebar button-mini">{results.title}</li> : <li className="nav-item text-sidebar">{results.title}</li>}
-                            </button>
-                        </div>
-                        ||
-                        chosenTree === results.tree_id && results.level !== 0
-                        &&
-                        <button onClick={(e) => handleChangeCategory(e, results.id, results.tree_id, results.title, results.description)}>
-                            {results.id === chosenCategory ? <li className="nav-link active small-item button-mini"> --- {results.title}</li> : <li className="nav-item small-item"> --- {results.title}</li>}
-                        </button>
-                    );
-                })}
-            </>
-        )
-    }
-
-    const MyItems = ({ }) => {
-        return (
-            <div className="sidebar-heading d-flex align-items-center fw-bold text-muted item-sidebar-catalog px-3">
-                <button onClick={(e) => handleChangeCategory(e, -1, 0, 'Мои товары')}>
-                    {-1 === chosenCategory ? <li className="nav-link active text-sidebar button-mini">Мои товары</li> : <li className="nav-item text-sidebar">Мои товары</li>}
-                </button>
-            </div>
-        )
-    }
+        setChosenCategory(-1);
+        setChosenTree(0);
+        setChosenTitle('Мои товары');
+        setChosenDescription('');
+        setChosenType(undefined);
+        setSingleItem(null);
+        navigate('/catalog');
+    };
 
     return (
-        <div>
-            <div className="container-fluid">
-                <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
-            </div>
-            <div className="d-flex">
-                {isLoadingCat && <div className="spinner-border text-primary" role="status">
-                    <span className="visually-hidden">Загрузка...</span>
-                </div>}
-            </div>
+        <div className="catalog-wrap">
+            <Header loginstate={loginstate} onSignOut={onSignOut} user={user} />
+            <button className="catalog-toggle" onClick={() => setSidebarOpen(prev => !prev)}>
+                {sidebarOpen ? <X size={18} /> : <AlignJustify size={18} />}
+            </button>
+
             <Helmet>
                 <title>OfferGuru - каталог товаров</title>
-                <meta name="description" content="Готовый каталог товаров, который можно использовать для быстрого создания КП, договора, торг-12 и других документов" />
+                <meta name="description" content="Готовый каталог товаров для быстрого создания КП, договора, торг-12 и других документов" />
             </Helmet>
-            <div className="container-fluid">
-                <div className="row">
-                    <div>
-                        <button className='button-on-mobile ps-3 pb-2' onClick={(e) => handleMenu(e)}>
-                            {style_visible === isCollapsed ? <><AlignJustify /> показать категории</> : <><XCircle /> скрыть категории</>}
-                        </button>
+
+            <div className="catalog-body">
+                {isLoadingCat && <div className="spinner-border text-primary catalog-loading"><span className="visually-hidden">Загрузка...</span></div>}
+
+                {sidebarOpen && <div className="catalog-sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+                <aside className={`catalog-sidebar ${sidebarOpen ? 'open' : ''}`}>
+                    <div className="catalog-sidebar-inner">
+                        <span className="catalog-sidebar-heading"><Menu size={14} /> Категории</span>
+                        {renderTree(listGroups, 'g')}
+
+                        {listService.length > 0 && (
+                            <>
+                                <div className="catalog-sidebar-divider" />
+                                <span className="catalog-sidebar-heading">Услуги</span>
+                                {renderTree(listService, 's')}
+                            </>
+                        )}
+
+                        {loginstate && (
+                            <>
+                                <div className="catalog-sidebar-divider" />
+                                <button
+                                    className={`catalog-link ${-1 === chosenCategory ? 'active' : ''}`}
+                                    onClick={selectMyItems}
+                                >
+                                    Мои товары
+                                </button>
+                            </>
+                        )}
                     </div>
-                    <nav id="sidebarMenu" className={isCollapsed}>
-                        <div className="position-sticky pt-3 sidebar-sticky mb-2">
-                            <h3 className='header-category'><Menu /> Категории</h3>
-                            <ul className="nav nav-pills flex-column gap-2">
-                                <CategoryView InputGroups={listGroups} />
-                                <br></br>
-                                <CategoryView InputGroups={listService} />
-                                <br></br>
-                                {loginstate && <MyItems />}
-                            </ul>
-                        </div>
-                    </nav>
+                </aside>
+
+                <div className="catalog-content-area">
                     {slug && (
                         <ItemCard
                             item={singleItem}
@@ -197,14 +197,11 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                             }}
                         />
                     )}
-                    {chosenCategory && !slug && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} description={chosenDescription} />}
+                    {chosenCategory && !slug && <ItemsArea category_id={chosenCategory} loginstate={loginstate} title={chosenTitle} description={chosenDescription} item_type={chosenType} />}
                 </div>
             </div>
 
-            <div className="container-fluid">
-                <Footer />
-            </div>
-
+            <Footer />
         </div>
     );
 };

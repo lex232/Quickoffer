@@ -17,6 +17,40 @@
     height: 24px;
 }
 
+.offer-total {
+  white-space: nowrap;
+}
+
+.offer-qty {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.offer-qty .cart-qty-btn,
+.offer-qty .cart-qty-input {
+  height: 24px;
+}
+
+.offer-qty .cart-qty-btn {
+  width: 24px;
+}
+
+.offer-qty .form-control {
+  flex: 1;
+  min-width: 0;
+}
+
+.offer-min-form.is-invalid {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.15);
+}
+
+.border-input.is-invalid {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.15);
+}
+
 .itemsforoffer:hover {
     box-shadow: 4px 4px 50px rgba(#687bf7, 0.6);
 }
