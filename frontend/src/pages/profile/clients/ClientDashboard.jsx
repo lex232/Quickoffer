@@ -119,8 +119,8 @@ const ClientDashboard = () => {
             <div className="col my-3 text-start ps-4">
               <h3>Список моих клиентов</h3>
             </div>
-            <div className="col-auto pe-4">
-              <button onClick={(e) => CreateClient(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить клиента</button>
+            <div className="col-auto">
+              <button onClick={(e) => CreateClient(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
             </div>
           </div>
         </div>

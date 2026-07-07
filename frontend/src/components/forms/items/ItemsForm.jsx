@@ -34,6 +34,7 @@ const ItemForm = ({
 
   const [ selectedImage, setSelectedImage ] = useState(undefined)
   const [ preview, setPreview ] = useState(image)
+  const [ errors, setErrors ] = useState({})
   // Ссылка на имя файла в форме
   const refImg = useRef();
 
@@ -89,15 +90,23 @@ const ItemForm = ({
     setSelectedImage(undefined)
   }
 
-  function handlePostCLiсk(e) {
-    // Обработать клик публикации
+  async function handlePostCLiсk(e) {
     e.preventDefault();
+    setErrors({})
 
-    // null не подходит для api, защита от отправки null
+    if (!titleArea || !titleArea.trim()) {
+      setErrors({ title: 'Наименование обязательно' })
+      return
+    }
+    if (!priceRetailArea || priceRetailArea <= 0) {
+      setErrors({ price_retail: 'Цена должна быть больше 0' })
+      return
+    }
+
     if (image === null) {
       image = undefined
     }
-  
+
     const data = {
       title: titleArea,
       description: descriptionArea,
@@ -108,16 +117,20 @@ const ItemForm = ({
       item_type: itemTypeArea,
       image: selectedImage,
     }
-    console.log(data, 'BEFORE API')
-    if (id === undefined) {
-      // Если из состояния не пришел id, отправляем POST запрос
-      items_api.createItem(data)
-      return navigate("/profile/items/list")
-    } else {
-      // Иначе PATCH
-      data.item_id = id
-      items_api.updateItem(data)
-      return navigate("/profile/items/list")
+    try {
+      if (id === undefined) {
+        await items_api.createItem(data)
+      } else {
+        data.item_id = id
+        await items_api.updateItem(data)
+      }
+      navigate("/profile/items/list")
+    } catch (err) {
+      if (err && typeof err === 'object') {
+        setErrors(err)
+      } else {
+        setErrors({ title: 'Ошибка при сохранении' })
+      }
     }
 }
 
@@ -128,16 +141,18 @@ const ItemForm = ({
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Наименование товара или услуги *</label>
-                <input type="text" defaultValue={title} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} /> 
+                <input type="text" defaultValue={title} className={`form-control border-input${errors.title ? ' is-invalid' : ''}`} id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setTitle(e.target.value)} />
+                {errors.title && <div className="invalid-feedback d-block">{Array.isArray(errors.title) ? errors.title[0] : errors.title}</div>}
             </div>
         </div>
         <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Товар или услуга *</label>
-                <select className='form-select border-input' value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
+                <select className={`form-select border-input${errors.item_type ? ' is-invalid' : ''}`} value={itemTypeArea} aria-label="Товар или услуга *" id="ItemType" onChange={(e) => setItemType(e.target.value)}>
                   <option value='product'>Товар</option>
                   <option value='service'>Услуга</option>
                 </select>
+                {errors.item_type && <div className="invalid-feedback d-block">{Array.isArray(errors.item_type) ? errors.item_type[0] : errors.item_type}</div>}
             </div>
           </div>
         </div>
@@ -146,7 +161,8 @@ const ItemForm = ({
           <div className="col-md-12 ps-0 pe-2">
             <div className="form-group">
                 <label>Описание:</label>
-                <textarea rows='4' defaultValue={description} className="form-control border-input" id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} /> 
+                <textarea rows='4' defaultValue={description} className={`form-control border-input${errors.description ? ' is-invalid' : ''}`} id="Title" placeholder="Наименование товара или услуги *" onChange={(e) => setDescription(e.target.value)} />
+                {errors.description && <div className="invalid-feedback d-block">{Array.isArray(errors.description) ? errors.description[0] : errors.description}</div>}
             </div>
           </div>
         </div>
@@ -155,7 +171,7 @@ const ItemForm = ({
           <div className="col-md-6 ps-0 pe-2">
             <label>Группа:</label>
             {listGroups && <div className="form">
-              <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
+              <select name='selectSF' className={`form-select border-input${errors.group ? ' is-invalid' : ''}`} aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setGroup(Number(e.target.value))}>
                 <option value=''>---</option>
                 {listGroups.map((catList) => {
                   if (groupArea) {
@@ -166,12 +182,13 @@ const ItemForm = ({
                 )
                 })}
               </select>
+              {errors.group && <div className="invalid-feedback d-block">{Array.isArray(errors.group) ? errors.group[0] : errors.group}</div>}
             </div>}
           </div>
           <div className="col-md-6 ps-0 pe-2">
             <label>Бренд</label>
               {listBrands && <div className="form">
-              <select name='selectSF' className='form-select border-input' aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
+              <select name='selectSF' className={`form-select border-input${errors.brand ? ' is-invalid' : ''}`} aria-label='Категория ПО' id="floatingSelectFS" onChange={(e) => setBrand(Number(e.target.value))}>
                 <option value=''>---</option>
                 {listBrands.map((brandList) => {
                   if (brandArea === brandList.title) {setBrand(Number(brandList.id))}
@@ -180,6 +197,7 @@ const ItemForm = ({
                   )
                 })}
               </select>
+              {errors.brand && <div className="invalid-feedback d-block">{Array.isArray(errors.brand) ? errors.brand[0] : errors.brand}</div>}
             </div>}
           </div>
         </div>
@@ -188,17 +206,19 @@ const ItemForm = ({
           <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Цена розничная (Руб.) *</label>
-                <input type="text" defaultValue={price_retail} className="form-control border-input" id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} /> 
+                <input type="text" defaultValue={price_retail} className={`form-control border-input${errors.price_retail ? ' is-invalid' : ''}`} id="PriceRetail" placeholder="Розничная цена *" onChange={(e) => setPriceRetail(e.target.value)} />
+                {errors.price_retail && <div className="invalid-feedback d-block">{Array.isArray(errors.price_retail) ? errors.price_retail[0] : errors.price_retail}</div>}
             </div>
         </div>
         <div className="col-md-6 ps-0 pe-2">
             <div className="form-group">
                 <label>Единицы измерения</label>
-                <select className='form-select border-input' value={quantityTypeArea} aria-label="Товар или услуга *" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
+                <select className={`form-select border-input${errors.quantity_type ? ' is-invalid' : ''}`} value={quantityTypeArea} aria-label="Товар или услуга *" id="QuantityType" onChange={(e) => setQuantityType(e.target.value)}>
                   <option selected value='pc'>шт.</option>
                   <option value='meters'>м.</option>
                   <option value='kms'>км.</option>
                 </select>
+                {errors.quantity_type && <div className="invalid-feedback d-block">{Array.isArray(errors.quantity_type) ? errors.quantity_type[0] : errors.quantity_type}</div>}
             </div>
           </div>
         </div>

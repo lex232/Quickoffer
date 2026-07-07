@@ -198,7 +198,7 @@ const OfferDashboard = () => {
             <div className="col my-3 text-start ps-4">
               <h3>Список коммерческих предложений</h3>
             </div>
-            <div className="col-auto pe-4">
+            <div className="col-auto">
               {(localStorage.getItem("items") && JSON.parse(localStorage.getItem("items")).length > 0) ? <CreateOfferPopup action={CreateOffer} />
                 : <button onClick={(e) => CreateOffer(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Создать КП</button>}
             </div>
