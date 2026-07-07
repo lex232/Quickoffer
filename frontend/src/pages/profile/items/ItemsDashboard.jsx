@@ -104,7 +104,7 @@ const ItemsDashboard = () => {
             <div className="col my-3 text-start ps-4">
               <h3>Список товаров и услуг</h3>
             </div>
-            <div className="col-auto pe-4">
+            <div className="col-auto">
               <button onClick={(e) => CreateItem(e)} className='btn-create' type="button"><PlusSquare size={16} className='me-2' />Добавить</button>
             </div>
           </div>

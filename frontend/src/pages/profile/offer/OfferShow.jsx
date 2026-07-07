@@ -152,6 +152,10 @@ const OfferShow = () => {
     .catch((e) => console.log(e))
   }
 
+  if (isLoadding) {
+    return <div className="offer-show"><p className="text-center my-5">Загрузка...</p></div>
+  }
+
   return (
       <div className="offer-show">
 
@@ -160,39 +164,56 @@ const OfferShow = () => {
               <BackwardButton />
           </div>
           <div className="col-10 text-end pe-4">
-              <h5>Просмотр КП {clientInfo && <span>для компании {clientInfo.title}</span>}</h5>
+              <h5>Просмотр КП {clientInfo?.title && <span>для компании {clientInfo.title}</span>}</h5>
           </div>
       </div>
 
-      <table className='mb-3'>
-        <tbody>
-          <td className='text-start'>
-            <tr>Название коммерческого предложения:</tr>
-            <tr>КП для компании:</tr>
-            <tr>ИНН:</tr>
-            <tr>Адрес регистрации:</tr>
-          </td>
-          {clientInfo && <td className='text-start'>
-            <tr>{currentOffer.name_offer}</tr>
-            <tr>{ReadCompanyType(clientInfo.company_type)} {clientInfo.title}</tr>
-            <tr>{clientInfo.inn}</tr>
-            <tr>{clientInfo.address_reg}</tr>
-          </td>}
-        </tbody>
-      </table>
-
-      <div className="row mb-2 text-end pb-2">
-          <div className="col">
-            <button onClick={(e) => DownloadBillWork(e)} type="button-work" className="btn btn-sm btn-outline-secondary">Счет (работы) <FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadBillItems(e)} type="button-items" className="btn btn-sm btn-outline-secondary">Счет (товары) <FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadOfferDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП <FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadOfferDocWithDescription(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП с характеристиками<FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadContractItemsDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (товары) <FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadContractServiceDoc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Договор (услуги) <FileText color='#5c61f2' size={18}/></button>
-            <button onClick={(e) => DownloadTorg12Doc(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">Накладная (торг-12) <FileText color='#5c61f2' size={18}/></button>
-            {/* <button onClick={(e) => DownloadOffer(e)} type="button-pdf" className="btn btn-sm btn-outline-secondary">КП PDF</button> */}
+      <div className="card mb-3">
+        <div className="card-body py-2">
+          <div className="row">
+            <div className="col-5 col-sm-4 text-muted small">Название:</div>
+            <div className="col-7 col-sm-8 fw-semibold">{currentOffer.name_offer}</div>
+          </div>
+          <div className="row">
+            <div className="col-5 col-sm-4 text-muted small">Компания:</div>
+            <div className="col-7 col-sm-8">{clientInfo ? `${ReadCompanyType(clientInfo.company_type)} ${clientInfo.title}` : '—'}</div>
+          </div>
+          <div className="row">
+            <div className="col-5 col-sm-4 text-muted small">ИНН:</div>
+            <div className="col-7 col-sm-8">{clientInfo ? clientInfo.inn : '—'}</div>
+          </div>
+          <div className="row">
+            <div className="col-5 col-sm-4 text-muted small">Адрес:</div>
+            <div className="col-7 col-sm-8">{clientInfo ? clientInfo.address_reg : '—'}</div>
           </div>
         </div>
+      </div>
+
+      <div className="card mb-3">
+        <div className="card-body py-1 px-3">
+          <div className="d-flex flex-wrap gap-2">
+            <div className="d-flex align-items-center flex-wrap gap-1">
+              <span className="text-muted small fw-medium">Счета:</span>
+              <button onClick={(e) => DownloadBillWork(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>Работы</button>
+              <button onClick={(e) => DownloadBillItems(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>Товары</button>
+            </div>
+            <div className="d-flex align-items-center flex-wrap gap-1">
+              <span className="text-muted small fw-medium">КП:</span>
+              <button onClick={(e) => DownloadOfferDoc(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>Короткое</button>
+              <button onClick={(e) => DownloadOfferDocWithDescription(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>С характеристиками</button>
+            </div>
+            <div className="d-flex align-items-center flex-wrap gap-1">
+              <span className="text-muted small fw-medium">Договоры:</span>
+              <button onClick={(e) => DownloadContractItemsDoc(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>На товары</button>
+              <button onClick={(e) => DownloadContractServiceDoc(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>На услуги</button>
+            </div>
+            <div className="d-flex align-items-center flex-wrap gap-1">
+              <span className="text-muted small fw-medium">Накладная:</span>
+              <button onClick={(e) => DownloadTorg12Doc(e)} type="button" className="btn-create btn-create-small" style={{ float: 'none', marginRight: 0, fontSize: '0.78rem' }}><FileText size={14} className='me-1'/>Торг-12</button>
+            </div>
+          </div>
+        </div>
+      </div>
         
       <div className="">
       {itemsOffer.map((results) => {
