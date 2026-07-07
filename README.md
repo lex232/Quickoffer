@@ -1,7 +1,9 @@
 # Quickoffer
-Application for quickly creating commercial proposals <br>
-Приложение для создания коммерческих документов в сфере СКС и формирования документов к ним <br>
-Ссылка - https://offerguru.ru/
+
+Application for quickly creating commercial proposals
+Приложение для создания коммерческих предложений в сфере СКС и формирования документов к ним
+
+Сайт — https://offerguru.ru/
 
 ## Технологии
 
@@ -14,24 +16,128 @@ Application for quickly creating commercial proposals <br>
 [![gunicorn](https://img.shields.io/badge/-gunicorn-464646?style=flat&logo=gunicorn&logoColor=56C0C0&color=65fa41)](https://gunicorn.org/)
 
 ## Возможности
-- Реализована регистрация и авторизация пользователей.
+
+- Регистрация и авторизация пользователей.
 - Создание клиентов индивидуальных для аккаунта.
 - Создание товаров индивидуальных для аккаунта.
 - Дополнительная информация в профиле (реквизиты).
 - Создание коммерческих предложений.
-- Реализован каталог популярных товаров.
-- Формирование документов (счет на работы, счет на товары, коммерческое предложение + характеристики, торг-12, договора)
+- Каталог популярных товаров.
+- Формирование документов (счёт на работы, счёт на товары, КП, КП + характеристики, ТОРГ-12, договоры).
+
+## Локальный запуск
+
+### Требования
+
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL 14+
+
+### 1. Клонировать репозиторий
+
+```bash
+git clone <url>
+cd quickoffer
+```
+
+### 2. Бэкенд
+
+```bash
+cd backend
+
+# Создать виртуальное окружение
+python -m venv venv
+
+# Активировать
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# Установить зависимости
+pip install -r requirements.txt
+
+# Настроить .env
+cp .env.example .env
+# Отредактировать .env — указать свои данные БД, SECRET_KEY, DEBUG_MODE=True
+# Пример:
+# POSTGRES_DB=quickoffer
+# POSTGRES_USER=postgres
+# POSTGRES_PASSWORD=mysecretpassword
+# DB_HOST=localhost
+# DB_PORT=5432
+# SECRET_KEY=your-secret-key
+# DEBUG_MODE=True
+
+# Применить миграции
+python manage.py migrate
+
+# Создать суперпользователя
+python manage.py createsuperuser
+
+# Запустить сервер
+python manage.py runserver
+```
+
+Бэкенд будет доступен на http://localhost:8000/
+
+### 3. Фронтенд
+
+```bash
+cd frontend
+
+# Установить зависимости
+npm install
+
+# Запустить dev-сервер
+npm start
+```
+
+Фронтенд будет доступен на http://localhost:3000/
+
+### Быстрый запуск (скрипты)
+
+В папке `infras/` лежат готовые скрипты для simultaneous запуска бэкенда и фронтенда (нужно прописать пути):
+
+**Windows:**
+```bash
+infras\run_qiuckoffer_win.bat
+```
+
+**Linux (Gnome Terminal):**
+```bash
+bash infras/quickoffer_linux.sh
+```
 
 ## Тестирование
 
 ```bash
-# Запуск всех тестов бэкенда
-cd backend && python manage.py test offer.tests --verbosity=2
+cd backend
+python manage.py test offer.tests --verbosity=2
 
-# Запуск конкретного файла
+# Конкретный файл
 python manage.py test offer.tests.test_models
 python manage.py test offer.tests.test_api_offers
 
-# Запуск конкретного тест-кейса
+# Конкретный тест-кейс
 python manage.py test offer.tests.test_api_offers.OfferAPITests
+```
+
+## Структура проекта
+
+```
+quickoffer/
+├── backend/
+│   ├── api/              # API endpoints (DRF)
+│   ├── offer/            # Основное приложение (модели, сервисы)
+│   │   ├── services/     # Бизнес-логика генерации документов
+│   │   └── tests/        # Тесты
+│   ├── quickoffer/       # Настройки Django
+│   ├── utils/            # Утилиты, шаблоны docx
+│   └── manage.py
+├── frontend/
+│   ├── public/
+│   ├── src/              # React-компоненты
+│   └── package.json
+└── infras/               # Скрипты для запуска
 ```
