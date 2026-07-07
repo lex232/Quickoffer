@@ -219,7 +219,7 @@ class OfferDocumentDownloadTests(BaseAPITest):
             item_price_purchase=8000.0,
         )
 
-    @patch('api.v1.offer.views.DocxTemplate')
+    @patch('offer.services.offer_doc.DocxTemplate')
     def test_download_doc(self, mock_docx):
         mock_instance = MagicMock()
         mock_docx.return_value = mock_instance
@@ -233,7 +233,7 @@ class OfferDocumentDownloadTests(BaseAPITest):
             response['Content-Type']
         )
 
-    @patch('api.v1.offer.views.DocxTemplate')
+    @patch('offer.services.base.DocxTemplate')
     def test_download_bill_items(self, mock_docx):
         mock_instance = MagicMock()
         mock_docx.return_value = mock_instance
@@ -243,7 +243,7 @@ class OfferDocumentDownloadTests(BaseAPITest):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    @patch('api.v1.offer.views.DocxTemplate')
+    @patch('offer.services.base.DocxTemplate')
     def test_download_contract_items(self, mock_docx):
         mock_instance = MagicMock()
         mock_docx.return_value = mock_instance
@@ -253,7 +253,7 @@ class OfferDocumentDownloadTests(BaseAPITest):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    @patch('api.v1.offer.views.DocxTemplate')
+    @patch('offer.services.base.DocxTemplate')
     def test_download_torg12(self, mock_docx):
         mock_instance = MagicMock()
         mock_docx.return_value = mock_instance
