@@ -1,0 +1,45 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Импорт товаров{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <div class="module aligned">
+    <h2>Импорт товаров из парсера</h2>
+
+    {% if messages %}
+    <ul class="messagelist">
+      {% for msg in messages %}
+      <li{% if msg.tags %} class="{{ msg.tags }}"{% endif %}>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% for field in form %}
+      <div class="form-row{% if field.errors %} errors{% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+        <ul class="errorlist">
+          {% for error in field.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <div class="submit-row">
+        <input type="submit" value="Загрузить и показать превью" class="default">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
