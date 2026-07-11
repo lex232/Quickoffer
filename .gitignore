@@ -13,6 +13,7 @@ backups
 /backups/
 .backups
 .opencode/
+AGENTS.md
 
 .vscode
 

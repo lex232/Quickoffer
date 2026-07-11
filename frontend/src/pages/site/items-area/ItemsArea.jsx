@@ -49,8 +49,8 @@ const ItemsArea = ({ category_id, loginstate, title, description, item_type }) =
     if (loginstate === false) {
       getItems(page, categoryId, noBrands ? undefined : brands_id);
     } else {
-      if (categoryId === -1) {
-        getItemsOnlyUsers(page);
+      if (categoryId === -1 || categoryId === -2) {
+        getItemsOnlyUsers(page, item_type);
       } else {
         getItemsAuth(page, categoryId, noBrands ? undefined : brands_id);
       }
@@ -59,8 +59,8 @@ const ItemsArea = ({ category_id, loginstate, title, description, item_type }) =
 
   // === ЗАПРОСЫ К API ===
 
-  const getItemsOnlyUsers = (page) => {
-    items_api.getItemsUserPaginate({ page, status: '' })
+  const getItemsOnlyUsers = (page, item_type) => {
+    items_api.getItemsUserPaginate({ page, status: item_type || '' })
       .then(res => {
         setpageCount(Math.ceil(res.count / 8));
         setListItems(res.results);
@@ -189,7 +189,19 @@ const ItemsArea = ({ category_id, loginstate, title, description, item_type }) =
                 type="button"
               >
                 <Plus size={16} className="me-2" />
-                Добавить
+                Добавить товар
+              </button>
+            </div>
+          )}
+          {category_id === -2 && (
+            <div className="col-6 p-0">
+              <button
+                onClick={CreateItem}
+                className="btn btn-primary btn-create-small"
+                type="button"
+              >
+                <Plus size={16} className="me-2" />
+                Добавить услугу
               </button>
             </div>
           )}
