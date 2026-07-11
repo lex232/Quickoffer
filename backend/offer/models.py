@@ -2,6 +2,7 @@
 Модели приложения offer
 """
 import os
+from datetime import datetime
 
 from PIL import Image
 
@@ -9,6 +10,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.urls import reverse
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
 from django.utils.text import slugify
 from unidecode import unidecode
@@ -36,6 +39,20 @@ STATUS_TYPE = [
     ('in_payment', 'получена оплата'),
     ('denied', 'отказано'),
 ]
+
+
+def item_upload_to(instance, filename):
+    """Путь загрузки картинок товаров: user/{username}/{date}/ или catalog/{date}/"""
+    date = datetime.now().strftime('%Y-%m-%d')
+    if hasattr(instance, 'author') and instance.author:
+        return f'item/user/{instance.author.username}/{date}/{filename}'
+    return f'item/catalog/{date}/{filename}'
+
+
+def item_min_upload_to(instance, filename):
+    """Путь загрузки миниатюр: рядом с оригиналом, суффикс _min"""
+    name, ext = os.path.splitext(filename)
+    return item_upload_to(instance, f'{name}_min{ext}')
 
 
 class Client(models.Model):
@@ -267,13 +284,13 @@ class Item(models.Model):
     )
     image = models.ImageField(
         verbose_name='изображение товара',
-        upload_to='media/item/imageuser/%Y-%m-%d/',
+        upload_to=item_upload_to,
         null=True,
         blank=True
     )
     image_min = models.ImageField(
         verbose_name='миниатюра 150х150',
-        upload_to='media/item/imageuser_min/%Y-%m-%d/',
+        upload_to=item_min_upload_to,
         null=True,
         blank=True,
         editable=False
@@ -622,3 +639,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+@receiver(post_delete, sender=Item)
+def delete_item_images(sender, instance, **kwargs):
+    """Удаление картинок и миниатюр при удалении товара"""
+    if instance.image:
+        instance.image.delete(save=False)
+    if instance.image_min:
+        instance.image_min.delete(save=False)

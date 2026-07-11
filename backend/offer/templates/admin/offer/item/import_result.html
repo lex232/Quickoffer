@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Результат импорта{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <div class="module aligned">
+    <h2>Результат импорта</h2>
+
+    <p><strong>Создано:</strong> {{ created }}</p>
+    <p><strong>Пропущено (дубликаты):</strong> {{ skipped }}</p>
+    <p><strong>Ошибок:</strong> {{ errors }}</p>
+
+    {% if error_messages %}
+    <h3>Ошибки:</h3>
+    <ul>
+      {% for msg in error_messages %}
+      <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="submit-row">
+      <a href="{% url 'admin:offer_item_import' %}" class="button">Импортировать ещё</a>
+      <a href="{% url 'admin:offer_item_changelist' %}" class="button">К списку товаров</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
