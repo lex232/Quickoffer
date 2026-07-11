@@ -41,6 +41,25 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         }
     }, [slug]);
 
+    useEffect(() => {
+        if (singleItem && listGroups.length > 0) {
+            const lastGroup = singleItem.group?.[singleItem.group.length - 1];
+            if (lastGroup) {
+                const foundInGroups = listGroups.find(g => g.id === lastGroup.id);
+                const foundInService = listService.find(s => s.id === lastGroup.id);
+                const found = foundInGroups || foundInService;
+
+                if (found) {
+                    setChosenCategory(found.id);
+                    setChosenTree(found.tree_id);
+                    setChosenTitle(found.title);
+                    setChosenDescription(found.description);
+                    setChosenType(foundInService ? 'service' : 'product');
+                }
+            }
+        }
+    }, [singleItem, listGroups, listService]);
+
     const loadSingleItem = async (itemSlug) => {
         setLoadingSingleItem(true);
         setItemError(null);
@@ -63,7 +82,7 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         group_api.getItemsGroup()
             .then(res => {
                 setListGroups(res);
-                if (res.length > 0 && chosenCategory == null) {
+                if (res.length > 0 && chosenCategory == null && !slug) {
                     setChosenCategory(res[0].id);
                     setChosenTree(res[0].tree_id);
                     setChosenTitle(res[0].title);
@@ -126,13 +145,24 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
         });
     };
 
-    const selectMyItems = (e) => {
+    const selectMyProducts = (e) => {
         e.preventDefault();
         setChosenCategory(-1);
         setChosenTree(0);
         setChosenTitle('Мои товары');
         setChosenDescription('');
-        setChosenType(undefined);
+        setChosenType('product');
+        setSingleItem(null);
+        navigate('/catalog');
+    };
+
+    const selectMyServices = (e) => {
+        e.preventDefault();
+        setChosenCategory(-2);
+        setChosenTree(0);
+        setChosenTitle('Мои услуги');
+        setChosenDescription('');
+        setChosenType('service');
         setSingleItem(null);
         navigate('/catalog');
     };
@@ -171,9 +201,15 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                                 <div className="catalog-sidebar-divider" />
                                 <button
                                     className={`catalog-link ${-1 === chosenCategory ? 'active' : ''}`}
-                                    onClick={selectMyItems}
+                                    onClick={selectMyProducts}
                                 >
                                     Мои товары
+                                </button>
+                                <button
+                                    className={`catalog-link ${-2 === chosenCategory ? 'active' : ''}`}
+                                    onClick={selectMyServices}
+                                >
+                                    Мои услуги
                                 </button>
                             </>
                         )}
