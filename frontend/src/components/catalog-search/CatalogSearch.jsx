@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ShoppingBag } from 'react-feather';
+import { Search, ShoppingBag, Trash2 } from 'react-feather';
 import items_api from '../../api/items_api';
 import CartPlusItem from '../../utils/items/cartPlusItem';
+import CartRemoveItem from '../../utils/items/cartRemoveItem';
 import CheckSameCartItem from '../../utils/items/checkSameCartItem';
 import './catalogSearch.css';
 
@@ -11,14 +12,22 @@ const CatalogSearch = () => {
     const [results, setResults] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [cartItems, setCartItems] = useState(() => {
+        try { return JSON.parse(localStorage.getItem('items')) || []; }
+        catch { return []; }
+    });
     const wrapperRef = useRef(null);
     const debounceRef = useRef(null);
     const navigate = useNavigate();
 
-    let items = [];
-    try {
-        items = JSON.parse(localStorage.getItem('items')) || [];
-    } catch { }
+    useEffect(() => {
+        const onStorage = () => {
+            try { setCartItems(JSON.parse(localStorage.getItem('items')) || []); }
+            catch { setCartItems([]); }
+        };
+        window.addEventListener('storage', onStorage);
+        return () => window.removeEventListener('storage', onStorage);
+    }, []);
 
     const search = useCallback((value) => {
         if (!value || value.length < 1) {
@@ -51,9 +60,15 @@ const CatalogSearch = () => {
         const currentItems = JSON.parse(localStorage.getItem('items')) || [];
         if (!CheckSameCartItem(item.id, currentItems)) {
             CartPlusItem(item, currentItems, e);
+            setCartItems(JSON.parse(localStorage.getItem('items')) || []);
         }
-        setIsOpen(false);
-        setQuery('');
+    };
+
+    const handleRemoveFromCart = (item, e) => {
+        e.stopPropagation();
+        const currentItems = JSON.parse(localStorage.getItem('items')) || [];
+        CartRemoveItem(item.id, currentItems, e);
+        setCartItems(JSON.parse(localStorage.getItem('items')) || []);
     };
 
     const handleItemClick = (slug) => {
@@ -101,7 +116,7 @@ const CatalogSearch = () => {
             {isOpen && results.length > 0 && (
                 <div className="catalog-search-dropdown">
                     {results.map(item => {
-                        const inCart = CheckSameCartItem(item.id, items);
+                        const inCart = CheckSameCartItem(item.id, cartItems);
                         const title = item.brand ? `${item.title} ${item.brand}` : item.title;
                         return (
                             <div
@@ -124,10 +139,10 @@ const CatalogSearch = () => {
                                 </div>
                                 <button
                                     className={`catalog-search-cart-btn ${inCart ? 'in-cart' : ''}`}
-                                    onClick={(e) => handleAddToCart(item, e)}
-                                    title={inCart ? 'Уже в корзине' : 'Добавить в корзину'}
+                                    onClick={(e) => inCart ? handleRemoveFromCart(item, e) : handleAddToCart(item, e)}
+                                    title={inCart ? 'Убрать из корзины' : 'Добавить в корзину'}
                                 >
-                                    <ShoppingBag size={14} />
+                                    {inCart ? <Trash2 size={14} /> : <ShoppingBag size={14} />}
                                 </button>
                             </div>
                         );
