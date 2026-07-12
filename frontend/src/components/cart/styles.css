@@ -13,6 +13,7 @@
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cart-add-btn:hover {
@@ -34,6 +35,7 @@
   cursor: pointer;
   transition: all 0.15s;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .cart-qty-btn:hover {

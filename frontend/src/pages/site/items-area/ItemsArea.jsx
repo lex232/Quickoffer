@@ -168,178 +168,142 @@ const ItemsArea = ({ category_id, loginstate, title, description, item_type }) =
 
   // === РЕНДЕР ===
 
+  const allBrandsChecked = checkStatesCheckedInBrands(brandFilters);
+
   return (
     <div className="col">
-      <div className="d-flex">
-        {isLoaddingItems && (
+      {isLoaddingItems && (
+        <div className="d-flex mb-3">
           <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Загрузка...</span>
+          </div>
+        </div>
+      )}
+
+      <div className="items-header">
+        <h4>{title}</h4>
+        {(category_id === -1 || category_id === -2) && (
+          <button onClick={CreateItem} className="btn btn-primary btn-create-small" type="button">
+            <Plus size={16} className="me-1" />
+            {category_id === -1 ? 'Добавить товар' : 'Добавить услугу'}
+          </button>
+        )}
+      </div>
+      {description && <div className="items-header-desc">{description}</div>}
+
+      <div className="items-filters">
+        <select
+          className="items-sort-select"
+          value={orderingPrice}
+          onChange={(e) => {
+            setOrderingPrice(e.target.value);
+            loadItemsWithFilters(1, category_id, brandFilters);
+            setCurrentPageState(1);
+            setPage(0);
+          }}
+        >
+          <option value="price_retail">Цена ↑</option>
+          <option value="-price_retail">Цена ↓</option>
+        </select>
+
+        {brandFilters.length > 0 && (
+          <div className="items-brands">
+            <button
+              className={`items-brand-pill items-brand-pill--all ${allBrandsChecked ? 'active' : ''}`}
+              onClick={HandleChangeBrandAllFilter}
+            >
+              Все
+            </button>
+            {brandFilters.map((brand) => (
+              <button
+                key={brand.id}
+                className={`items-brand-pill ${brand.checked ? 'active' : ''}`}
+                onClick={(e) => HandleChangeCheckedBrandFilter(e, brand.id)}
+              >
+                {brand.title}
+              </button>
+            ))}
           </div>
         )}
       </div>
 
-      <div className="container-fluid">
-        <div className="row my-2 ps-2">
-          <h4 className="col-6 p-0">{title}</h4>
-          {category_id === -1 && (
-            <div className="col-6 p-0">
-              <button
-                onClick={CreateItem}
-                className="btn btn-primary btn-create-small"
-                type="button"
-              >
-                <Plus size={16} className="me-2" />
-                Добавить товар
-              </button>
-            </div>
-          )}
-          {category_id === -2 && (
-            <div className="col-6 p-0">
-              <button
-                onClick={CreateItem}
-                className="btn btn-primary btn-create-small"
-                type="button"
-              >
-                <Plus size={16} className="me-2" />
-                Добавить услугу
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="row my-2 ps-2">
-          <span className="p-0">{description}</span>
-        </div>
-        <div className="pb-4">
-          <select
-            className="form-select"
-            value={orderingPrice}
-            onChange={(e) => {
-              setOrderingPrice(e.target.value);
-              // Сортировка сбрасывает на 1-ю страницу
-              loadItemsWithFilters(1, category_id, brandFilters);
-              setCurrentPageState(1);
-              setPage(0);
-            }}
-          >
-            <option value="price_retail">Сортировать по цене по возрастанию</option>
-            <option value="-price_retail">Сортировать по цене по убыванию</option>
-          </select>
-        </div>
-        <div className="row pb-2">
-          {brandFilters.length > 0 && (
-            <span>
-              <div className="form-check checkbox-brands">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="all_brands"
-                  checked={checkStatesCheckedInBrands(brandFilters)}
-                  onClick={HandleChangeBrandAllFilter}
-                />
-                <label className="form-check-label pe-2" htmlFor="all_brands">
-                  Все бренды
-                </label>
-              </div>
-              {brandFilters.map((brand) => (
-                <div className="form-check checkbox-brands" key={brand.id}>
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    checked={brand.checked}
-                    id={`brand-${brand.id}`}
-                    onClick={(e) => HandleChangeCheckedBrandFilter(e, brand.id)}
-                  />
-                  <label className="form-check-label pe-2" htmlFor={`brand-${brand.id}`}>
-                    {brand.title}
-                  </label>
-                </div>
-              ))}
-            </span>
-          )}
-        </div>
-
-        <div className="row justify-content-start">
-          {listItems && listItems.length > 0 ? (
-            listItems.map((results) => (
-              <div className="col-12 col-lg-6 col-xl-4 col-xxl-3 mb-5" key={results.id}>
-                <div className="card h-100 general-item">
-                  <div className="card-body p-0 item-center">
+      <div className="row g-3">
+        {listItems && listItems.length > 0 ? (
+          listItems.map((item) => {
+            const isService = item.item_type === 'service';
+            const hasImage = !!item.image;
+            return (
+              <div className={`col-12 col-sm-6 col-lg-4 col-xl-3`} key={item.id}>
+                <div className={`general-item ${isService ? 'general-item--compact' : ''}`}>
+                  {hasImage && (
                     <div className="area-img">
-                      {results.image && (
-                        <img
-                          className="card-image"
-                          src={results.image}
-                          alt={results.title}
-                        />
-                      )}
+                      <img className="card-image" src={item.image} alt={item.title} />
                     </div>
-                    <div className="text-start">
-                      <div className="ps-2">
-                        {results.private_type === false && results.item_type === "product" ? (
-                          <Link to={`/catalog/${results.slug}`} className="text-dark text-decoration-underline">
-                            {results.title}
-                          </Link>
-                        ) : (
-                          <span className="text-dark">{results.title}</span>
-                        )}
+                  )}
+                  <div className="item-center">
+                    {isService ? (
+                      <div className="item-service-badge">Услуга</div>
+                    ) : item.brand?.title || item.brand ? (
+                      <div className="item-brand">
+                        {item.brand?.title || item.brand}
                       </div>
-                      {results.item_type === "product" && (
-                        <div className="item-brand ps-2">
-                          Производитель: <b>{results.brand?.title || results.brand || '—'}</b>
-                        </div>
-                      )}
-                      <div className="description-item pt-1">
-                        {AddNewTable(results.description || '')}
-                      </div>
+                    ) : null}
+                    {item.private_type === false && !isService ? (
+                      <Link to={`/catalog/${item.slug}`} className="item-title-link">
+                        {item.title}
+                      </Link>
+                    ) : (
+                      <div className="item-title-plain">{item.title}</div>
+                    )}
+                    <div className="description-item">
+                      {AddNewTable(item.description || '')}
                     </div>
                   </div>
                   <div className="item-bottom">
-                    <div className="item-price pe-2">
-                      {results.price_retail?.toLocaleString('ru-RU') || '—'} руб.
+                    <div className="item-price">
+                      {item.price_retail?.toLocaleString('ru-RU') || '—'} ₽
                     </div>
                     {loginstate && (
-                      <div className="card-footer d-flex p-2 pt-0 border-top-0 bg-transparent align-items-center">
-                        <AddToCartButton results={results} onCartChange={triggerCartUpdate} />
-                      </div>
+                      <AddToCartButton results={item} onCartChange={triggerCartUpdate} />
                     )}
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-12">
-              <div className="text-center py-5">
-                <p className="text-muted">
-                  В этой категории или по выставленным фильтрам пока нет товаров.
-                </p>
-              </div>
+            );
+          })
+        ) : (
+          <div className="col-12">
+            <div className="items-empty">
+              В этой категории или по выставленным фильтрам пока нет товаров.
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {pageCount > 1 && (
-        <ReactPaginate
-          previousLabel={"предыдущая"}
-          nextLabel={"следующая"}
-          initialPage={page}
-          forcePage={currentpagestate - 1}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination justify-content-center"}
-          pageClassName={"page-item"}
-          pageLinkClassName={"page-link"}
-          previousClassName={"page-item"}
-          previousLinkClassName={"page-link"}
-          nextClassName={"page-item"}
-          nextLinkClassName={"page-link"}
-          breakClassName={"page-item"}
-          breakLinkClassName={"page-link"}
-          activeClassName={"active"}
-        />
+        <div className="mt-4">
+          <ReactPaginate
+            previousLabel={"←"}
+            nextLabel={"→"}
+            initialPage={page}
+            forcePage={currentpagestate - 1}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={2}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination justify-content-center"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+            breakClassName={"page-item"}
+            breakLinkClassName={"page-link"}
+            activeClassName={"active"}
+          />
+        </div>
       )}
     </div>
   );

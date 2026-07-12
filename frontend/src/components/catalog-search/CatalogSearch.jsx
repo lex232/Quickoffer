@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ShoppingBag } from 'react-feather';
+import { Search, ShoppingBag, Trash2 } from 'react-feather';
 import items_api from '../../api/items_api';
 import CartPlusItem from '../../utils/items/cartPlusItem';
+import CartRemoveItem from '../../utils/items/cartRemoveItem';
 import CheckSameCartItem from '../../utils/items/checkSameCartItem';
 import './catalogSearch.css';
 
@@ -61,6 +62,13 @@ const CatalogSearch = () => {
             CartPlusItem(item, currentItems, e);
             setCartItems(JSON.parse(localStorage.getItem('items')) || []);
         }
+    };
+
+    const handleRemoveFromCart = (item, e) => {
+        e.stopPropagation();
+        const currentItems = JSON.parse(localStorage.getItem('items')) || [];
+        CartRemoveItem(item.id, currentItems, e);
+        setCartItems(JSON.parse(localStorage.getItem('items')) || []);
     };
 
     const handleItemClick = (slug) => {
@@ -131,10 +139,10 @@ const CatalogSearch = () => {
                                 </div>
                                 <button
                                     className={`catalog-search-cart-btn ${inCart ? 'in-cart' : ''}`}
-                                    onClick={(e) => handleAddToCart(item, e)}
-                                    title={inCart ? 'Уже в корзине' : 'Добавить в корзину'}
+                                    onClick={(e) => inCart ? handleRemoveFromCart(item, e) : handleAddToCart(item, e)}
+                                    title={inCart ? 'Убрать из корзины' : 'Добавить в корзину'}
                                 >
-                                    <ShoppingBag size={14} />
+                                    {inCart ? <Trash2 size={14} /> : <ShoppingBag size={14} />}
                                 </button>
                             </div>
                         );

@@ -133,9 +133,15 @@
 }
 
 .catalog-search-cart-btn.in-cart {
-    background: #f0f0ff;
-    border-color: #5c61f2;
-    color: #5c61f2;
+    background: #fff0f0;
+    border-color: #e53e3e;
+    color: #e53e3e;
+}
+
+.catalog-search-cart-btn.in-cart:hover {
+    background: #e53e3e;
+    color: #fff;
+    border-color: #e53e3e;
 }
 
 .catalog-search-empty {
