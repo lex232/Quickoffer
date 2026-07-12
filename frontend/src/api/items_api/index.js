@@ -202,7 +202,8 @@ class ApiItems {
       {
         method: 'GET',
         headers: {
-          ...this._headers
+          ...this._headers,
+          ...(token && { 'authorization': `Token ${token}` })
         }
       }
     ).then(this.checkResponse)

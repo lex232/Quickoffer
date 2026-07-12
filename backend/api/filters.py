@@ -15,9 +15,9 @@ class FilterForClients(FilterSet):
 
 
 class FilterForItems(FilterSet):
-    """Поиск по товарам-услугам по вхождению в начало названия"""
+    """Поиск по товарам-услугам по вхождению в название"""
 
-    item = filters.CharFilter(field_name='title', lookup_expr='startswith')
+    item = filters.CharFilter(field_name='title', lookup_expr='icontains')
 
     class Meta:
         model = Item

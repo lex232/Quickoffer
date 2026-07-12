@@ -9,6 +9,7 @@ import ItemCard from '../items-area/ItemCard.jsx';
 
 import group_api from '../../../api/group_api';
 import { AlignJustify, X, Menu } from 'react-feather';
+import CatalogSearch from '../../../components/catalog-search/CatalogSearch';
 import './styles.css'
 
 
@@ -185,6 +186,8 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
                 {sidebarOpen && <div className="catalog-sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
                 <aside className={`catalog-sidebar ${sidebarOpen ? 'open' : ''}`}>
                     <div className="catalog-sidebar-inner">
+                        <CatalogSearch />
+                        <div className="catalog-sidebar-divider" />
                         <span className="catalog-sidebar-heading"><Menu size={14} /> Категории</span>
                         {renderTree(listGroups, 'g')}
 
