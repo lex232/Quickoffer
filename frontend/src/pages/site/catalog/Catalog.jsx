@@ -185,8 +185,8 @@ const CatalogPage = ({ loginstate, onSignOut, user }) => {
 
                 {sidebarOpen && <div className="catalog-sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
                 <aside className={`catalog-sidebar ${sidebarOpen ? 'open' : ''}`}>
+                    <CatalogSearch />
                     <div className="catalog-sidebar-inner">
-                        <CatalogSearch />
                         <div className="catalog-sidebar-divider" />
                         <span className="catalog-sidebar-heading"><Menu size={14} /> Категории</span>
                         {renderTree(listGroups, 'g')}

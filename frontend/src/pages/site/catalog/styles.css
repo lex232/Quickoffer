@@ -164,15 +164,24 @@
         z-index: 1040;
         transform: translateX(-100%);
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
     }
 
     .catalog-sidebar.open {
         transform: translateX(0);
     }
 
+    .catalog-sidebar .catalog-search {
+        padding-top: 50px;
+        flex-shrink: 0;
+    }
+
     .catalog-sidebar-inner {
-        padding-top: 60px;
-        height: 100dvh;
+        flex: 1;
+        overflow-y: auto;
+        height: auto;
+        padding-top: 0;
     }
 
     .catalog-toggle {

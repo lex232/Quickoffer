@@ -11,14 +11,22 @@ const CatalogSearch = () => {
     const [results, setResults] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [cartItems, setCartItems] = useState(() => {
+        try { return JSON.parse(localStorage.getItem('items')) || []; }
+        catch { return []; }
+    });
     const wrapperRef = useRef(null);
     const debounceRef = useRef(null);
     const navigate = useNavigate();
 
-    let items = [];
-    try {
-        items = JSON.parse(localStorage.getItem('items')) || [];
-    } catch { }
+    useEffect(() => {
+        const onStorage = () => {
+            try { setCartItems(JSON.parse(localStorage.getItem('items')) || []); }
+            catch { setCartItems([]); }
+        };
+        window.addEventListener('storage', onStorage);
+        return () => window.removeEventListener('storage', onStorage);
+    }, []);
 
     const search = useCallback((value) => {
         if (!value || value.length < 1) {
@@ -51,9 +59,8 @@ const CatalogSearch = () => {
         const currentItems = JSON.parse(localStorage.getItem('items')) || [];
         if (!CheckSameCartItem(item.id, currentItems)) {
             CartPlusItem(item, currentItems, e);
+            setCartItems(JSON.parse(localStorage.getItem('items')) || []);
         }
-        setIsOpen(false);
-        setQuery('');
     };
 
     const handleItemClick = (slug) => {
@@ -101,7 +108,7 @@ const CatalogSearch = () => {
             {isOpen && results.length > 0 && (
                 <div className="catalog-search-dropdown">
                     {results.map(item => {
-                        const inCart = CheckSameCartItem(item.id, items);
+                        const inCart = CheckSameCartItem(item.id, cartItems);
                         const title = item.brand ? `${item.title} ${item.brand}` : item.title;
                         return (
                             <div
